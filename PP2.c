@@ -7,7 +7,6 @@
 
 /* ------------------------------------------------------------------ 1. REGISTRAR NIÑO ------------------------------------------------------------------ */
 
-
 /* --------------------------- STRUCT DEL NIÑO --------------------------- */
 
 typedef struct Kid
@@ -79,7 +78,6 @@ Imprimir * InsertarKid(Imprimir * ColaKids, int cedula, char nombre[200], char n
 	ColaKids ->rear = ColaKids->rear->next;
 }
 
-
 /* ----------------------- CONSULTAR NIÑO----------------------- */
 
 int ConsultarKids(Imprimir *ColaKids, int cedula)
@@ -91,7 +89,6 @@ int ConsultarKids(Imprimir *ColaKids, int cedula)
 	}
 	else
 	{
-		printf("\n------------------ INFORMACION DEL NIÑO ------------------");
 		for(i = ColaKids->front; i!= NULL; i = i->next)
 		{
 			if(i->cedula==cedula)
@@ -116,17 +113,109 @@ int ConsultarKids(Imprimir *ColaKids, int cedula)
 
 
 
-/* ----------------------------------------------------------- MODIFICAR INFORMACION DE UN NIÑO -------------------------------------------------------- */
+/* ----------------------------------------------------------- 2. MODIFICAR INFORMACION DE UN NIÑO -------------------------------------------------------- */
+
+int ModificarInfoKid (Imprimir *ColaKids)
+{
+	int cedula_verificar;
+	int contador = 0;
+	
+	Kid *i = ColaKids->front;
+	
+	printf ("\n\nIngrese la cedula del niño que desea modificar: ")	;
+	scanf("%d", &cedula_verificar);
+	Kid *aux = ColaKids->front;
+	while (aux!=NULL)
+	{
+		if (cedula_verificar == i->cedula)
+		{
+			contador = 1;
+			
+			printf ("\n\n-------------------- DATOS A MODIFICAR --------------------");
+			printf ("\n1. Modificar nombre.");
+			printf ("\n2. Modificar nombre de usuario.");
+			printf ("\n3. Modificar correo.");
+			printf ("\n4. Modificar lugar de residencia.");
+			printf ("\n5. Modificar edad.");
+			printf ("\n6. Modificar necesidades especiales.");
+			
+			int dato;
+			printf ("\n\nIngrese el numero del dato que desea modificar: ");
+			scanf("%d", &dato);
+			
+			if (dato == 1)
+			{
+				char modificar_nombre[100];
+		
+				printf ("Ingrese el nuevo nombre del niño: ");
+				scanf("%s",i->nombre);
+
+			}
+			
+			else if (dato == 2)
+			{
+				printf ("Ingrese el nuevo nombre de usuario del niño: ");
+				scanf("%s",i->nombre_usuario);
+			}
+			
+			else if (dato == 3)
+			{
+				printf ("Ingrese el nuevo correo del niño: ");
+				scanf("%s",i->correo);	
+			}
+			
+			else if (dato == 4)
+			{
+				char modificar_lugar_residencia[100];
+				
+				printf ("Ingrese el nuevo lugar de residencia del niño: ");
+				scanf("%s",i->lugar_residencia);				
+			}
+			
+			else if (dato == 5)
+			{
+				printf ("Ingrese la nueva edad del niño: ");
+				scanf("%d",i->edad);
+			}
+			
+			else if (dato == 6)
+			{
+				printf ("Ingrese las nuevas necesidades especiales del niño: ");
+				scanf("%s",i->necesidades_especiales);		
+			}
+			
+			else
+			{
+				printf ("ERROR: el dato solicitado no existe, la accion no se pudo completar con exito.");
+				return 0;
+			}
+			
+			printf ("La informacion fue modificada con exito.");
+			printf ("\n\n-------------------- DATOS MODIFICADOS --------------------");
+			ConsultarKids(ColaKids, cedula_verificar);
+		}
+		
+		else
+		{
+			aux = aux->next;
+		}
+	}
+		
+	if (contador == 0)
+	{
+		printf ("\nERROR: la cedula ingresada no existe, la informacion no se pudo modificar.");
+		return 0;
+	}
+	
+	return 0;
+}
 
 
 
 
 
 
-
-
-/* ------------------------------------------------------------- REGISTRAR AYUDANTE DE SANTA ------------------------------------------------------------ */
-
+/* ------------------------------------------------------------- 3. REGISTRAR AYUDANTE DE SANTA ------------------------------------------------------------ */
 
 /* --------------------------- STRUCT DEL AYUDANTE --------------------------- */
 
@@ -227,84 +316,84 @@ int ConsultarAyudantes(ImprimirAyudante *ColaAyudantes, int cedula)
 
 
 
-/* ------------------------------------------------------- MODIFICAR INFORMACION DE UN AYUDANTE DE SANTA ------------------------------------------------- */
+/* ------------------------------------------------------- 4. MODIFICAR INFORMACION DE UN AYUDANTE DE SANTA ------------------------------------------------- */
 
 
 
 
 
 
-/* ------------------------------------------------------------------ REGISTRAR JUGUETE ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ 5. REGISTRAR JUGUETE ------------------------------------------------------------------ */
 
 
 
 
 
 
-/* ----------------------------------------------------------- MODIFICAR INFORMACION DE UN JUGUETE -------------------------------------------------------- */
+/* ----------------------------------------------------------- 6. MODIFICAR INFORMACION DE UN JUGUETE -------------------------------------------------------- */
 
 
 
 
 
 
-/* -------------------------------------------------------------- REGISTRAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
+/* -------------------------------------------------------------- 7. REGISTRAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
 
 
 
 
 
 
-/* -------------------------------------------------------------- MODIFICAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
+/* -------------------------------------------------------------- 8. MODIFICAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
 
 
 
 
 
 
-/* ----------------------------------------------------------- REGISTRAR COMPORTAMIENTO DE UN NIÑO -------------------------------------------------------- */
+/* ----------------------------------------------------------- 9. REGISTRAR COMPORTAMIENTO DE UN NIÑO -------------------------------------------------------- */
 
 
 
 
 
 
-/* --------------------------------------------------------------- REGISTRAR CARTA PARA SANTA ------------------------------------------------------------- */
+/* --------------------------------------------------------------- 10. REGISTRAR CARTA PARA SANTA ------------------------------------------------------------- */
 
 
 
 
 
 
-/* --------------------------------------------------------------- MODIFICAR CARTA PARA SANTA ------------------------------------------------------------- */
+/* --------------------------------------------------------------- 11. MODIFICAR CARTA PARA SANTA ------------------------------------------------------------- */
 
 
 
 
 
 
-/* --------------------------------------------------------------- CONSULTAR CARTA PARA SANTA ------------------------------------------------------------- */
+/* --------------------------------------------------------------- 12. CONSULTAR CARTA PARA SANTA ------------------------------------------------------------- */
 
 
 
 
 
 
-/* ---------------------------------------------------------------- PROCESAR CARTA PARA SANTA ------------------------------------------------------------- */
+/* ---------------------------------------------------------------- 13. PROCESAR CARTA PARA SANTA ------------------------------------------------------------- */
 
 
 
 
 
 
-/* ------------------------------------------------------------------ ENTREGA DE JUGUETES ----------------------------------------------------------------- */
+/* ------------------------------------------------------------------ 14. ENTREGA DE JUGUETES ----------------------------------------------------------------- */
 
 
 
 
 
 
-/* ------------------------------------------------------------------ ANALISIS DE DATOS ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------ 15. ANALISIS DE DATOS ------------------------------------------------------------------- */
 
 
 
