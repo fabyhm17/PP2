@@ -32,7 +32,7 @@ typedef struct Imprimir
 	int size;
 }Imprimir;
 
-/* ----------------------- CREAR NUEVA COLA USUARIO ----------------------- */
+/* ----------------------- CREAR NUEVA COLA NIÑO ----------------------- */
 
 Imprimir * CrearColaKids(Imprimir * ColaKids)
 {
@@ -43,7 +43,7 @@ Imprimir * CrearColaKids(Imprimir * ColaKids)
 	return ColaKids;
 }
 
-/* ----------------------- CREAR NODO  NIÑO ----------------------- */
+/* ----------------------- CREAR NODO NIÑO ----------------------- */
 
 Kid * CrearKid(int cedula, char nombre[200], char nombre_usuario[200],char correo [200], char lugar_residencia [50], int edad, char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
 {
@@ -87,11 +87,11 @@ int ConsultarKids(Imprimir *ColaKids, int cedula)
 	Kid *i;
 	if (ColaKids -> front == NULL)
 	{
-		printf ("\nERROR: No hay miembros registrados");
+		printf ("\nERROR: No hay niños registrados");
 	}
 	else
 	{
-		printf("\n------------------ INFORMACION DEL USUARIO ------------------");
+		printf("\n------------------ INFORMACION DEL NIÑO ------------------");
 		for(i = ColaKids->front; i!= NULL; i = i->next)
 		{
 			if(i->cedula==cedula)
@@ -99,17 +99,19 @@ int ConsultarKids(Imprimir *ColaKids, int cedula)
 				printf("\n\nNombre: %s", i->nombre);
 				printf("\n\nNombre de usuario: %s", i->nombre_usuario);
 				printf("\nCorreo: %s", i->correo);
-				printf("\n\nLugar de residencia: %s", i->lugar_residencia);
+				printf("\nLugar de residencia: %s", i->lugar_residencia);
 				printf("\nCedula: %d", i->cedula);
 				printf("\nEdad: %d", i->edad);
 				printf("\nFecha de nacimiento: %s", i->fecha_nacimiento);
-				printf("\nFecha de nacimiento: %s", i->fecha_nacimiento);
+				printf("\nNecesidades especiales: %s", i->necesidades_especiales);
 				printf("\n____________________________________________________________________________\n");
 			}
 		}
 	}
 	return 0;
 }
+
+
 
 
 
@@ -121,8 +123,105 @@ int ConsultarKids(Imprimir *ColaKids, int cedula)
 
 
 
+
+
 /* ------------------------------------------------------------- REGISTRAR AYUDANTE DE SANTA ------------------------------------------------------------ */
 
+
+/* --------------------------- STRUCT DEL AYUDANTE --------------------------- */
+
+typedef struct Ayudante
+{
+	char nombre [50];
+	char puesto [50];
+	char correo [50];
+	char funcion [50];	
+	int cedula;
+	char fecha_entrada [50];	
+	int contador_cartas;
+	struct Ayudante * next;	
+}Ayudante;
+
+typedef struct ImprimirAyudante
+{
+	Ayudante *front;
+	Ayudante *rear;
+	int size;
+}ImprimirAyudante;
+
+/* ----------------------- CREAR NUEVA COLA AYUDANTE ----------------------- */
+
+ImprimirAyudante * CrearColaAyudantes(ImprimirAyudante * ColaAyudantes)
+{
+	ColaAyudantes = NULL;
+	ColaAyudantes = (ImprimirAyudante *) malloc(sizeof(ImprimirAyudante));	
+	ColaAyudantes -> front = NULL;
+	ColaAyudantes -> rear = NULL;
+	return ColaAyudantes;
+}
+
+/* ----------------------- CREAR NODO AYUDANTE ----------------------- */
+
+Ayudante * CrearAyudante(int cedula, char nombre[200], char puesto[200],char correo [200], char funcion [200], char fecha_entrada [50], int contador_cartas)
+{
+	struct Ayudante *nuevo;
+	nuevo = (Ayudante *) malloc(sizeof(Ayudante));
+	nuevo -> next = NULL;
+	
+	nuevo->cedula=cedula;
+	strcpy(nuevo->nombre,nombre);	
+	strcpy(nuevo->puesto,puesto);
+	strcpy(nuevo->correo,correo);
+	strcpy(nuevo->funcion,funcion);
+	strcpy(nuevo->fecha_entrada,fecha_entrada);
+	nuevo->contador_cartas = contador_cartas;
+	return nuevo;
+}
+
+/* ----------------------- REGISTRAR AYUDANTE ----------------------- */
+
+ImprimirAyudante * InsertarAyudante(ImprimirAyudante * ColaAyudantes, int cedula, char nombre[200], char puesto[200], char correo [200], char funcion [200], char fecha_entrada [50], int contador_cartas)
+{
+	ColaAyudantes->size = ColaAyudantes-> size + 1;
+	if(ColaAyudantes->front == NULL) 
+	{
+		ColaAyudantes->front = CrearAyudante(cedula,nombre, puesto, correo,funcion,fecha_entrada,contador_cartas);
+		ColaAyudantes->rear = ColaAyudantes->front;
+		return ColaAyudantes;
+	}
+	ColaAyudantes ->rear->next = CrearAyudante(cedula,nombre, puesto, correo,funcion,fecha_entrada,contador_cartas);
+	ColaAyudantes ->rear = ColaAyudantes->rear->next;
+}
+
+
+/* ----------------------- CONSULTAR AYUDANTE ----------------------- */
+
+int ConsultarAyudantes(ImprimirAyudante *ColaAyudantes, int cedula)
+{
+	Ayudante *i;
+	if (ColaAyudantes -> front == NULL)
+	{
+		printf ("\nERROR: No hay ayudantes registrados");
+	}
+	else
+	{
+		printf("\n------------------ INFORMACION DEL AYUDANTE ------------------");
+		for(i = ColaAyudantes->front; i!= NULL; i = i->next)
+		{
+			if(i->cedula==cedula)
+			{
+				printf("\n\nNombre: %s", i->nombre);
+				printf("\n\nPuesto: %s", i->puesto);
+				printf("\nCorreo: %s", i->correo);
+				printf("\nFuncion: %s", i->funcion);
+				printf("\nCedula: %d", i->cedula);
+				printf("\nFecha en que comienza a trabajar: %s", i->fecha_entrada);
+				printf("\n____________________________________________________________________________\n");
+			}
+		}
+	}
+	return 0;
+}
 
 
 
