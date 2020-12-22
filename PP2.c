@@ -5,9 +5,111 @@
 #include <time.h>
 
 
-/* ------------------------------------------------------------------ REGISTRAR NIÑO ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ 1. REGISTRAR NIÑO ------------------------------------------------------------------ */
 
 
+/* --------------------------- STRUCT DEL NIÑO --------------------------- */
+
+typedef struct Kid
+{
+	char nombre [50];
+	char nombre_usuario [50];
+	char correo [50];
+	char lugar_residencia [50];	
+	int cedula;
+	int edad;
+	char fecha_nacimiento [50];
+	char necesidades_especiales [50];	
+	int contador_comportamiento_bueno;
+	int contador_comportamiento_malo;
+	struct Kid * next;	
+}Kid;
+
+typedef struct Imprimir
+{
+	Kid *front;
+	Kid *rear;
+	int size;
+}Imprimir;
+
+/* ----------------------- CREAR NUEVA COLA USUARIO ----------------------- */
+
+Imprimir * CrearColaKids(Imprimir * ColaKids)
+{
+	ColaKids = NULL;
+	ColaKids = (Imprimir *) malloc(sizeof(Imprimir));	
+	ColaKids -> front = NULL;
+	ColaKids -> rear = NULL;
+	return ColaKids;
+}
+
+/* ----------------------- CREAR NODO  NIÑO ----------------------- */
+
+Kid * CrearKid(int cedula, char nombre[200], char nombre_usuario[200],char correo [200], char lugar_residencia [50], int edad, char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
+{
+	struct Kid *nuevo;
+	nuevo = (Kid *) malloc(sizeof(Kid));
+	nuevo -> next = NULL;
+	
+	nuevo->cedula=cedula;
+	strcpy(nuevo->nombre,nombre);	
+	strcpy(nuevo->nombre_usuario,nombre_usuario);
+	strcpy(nuevo->correo,correo);
+	strcpy(nuevo->lugar_residencia,lugar_residencia);
+	nuevo->edad=edad;
+	strcpy(nuevo->fecha_nacimiento,fecha_nacimiento);
+	strcpy(nuevo->necesidades_especiales,necesidades_especiales);
+	nuevo->contador_comportamiento_bueno = contador_comportamiento_bueno;
+	nuevo->contador_comportamiento_malo = contador_comportamiento_malo;
+	return nuevo;
+}
+
+/* ----------------------- REGISTRAR NIÑO ----------------------- */
+
+Imprimir * InsertarKid(Imprimir * ColaKids, int cedula, char nombre[200], char nombre_usuario[200], char correo [200], char lugar_residencia [50], int edad, char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
+{
+	ColaKids->size = ColaKids-> size + 1;
+	if(ColaKids->front == NULL) 
+	{
+		ColaKids->front = CrearKid(cedula,nombre, nombre_usuario, correo,lugar_residencia,edad,fecha_nacimiento,necesidades_especiales,contador_comportamiento_bueno, contador_comportamiento_malo);
+		ColaKids->rear = ColaKids->front;
+		return ColaKids;
+	}
+	ColaKids ->rear->next = CrearKid(cedula,nombre, nombre_usuario, correo,lugar_residencia,edad,fecha_nacimiento,necesidades_especiales,contador_comportamiento_bueno,contador_comportamiento_malo);
+	ColaKids ->rear = ColaKids->rear->next;
+}
+
+
+/* ----------------------- CONSULTAR NIÑO----------------------- */
+
+int ConsultarKids(Imprimir *ColaKids, int cedula)
+{
+	Kid *i;
+	if (ColaKids -> front == NULL)
+	{
+		printf ("\nERROR: No hay miembros registrados");
+	}
+	else
+	{
+		printf("\n------------------ INFORMACION DEL USUARIO ------------------");
+		for(i = ColaKids->front; i!= NULL; i = i->next)
+		{
+			if(i->cedula==cedula)
+			{
+				printf("\n\nNombre: %s", i->nombre);
+				printf("\n\nNombre de usuario: %s", i->nombre_usuario);
+				printf("\nCorreo: %s", i->correo);
+				printf("\n\nLugar de residencia: %s", i->lugar_residencia);
+				printf("\nCedula: %d", i->cedula);
+				printf("\nEdad: %d", i->edad);
+				printf("\nFecha de nacimiento: %s", i->fecha_nacimiento);
+				printf("\nFecha de nacimiento: %s", i->fecha_nacimiento);
+				printf("\n____________________________________________________________________________\n");
+			}
+		}
+	}
+	return 0;
+}
 
 
 
