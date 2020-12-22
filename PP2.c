@@ -105,6 +105,7 @@ int ConsultarKids(Imprimir *ColaKids, int cedula)
 			}
 		}
 	}
+
 	return 0;
 }
 
@@ -145,11 +146,8 @@ int ModificarInfoKid (Imprimir *ColaKids)
 			
 			if (dato == 1)
 			{
-				char modificar_nombre[100];
-		
 				printf ("Ingrese el nuevo nombre del niño: ");
 				scanf("%s",i->nombre);
-
 			}
 			
 			else if (dato == 2)
@@ -294,7 +292,6 @@ int ConsultarAyudantes(ImprimirAyudante *ColaAyudantes, int cedula)
 	}
 	else
 	{
-		printf("\n------------------ INFORMACION DEL AYUDANTE ------------------");
 		for(i = ColaAyudantes->front; i!= NULL; i = i->next)
 		{
 			if(i->cedula==cedula)
@@ -317,6 +314,85 @@ int ConsultarAyudantes(ImprimirAyudante *ColaAyudantes, int cedula)
 
 
 /* ------------------------------------------------------- 4. MODIFICAR INFORMACION DE UN AYUDANTE DE SANTA ------------------------------------------------- */
+
+
+int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
+{
+	int cedula_verificar;
+	int contador = 0;
+	
+	Ayudante *i = ColaAyudantes->front;
+	
+	printf ("\n\nIngrese la cedula del ayudante que desea modificar: ")	;
+	scanf("%d", &cedula_verificar);
+	
+	Ayudante *aux = ColaAyudantes->front;
+	while (aux!=NULL)
+	{
+		if (cedula_verificar == i->cedula)
+		{
+			contador = 1;
+			
+			printf ("\n\n-------------------- DATOS A MODIFICAR --------------------");
+			printf ("\n1. Modificar nombre.");
+			printf ("\n2. Modificar puesto.");
+			printf ("\n3. Modificar correo.");
+			printf ("\n4. Modificar funcion.");
+			
+			int dato;
+			printf ("\n\nIngrese el numero del dato que desea modificar: ");
+			scanf("%d", &dato);
+			
+			if (dato == 1)
+			{
+				printf ("Ingrese el nuevo nombre del ayudante: ");
+				scanf("%s",i->nombre);
+			}
+			
+			else if (dato == 2)
+			{
+				printf ("Ingrese el nuevo puesto del ayudante: ");
+				scanf("%s",i->puesto);
+			}
+			
+			else if (dato == 3)
+			{
+				printf ("Ingrese el nuevo correo del ayudante: ");
+				scanf("%s",i->correo);	
+			}
+			
+			else if (dato == 4)
+			{
+				printf ("Ingrese la nueva funcion del ayudante: ");
+				scanf("%s",i->funcion);				
+			}
+			
+			else
+			{
+				printf ("ERROR: el dato solicitado no existe, la accion no se pudo completar con exito.");
+				return 0;
+			}
+			
+			printf ("La informacion fue modificada con exito.");
+			printf ("\n\n-------------------- DATOS MODIFICADOS --------------------");
+			ConsultarAyudantes(ColaAyudantes, cedula_verificar);
+		}
+		
+		else
+		{
+			aux = aux->next;
+		}
+	}
+		
+	if (contador == 0)
+	{
+		printf ("\nERROR: la cedula ingresada no existe, la informacion no se pudo modificar.");
+		return 0;
+	}
+	
+	return 0;
+}
+
 
 
 
