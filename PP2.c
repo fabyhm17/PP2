@@ -15,7 +15,7 @@ typedef struct Kid
 	char nombre_usuario [50];
 	char correo [50];
 	char lugar_residencia [50];	
-	int cedula;
+	char cedula [50];
 	int edad;
 	char fecha_nacimiento [50];
 	char necesidades_especiales [50];	
@@ -44,13 +44,13 @@ Imprimir * CrearColaKids(Imprimir * ColaKids)
 
 /* ----------------------- CREAR NODO NIÑO ----------------------- */
 
-Kid * CrearKid(int cedula, char nombre[200], char nombre_usuario[200],char correo [200], char lugar_residencia [50], int edad, char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
+Kid * CrearKid(char cedula[15], char nombre[200], char nombre_usuario[200],char correo [200], char lugar_residencia [50], int edad, char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
 {
 	struct Kid *nuevo;
 	nuevo = (Kid *) malloc(sizeof(Kid));
 	nuevo -> next = NULL;
 	
-	nuevo->cedula=cedula;
+	strcpy(nuevo->cedula,cedula);
 	strcpy(nuevo->nombre,nombre);	
 	strcpy(nuevo->nombre_usuario,nombre_usuario);
 	strcpy(nuevo->correo,correo);
@@ -65,7 +65,7 @@ Kid * CrearKid(int cedula, char nombre[200], char nombre_usuario[200],char corre
 
 /* ----------------------- REGISTRAR NIÑO ----------------------- */
 
-Imprimir * InsertarKid(Imprimir * ColaKids, int cedula, char nombre[200], char nombre_usuario[200], char correo [200], char lugar_residencia [50], int edad, char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
+Imprimir * InsertarKid(Imprimir * ColaKids, char cedula[15], char nombre[200], char nombre_usuario[200], char correo [200], char lugar_residencia [50], int edad, char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
 {
 	ColaKids->size = ColaKids-> size + 1;
 	if(ColaKids->front == NULL) 
@@ -83,7 +83,7 @@ Imprimir * InsertarKid(Imprimir * ColaKids, int cedula, char nombre[200], char n
 int ConsultarKids(Imprimir *ColaKids)
 {
 	Kid *i;
-	int cedula_verificar;
+	char cedula_verificar[15];
 	int contador; 
 	
 	if (ColaKids -> front == NULL)
@@ -94,11 +94,12 @@ int ConsultarKids(Imprimir *ColaKids)
 	else
 	{
 		printf ("\nIngrese la cedula del niño que desea consultar: ")	;
-		scanf("%d", &cedula_verificar);
+		fflush (stdin);
+		gets (cedula_verificar);
 		
 		for(i = ColaKids->front; i!= NULL; i = i->next)
 		{
-			if(i->cedula==cedula_verificar)
+			if (strcmp(i->cedula,cedula_verificar)==0)
 			{
 				contador = 1;
 				
@@ -106,7 +107,7 @@ int ConsultarKids(Imprimir *ColaKids)
 				printf("\nNombre de usuario: %s", i->nombre_usuario);
 				printf("\nCorreo: %s", i->correo);
 				printf("\nLugar de residencia: %s", i->lugar_residencia);
-				printf("\nCedula: %d", i->cedula);
+				printf("\nCedula: %s", i->cedula);
 				printf("\nEdad: %d", i->edad);
 				printf("\nFecha de nacimiento: %s", i->fecha_nacimiento);
 				printf("\nNecesidades especiales: %s", i->necesidades_especiales);
@@ -133,7 +134,7 @@ void RegistrarKidMain(Imprimir *ColaKids)
 	char nombre_usuario_kid[100];
 	char correo_kid[100];
 	char residencia_kid[100];
-	int cedula_kid;
+	char cedula_kid[15];
 	int edad_kid;
 	char nacimiento_kid[100];
 	char necesidades_especiales_kid[100];
@@ -144,13 +145,14 @@ void RegistrarKidMain(Imprimir *ColaKids)
 	gets (nombre_kid);
 
 	printf ("Ingrese la cedula del niño que desea registrar: ");
-	scanf("%d", &cedula_kid);
+	fflush (stdin);
+	gets (cedula_kid);
 	
 	Kid *i;
 	
 	for(i = ColaKids->front; i!= NULL; i = i->next)
 	{
-		if (cedula_kid == i->cedula)
+		if (strcmp(i->cedula,cedula_kid)==0)
 		{
 			printf("ERROR: La cedula ya existe, la accion no se pudo completar. Intentelo mas tarde.\n");
 			return;
@@ -192,17 +194,19 @@ void RegistrarKidMain(Imprimir *ColaKids)
 
 int ModificarInfoKid (Imprimir *ColaKids)
 {
-	int cedula_verificar;
+	char cedula_verificar[15];
 	int contador = 0;
 	
 	Kid *i = ColaKids->front;
 	
 	printf ("\n\nIngrese la cedula del niño que desea modificar: ")	;
-	scanf("%d", &cedula_verificar);
+	fflush (stdin);
+	gets (cedula_verificar);
+	
 	Kid *aux = ColaKids->front;
 	for(i = ColaKids->front; i!= NULL; i = i->next)
 	{
-		if (cedula_verificar == i->cedula)
+		if (strcmp(i->cedula,cedula_verificar)==0)
 		{
 			contador = 1;
 			
@@ -679,7 +683,7 @@ int main()
 		if (opcion == 1)
 		{
 			RegistrarKidMain(ColaKids);
-			//ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
+			ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
 		}
 		
 		
