@@ -461,6 +461,8 @@ void RegistrarAyudanteMain(ImprimirAyudante *ColaAyudantes)
 	
 	InsertarAyudante(ColaAyudantes, cedula_ayudante, nombre_ayudante, puesto_ayudante, correo_ayudante, funcion_ayudante, fecha_entrada_ayudante, 0);
 
+
+	return;
 }
 
 
@@ -565,6 +567,142 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 /* ------------------------------------------------------------------ 5. REGISTRAR JUGUETE ------------------------------------------------------------------ */
 
 
+/* Estructuras y tipos */
+typedef struct juguete {
+   int codigo;
+   char nombre[50];
+   char descripcion[100];
+   char categoria[100];
+   char rango_edad[10];
+   int costo_fabricacion;
+   char estado[50];     
+      
+   struct juguete *derecho;
+   struct juguete *izquierdo;
+   struct juguete *next;
+} juguetes;
+
+typedef juguetes *pNodo;
+typedef juguetes *Arbol;
+
+
+/* ----------------------- CREAR NODO JUGUETE ----------------------- */
+
+juguetes* CrearJuguete( int codigo, char nombre[50], char descripcion[100], char categoria[100], char rango_edad[10], int costo_fabricacion, char estado[50] )
+{
+	struct juguete *nuevo;
+	nuevo = (juguetes *) malloc(sizeof(juguetes));
+	nuevo -> next = NULL;
+	
+	nuevo->codigo=codigo;
+	strcpy(nuevo->nombre,nombre);	
+	strcpy(nuevo->descripcion,descripcion);
+	strcpy(nuevo->categoria,categoria);
+	strcpy(nuevo->rango_edad,rango_edad);
+	nuevo->costo_fabricacion=costo_fabricacion;
+	strcpy(nuevo->estado,estado);
+
+	return nuevo;
+}
+
+
+/* Comprobar si un árbol es vacío */
+int Vacio(Arbol r)
+{
+   return r==NULL;
+}
+
+
+void InsertarJuguete(Arbol *a, int codigo, char nombre[50], char descripcion[100], char categoria[100], char rango_edad[10], int costo_fabricacion, char estado[50] )
+{
+   pNodo padre = NULL;
+   pNodo actual = *a;
+   
+   /* Buscar el dato en el árbol, manteniendo un puntero al nodo padre */
+   while(!Vacio(actual) && codigo != actual->codigo) {
+      padre = actual;
+      if(codigo < actual->codigo) actual = actual->izquierdo;
+      else if(codigo > actual->codigo) actual = actual->derecho;
+   }
+
+   /* Si se ha encontrado el elemento, regresar sin insertar */
+   if(!Vacio(actual)) return;
+   /* Si padre es NULL, entonces el árbol estaba vacío, el nuevo nodo será
+      el nodo raiz */
+
+   /* Si padre es NULL, entonces el árbol estaba vacío, el nuevo nodo será
+      el nodo raiz */
+   if(Vacio(padre)) {
+      actual = (Arbol)malloc(sizeof(juguetes));
+      padre->izquierdo = actual;
+      actual=CrearJuguete(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
+
+      actual->izquierdo = (*a)->derecho = NULL;
+   }
+   /* Si el dato es menor que el que contiene el nodo padre, lo insertamos
+      en la rama izquierda */
+   else if(codigo < padre->codigo) {
+      actual = (Arbol)malloc(sizeof(juguetes));
+      padre->izquierdo = actual;
+	  actual=CrearJuguete(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
+      
+      actual->izquierdo = actual->derecho = NULL;
+   }
+   /* Si el dato es mayor que el que contiene el nodo padre, lo insertamos
+      en la rama derecha */
+   else if(codigo > padre->codigo) {
+      actual = (Arbol)malloc(sizeof(juguetes));
+      padre->derecho = actual;
+   	  actual=CrearJuguete(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
+      
+      actual->izquierdo = actual->derecho = NULL;
+  }
+}
+
+
+/* ----------------------- REGISTRAR JUGUETES EN EL MAIN ----------------------- */
+
+void RegistrarJuguetesMain(Arbol *a)
+{
+	int codigo;
+	char nombre[50];
+    char descripcion[100];
+    char categoria[100];
+    char rango_edad[10];
+    int costo_fabricacion;
+    char estado[50];  
+    
+    
+	printf("--------------REGISTRO DE JUGUETES---------------\n\n");
+	printf("Ingrese el codigo del juguete: ");
+	scanf("%d", &codigo);
+	
+	printf("\nIngrese el nombre del juguete: ");
+	fflush (stdin);
+	gets (nombre);
+	
+	printf("\nIngrese la descripcion del juguete: ");
+	fflush (stdin);
+	gets (descripcion);
+	
+	printf("\nIngrese la categoria del juguete: ");
+	fflush (stdin);
+	gets (categoria);
+	
+	printf("\nIngrese el rango de edad para la que recomienda el juguete: ");
+	fflush (stdin);
+	gets (rango_edad);
+	
+	printf("\nIngrese el costo total de fabricacion del juguete: ");
+	scanf("%d", &costo_fabricacion);
+
+	InsertarJuguete(a, codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, "Disponible" );
+	
+
+}
+
+
+
 
 
 
@@ -654,7 +792,7 @@ int main()
 	//DECLARACION DE ESTRUCTURAS DE DATOS
 	Imprimir * ColaKids = CrearColaKids(ColaKids);
 	ImprimirAyudante * ColaAyudantes = CrearColaAyudantes(ColaAyudantes);
-	
+	Arbol *a;
 	
 	//MENU PRINCIPAL DE LA FUNCION
 	printf ("\n --------------------- BIENVENIDO AL SISTEMA DE REGISTRO Y PROCESAMIENTO DE CARTAS DE SANTA --------------------- \n");
@@ -711,7 +849,7 @@ int main()
 		
 		else if (opcion == 5)
 		{
-			return 0;
+			RegistrarJuguetesMain(a);
 		}
 		
 	
