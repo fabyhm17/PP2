@@ -306,7 +306,7 @@ typedef struct Ayudante
 	char puesto [50];
 	char correo [50];
 	char funcion [50];	
-	int cedula;
+	char cedula[50];
 	char fecha_entrada [50];	
 	int contador_cartas;
 	struct Ayudante * next;	
@@ -332,13 +332,13 @@ ImprimirAyudante * CrearColaAyudantes(ImprimirAyudante * ColaAyudantes)
 
 /* ----------------------- CREAR NODO AYUDANTE ----------------------- */
 
-Ayudante * CrearAyudante(int cedula, char nombre[200], char puesto[200],char correo [200], char funcion [200], char fecha_entrada [50], int contador_cartas)
+Ayudante * CrearAyudante(char cedula[50], char nombre[200], char puesto[200],char correo [200], char funcion [200], char fecha_entrada [50], int contador_cartas)
 {
 	struct Ayudante *nuevo;
 	nuevo = (Ayudante *) malloc(sizeof(Ayudante));
 	nuevo -> next = NULL;
 	
-	nuevo->cedula=cedula;
+	strcpy(nuevo->cedula,cedula);
 	strcpy(nuevo->nombre,nombre);	
 	strcpy(nuevo->puesto,puesto);
 	strcpy(nuevo->correo,correo);
@@ -350,7 +350,7 @@ Ayudante * CrearAyudante(int cedula, char nombre[200], char puesto[200],char cor
 
 /* ----------------------- REGISTRAR AYUDANTE ----------------------- */
 
-ImprimirAyudante * InsertarAyudante(ImprimirAyudante * ColaAyudantes, int cedula, char nombre[200], char puesto[200], char correo [200], char funcion [200], char fecha_entrada [50], int contador_cartas)
+ImprimirAyudante * InsertarAyudante(ImprimirAyudante * ColaAyudantes, char cedula[50], char nombre[200], char puesto[200], char correo [200], char funcion [200], char fecha_entrada [50], int contador_cartas)
 {
 	ColaAyudantes->size = ColaAyudantes-> size + 1;
 	if(ColaAyudantes->front == NULL) 
@@ -369,7 +369,7 @@ ImprimirAyudante * InsertarAyudante(ImprimirAyudante * ColaAyudantes, int cedula
 int ConsultarAyudantes(ImprimirAyudante *ColaAyudantes)
 {
 	Ayudante *i;
-	int cedula_verificar;
+	char cedula_verificar[20];
 	int contador; 
 	
 	if (ColaAyudantes -> front == NULL)
@@ -380,11 +380,12 @@ int ConsultarAyudantes(ImprimirAyudante *ColaAyudantes)
 	else
 	{
 		printf ("\nIngrese la cedula del ayudante que desea consultar: ")	;
-		scanf("%d", &cedula_verificar);
+		fflush (stdin);
+		gets (cedula_verificar);
 		
 		for(i = ColaAyudantes->front; i!= NULL; i = i->next)
 		{
-			if(i->cedula == cedula_verificar)
+			if (strcmp(i->cedula,cedula_verificar)==0)
 			{
 				contador = 1;
 				
@@ -392,7 +393,7 @@ int ConsultarAyudantes(ImprimirAyudante *ColaAyudantes)
 				printf("\nPuesto: %s", i->puesto);
 				printf("\nCorreo: %s", i->correo);
 				printf("\nFuncion: %s", i->funcion);
-				printf("\nCedula: %d", i->cedula);
+				printf("\nCedula: %s", i->cedula);
 				printf("\nFecha en que comienza a trabajar: %s", i->fecha_entrada);
 				printf("\n____________________________________________________________________________\n");
 			}
@@ -417,7 +418,7 @@ void RegistrarAyudanteMain(ImprimirAyudante *ColaAyudantes)
 	char nombre_ayudante[100];
 	char correo_ayudante[100];
 	char puesto_ayudante[100];
-	int cedula_ayudante;	
+	char cedula_ayudante[50];	
 	char funcion_ayudante[100];
 	char fecha_entrada_ayudante[100];
 	
@@ -427,13 +428,14 @@ void RegistrarAyudanteMain(ImprimirAyudante *ColaAyudantes)
 	gets (nombre_ayudante);
 
 	printf ("Ingrese la cedula del ayudante que desea registrar: ");
-	scanf("%d", &cedula_ayudante);
+	fflush (stdin);
+	gets (cedula_ayudante);
 	
 	Ayudante *i;
 	
 	for(i = ColaAyudantes->front; i!= NULL; i = i->next)
 	{
-		if (cedula_ayudante == i->cedula)
+		if (strcmp(i->cedula,cedula_ayudante)==0)
 		{
 			printf("ERROR: La cedula ya existe, la accion no se pudo completar. Intentelo mas tarde.\n");
 			return;
@@ -469,7 +471,7 @@ void RegistrarAyudanteMain(ImprimirAyudante *ColaAyudantes)
 
 int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 {
-	int cedula_verificar;
+	char cedula_verificar[20];
 	int contador = 0;	
 
 	if (ColaAyudantes -> front == NULL)
@@ -482,11 +484,12 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 		Ayudante *i = ColaAyudantes->front;
 		
 		printf ("\n\nIngrese la cedula del ayudante que desea modificar: ")	;
-		scanf("%d", &cedula_verificar);
+		fflush (stdin);
+		gets (cedula_verificar);
 		
 		for(i = ColaAyudantes->front; i!= NULL; i = i->next)
 		{
-			if (cedula_verificar == i->cedula)
+			if (strcmp(i->cedula,cedula_verificar)==0)
 			{
 				contador = 1;
 				
@@ -683,7 +686,7 @@ int main()
 		if (opcion == 1)
 		{
 			RegistrarKidMain(ColaKids);
-			ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
+			//ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
 		}
 		
 		
@@ -696,7 +699,7 @@ int main()
 		else if (opcion == 3)
 		{
 			RegistrarAyudanteMain(ColaAyudantes);
-			//ConsultarAyudantes(ColaAyudantes);   //Funcion para probar otras, no la piden		
+			ConsultarAyudantes(ColaAyudantes);   //Funcion para probar otras, no la piden		
 		}
 		
 		
