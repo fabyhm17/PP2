@@ -743,13 +743,14 @@ Ruta{
 Domicilio*inicio = NULL;
 
 void insertarLugar (){
-	Domicilio*aux;
+	Domicilio*aux, *aux2;
 	Domicilio* nuevo = (Domicilio*)malloc(sizeof(Domicilio));
 	
 	//DATOS DEL LUGAR PARA CATALOGO
+	printf("Codigo Catalogo: ");
+	scanf("%d",&nuevo -> codigo);
 	printf("Nombre del lugar: ");
 	scanf("%s",nuevo -> nombre);
-	scanf("%d",&nuevo -> codigo);
 	printf("Código postal: ");
 	scanf("%d",&nuevo -> postal);
 	
@@ -796,17 +797,16 @@ void insertarRuta(){
 	Domicilio *aux2, *aux;
 	
 	if (inicio==NULL){
-		printf("Error: el grafo esta vacio\n");
+		printf("\n\nError: el grafo esta vacio\n");
 		return;
 	}
-	fflush(stdin);
-	printf("Ingregar lugar de origen:\n");
+	printf("Ingregar lugar de origen:");
 	scanf("%s", ini);
 	printf("Ingresar lugar de destino:");
 	scanf("%s", fin);
-	printf("Ingresar distancia [km]:\n");
+	printf("Ingresar distancia [km]:");
 	scanf("%f", &distancia);
-	printf("Ingresar tiempo estimado [min]:\n");
+	printf("Ingresar tiempo estimado [min]:");
 	scanf("%f", &tiempo);
 	printf("Ingresar tipo de ruta:");
 	scanf("%s", tipo_ruta);
@@ -815,24 +815,27 @@ void insertarRuta(){
 	aux = inicio;
 	aux2 = inicio;
 while(aux2 != NULL){
-		if (aux2 ->nombre == fin)
+		if ( strcmp(fin,aux2 ->nombre) == 0){
+			
 			break;
+		}
 		aux2 = aux2 -> siguiente;
 	}
 			
 	if (aux2 == NULL){
-		printf("Error: Domicilio no encontrado\n");
+		printf("\n\nError: Domicilio no encontrado\n");
 		return;
 		}
 	while(aux != NULL){
-		if(aux -> nombre == ini){
+		if(strcmp(ini,aux ->nombre)== 0){
 			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
+			printf("Ruta añadida");
 			return;
 		}
 			aux = aux -> siguiente;
 	}
 	if(aux == NULL){
-		printf("Error: Domicilio no encontrado\n");
+		printf("\n\nError: Domicilio no encontrado\n");
 	}
 
 }
@@ -978,8 +981,25 @@ int main()
 		
 		else if (opcion == 7)
 		{
-			return 0;
+			int domicilios, d, rutas, r;
+			printf("------CATALOGO DOMICILIOS-------\n\n");
+			printf("cantidad domicilios que desea registrar: ");
+			scanf("%d",&domicilios);
+			for(d=0; d<domicilios; d++){
+				printf("\n\n-----DOMICILIO #%d ------\n", d+1 );
+				insertarLugar ();
+								
+			}
+			printf("\n\ncantidad rutas: ");
+			scanf("%d", &rutas);
+			for(r=0; r<rutas; r++){
+				printf("\n\n-----RUTA #%d ------\n", r+1 );
+				insertarRuta();
+				
+			}
 		}
+			
+				
 		
 		
 		else if (opcion == 8)
