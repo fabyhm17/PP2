@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <time.h>
 
+#define Domicilio struct domicilio
+#define Ruta struct ruta
+
 
 /* ------------------------------------------------------------------ 1. REGISTRAR NIÑO ------------------------------------------------------------------ */
 
@@ -717,8 +720,122 @@ void RegistrarJuguetesMain(Arbol *a)
 /* -------------------------------------------------------------- 7. REGISTRAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
 
 
+Domicilio {
+	char nombre [15];
+	int codigo;
+	int postal;
+	
+	Domicilio*siguiente;
+	Ruta*adyacencia;
+	
+};
 
+Ruta{
+	char origen [15];
+	char destino [15];
+	float tiempo;
+	float distancia;
+	char tipo_ruta [15];
+	Domicilio*vrt;
+	Ruta*siguiente;
+};
 
+Domicilio*inicio = NULL;
+
+void insertarLugar (){
+	Domicilio*aux;
+	Domicilio* nuevo = (Domicilio*)malloc(sizeof(Domicilio));
+	
+	//DATOS DEL LUGAR PARA CATALOGO
+	printf("Nombre del lugar: ");
+	scanf("%s",nuevo -> nombre);
+	scanf("%d",&nuevo -> codigo);
+	printf("Código postal: ");
+	scanf("%d",&nuevo -> postal);
+	
+	nuevo -> siguiente = NULL;
+	nuevo -> adyacencia = NULL;
+	if (inicio==NULL){
+		inicio = nuevo;
+	}
+	else{
+		aux = inicio;
+		while (aux -> siguiente != NULL){
+			aux = aux -> siguiente;
+		}
+		aux -> siguiente = nuevo;
+	}
+}
+
+void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fin [15],float distancia, float tiempo, char tipo_ruta [15]){
+	Ruta*a;
+	if(aux-> adyacencia == NULL){
+		aux-> adyacencia = nuevo;
+		nuevo -> vrt = aux2;
+		nuevo -> tiempo = tiempo;
+		nuevo -> distancia = distancia;
+		strcpy(nuevo->tipo_ruta,tipo_ruta);
+		strcpy(nuevo->origen,ini);
+		strcpy(nuevo->destino,fin);
+	}else{
+		a = aux -> adyacencia;
+		while(a -> siguiente != NULL){
+			a = a -> siguiente;
+		}
+		nuevo -> vrt = aux2;
+		a -> siguiente =  nuevo;
+			
+	}
+				
+}
+
+void insertarRuta(){
+	char ini[15], fin[15], tipo_ruta [15];
+	float tiempo, distancia;
+	Ruta*nuevo = (Ruta*)malloc(sizeof(Ruta));
+	Domicilio *aux2, *aux;
+	
+	if (inicio==NULL){
+		printf("Error: el grafo esta vacio\n");
+		return;
+	}
+	fflush(stdin);
+	printf("Ingregar lugar de origen:\n");
+	scanf("%s", ini);
+	printf("Ingresar lugar de destino:");
+	scanf("%s", fin);
+	printf("Ingresar distancia [km]:\n");
+	scanf("%f", &distancia);
+	printf("Ingresar tiempo estimado [min]:\n");
+	scanf("%f", &tiempo);
+	printf("Ingresar tipo de ruta:");
+	scanf("%s", tipo_ruta);
+	
+	
+	aux = inicio;
+	aux2 = inicio;
+while(aux2 != NULL){
+		if (aux2 ->nombre == fin)
+			break;
+		aux2 = aux2 -> siguiente;
+	}
+			
+	if (aux2 == NULL){
+		printf("Error: Domicilio no encontrado\n");
+		return;
+		}
+	while(aux != NULL){
+		if(aux -> nombre == ini){
+			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
+			return;
+		}
+			aux = aux -> siguiente;
+	}
+	if(aux == NULL){
+		printf("Error: Domicilio no encontrado\n");
+	}
+
+}
 
 
 /* -------------------------------------------------------------- 8. MODIFICAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
