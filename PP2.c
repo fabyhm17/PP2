@@ -1038,7 +1038,31 @@ int main()
 		
 		else if (opcion == 8)
 		{
-			return 0;;
+			int op;
+			printf("\n-------MODIFICAR CATALOGO DOMICILIO-------\n");
+			printf("\n1. Modificar datos domicilio");
+			printf("\n2. eliminar domicilio");
+			printf("\n3. modificar ruta");
+			printf("\n3.eliminarruta");
+			printf("\nopcion: ");
+			scanf("%d", op);
+			if(op>1 && op<4){
+				if (op ==1){
+					return;
+				}
+				if (op ==2){
+					return;
+				}
+				if (op ==3){
+					return;
+				}
+			}
+			else{
+				printf("Error: opcion no disponible");
+				return;
+			}
+			
+		
 		}
 		
 		
