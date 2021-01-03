@@ -877,9 +877,73 @@ while(aux2 != NULL){
 
 /* -------------------------------------------------------------- 8. MODIFICAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
 
-
-
-
+void modificarDomicilio(){
+	char domicilio [15];
+	char nombre [15];
+	int i, codigo, postal;
+	Domicilio* aux = inicio;
+	if (inicio==NULL){
+		printf("\n\nError: el grafo esta vacio\n");
+		return;
+	}
+	printf("Nombre del domicilio: ");
+	fflush (stdin);
+	gets (domicilio);
+	while(aux != NULL){
+		if(strcmp(domicilio,aux ->nombre)== 0){
+			printf("\n1. Modificar nombre");
+			printf("\n2. Modificar codigo catalago");
+			printf("\n3. Modificar codigo postal");
+			printf("\nOpcion: ");
+			scanf("%d", &i);
+			while (i>3 || i<1){
+				printf("\nError: opcion no valida. \nOpcion: ");
+				scanf("%d", &i);	
+			}
+			if(i == 1){
+				printf("\nNuevo nombre: ");
+					fflush (stdin);
+					gets (nombre);
+					strcpy(aux->nombre, nombre);
+					printf("---MOFICADO----");
+				
+			}
+			if(i==2){
+				Domicilio* aux2 = inicio;
+				printf("\nNuevo codigo: ");
+					scanf("%d", codigo);
+					while(aux2 != NULL){
+						if (aux2 -> codigo == codigo){
+							printf("Error: codigo anteriormente registrado");
+							return;
+						}
+						aux2 = aux2 -> siguiente;
+					}
+				aux -> codigo = codigo;
+				printf("---MOFICADO----");		
+			}
+			if(i==3){
+				Domicilio* aux2 = inicio;
+				printf("\nNuevo codigo postal: ");
+					scanf("%d", postal);
+					while(aux2 != NULL){
+						if (aux2 -> codigo == codigo){
+							printf("Error: codigo anteriormente registrado");
+							return;
+						}
+						aux2 = aux2 -> siguiente;
+					}
+				aux -> postal = codigo;
+				printf("---MOFICADO----");		
+			}		
+		}			
+	}	
+	if (aux == NULL){
+		printf("\n\nError: Domicilio no encontrado\n");
+		return;
+	
+	}
+}
 
 
 /* ----------------------------------------------------------- 9. REGISTRAR COMPORTAMIENTO DE UN NIÑO -------------------------------------------------------- */
@@ -1045,10 +1109,11 @@ int main()
 			printf("\n3. modificar ruta");
 			printf("\n3.eliminarruta");
 			printf("\nopcion: ");
-			scanf("%d", op);
-			if(op>1 && op<4){
+			scanf("%d", &op);
+			if(op>0 && op<4){
 				if (op ==1){
-					return;
+					modificarDomicilio();
+	
 				}
 				if (op ==2){
 					return;
