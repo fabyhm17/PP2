@@ -719,6 +719,7 @@ void RegistrarJuguetesMain(Arbol *a)
 
 /* -------------------------------------------------------------- 7. REGISTRAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
 
+//GRAFO CON LISTA DE ADYACENCIA
 
 Domicilio {
 	char nombre [15];
@@ -742,17 +743,45 @@ Ruta{
 
 Domicilio*inicio = NULL;
 
+
+//FUNCIÓN DE CREAR EL NODO DOMOCILIO
+
 void insertarLugar (){
+	char nombre [15];
+	int codigo, postal;
 	Domicilio*aux, *aux2;
 	Domicilio* nuevo = (Domicilio*)malloc(sizeof(Domicilio));
-	
+	aux2 = inicio;
+	aux = inicio;
 	//DATOS DEL LUGAR PARA CATALOGO
 	printf("Codigo Catalogo: ");
-	scanf("%d",&nuevo -> codigo);
+	scanf("%d",&codigo);
+	while(aux2 != NULL){
+		if (aux2 -> codigo == codigo){
+			
+			printf("Error: codigo registrado");
+			return;
+		}
+		aux2 = aux2 -> siguiente;
+	}
+	nuevo -> codigo = codigo;
 	printf("Nombre del lugar: ");
-	scanf("%s",nuevo -> nombre);
+	fflush (stdin);
+	gets (nombre);
+	strcpy(nuevo-> nombre, nombre);
+	printf("\n%s",nuevo-> nombre );
 	printf("Código postal: ");
-	scanf("%d",&nuevo -> postal);
+		scanf("%d",&postal);
+	while(aux != NULL){
+		if (aux -> postal == postal){
+			
+			printf("Error: codigo anteriormente registrado");
+			return;
+		}
+		aux = aux -> siguiente;
+	}
+	nuevo -> postal = postal;
+
 	
 	nuevo -> siguiente = NULL;
 	nuevo -> adyacencia = NULL;
@@ -767,6 +796,8 @@ void insertarLugar (){
 		aux -> siguiente = nuevo;
 	}
 }
+
+//FUNCIÓN DE CREAR LAS CONEXION DE RUTAS CON DOMOCILIOS
 
 void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fin [15],float distancia, float tiempo, char tipo_ruta [15]){
 	Ruta*a;
@@ -790,6 +821,8 @@ void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fi
 				
 }
 
+//FUNCION AUX DE RUTAS
+
 void insertarRuta(){
 	char ini[15], fin[15], tipo_ruta [15];
 	float tiempo, distancia;
@@ -801,16 +834,11 @@ void insertarRuta(){
 		return;
 	}
 	printf("Ingregar lugar de origen:");
-	scanf("%s", ini);
+	fflush (stdin);
+	gets (ini);
 	printf("Ingresar lugar de destino:");
-	scanf("%s", fin);
-	printf("Ingresar distancia [km]:");
-	scanf("%f", &distancia);
-	printf("Ingresar tiempo estimado [min]:");
-	scanf("%f", &tiempo);
-	printf("Ingresar tipo de ruta:");
-	scanf("%s", tipo_ruta);
-	
+	fflush (stdin);
+	gets (fin);
 	
 	aux = inicio;
 	aux2 = inicio;
@@ -828,8 +856,14 @@ while(aux2 != NULL){
 		}
 	while(aux != NULL){
 		if(strcmp(ini,aux ->nombre)== 0){
+			printf("Ingresar distancia [km]:");
+			scanf("%f", &distancia);
+			printf("Ingresar tiempo estimado [min]:");
+			scanf("%f", &tiempo);
+			printf("Ingresar tipo de ruta:");
+			scanf("%s", tipo_ruta);
 			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
-			printf("Ruta añadida");
+			printf("\n\n------Ruta añadida-------");
 			return;
 		}
 			aux = aux -> siguiente;
