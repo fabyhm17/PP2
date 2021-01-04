@@ -3,6 +3,8 @@
 # include <string.h>	
 #include <unistd.h>
 #include <time.h>
+#define TRUE 1
+#define FALSE 0
 
 #define Domicilio struct domicilio
 #define Ruta struct ruta
@@ -864,6 +866,98 @@ void RegistrarJuguetesMain(Arbol *a)
 	
 
 }
+
+
+// Eliminar un juguete de un árbol ABB 
+/*
+void Borrar(Arbol *a, int dat)
+{
+   pNodo padre = NULL;
+   pNodo actual;
+   pNodo nodo;
+   int aux;
+
+   actual = *a;
+   //Mientras sea posible que el valor esté en el árbol 
+   while(!Vacio(actual)) {
+      if(dat == actual->codigo) //Si el valor está en el nodo actual 
+	  { 
+         if(EsHoja(actual)) // Y si además es un nodo hoja: lo borramos 
+		 {
+            if(padre) // Si tiene padre (no es el nodo raiz) 
+               //Anulamos el puntero que le hace referencia 
+               if(padre->derecho == actual) padre->derecho = NULL;
+               else if(padre->izquierdo == actual) padre->izquierdo = NULL;
+            free(actual); // Borrar el nodo 
+            actual = NULL;
+            return;
+         }
+         else// Si el valor está en el nodo actual, pero no es hoja 
+		 {
+            padre = actual;
+            // Buscar nodo más izquierdo de rama derecha 
+            if(actual->derecho) 
+			{
+               nodo = actual->derecho;
+               while(nodo->izquierdo)
+			   {
+                  padre = nodo;
+                  nodo = nodo->izquierdo;
+               }
+            }
+            // O buscar nodo más derecho de rama izquierda 
+            else
+			{
+               nodo = actual->izquierdo;
+               while(nodo->derecho) 
+			   {
+                  padre = nodo;
+                  nodo = nodo->derecho;
+               }
+            }
+            // Intercambiar valores de no a borrar u nodo encontrado y continuar, cerrando el bucle. El nodo encontrado no tiene
+            //  por qué ser un nodo hoja, cerrando el bucle nos aseguramos de que sólo se eliminan nodos hoja. 
+            aux = actual->nombre;
+            actual->nombre = nodo->nombre;
+            nodo->nombre = aux;
+            actual = nodo;
+         }
+      }
+      else // Todavía no hemos encontrado el valor, seguir buscándolo 
+	  { 
+         padre = actual;
+         if(dat > actual->codigo) actual = actual->derecho;
+         else if(dat < actual->codigo) actual = actual->izquierdo;
+      }
+   }
+}*/
+
+// Buscar un valor en el árbol 
+int Buscar(Arbol a, int dat)
+{
+   pNodo actual = a;
+
+   //Todavía puede aparecer, ya que quedan nodos por mirar 
+   while(!Vacio(actual)) {
+      if(dat == actual->codigo) return TRUE; // dato encontrado 
+      else if(dat < actual->codigo) actual = actual->izquierdo; //Seguir 
+      else if(dat > actual->codigo) actual = actual->derecho;
+   }
+   return FALSE; // No está en árbol 
+}
+
+
+// Comprobar si un nodo es hoja 
+int EsHoja(pNodo r)
+{
+   return !r->derecho && !r->izquierdo;
+}
+
+
+
+
+
+
 
 /* ----------------------- IMPRIMIR REGISTRO DE JUGUETES----------------------- */
 
