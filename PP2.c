@@ -608,33 +608,29 @@ juguetes* CrearJuguete( int codigo, char nombre[50], char descripcion[100], char
 	return nuevo;
 }
 
-
-/* Comprobar si un árbol es vacío */
+/* ----------------------- COMPROBAR SI EL ÁRBOL ES VACÍO----------------------- */
 int Vacio(Arbol r)
 {
    return r==NULL;
 }
 
-
+/* ----------------------- INSERTAR JUGUETE----------------------- */
 void InsertarJuguete(Arbol *a, int codigo, char nombre[50], char descripcion[100], char categoria[100], char rango_edad[10], int costo_fabricacion, char estado[50] )
 {
    pNodo padre = NULL;
    pNodo actual = *a;
    
-   /* Buscar el dato en el árbol, manteniendo un puntero al nodo padre */
+   // Buscar el dato en el árbol, manteniendo un puntero al nodo padre 
    while(!Vacio(actual) && codigo != actual->codigo) {
       padre = actual;
       if(codigo < actual->codigo) actual = actual->izquierdo;
       else if(codigo > actual->codigo) actual = actual->derecho;
    }
 
-   /* Si se ha encontrado el elemento, regresar sin insertar */
+   //Si se ha encontrado el elemento, regresar sin insertar
    if(!Vacio(actual)) return;
-   /* Si padre es NULL, entonces el árbol estaba vacío, el nuevo nodo será
-      el nodo raiz */
+   // Si padre es NULL, entonces el árbol estaba vacío, el nuevo nodo será el nodo raiz 
 
-   /* Si padre es NULL, entonces el árbol estaba vacío, el nuevo nodo será
-      el nodo raiz */
    if(Vacio(padre)) {
       actual = (Arbol)malloc(sizeof(juguetes));
       padre->izquierdo = actual;
@@ -642,8 +638,7 @@ void InsertarJuguete(Arbol *a, int codigo, char nombre[50], char descripcion[100
 
       actual->izquierdo = (*a)->derecho = NULL;
    }
-   /* Si el dato es menor que el que contiene el nodo padre, lo insertamos
-      en la rama izquierda */
+   // Si el código es menor que el que contiene el nodo padre, lo insertamos en la rama izquierda
    else if(codigo < padre->codigo) {
       actual = (Arbol)malloc(sizeof(juguetes));
       padre->izquierdo = actual;
@@ -651,8 +646,7 @@ void InsertarJuguete(Arbol *a, int codigo, char nombre[50], char descripcion[100
       
       actual->izquierdo = actual->derecho = NULL;
    }
-   /* Si el dato es mayor que el que contiene el nodo padre, lo insertamos
-      en la rama derecha */
+   // Si el código es mayor que el que contiene el nodo padre, lo insertamos en la rama derecha
    else if(codigo > padre->codigo) {
       actual = (Arbol)malloc(sizeof(juguetes));
       padre->derecho = actual;
@@ -701,10 +695,52 @@ void RegistrarJuguetesMain(Arbol *a)
 
 	InsertarJuguete(a, codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, "Disponible" );
 	
+	return;
+	
 
 }
 
+/* ----------------------- IMPRIMIR REGISTRO DE JUGUETES----------------------- */
 
+
+void imprimir_juguetes( int codigo, char nombre[50], char descripcion[100], char categoria[100], char rango_edad[10], int costo_fabricacion, char estado[50] )
+{
+	printf("Codigo: %d\n",codigo);
+	printf("Nombre: %s\n",nombre);
+	printf("Descripcion: %s\n",descripcion);
+	printf("Categoria: %s\n",categoria);
+	printf("Rango de edad recomendado: %s\n",rango_edad);
+	printf("Costo de fabricacion: %s\n",costo_fabricacion);
+	printf("Estado: %s\n",estado);
+	printf("-----------------------------------------------");
+	
+}
+
+/*void imprir_arbol(Arbol* a)
+{
+	int codigo;
+	char nombre[50];
+    char descripcion[100];
+    char categoria[100];
+    char rango_edad[10];
+    int costo_fabricacion;
+    char estado[50];  
+
+    
+	if(a==NULL) //Condicion de parada
+	{
+		return;
+	}
+	else //Se imprime la lisa de juguetes, se hace co recorrido in orden para que se imprima de menor a mayor
+	{
+		//Se recorre la rama izquierda del arbol
+		imprimir_arbol(a->izquierdo);
+		//Se imprimer los datos
+		imprimir_juguetes(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
+		//Se recorre el lado derecho del arbol
+		imprimir_arbol(a->derecho);
+	}
+}*/
 
 
 
@@ -1068,6 +1104,8 @@ int main()
 		else if (opcion == 5)
 		{
 			RegistrarJuguetesMain(a);
+			//imprimir_arbol(a);
+
 		}
 		
 	
