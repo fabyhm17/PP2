@@ -420,8 +420,10 @@ void RegistrarAyudanteMain(ImprimirAyudante *ColaAyudantes)
 {
 	char nombre_ayudante[100];
 	char correo_ayudante[100];
+	char num_puesto[100];
 	char puesto_ayudante[100];
-	char cedula_ayudante[50];	
+	char cedula_ayudante[50];
+	char num_funcion[100];	
 	char funcion_ayudante[100];
 	char fecha_entrada_ayudante[100];
 	
@@ -449,21 +451,142 @@ void RegistrarAyudanteMain(ImprimirAyudante *ColaAyudantes)
 	fflush (stdin);
 	gets (correo_ayudante);
 	
-	printf ("Ingrese el puesto del ayudante que desea registrar: ");
-	fflush (stdin);
-	gets (puesto_ayudante);
 	
+	printf ("\n\n---------------- PUESTOS DISPONIBLES ----------------");
+	printf ("\n1. Gestion de cartas");
+	printf ("\n2. Produccion de juguetes");
+	printf ("\n3. Envoltorio de juguetes");
+	printf ("\n4. Distribucion de regalos");
+	printf ("\n\nIngrese numero del puesto que el ayudante realiza: ");
+	fflush (stdin);
+	gets (num_puesto);
+	
+	if (strcmp(num_puesto,"1")==0)
+	{
+		strcpy(puesto_ayudante,"Gestion de cartas");
+		
+		printf ("\n\n---------------- FUNCIONES DISPONIBLES ----------------");
+		printf ("\n1. Seleccion de cartas.");
+		printf ("\n2. Clasificacion de niños segun su comportamiento.");	
+		printf ("\n\nIngrese la funcion que realiza el ayudante: ");
+		fflush (stdin);
+		gets (num_funcion);
+		
+		if (strcmp(num_funcion,"1")==0)
+		{
+			strcpy(funcion_ayudante,"Seleccion de cartas");
+		}
+		else if (strcmp(num_funcion,"2")==0)
+		{
+			strcpy(funcion_ayudante,"Clasificacion de niños segun su comportamiento");
+		}
+		else
+		{
+			printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
+			return;
+		}				
+	}
+	
+	else if (strcmp(num_puesto,"2")==0)
+	{
+		strcpy(puesto_ayudante,"Produccion de juguetes");
+
+		printf ("\n\n---------------- FUNCIONES DISPONIBLES ----------------");
+		printf ("\n1. Ensamblaje de juguetes.");
+		printf ("\n2. Inventario de juguetes producidos.");
+		printf ("\n3. Manipulacion de materia prima.");	
+		printf ("\n\nIngrese la funcion que realiza el ayudante: ");
+		fflush (stdin);
+		gets (num_funcion);
+		
+		if (strcmp(num_funcion,"1")==0)
+		{
+			strcpy(funcion_ayudante,"Ensamblaje de juguetes");
+		}
+		else if (strcmp(num_funcion,"2")==0)
+		{
+			strcpy(funcion_ayudante,"Inventario de juguetes producidos");
+		}
+		else if (strcmp(num_funcion,"3")==0)
+		{
+			strcpy(funcion_ayudante,"Manipulacion de materia prima");
+		}
+		else
+		{
+			printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
+			return;
+		}
+	}
+	
+	else if (strcmp(num_puesto,"3")==0)
+	{
+		strcpy(puesto_ayudante,"Envoltorio de juguetes");
+		
+		printf ("\n\n---------------- FUNCIONES DISPONIBLES ----------------");
+		printf ("\n1. Inventario de envoltorios de navidad.");
+		printf ("\n2. Envoltorio de regalos.");
+		printf ("\n3. Inventario de juguetes envueltos.");	
+		printf ("\n\nIngrese la funcion que realiza el ayudante: ");
+		fflush (stdin);
+		gets (num_funcion);
+		
+		if (strcmp(num_funcion,"1")==0)
+		{
+			strcpy(funcion_ayudante,"Inventario de envoltorios de navidad");
+		}
+		else if (strcmp(num_funcion,"2")==0)
+		{
+			strcpy(funcion_ayudante,"Envoltorio de regalos");
+		}
+		else if (strcmp(num_funcion,"3")==0)
+		{
+			strcpy(funcion_ayudante,"Inventario de juguetes envueltos");
+		}
+		else
+		{
+			printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
+			return;
+		}
+	}
+	
+	else if (strcmp(num_puesto,"4")==0)
+	{
+		strcpy(puesto_ayudante,"Distribucion de regalos");
+
+		printf ("\n\n---------------- FUNCIONES DISPONIBLES ----------------");
+		printf ("\n1. Inventario de regalos a entregar.");
+		printf ("\n2. Distribucion de regalos segun la region.");	
+		printf ("\n\nIngrese la funcion que realiza el ayudante: ");
+		fflush (stdin);
+		gets (num_funcion);
+		
+		if (strcmp(num_funcion,"1")==0)
+		{
+			strcpy(funcion_ayudante,"Inventario de regalos a entregar");
+		}
+		else if (strcmp(num_funcion,"2")==0)
+		{
+			strcpy(funcion_ayudante,"Distribucion de regalos segun la region");
+		}
+		else
+		{
+			printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
+			return;
+		}
+	}
+	
+	else
+	{
+		printf("\nERROR: el puesto no existe, la accion no se pudo realizar con exito.");
+		return;
+	}
+	
+				
 	printf ("Ingrese la fecha en que el ayudante comienza a trabajar [dd/mm/yy]: ");
 	fflush (stdin);
 	gets (fecha_entrada_ayudante);
 	
-	printf ("Ingrese la funcion del ayudante que desea registrar: ");
-	fflush (stdin);
-	gets (funcion_ayudante);
-	
-	
 	InsertarAyudante(ColaAyudantes, cedula_ayudante, nombre_ayudante, puesto_ayudante, correo_ayudante, funcion_ayudante, fecha_entrada_ayudante, 0);
-
 
 	return;
 }
@@ -472,7 +595,6 @@ void RegistrarAyudanteMain(ImprimirAyudante *ColaAyudantes)
 
 
 /* ------------------------------------------------------- 4. MODIFICAR INFORMACION DE UN AYUDANTE DE SANTA ------------------------------------------------- */
-
 
 int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 {
@@ -1150,7 +1272,7 @@ int main()
 		else if (opcion == 3)
 		{
 			RegistrarAyudanteMain(ColaAyudantes);
-			ConsultarAyudantes(ColaAyudantes);   //Funcion para probar otras, no la piden		
+			//ConsultarAyudantes(ColaAyudantes);   //Funcion para probar otras, no la piden		
 		}
 		
 		
