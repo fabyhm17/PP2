@@ -686,9 +686,6 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 
 
 
-
-
-
 /* ------------------------------------------------------------------ 5. REGISTRAR JUGUETE ------------------------------------------------------------------ */
 
 
@@ -798,27 +795,67 @@ void RegistrarJuguetesMain(Arbol *a)
     int costo_fabricacion;
     char estado[50];  
     
+    char eleccion_categ[10];
+    
 	printf("--------------REGISTRO DE JUGUETES---------------\n\n");
 	printf("Ingrese el codigo del juguete: ");
 	scanf("%d", &codigo);
 	
-	printf("\nIngrese el nombre del juguete: ");
+	printf("Ingrese el nombre del juguete: ");
 	fflush (stdin);
 	gets (nombre);
 	
-	printf("\nIngrese la descripcion del juguete: ");
+	printf("Ingrese la descripcion del juguete: ");
 	fflush (stdin);
 	gets (descripcion);
 	
-	printf("\nIngrese la categoria del juguete: ");
-	fflush (stdin);
-	gets (categoria);
+	printf("\n\n--------------CATEGORIAS DISPONIBLES---------------\n\n");
+	printf("\n 1. Peluches");
+	printf("\n 2. Muñecas");
+	printf("\n 3. Vehiculos");
+	printf("\n 4. Juguestes de contruccion");
+	printf("\n 5. Juguetes educativos");
+	printf("\n 6. Juguetes para bebes");
 	
-	printf("\nIngrese el rango de edad para la que recomienda el juguete: ");
+	printf("\nIngrese el numero al que pertenece la categoria del juguete: ");
+	fflush (stdin);
+	gets (eleccion_categ);
+	
+	if (strcmp(eleccion_categ,"1")==0)
+	{
+		strcpy(categoria,"Peluches");
+	}
+	else if (strcmp(eleccion_categ,"2")==0)
+	{
+		strcpy(categoria,"Munecas");
+	}
+	else if (strcmp(eleccion_categ,"3")==0)
+	{
+		strcpy(categoria,"Vehiculos");
+	}
+	else if (strcmp(eleccion_categ,"4")==0)
+	{
+		strcpy(categoria,"Juguetes de construccion");
+	}
+	else if (strcmp(eleccion_categ,"5")==0)
+	{
+		strcpy(categoria,"Juguetes educativos");
+	}
+	else if (strcmp(eleccion_categ,"6")==0)
+	{
+		strcpy(categoria,"Juguetes para bebes");
+	}
+	else
+	{
+		printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
+		return;
+	}			
+	
+	printf("Ingrese el rango de edad para la que recomienda el juguete: ");
 	fflush (stdin);
 	gets (rango_edad);
 	
-	printf("\nIngrese el costo total de fabricacion del juguete: ");
+	printf("Ingrese el costo total de fabricacion del juguete: ");
 	scanf("%d", &costo_fabricacion);
 
 	InsertarJuguete(a, codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, "Disponible" );
