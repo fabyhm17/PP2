@@ -571,7 +571,8 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 
 
 /* Estructuras y tipos */
-typedef struct juguete {
+typedef struct juguete 
+{
    int codigo;
    char nombre[50];
    char descripcion[100];
@@ -621,7 +622,8 @@ void InsertarJuguete(Arbol *a, int codigo, char nombre[50], char descripcion[100
    pNodo actual = *a;
    
    // Buscar el dato en el árbol, manteniendo un puntero al nodo padre 
-   while(!Vacio(actual) && codigo != actual->codigo) {
+   while(!Vacio(actual) && codigo != actual->codigo) 
+   {
       padre = actual;
       if(codigo < actual->codigo) actual = actual->izquierdo;
       else if(codigo > actual->codigo) actual = actual->derecho;
@@ -629,31 +631,36 @@ void InsertarJuguete(Arbol *a, int codigo, char nombre[50], char descripcion[100
 
    //Si se ha encontrado el elemento, regresar sin insertar
    if(!Vacio(actual)) return;
+   
    // Si padre es NULL, entonces el árbol estaba vacío, el nuevo nodo será el nodo raiz 
-
-   if(Vacio(padre)) {
+   if(Vacio(padre)) 
+   {
       actual = (Arbol)malloc(sizeof(juguetes));
       padre->izquierdo = actual;
       actual=CrearJuguete(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
 
       actual->izquierdo = (*a)->derecho = NULL;
    }
+   
    // Si el código es menor que el que contiene el nodo padre, lo insertamos en la rama izquierda
-   else if(codigo < padre->codigo) {
+   else if(codigo < padre->codigo) 
+   {
       actual = (Arbol)malloc(sizeof(juguetes));
       padre->izquierdo = actual;
 	  actual=CrearJuguete(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
       
       actual->izquierdo = actual->derecho = NULL;
    }
+   
    // Si el código es mayor que el que contiene el nodo padre, lo insertamos en la rama derecha
-   else if(codigo > padre->codigo) {
+   else if(codigo > padre->codigo) 
+   {
       actual = (Arbol)malloc(sizeof(juguetes));
       padre->derecho = actual;
    	  actual=CrearJuguete(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
       
       actual->izquierdo = actual->derecho = NULL;
-  }
+   }
 }
 
 
@@ -668,7 +675,6 @@ void RegistrarJuguetesMain(Arbol *a)
     char rango_edad[10];
     int costo_fabricacion;
     char estado[50];  
-    
     
 	printf("--------------REGISTRO DE JUGUETES---------------\n\n");
 	printf("Ingrese el codigo del juguete: ");
@@ -757,17 +763,18 @@ void imprimir_juguetes( int codigo, char nombre[50], char descripcion[100], char
 
 //GRAFO CON LISTA DE ADYACENCIA
 
-Domicilio {
+Domicilio 
+{
 	char nombre [15];
 	int codigo;
 	int postal;
 	
 	Domicilio*siguiente;
-	Ruta*adyacencia;
-	
+	Ruta*adyacencia;	
 };
 
-Ruta{
+Ruta
+{
 	char origen [15];
 	char destino [15];
 	float tiempo;
@@ -782,33 +789,41 @@ Domicilio*inicio = NULL;
 
 //FUNCIÓN DE CREAR EL NODO DOMOCILIO
 
-void insertarLugar (){
+void insertarLugar ()
+{
 	char nombre [15];
 	int codigo, postal;
 	Domicilio*aux, *aux2;
 	Domicilio* nuevo = (Domicilio*)malloc(sizeof(Domicilio));
 	aux2 = inicio;
 	aux = inicio;
+	
 	//DATOS DEL LUGAR PARA CATALOGO
 	printf("Codigo Catalogo: ");
 	scanf("%d",&codigo);
+	
 	while(aux2 != NULL){
-		if (aux2 -> codigo == codigo){
-			
+		if (aux2 -> codigo == codigo)
+		{	
 			printf("Error: codigo registrado");
 			return;
 		}
 		aux2 = aux2 -> siguiente;
 	}
+	
 	nuevo -> codigo = codigo;
+	
 	printf("Nombre del lugar: ");
 	fflush (stdin);
 	gets (nombre);
 	strcpy(nuevo-> nombre, nombre);
 	printf("\n%s",nuevo-> nombre );
+	
 	printf("Código postal: ");
-		scanf("%d",&postal);
-	while(aux != NULL){
+	scanf("%d",&postal);
+	
+	while(aux != NULL)
+	{
 		if (aux -> postal == postal){
 			
 			printf("Error: codigo anteriormente registrado");
@@ -816,28 +831,37 @@ void insertarLugar (){
 		}
 		aux = aux -> siguiente;
 	}
-	nuevo -> postal = postal;
-
 	
+	nuevo -> postal = postal;
 	nuevo -> siguiente = NULL;
 	nuevo -> adyacencia = NULL;
-	if (inicio==NULL){
+	
+	if (inicio==NULL)
+	{
 		inicio = nuevo;
 	}
-	else{
+	
+	else
+	{
 		aux = inicio;
-		while (aux -> siguiente != NULL){
+		while (aux -> siguiente != NULL)
+		{
 			aux = aux -> siguiente;
 		}
 		aux -> siguiente = nuevo;
 	}
 }
 
+
+
 //FUNCIÓN DE CREAR LAS CONEXION DE RUTAS CON DOMOCILIOS
 
-void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fin [15],float distancia, float tiempo, char tipo_ruta [15]){
+void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fin [15],float distancia, float tiempo, char tipo_ruta [15])
+{
 	Ruta*a;
-	if(aux-> adyacencia == NULL){
+	
+	if(aux-> adyacencia == NULL)
+	{
 		aux-> adyacencia = nuevo;
 		nuevo -> vrt = aux2;
 		nuevo -> tiempo = tiempo;
@@ -845,53 +869,66 @@ void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fi
 		strcpy(nuevo->tipo_ruta,tipo_ruta);
 		strcpy(nuevo->origen,ini);
 		strcpy(nuevo->destino,fin);
-	}else{
+	}
+	
+	else
+	{
 		a = aux -> adyacencia;
-		while(a -> siguiente != NULL){
+		while(a -> siguiente != NULL)
+		{
 			a = a -> siguiente;
 		}
 		nuevo -> vrt = aux2;
-		a -> siguiente =  nuevo;
-			
-	}
-				
+		a -> siguiente =  nuevo;			
+	}			
 }
+
 
 //FUNCION AUX DE RUTAS
 
-void insertarRuta(){
+void insertarRuta()
+{
 	char ini[15], fin[15], tipo_ruta [15];
 	float tiempo, distancia;
 	Ruta*nuevo = (Ruta*)malloc(sizeof(Ruta));
 	Domicilio *aux2, *aux;
 	
-	if (inicio==NULL){
+	if (inicio==NULL)
+	{
 		printf("\n\nError: el grafo esta vacio\n");
 		return;
 	}
+	
 	printf("Ingregar lugar de origen:");
 	fflush (stdin);
 	gets (ini);
+	
 	printf("Ingresar lugar de destino:");
 	fflush (stdin);
 	gets (fin);
 	
 	aux = inicio;
 	aux2 = inicio;
-while(aux2 != NULL){
-		if ( strcmp(fin,aux2 ->nombre) == 0){
-			
+	
+	while(aux2 != NULL)
+	{
+		if ( strcmp(fin,aux2 ->nombre) == 0)
+		{
 			break;
 		}
 		aux2 = aux2 -> siguiente;
 	}
-			
-	if (aux2 == NULL){
+				
+	if (aux2 == NULL)
+	{
 		printf("\n\nError: Domicilio no encontrado\n");
 		return;
-		}
-	while(aux != NULL){
-		if(strcmp(ini,aux ->nombre)== 0){
+	}
+	
+	while(aux != NULL)
+	{
+		if(strcmp(ini,aux ->nombre)== 0)
+		{
 			printf("Ingresar distancia [km]:");
 			scanf("%f", &distancia);
 			printf("Ingresar tiempo estimado [min]:");
@@ -902,9 +939,11 @@ while(aux2 != NULL){
 			printf("\n\n------Ruta añadida-------");
 			return;
 		}
-			aux = aux -> siguiente;
+		aux = aux -> siguiente;
 	}
-	if(aux == NULL){
+	
+	if(aux == NULL)
+	{
 		printf("\n\nError: Domicilio no encontrado\n");
 	}
 
@@ -913,57 +952,76 @@ while(aux2 != NULL){
 
 /* -------------------------------------------------------------- 8. MODIFICAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
 
-void modificarDomicilio(){
+void modificarDomicilio()
+{
 	char domicilio [15];
 	char nombre [15];
 	int i, codigo, postal;
 	Domicilio* aux = inicio;
-	if (inicio==NULL){
+	
+	if (inicio==NULL)
+	{
 		printf("\n\nError: el grafo esta vacio\n");
 		return;
 	}
+	
 	printf("Nombre del domicilio: ");
 	fflush (stdin);
 	gets (domicilio);
-	while(aux != NULL){
-		if(strcmp(domicilio,aux ->nombre)== 0){
+	
+	while(aux != NULL)
+	{
+		if(strcmp(domicilio,aux ->nombre)== 0)
+		{
 			printf("\n1. Modificar nombre");
 			printf("\n2. Modificar codigo catalago");
 			printf("\n3. Modificar codigo postal");
 			printf("\nOpcion: ");
 			scanf("%d", &i);
-			while (i>3 || i<1){
+			while (i>3 || i<1)
+			{
 				printf("\nError: opcion no valida. \nOpcion: ");
 				scanf("%d", &i);	
 			}
-			if(i == 1){
+			
+			if(i == 1)
+			{
 				printf("\nNuevo nombre: ");
+				{
 					fflush (stdin);
 					gets (nombre);
 					strcpy(aux->nombre, nombre);
 					printf("---MOFICADO----");
-				
+				}	
 			}
-			if(i==2){
+			
+			if(i==2)
+			{
 				Domicilio* aux2 = inicio;
 				printf("\nNuevo codigo: ");
 					scanf("%d", codigo);
-					while(aux2 != NULL){
-						if (aux2 -> codigo == codigo){
+					while(aux2 != NULL)
+					{
+						if (aux2 -> codigo == codigo)
+						{
 							printf("Error: codigo anteriormente registrado");
 							return;
 						}
 						aux2 = aux2 -> siguiente;
 					}
 				aux -> codigo = codigo;
-				printf("---MOFICADO----");		
+				printf("---- MOFICADO ----");		
 			}
-			if(i==3){
+			
+			if(i==3)
+			{
 				Domicilio* aux2 = inicio;
 				printf("\nNuevo codigo postal: ");
 					scanf("%d", postal);
-					while(aux2 != NULL){
-						if (aux2 -> codigo == codigo){
+					while(aux2 != NULL)
+					{
+						if (aux2 -> codigo == codigo)
+						{
 							printf("Error: codigo anteriormente registrado");
 							return;
 						}
@@ -974,10 +1032,11 @@ void modificarDomicilio(){
 			}		
 		}			
 	}	
-	if (aux == NULL){
+	
+	if (aux == NULL)
+	{
 		printf("\n\nError: Domicilio no encontrado\n");
 		return;
-	
 	}
 }
 
@@ -1118,54 +1177,59 @@ int main()
 		else if (opcion == 7)
 		{
 			int domicilios, d, rutas, r;
-			printf("------CATALOGO DOMICILIOS-------\n\n");
-			printf("cantidad domicilios que desea registrar: ");
+			
+			printf("\n\n------------------------ CATALOGO DE DOMICILIOS ------------------------\n\n");
+			printf("Ingrese la cantidad domicilios que desea registrar: ");
 			scanf("%d",&domicilios);
-			for(d=0; d<domicilios; d++){
-				printf("\n\n-----DOMICILIO #%d ------\n", d+1 );
-				insertarLugar ();
-								
+			
+			for(d=0; d<domicilios; d++)
+			{
+				printf("\n\n-------------- DOMICILIO #%d --------------\n", d+1 );
+				insertarLugar ();					
 			}
-			printf("\n\ncantidad rutas: ");
+			
+			printf("\n\nIngrese la cantidad rutas: ");
 			scanf("%d", &rutas);
-			for(r=0; r<rutas; r++){
-				printf("\n\n-----RUTA #%d ------\n", r+1 );
-				insertarRuta();
-				
+			
+			for(r=0; r<rutas; r++)
+			{
+				printf("\n\n-------------- RUTA #%d --------------\n", r+1 );
+				insertarRuta();	
 			}
 		}
 			
-				
-		
-		
+			
 		else if (opcion == 8)
 		{
 			int op;
 			printf("\n-------MODIFICAR CATALOGO DOMICILIO-------\n");
-			printf("\n1. Modificar datos domicilio");
-			printf("\n2. eliminar domicilio");
-			printf("\n3. modificar ruta");
-			printf("\n3.eliminarruta");
-			printf("\nopcion: ");
+			printf("\n1. Modificar datos domicilio.");
+			printf("\n2. Eliminar domicilio.");
+			printf("\n3. Modificar ruta.");
+			printf("\n3. Eliminar ruta.");
+			printf("\nInserte el numero de la accion que desea realizar: ");
 			scanf("%d", &op);
-			if(op>0 && op<4){
-				if (op ==1){
+			if(op>0 && op<4)
+			{
+				if (op ==1)
+				{
 					modificarDomicilio();
-	
 				}
-				if (op ==2){
+				if (op ==2)
+				{
 					return;
 				}
-				if (op ==3){
+				if (op ==3)
+				{
 					return;
 				}
-			}
-			else{
-				printf("Error: opcion no disponible");
-				return;
 			}
 			
-		
+			else
+			{
+				printf("ERROR: opcion no disponible");
+				return;
+			}	
 		}
 		
 		
