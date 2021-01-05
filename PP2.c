@@ -21,7 +21,7 @@ typedef struct Kid
 	char correo [50];
 	char lugar_residencia [50];	
 	char cedula [50];
-	int edad;
+	char edad[50];
 	char fecha_nacimiento [50];
 	char necesidades_especiales [50];	
 	int contador_comportamiento_bueno;
@@ -49,7 +49,7 @@ Imprimir * CrearColaKids(Imprimir * ColaKids)
 
 /* ----------------------- CREAR NODO NIÑO ----------------------- */
 
-Kid * CrearKid(char cedula[15], char nombre[200], char nombre_usuario[200],char correo [200], char lugar_residencia [50], int edad, char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
+Kid * CrearKid(char cedula[15], char nombre[200], char nombre_usuario[200],char correo [200], char lugar_residencia [50], char edad [50], char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
 {
 	struct Kid *nuevo;
 	nuevo = (Kid *) malloc(sizeof(Kid));
@@ -60,7 +60,7 @@ Kid * CrearKid(char cedula[15], char nombre[200], char nombre_usuario[200],char 
 	strcpy(nuevo->nombre_usuario,nombre_usuario);
 	strcpy(nuevo->correo,correo);
 	strcpy(nuevo->lugar_residencia,lugar_residencia);
-	nuevo->edad=edad;
+	strcpy(nuevo->edad,edad);
 	strcpy(nuevo->fecha_nacimiento,fecha_nacimiento);
 	strcpy(nuevo->necesidades_especiales,necesidades_especiales);
 	nuevo->contador_comportamiento_bueno = contador_comportamiento_bueno;
@@ -70,7 +70,7 @@ Kid * CrearKid(char cedula[15], char nombre[200], char nombre_usuario[200],char 
 
 /* ----------------------- REGISTRAR NIÑO ----------------------- */
 
-Imprimir * InsertarKid(Imprimir * ColaKids, char cedula[15], char nombre[200], char nombre_usuario[200], char correo [200], char lugar_residencia [50], int edad, char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
+Imprimir * InsertarKid(Imprimir * ColaKids, char cedula[15], char nombre[200], char nombre_usuario[200], char correo [200], char lugar_residencia [50], char edad [50], char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
 {
 	ColaKids->size = ColaKids-> size + 1;
 	if(ColaKids->front == NULL) 
@@ -113,7 +113,7 @@ int ConsultarKids(Imprimir *ColaKids)
 				printf("\nCorreo: %s", i->correo);
 				printf("\nLugar de residencia: %s", i->lugar_residencia);
 				printf("\nCedula: %s", i->cedula);
-				printf("\nEdad: %d", i->edad);
+				printf("\nEdad: %s", i->edad);
 				printf("\nFecha de nacimiento: %s", i->fecha_nacimiento);
 				printf("\nNecesidades especiales: %s", i->necesidades_especiales);
 				printf("\nComportamientos buenos: %d", i->contador_comportamiento_bueno);
@@ -142,7 +142,7 @@ void RegistrarKidMain(Imprimir *ColaKids)
 	char correo_kid[100];
 	char residencia_kid[100];
 	char cedula_kid[15];
-	int edad_kid;
+	char edad_kid [10];
 	char nacimiento_kid[100];
 	char necesidades_especiales_kid[100];
 	
@@ -179,7 +179,8 @@ void RegistrarKidMain(Imprimir *ColaKids)
 	gets (residencia_kid);
 	
 	printf ("Ingrese la edad del niño que desea registrar: ");
-	scanf("%d", &edad_kid);
+	fflush (stdin);
+	gets (edad_kid);
 	
 	printf ("Ingrese la fecha de nacimiento del niño que desea registrar [dd/mm/yy]: ");
 	fflush (stdin);
@@ -258,7 +259,7 @@ int ModificarInfoKid (Imprimir *ColaKids)
 			else if (dato == 5)
 			{
 				printf ("Ingrese la nueva edad del niño: ");
-				scanf("%d",i->edad);
+				scanf("%s",i->edad);
 			}
 			
 			else if (dato == 6)
@@ -279,8 +280,8 @@ int ModificarInfoKid (Imprimir *ColaKids)
 			printf("\nNombre de usuario: %s", i->nombre_usuario);
 			printf("\nCorreo: %s", i->correo);
 			printf("\nLugar de residencia: %s", i->lugar_residencia);
-			printf("\nCedula: %d", i->cedula);
-			printf("\nEdad: %d", i->edad);
+			printf("\nCedula: %s", i->cedula);
+			printf("\nEdad: %s", i->edad);
 			printf("\nFecha de nacimiento: %s", i->fecha_nacimiento);
 			printf("\nNecesidades especiales: %s", i->necesidades_especiales);
 			printf("\n____________________________________________________________________________\n");
@@ -1244,7 +1245,7 @@ void insertarRuta()
 	
 	if (inicio==NULL)
 	{
-		printf("\n\nError: el grafo esta vacio\n");
+		printf("\n\nERROR: el grafo esta vacio\n");
 		return;
 	}
 	
@@ -1270,7 +1271,7 @@ void insertarRuta()
 				
 	if (aux2 == NULL)
 	{
-		printf("\n\nError: Domicilio no encontrado\n");
+		printf("\n\nERROR: Domicilio no encontrado\n");
 		return;
 	}
 	
@@ -1285,7 +1286,7 @@ void insertarRuta()
 			printf("Ingresar tipo de ruta:");
 			scanf("%s", tipo_ruta);
 			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
-			printf("\n\n------Ruta añadida-------");
+			printf("\n\n---------- RUTA AÑADIDA ----------");
 			return;
 		}
 		aux = aux -> siguiente;
@@ -1293,7 +1294,7 @@ void insertarRuta()
 	
 	if(aux == NULL)
 	{
-		printf("\n\nError: Domicilio no encontrado\n");
+		printf("\n\nERROR: Domicilio no encontrado\n");
 	}
 
 }
@@ -1311,7 +1312,7 @@ void modificarDomicilio()
 	
 	if (inicio==NULL)
 	{
-		printf("\n\nError: el grafo esta vacio\n");
+		printf("\n\nERROR: el grafo esta vacio\n");
 		return;
 	}
 	
@@ -1330,7 +1331,7 @@ void modificarDomicilio()
 			scanf("%d", &i);
 			while (i>3 || i<1)
 			{
-				printf("\nError: opcion no valida. \nOpcion: ");
+				printf("\nERROR: opcion no valida. \nOpcion: ");
 				scanf("%d", &i);	
 			}
 			
@@ -1341,7 +1342,7 @@ void modificarDomicilio()
 					fflush (stdin);
 					gets (nombre);
 					strcpy(aux->nombre, nombre);
-					printf("---MOFICADO----");
+					printf("---------- MOFICADO ----------");
 				}	
 			}
 			
@@ -1354,13 +1355,13 @@ void modificarDomicilio()
 					{
 						if (aux2 -> codigo == codigo)
 						{
-							printf("Error: codigo anteriormente registrado");
+							printf("ERROR: codigo anteriormente registrado");
 							return;
 						}
 						aux2 = aux2 -> siguiente;
 					}
 				aux -> codigo = codigo;
-				printf("---- MOFICADO ----");		
+				printf("---------- MOFICADO ----------");		
 			}
 			
 			if(i==3)
@@ -1372,20 +1373,20 @@ void modificarDomicilio()
 					{
 						if (aux2 -> codigo == codigo)
 						{
-							printf("Error: codigo anteriormente registrado");
+							printf("ERROR: codigo anteriormente registrado");
 							return;
 						}
 						aux2 = aux2 -> siguiente;
 					}
 				aux -> postal = codigo;
-				printf("---MOFICADO----");		
+				printf("---------- MOFICADO ----------");		
 			}		
 		}			
 	}	
 	
 	if (aux == NULL)
 	{
-		printf("\n\nError: Domicilio no encontrado\n");
+		printf("\n\nERROR: Domicilio no encontrado\n");
 		return;
 	}
 }
@@ -1394,74 +1395,96 @@ void modificarDomicilio()
  void eliminarNodo(char nombre [15]){
     Domicilio*aux=inicio;
     Ruta* ar, *ar1;
-    while(aux!=NULL){   
-    	if(strcmp(aux->nombre,nombre)==0){
-	        if(aux->adyacencia!=NULL){
+    while(aux!=NULL)
+	{   
+    	if(strcmp(aux->nombre,nombre)==0)
+		{
+	        if(aux->adyacencia!=NULL)
+			{
 	            ar=aux->adyacencia;
-	            while(ar!=NULL){ 
+	            while(ar!=NULL)
+				{ 
 				  	ar1= ar;
 	            	ar=ar->siguiente;
 	            	free(ar1);
 	            	printf(ar->vrt->nombre);  
 	            }
 	            free(aux);
-	            printf("***ELIMINADO***");
+	            printf("---------- ELIMINADO ----------");
 	            return;
 	        }
-	        else{
+	        
+	        else
+			{
 	        	free(aux);
-	        	printf("***ELIMINADO***");
-	        	return;
-	        	
+	        	printf("---------- ELIMINADO ----------");
+	        	return;	
 			}
 	    	
 		}
         aux=aux->siguiente;
     }
 }
+
 //ELIMINAR DOMICILIO	
- void eliminarDomicilio(){
+void eliminarDomicilio()
+{
 	char nombre[15];
 	Domicilio*aux=inicio,*aux2=inicio;
-  if(inicio!=NULL){
-  	 fflush(stdin);
-  	 printf("Nombre del domicilio que desea eliminar:");
-     fflush (stdin);
-	gets (nombre);
-     while(aux!=NULL){
-  	    if(strcmp(aux->nombre,nombre)==0)
-  		break;
-	    aux=aux->siguiente;
-     }
-     if(aux==NULL){
-     	printf("Error: Domicilio no encontrado\n");
-	 }else{
-	 	eliminarNodo(nombre);
-	 	
-	 }
- 	
- }
- 
+	if(inicio!=NULL)
+	{
+		fflush(stdin);
+		printf("Nombre del domicilio que desea eliminar:");
+		fflush (stdin);
+		gets (nombre);
+		while(aux!=NULL)
+		{
+			if(strcmp(aux->nombre,nombre)==0)
+			break;
+			aux=aux->siguiente;
+	    }
+	    
+		if(aux==NULL)
+		{
+	    	printf("ERROR: Domicilio no encontrado\n");
+		}
+		
+		else
+		{
+			eliminarNodo(nombre);	
+		}	
+	}
 }
 
-void visualizarGrafo(){
+void visualizarGrafo()
+{
     Domicilio*aux=inicio;
     Ruta* ar;
     printf("GRAFO DE RUTAS\n");
-    while(aux!=NULL){   
+    while(aux!=NULL)
+	{   
 	    printf("%s:    ",aux->nombre);
-        if(aux->adyacencia!=NULL){
+        if(aux->adyacencia!=NULL)
+		{
             ar=aux->adyacencia;
-            while(ar!=NULL){ 
+            while(ar!=NULL)
+			{ 
 			    printf(" -> %s",ar->vrt->nombre);
                 ar=ar->siguiente;
             }
         }
+        
         printf("\n");
         aux=aux->siguiente;
     }
+    
     printf("\n");
 }
+
+
+
+
+
 
 /* ----------------------------------------------------------- 9. REGISTRAR COMPORTAMIENTO DE UN NIÑO -------------------------------------------------------- */
 
@@ -1526,6 +1549,33 @@ ImprimirComportamiento * InsertarComportamiento(ImprimirComportamiento * ColaCom
 }
 
 
+/* ----------------------- CONSULTAR COMPORTAMIENTO ----------------------- */
+
+int ConsultarComportamientos(ImprimirComportamiento *ColaComportamientos)
+{
+	Comportamiento *i; 
+	
+	if (ColaComportamientos -> front == NULL)
+	{
+		printf ("\nERROR: No hay comportamientos registrados.");
+		return;
+	}
+	
+	else
+	{
+		for(i = ColaComportamientos->front; i!= NULL; i = i->next)
+		{		
+				printf("\n\nCedula: %s", i->cedula_kid);
+				printf("\nNombre del padre: %s", i->nombre_padre);
+				printf("\nFecha del registro: %s", i->fecha_registro);
+				printf("\nTipo de comportamiento: %s", i->comportamiento);
+				printf("\nDescripcion del comportamiento: %s", i->descripcion_comportamiento);
+				printf("\n____________________________________________________________________________\n");
+		}			
+	}
+	
+	return 0;
+}
 
 /* ----------------------- REGISTRAR NIÑO EN EL MAIN ----------------------- */
 
@@ -1588,8 +1638,6 @@ void RegistrarComportamientoMain(ImprimirComportamiento *ColaComportamientos, Im
 			
 			
 			InsertarComportamiento(ColaComportamientos,cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
-			
-			return;
 		}
 	}	
 	
@@ -1642,7 +1690,25 @@ void RegistrarComportamientoMain(ImprimirComportamiento *ColaComportamientos, Im
 /* ------------------------------------------------------------------ 15. ANALISIS DE DATOS ------------------------------------------------------------------- */
 
 
+/* ------------------------------------ 15.1 Cantidad de juguetes solicitados por año ------------------------------------- */
 
+
+/* ------------------------------------ 15.2 Lugar donde se solicitaron más y menos juguetes ------------------------------------- */
+
+
+/* ------------------------------------ 15.3 Cantidad de niños a los que se les aprobó su carta por año  ------------------------------------- */
+
+
+/* ------------------------------------ 15.4 Cantidad de niños a los que se les rechazó su carta por año ------------------------------------- */
+
+
+/* ------------------------------------ 15.5 Cantidad de comportamientos buenos y malos registrados  ------------------------------------- */
+
+
+/* ------------------------------------ 15.6 Cantidad de cartas procesadas según ayudante. ------------------------------------- */
+
+
+/* ------------------------------------ 15.7 Top 10 de los juguetes más pedidos  ------------------------------------- */
 
 
 
@@ -1759,7 +1825,7 @@ int main()
 		else if (opcion == 8)
 		{
 			int op;
-			printf("\n-------MODIFICAR CATALOGO DOMICILIO-------\n");
+			printf("\n--------------- MODIFICAR CATALOGO DOMICILIO ---------------\n");
 			printf("\n1. Modificar datos domicilio.");
 			printf("\n2. Eliminar domicilio.");
 			printf("\n3. Modificar ruta.");
@@ -1772,12 +1838,14 @@ int main()
 				{
 					modificarDomicilio();
 				}
+				
 				if (op ==2)
 				{
-					 visualizarGrafo();
+					visualizarGrafo();
 					eliminarDomicilio();
-					 visualizarGrafo();
+					visualizarGrafo();
 				}
+				
 				if (op ==3)
 				{
 					return;
@@ -1795,7 +1863,8 @@ int main()
 		else if (opcion == 9)
 		{
 			RegistrarComportamientoMain(ColaComportamientos, ColaKids);
-			ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
+			//ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
+			ConsultarComportamientos(ColaComportamientos);   //Funcion para probar otras, no la piden
 		}
 		
 		
@@ -1831,7 +1900,60 @@ int main()
 		
 		else if (opcion == 15)
 		{
-			return 0;
+			char opcion_analisis[10];
+			
+			printf ("\n\n -------------------------- ANALISIS DE DATOS -------------------------- \n");
+			printf ("\n 1.  Registrar niño.");
+			printf ("\n 2.  Modificar informacion de un niño.");
+			printf ("\n 3.  Registrar ayudante de Santa.");
+			printf ("\n 4.  Modificar informacion de un ayudante de Santa.");
+			printf ("\n 5.  Registrar juguete.");
+			printf ("\n 6.  Modificar informacion de un juguete.");
+			printf ("\n 7.  Registrar lugar de domicilio en el catalogo.");
+			printf ("\n\nIngrese el numero del analisis que desea realizar:  ");
+			fflush (stdin);
+			gets (opcion_analisis);	
+			
+			if (strcmp(opcion_analisis,"1")==0)
+			{
+				return 0;
+			}
+			
+			else if (strcmp(opcion_analisis,"2")==0)
+			{
+				return 0;
+			}
+
+			else if (strcmp(opcion_analisis,"3")==0)
+			{
+				return 0;
+			}
+			
+			else if (strcmp(opcion_analisis,"4")==0)
+			{
+				return 0;
+			}
+			
+			else if (strcmp(opcion_analisis,"5")==0)
+			{
+				return 0;
+			}
+			
+			else if (strcmp(opcion_analisis,"6")==0)
+			{
+				return 0;
+			}
+			
+			else if (strcmp(opcion_analisis,"7")==0)
+			{
+				return 0;
+			}	
+			
+			else
+			{
+				printf ("\n\nERROR: La accion solicitada no existe.");
+				return;
+			}
 		}
 		
 		
