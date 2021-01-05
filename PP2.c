@@ -1073,7 +1073,7 @@ void insertarLugar ()
 	fflush (stdin);
 	gets (nombre);
 	strcpy(nuevo-> nombre, nombre);
-	printf("\n%s",nuevo-> nombre );
+
 	
 	printf("Código postal: ");
 	scanf("%d",&postal);
@@ -1115,9 +1115,11 @@ void insertarLugar ()
 void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fin [15],float distancia, float tiempo, char tipo_ruta [15])
 {
 	Ruta*a;
+
 	
 	if(aux-> adyacencia == NULL)
 	{
+	
 		aux-> adyacencia = nuevo;
 		nuevo -> vrt = aux2;
 		nuevo -> tiempo = tiempo;
@@ -1135,7 +1137,8 @@ void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fi
 			a = a -> siguiente;
 		}
 		nuevo -> vrt = aux2;
-		a -> siguiente =  nuevo;			
+		a -> siguiente =  nuevo;
+		
 	}			
 }
 
@@ -1208,6 +1211,7 @@ void insertarRuta()
 
 /* -------------------------------------------------------------- 8. MODIFICAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
 
+//MODIFICAR DOMICILIO
 void modificarDomicilio()
 {
 	char domicilio [15];
@@ -1296,6 +1300,78 @@ void modificarDomicilio()
 	}
 }
 
+
+ void eliminarNodo(char nombre [15]){
+    Domicilio*aux=inicio;
+    Ruta* ar, *ar1;
+    while(aux!=NULL){   
+    	if(strcmp(aux->nombre,nombre)==0){
+	        if(aux->adyacencia!=NULL){
+	            ar=aux->adyacencia;
+	            while(ar!=NULL){ 
+				  	ar1= ar;
+	            	ar=ar->siguiente;
+	            	free(ar1);
+	            	printf(ar->vrt->nombre);  
+	            }
+	            free(aux);
+	            printf("***ELIMINADO***");
+	            return;
+	        }
+	        else{
+	        	free(aux);
+	        	printf("***ELIMINADO***");
+	        	return;
+	        	
+			}
+	    	
+		}
+        aux=aux->siguiente;
+    }
+}
+//ELIMINAR DOMICILIO	
+ void eliminarDomicilio(){
+	char nombre[15];
+	Domicilio*aux=inicio,*aux2=inicio;
+  if(inicio!=NULL){
+  	 fflush(stdin);
+  	 printf("Nombre del domicilio que desea eliminar:");
+     fflush (stdin);
+	gets (nombre);
+     while(aux!=NULL){
+  	    if(strcmp(aux->nombre,nombre)==0)
+  		break;
+	    aux=aux->siguiente;
+     }
+     if(aux==NULL){
+     	printf("Error: Domicilio no encontrado\n");
+	 }else{
+	 	eliminarNodo(nombre);
+	 	
+	 }
+ 	
+ }
+ 
+}
+
+void visualizarGrafo(){
+    Domicilio*aux=inicio;
+    Ruta* ar;
+    printf("GRAFO DE RUTAS\n");
+    while(aux!=NULL){   
+	    printf("%s:    ",aux->nombre);
+        if(aux->adyacencia!=NULL){
+            ar=aux->adyacencia;
+            while(ar!=NULL){ 
+			    printf(" -> %s",ar->vrt->nombre);
+                ar=ar->siguiente;
+            }
+        }
+        printf("\n");
+        aux=aux->siguiente;
+    }
+    printf("\n");
+}
 
 /* ----------------------------------------------------------- 9. REGISTRAR COMPORTAMIENTO DE UN NIÑO -------------------------------------------------------- */
 
@@ -1433,6 +1509,8 @@ void RegistrarComportamientoMain(ImprimirComportamiento *ColaComportamientos, Im
 		return;
 	}	
 }
+
+
 
 
 
@@ -1606,7 +1684,9 @@ int main()
 				}
 				if (op ==2)
 				{
-					return;
+					 visualizarGrafo();
+					eliminarDomicilio();
+					 visualizarGrafo();
 				}
 				if (op ==3)
 				{
