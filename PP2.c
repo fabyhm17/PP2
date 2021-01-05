@@ -116,6 +116,8 @@ int ConsultarKids(Imprimir *ColaKids)
 				printf("\nEdad: %d", i->edad);
 				printf("\nFecha de nacimiento: %s", i->fecha_nacimiento);
 				printf("\nNecesidades especiales: %s", i->necesidades_especiales);
+				printf("\nComportamientos buenos: %d", i->contador_comportamiento_bueno);
+				printf("\nComportamientos malos: %d", i->contador_comportamiento_malo);
 				printf("\n____________________________________________________________________________\n");
 			}
 		}			
@@ -284,7 +286,6 @@ int ModificarInfoKid (Imprimir *ColaKids)
 			printf("\n____________________________________________________________________________\n");
 			return;
 		}
-
 	}
 		
 	if (contador == 0)
@@ -324,6 +325,7 @@ typedef struct ImprimirAyudante
 	int size;
 }ImprimirAyudante;
 
+
 /* ----------------------- CREAR NUEVA COLA AYUDANTE ----------------------- */
 
 ImprimirAyudante * CrearColaAyudantes(ImprimirAyudante * ColaAyudantes)
@@ -334,6 +336,7 @@ ImprimirAyudante * CrearColaAyudantes(ImprimirAyudante * ColaAyudantes)
 	ColaAyudantes -> rear = NULL;
 	return ColaAyudantes;
 }
+
 
 /* ----------------------- CREAR NODO AYUDANTE ----------------------- */
 
@@ -1296,8 +1299,140 @@ void modificarDomicilio()
 
 /* ----------------------------------------------------------- 9. REGISTRAR COMPORTAMIENTO DE UN NIÑO -------------------------------------------------------- */
 
+/* --------------------------- STRUCT DEL COMPORTAMIENTO --------------------------- */
+
+typedef struct Comportamiento
+{
+	char nombre_padre [50];
+	char cedula_kid [50];
+	char fecha_registro [50];
+	char descripcion_comportamiento [50];
+	char comportamiento [50];	
+	struct Comportamiento * next;	
+}Comportamiento;
+
+typedef struct ImprimirComportamiento
+{
+	Comportamiento *front;
+	Comportamiento *rear;
+	int size;
+}ImprimirComportamiento;
+
+/* ----------------------- CREAR NUEVA COLA COMPORTAMIENTO ----------------------- */
+
+ImprimirComportamiento * CrearColaComportamientos(ImprimirComportamiento * ColaComportamientos)
+{
+	ColaComportamientos = NULL;
+	ColaComportamientos = (ImprimirComportamiento *) malloc(sizeof(ImprimirComportamiento));	
+	ColaComportamientos -> front = NULL;
+	ColaComportamientos -> rear = NULL;
+	return ColaComportamientos;
+}
+
+/* ----------------------- CREAR NODO COMPORTAMIENTO ----------------------- */
+
+Comportamiento * CrearComportamiento(char cedula_kid[15], char nombre_padre[200], char comportamiento[50], char fecha_registro [50], char descripcion_comportamiento [200])
+{
+	struct Comportamiento *nuevo;
+	nuevo = (Comportamiento *) malloc(sizeof(Comportamiento));
+	nuevo -> next = NULL;
+	
+	strcpy(nuevo->cedula_kid,cedula_kid);	
+	strcpy(nuevo->nombre_padre,nombre_padre);
+	strcpy(nuevo->comportamiento,comportamiento);
+	strcpy(nuevo->fecha_registro,fecha_registro);
+	strcpy(nuevo->descripcion_comportamiento,descripcion_comportamiento);
+	return nuevo;
+}
+
+/* ----------------------- REGISTRAR COMPORTAMIENTO ----------------------- */
+
+ImprimirComportamiento * InsertarComportamiento(ImprimirComportamiento * ColaComportamientos, char cedula_kid[15], char nombre_padre[200], char comportamiento[50], char fecha_registro [50], char descripcion_comportamiento [200])
+{
+	ColaComportamientos->size = ColaComportamientos-> size + 1;
+	if(ColaComportamientos->front == NULL) 
+	{
+		ColaComportamientos->front = CrearComportamiento(cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
+		return ColaComportamientos;
+	}
+	ColaComportamientos ->rear->next = CrearComportamiento(cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
+	ColaComportamientos ->rear = ColaComportamientos->rear->next;
+}
 
 
+
+/* ----------------------- REGISTRAR NIÑO EN EL MAIN ----------------------- */
+
+void RegistrarComportamientoMain(ImprimirComportamiento *ColaComportamientos, Imprimir *ColaKids)
+{
+	char nombre_padre [50];
+	char cedula_kid [50];
+	char fecha_registro [50];
+	char descripcion_comportamiento [50];
+	char num_comportamiento [50];
+	char comportamiento [50];
+	int contador=0;
+
+	printf ("\nIngrese la cedula del niño que desea registrar: ");
+	fflush (stdin);
+	gets (cedula_kid);
+	
+	Kid *i;
+	
+	for(i = ColaKids->front; i!= NULL; i = i->next)
+	{
+		if (strcmp(i->cedula,cedula_kid)==0)
+		{
+			contador = 1;
+			
+			printf ("\nIngrese el nombre del padre que registra el comportamiento: ");
+			fflush (stdin);
+			gets (nombre_padre);
+			
+			printf ("\nIngrese la fecha del registro [dd/mm/yy]: ");
+			fflush (stdin);
+			gets (fecha_registro);
+			
+			printf ("\nIngrese una breve descripcion del comportamiento: ");
+			fflush (stdin);
+			gets (descripcion_comportamiento);
+			
+			
+			printf ("\n1. Comportamiento bueno.");	
+			printf ("\n2. Comportamiento malo.");
+			printf ("\n\nIngrese el numero del tipo de comportamiento que se registra: ");	
+			fflush (stdin);
+			gets (num_comportamiento);	
+			
+			if (strcmp(num_comportamiento,"1")==0)
+			{
+				strcpy(comportamiento,"Bueno");
+				i->contador_comportamiento_bueno = i->contador_comportamiento_bueno + 1;
+			}	
+			else if (strcmp(num_comportamiento,"2")==0)
+			{
+				strcpy(comportamiento,"Malo");
+				i->contador_comportamiento_malo = i->contador_comportamiento_malo + 1;
+			}	
+			else
+			{
+				printf ("\nERROR: el tipo de comportamiento solicitado no existe, la accion no se pudo completar.");
+				return;
+			}
+			
+			
+			InsertarComportamiento(ColaComportamientos,cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
+			
+			return;
+		}
+	}	
+	
+	if (contador ==0)
+	{
+		printf("ERROR: la cedula no existe, la accion no se pudo completar.");
+		return;
+	}	
+}
 
 
 
@@ -1358,6 +1493,7 @@ int main()
 	//DECLARACION DE ESTRUCTURAS DE DATOS
 	Imprimir * ColaKids = CrearColaKids(ColaKids);
 	ImprimirAyudante * ColaAyudantes = CrearColaAyudantes(ColaAyudantes);
+	ImprimirComportamiento * ColaComportamientos = CrearColaComportamientos(ColaComportamientos);
 	Arbol *a;
 	
 	//MENU PRINCIPAL DE LA FUNCION
@@ -1488,7 +1624,8 @@ int main()
 		
 		else if (opcion == 9)
 		{
-			return 0;
+			RegistrarComportamientoMain(ColaComportamientos, ColaKids);
+			ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
 		}
 		
 		
