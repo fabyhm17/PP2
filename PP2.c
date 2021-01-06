@@ -1392,70 +1392,58 @@ void modificarDomicilio()
 }
 
 
- void eliminarNodo(char nombre [15]){
-    Domicilio*aux=inicio;
-    Ruta* ar, *ar1;
-    while(aux!=NULL)
-	{   
-    	if(strcmp(aux->nombre,nombre)==0)
-		{
-	        if(aux->adyacencia!=NULL)
-			{
-	            ar=aux->adyacencia;
-	            while(ar!=NULL)
-				{ 
-				  	ar1= ar;
-	            	ar=ar->siguiente;
-	            	free(ar1);
-	            	printf(ar->vrt->nombre);  
-	            }
-	            free(aux);
-	            printf("---------- ELIMINADO ----------");
-	            return;
-	        }
-	        
-	        else
-			{
-	        	free(aux);
-	        	printf("---------- ELIMINADO ----------");
-	        	return;	
-			}
-	    	
-		}
-        aux=aux->siguiente;
-    }
-}
+//ELIMINAR DOMICILIO
 
-//ELIMINAR DOMICILIO	
-void eliminarDomicilio()
-{
-	char nombre[15];
-	Domicilio*aux=inicio,*aux2=inicio;
-	if(inicio!=NULL)
-	{
-		fflush(stdin);
-		printf("Nombre del domicilio que desea eliminar:");
-		fflush (stdin);
-		gets (nombre);
-		while(aux!=NULL)
-		{
-			if(strcmp(aux->nombre,nombre)==0)
-			break;
-			aux=aux->siguiente;
-	    }
-	    
-		if(aux==NULL)
-		{
-	    	printf("ERROR: Domicilio no encontrado\n");
-		}
-		
-		else
-		{
-			eliminarNodo(nombre);	
-		}	
+void vaciar_aristas(Domicilio*aux){
+	Ruta * q, *r;
+	q = aux -> adyacencia;
+	while(q -> siguiente != NULL){
+		r=q;
+		q = q->siguiente;
+		free(r);
 	}
 }
 
+void borrarDomicilio(){
+	char domicilio [15];
+	Domicilio* aux = inicio;
+	Domicilio * ant;
+	
+	if (inicio==NULL)
+	{
+		printf("\nGrafo esta vacio\n");
+		return;
+	}
+	
+	printf("Nombre del domicilio que desea eliminar: ");
+	fflush (stdin);
+	gets (domicilio);
+	
+	while(aux != NULL){
+		if(strcmp(domicilio,aux->nombre)==0){
+			if(aux -> adyacencia != NULL){
+				vaciar_aristas(aux);
+			}
+			if(aux == inicio){
+				inicio = inicio -> siguiente;
+				free(aux);
+				printf("Domicilio eliminado");
+				return;
+				
+			}else{
+				ant -> siguiente = aux -> siguiente;
+				free(aux);
+				printf("Domicilio eliminado");
+				return;	
+			}
+		}
+		else{
+			ant = aux;
+			aux = aux -> siguiente;
+		}
+	}
+	
+}	
 void visualizarGrafo()
 {
     Domicilio*aux=inicio;
@@ -1842,7 +1830,7 @@ int main()
 				if (op ==2)
 				{
 					visualizarGrafo();
-					eliminarDomicilio();
+					borrarDomicilio();
 					visualizarGrafo();
 				}
 				
