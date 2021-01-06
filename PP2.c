@@ -1299,7 +1299,52 @@ void insertarRuta()
 
 }
 
+void RutaModificar(char ini[15],char fin [15], float distancia, float tiempo, char tipo_ruta[15])
+{
+	Ruta*nuevo = (Ruta*)malloc(sizeof(Ruta));
+	Domicilio *aux2, *aux;
+	
+	if (inicio==NULL)
+	{
+		printf("\n\nERROR: el grafo esta vacio\n");
+		return;
+	}
+	
+	aux = inicio;
+	aux2 = inicio;
+	
+	while(aux2 != NULL)
+	{
+		if ( strcmp(fin,aux2 ->nombre) == 0)
+		{
+			break;
+		}
+		aux2 = aux2 -> siguiente;
+	}
+				
+	if (aux2 == NULL)
+	{
+		printf("\n\nERROR: Domicilio no encontrado\n");
+		return;
+	}
+	
+	while(aux != NULL)
+	{
+		if(strcmp(ini,aux ->nombre)== 0)
+		{
+			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
+			printf("\n\n---------- RUTA MODIFICADA ----------");
+			return;
+		}
+		aux = aux -> siguiente;
+	}
+	
+	if(aux == NULL)
+	{
+		printf("\n\nERROR: Domicilio no encontrado\n");
+	}
 
+}
 /* -------------------------------------------------------------- 8. MODIFICAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
 
 //MODIFICAR DOMICILIO
@@ -1392,7 +1437,7 @@ void modificarDomicilio()
 }
 
 
-//ELIMINAR DOMICILIO
+//ELIMINAR NODO
 
 void vaciar_aristas(Domicilio*aux){
 	Ruta * q, *r;
@@ -1444,11 +1489,160 @@ void borrarDomicilio(){
 	}
 	
 }	
+
+//ELIMINAR ARISTA
+void eliminarArista(){
+	char ini [15];
+	char fin [15];
+	Domicilio * aux, *aux2;
+	Ruta * q, *r;
+	printf("\nIngrese origen:");
+	fflush (stdin);
+	gets (ini);
+	printf("\nIngrese final:");
+	fflush (stdin);
+	gets (fin);
+	
+	aux = inicio;
+	aux2 = inicio;
+	while(aux2 != NULL){
+		if(strcmp(aux2 -> nombre,fin)==0){
+			break;
+		}else{
+			aux2 = aux -> siguiente;
+		}	
+	}
+	while(aux != NULL){
+		if(strcmp(aux -> nombre,ini)==0){
+			
+			q = aux -> adyacencia;
+			while(q!=NULL){
+				if(q -> vrt ==aux2){
+					if(q== aux -> adyacencia){
+						aux -> adyacencia = aux -> adyacencia -> siguiente;
+					}else{
+						r -> siguiente = q -> siguiente;
+					}
+					free(q);
+					printf("\nRuta %s -> %s eliminada!!", aux-> nombre, aux2 -> nombre);
+					return;
+					
+				}
+			}
+			r = q;
+			q = q = q-> siguiente;
+			
+		}
+		aux = aux -> siguiente;
+	}
+	
+}
+
+//MODIFICAR ARISTA
+
+modificar_ruta_aux(char ini[15], char fin[15], float distancia, float tiempo, char tipo_ruta [15]){
+	int op;
+	printf("\n----MODIFICAR RUTA-----\n\n");
+	printf("\n1. Modificar punto de origen");
+	printf("\n2. Modificar punto de llegada");
+	printf("\n3. Modificar tiempo de la ruta");
+	printf("\n4. Modificar distancia de la ruta");
+	printf("\n5. Modificar tipo de ruta");
+	printf("\nopcion: ");
+	scanf("%d",&op);
+	switch(op){
+		case 1:
+			printf("Escriba el nuevo punto de origen: ");
+			fflush (stdin);
+			gets (ini);
+			break;
+		case 2:
+			printf("Escriba el nuevo punto de llegada: ");
+			fflush (stdin);
+			gets (fin);
+			break;
+		case 3:
+			printf("Escriba el nuevo tiempo de la ruta:");
+			scanf("%f",&tiempo);
+			break;
+		case 4:
+			printf("Escriba la nueva distancia:");
+			scanf("%f",&distancia);
+			break;
+		case 5:
+			printf("Escriba el nuevo tipo de ruta:");
+			fflush (stdin);
+			gets (tipo_ruta);
+			break;		
+	}
+	
+	RutaModificar(ini,fin,distancia, tiempo,tipo_ruta);
+	
+}
+modificarArista(){
+	char ini [15];
+	char fin [15];
+
+	float tiempo;
+	float distancia;
+	char tipo_ruta [15];
+	Domicilio * aux, *aux2;
+	Ruta * q, *r;
+	
+
+	printf("\n----DATOS-----");
+	printf("\n\n\nIngrese origen:");
+	fflush (stdin);
+	gets (ini);
+	printf("\nIngrese final:");
+	fflush (stdin);
+	gets (fin);
+
+	aux = inicio;
+	aux2 = inicio;
+	while(aux2 != NULL){
+		if(strcmp(aux2 -> nombre,fin)==0){
+			break;
+		}else{
+			aux2 = aux -> siguiente;
+		}	
+	}
+	while(aux != NULL){
+		if(strcmp(aux -> nombre,ini)==0){
+			
+			q = aux -> adyacencia;
+			while(q!=NULL){
+				if(q -> vrt ==aux2){
+					if(q== aux -> adyacencia){
+						aux -> adyacencia = aux -> adyacencia -> siguiente;
+					}else{
+						r -> siguiente = q -> siguiente;
+					}
+					tiempo = q -> tiempo;
+					distancia = q -> distancia;
+					strcpy(q-> tipo_ruta,tipo_ruta);
+					free(q);
+					printf("j");
+					modificar_ruta_aux(ini, fin, distancia, tiempo, tipo_ruta);	
+					
+				}
+			}
+			r = q;
+			q = q = q-> siguiente;
+			
+		}
+		aux = aux -> siguiente;
+	}
+	printf("Error: ruta no encontrada");
+	return;
+}
+
+
 void visualizarGrafo()
 {
     Domicilio*aux=inicio;
     Ruta* ar;
-    printf("GRAFO DE RUTAS\n");
+    printf("\nGRAFO DE RUTAS\n");
     while(aux!=NULL)
 	{   
 	    printf("%s:    ",aux->nombre);
@@ -1468,8 +1662,6 @@ void visualizarGrafo()
     
     printf("\n");
 }
-
-
 
 
 
@@ -1817,10 +2009,10 @@ int main()
 			printf("\n1. Modificar datos domicilio.");
 			printf("\n2. Eliminar domicilio.");
 			printf("\n3. Modificar ruta.");
-			printf("\n3. Eliminar ruta.");
+			printf("\n4. Eliminar ruta.");
 			printf("\nInserte el numero de la accion que desea realizar: ");
 			scanf("%d", &op);
-			if(op>0 && op<4)
+			if(op>0 && op<5)
 			{
 				if (op ==1)
 				{
@@ -1836,7 +2028,12 @@ int main()
 				
 				if (op ==3)
 				{
-					return;
+					modificarArista();
+				}
+				if(op ==4){
+					visualizarGrafo();
+					eliminarArista();
+					visualizarGrafo();
 				}
 			}
 			
