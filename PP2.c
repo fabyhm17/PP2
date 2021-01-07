@@ -1360,6 +1360,8 @@ void RutaModificar(char ini[15],char fin [15], float distancia, float tiempo, ch
 		{
 			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
 			printf("\n\n---------- RUTA MODIFICADA ----------");
+			printf("\nRuta %s -> %s", aux-> nombre, aux2 -> nombre);
+			
 			return;
 		}
 		aux = aux -> siguiente;
@@ -1380,7 +1382,7 @@ void modificarDomicilio()
 	char nombre [15];
 	int i, codigo, postal;
 	Domicilio* aux = inicio;
-	Domicilio* aux3 = inicio;
+
 	if (inicio==NULL)
 	{
 		printf("\n\nERROR: el grafo esta vacio\n");
@@ -1408,62 +1410,78 @@ void modificarDomicilio()
 			
 			if(i == 1)
 			{
+				Domicilio* aux2 = inicio;
 				printf("\nNuevo nombre: ");
-				{
-					fflush (stdin);
-					gets (nombre);
-					while(aux3 != NULL){
-						printf("%s",aux3-> nombre);
-						if (strcmp(aux3-> nombre, nombre)==0);
-						{				
-							printf("Error: nombre registrado");
+				fflush (stdin);
+				gets (nombre);
+					while(aux2 != NULL)
+					{
+						if (strcmp(aux2 -> nombre, nombre)==0)
+						{
+							printf("\nERROR: nombre anteriormente registrado");
 							return;
 						}
-						aux3 = aux3 -> siguiente;
+						aux2 = aux2 -> siguiente;
 					}
-	
-					strcpy(aux->nombre, nombre);
+					strcpy(aux->nombre,nombre);
+					printf("\n MODIFICADO !! ");
+					printf("\n___________________________________");
+					printf("\n\nDOMICILIO: %s", aux -> nombre);
+					printf("\nCODIGO # %d", aux -> codigo);
+					printf("\nCODIGO POSTAL: %d", aux -> postal);
+					return;	
 					
-					printf("---------- MOFICADO ----------");
-				}	
 			}
 			
 			if(i==2)
 			{
 				Domicilio* aux2 = inicio;
 				printf("\nNuevo codigo: ");
-					scanf("%d", codigo);
+					scanf("%d", &codigo);
 					while(aux2 != NULL)
 					{
 						if (aux2 -> codigo == codigo)
 						{
-							printf("ERROR: codigo anteriormente registrado");
+							printf("\nERROR: codigo anteriormente registrado");
 							return;
 						}
 						aux2 = aux2 -> siguiente;
 					}
 				aux -> codigo = codigo;
-				printf("---------- MOFICADO ----------");		
+				printf("\n MOFICADO !!!");
+				printf("\n___________________________________");
+				printf("\n\nDOMICILIO: %s", aux -> nombre);
+				printf("\nCODIGO # %d", aux -> codigo);
+				printf("\nCODIGO POSTAL: %d", aux -> postal);
+				return;			
 			}
 			
 			if(i==3)
 			{
-				Domicilio* aux2 = inicio;
+				Domicilio* aux2  = inicio;
 				printf("\nNuevo codigo postal: ");
-					scanf("%d", postal);
+					scanf("%d", &postal);
 					while(aux2 != NULL)
 					{
-						if (aux2 -> codigo == codigo)
+						if (aux2 -> postal == postal)
 						{
-							printf("ERROR: codigo anteriormente registrado");
+							printf("\nERROR: codigo anteriormente registrado");
 							return;
 						}
 						aux2 = aux2 -> siguiente;
 					}
-				aux -> postal = codigo;
-				printf("---------- MOFICADO ----------");		
-			}		
-		}			
+				aux -> postal = postal;
+				printf("\n MOFICADO !!!");
+				printf("\n___________________________________");
+				printf("\n\nDOMICILIO: %s", aux -> nombre);
+				printf("\nCODIGO # %d", aux -> codigo);
+				printf("\nCODIGO POSTAL: %d", aux -> postal);
+				
+				return;		
+			}
+				
+		}
+			aux = aux -> siguiente;			
 	}	
 	
 	if (aux == NULL)
@@ -1474,7 +1492,12 @@ void modificarDomicilio()
 }
 
 
+
+
+
 //ELIMINAR NODO
+
+
 
 void vaciar_aristas(Domicilio*aux){
 	Ruta * q, *r;
@@ -1509,13 +1532,13 @@ void borrarDomicilio(){
 			if(aux == inicio){
 				inicio = inicio -> siguiente;
 				free(aux);
-				printf("Domicilio eliminado");
+				printf("\nDomicilio eliminado");
 				return;
 				
 			}else{
 				ant -> siguiente = aux -> siguiente;
 				free(aux);
-				printf("Domicilio eliminado");
+				printf("\nDomicilio eliminado");
 				return;	
 			}
 		}
@@ -1524,8 +1547,12 @@ void borrarDomicilio(){
 			aux = aux -> siguiente;
 		}
 	}
+	if(aux == NULL){
+		printf("\nError: Domicilio no encontrado");
+	}
+}
+
 	
-}	
 
 //ELIMINAR ARISTA
 void eliminarArista(){
@@ -1659,7 +1686,7 @@ modificarArista(){
 					distancia = q -> distancia;
 					strcpy(q-> tipo_ruta,tipo_ruta);
 					free(q);
-					printf("j");
+					
 					modificar_ruta_aux(ini, fin, distancia, tiempo, tipo_ruta);	
 					
 				}
@@ -1759,7 +1786,6 @@ ImprimirComportamiento * InsertarComportamiento(ImprimirComportamiento * ColaCom
 	if(ColaComportamientos->front == NULL) 
 	{
 		ColaComportamientos->front = CrearComportamiento(cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
-		ColaComportamientos->rear = ColaComportamientos->front;
 		return ColaComportamientos;
 	}
 	ColaComportamientos ->rear->next = CrearComportamiento(cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
