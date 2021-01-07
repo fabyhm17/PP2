@@ -2436,7 +2436,7 @@ int main()
 		
 		else if (opcion == 12)
 		{
-			printf("     BINVENIDOS A  LA CONSULTA DE CARTAS");
+			printf("     BIENVENIDOS A  LA CONSULTA DE CARTAS");
 			ConsultarCartas(ColaCartas);
 		}
 		
