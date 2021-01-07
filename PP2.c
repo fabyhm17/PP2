@@ -1140,10 +1140,11 @@ void insertarLugar ()
 {
 	char nombre [15];
 	int codigo, postal;
-	Domicilio*aux, *aux2;
+	Domicilio*aux, *aux2, *aux3;
 	Domicilio* nuevo = (Domicilio*)malloc(sizeof(Domicilio));
 	aux2 = inicio;
 	aux = inicio;
+	aux3 = inicio;
 	
 	//DATOS DEL LUGAR PARA CATALOGO
 	printf("Codigo Catalogo: ");
@@ -1163,6 +1164,15 @@ void insertarLugar ()
 	printf("Nombre del lugar: ");
 	fflush (stdin);
 	gets (nombre);
+	while(aux3 != NULL){
+		if (strcmp(aux3-> nombre, nombre)==0)
+		{	
+			printf("Error: nombre registrado");
+			return;
+		}
+		aux3 = aux3 -> siguiente;
+	}
+	
 	strcpy(nuevo-> nombre, nombre);
 
 	
@@ -1233,7 +1243,7 @@ void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fi
 			a = a -> siguiente;
 		}
 		if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0){
-			printf("Error: ruta ya registrada.");
+			printf("\n\nError: ruta ya registrada.\n");
 			return;
 		}
 		nuevo -> vrt = aux2;
@@ -1244,7 +1254,9 @@ void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fi
 		strcpy(nuevo->destino,fin);
 		a -> siguiente =  nuevo;
 		
+		
 	}
+	printf("\n\n---------- NUEVA RUTA! ----------");
 				
 }
 
@@ -1301,7 +1313,6 @@ void insertarRuta()
 			printf("Ingresar tipo de ruta:");
 			scanf("%s", tipo_ruta);
 			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
-			printf("\n\n---------- RUTA AÑADIDA ----------");
 			return;
 		}
 		aux = aux -> siguiente;
@@ -1369,7 +1380,7 @@ void modificarDomicilio()
 	char nombre [15];
 	int i, codigo, postal;
 	Domicilio* aux = inicio;
-	
+	Domicilio* aux3 = inicio;
 	if (inicio==NULL)
 	{
 		printf("\n\nERROR: el grafo esta vacio\n");
@@ -1401,7 +1412,18 @@ void modificarDomicilio()
 				{
 					fflush (stdin);
 					gets (nombre);
+					while(aux3 != NULL){
+						printf("%s",aux3-> nombre);
+						if (strcmp(aux3-> nombre, nombre)==0);
+						{				
+							printf("Error: nombre registrado");
+							return;
+						}
+						aux3 = aux3 -> siguiente;
+					}
+	
 					strcpy(aux->nombre, nombre);
+					
 					printf("---------- MOFICADO ----------");
 				}	
 			}
