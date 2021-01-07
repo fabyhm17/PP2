@@ -2152,13 +2152,13 @@ int main()
 			char opcion_analisis[10];
 			
 			printf ("\n\n -------------------------- ANALISIS DE DATOS -------------------------- \n");
-			printf ("\n 1.  Registrar niño.");
-			printf ("\n 2.  Modificar informacion de un niño.");
-			printf ("\n 3.  Registrar ayudante de Santa.");
-			printf ("\n 4.  Modificar informacion de un ayudante de Santa.");
-			printf ("\n 5.  Registrar juguete.");
-			printf ("\n 6.  Modificar informacion de un juguete.");
-			printf ("\n 7.  Registrar lugar de domicilio en el catalogo.");
+			printf ("\n 1.  Cantidad de juguetes solicitados por año.");
+			printf ("\n 2.  Lugar donde se solicitaron mas y menos juguetes.");
+			printf ("\n 3.  Cantidad de niños a los que se les aprobó su carta por año.");
+			printf ("\n 4.  Cantidad de niños a los que se les rechazó su carta por año.");
+			printf ("\n 5.  Cantidad de comportamientos buenos y malos registrados.");
+			printf ("\n 6.  Cantidad de cartas procesadas por ayudante.");
+			printf ("\n 7.  Top 10 de los juguetes mas solicitados.");
 			printf ("\n\nIngrese el numero del analisis que desea realizar:  ");
 			fflush (stdin);
 			gets (opcion_analisis);	
@@ -2185,7 +2185,18 @@ int main()
 			
 			else if (strcmp(opcion_analisis,"5")==0)
 			{
-				return 0;
+				int comportamiento_bueno = 0;
+				int comportamiento_malo = 0;
+				
+				Kid *i;
+				for (i = ColaKids->front; i!= NULL; i = i->next)
+				{
+					comportamiento_bueno = comportamiento_bueno + i->contador_comportamiento_bueno;
+					comportamiento_malo = comportamiento_malo + i->contador_comportamiento_malo;
+				}
+				
+				printf ("\nLa cantidad de comportamientos buenos registrados fue de: %d", comportamiento_bueno);
+				printf ("\nLa cantidad de comportamientos malos registrados fue de: %d", comportamiento_malo);
 			}
 			
 			else if (strcmp(opcion_analisis,"6")==0)
