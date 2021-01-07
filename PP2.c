@@ -1759,6 +1759,7 @@ ImprimirComportamiento * InsertarComportamiento(ImprimirComportamiento * ColaCom
 	if(ColaComportamientos->front == NULL) 
 	{
 		ColaComportamientos->front = CrearComportamiento(cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
+		ColaComportamientos->rear = ColaComportamientos->front;
 		return ColaComportamientos;
 	}
 	ColaComportamientos ->rear->next = CrearComportamiento(cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
