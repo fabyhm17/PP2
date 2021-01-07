@@ -1225,12 +1225,27 @@ void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fi
 		a = aux -> adyacencia;
 		while(a -> siguiente != NULL)
 		{
+		
+			if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0){
+				printf("Error: ruta ya registrada.");
+				return;
+			}
 			a = a -> siguiente;
 		}
+		if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0){
+			printf("Error: ruta ya registrada.");
+			return;
+		}
 		nuevo -> vrt = aux2;
+		nuevo -> tiempo = tiempo;
+		nuevo -> distancia = distancia;
+		strcpy(nuevo->tipo_ruta,tipo_ruta);
+		strcpy(nuevo->origen,ini);
+		strcpy(nuevo->destino,fin);
 		a -> siguiente =  nuevo;
 		
-	}			
+	}
+				
 }
 
 
@@ -1241,7 +1256,8 @@ void insertarRuta()
 	char ini[15], fin[15], tipo_ruta [15];
 	float tiempo, distancia;
 	Ruta*nuevo = (Ruta*)malloc(sizeof(Ruta));
-	Domicilio *aux2, *aux;
+	Domicilio *aux2, *aux, *aux3; 
+	Ruta * a;
 	
 	if (inicio==NULL)
 	{
@@ -1256,10 +1272,9 @@ void insertarRuta()
 	printf("Ingresar lugar de destino:");
 	fflush (stdin);
 	gets (fin);
-	
 	aux = inicio;
 	aux2 = inicio;
-	
+
 	while(aux2 != NULL)
 	{
 		if ( strcmp(fin,aux2 ->nombre) == 0)
