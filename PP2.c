@@ -936,57 +936,60 @@ void Borrar_Juguete(Arbol *a, int juguete)
 
    actual = *a;
    //Mientras sea posible que el valor esté en el árbol 
-   while(!Vacio(actual)) {
-      if(juguete == actual->codigo) //Si el valor está en el nodo actual 
-	  { 
-         if(EsHoja(actual)) // Y si además es un nodo hoja: lo borramos 
-		 {
-            if(padre) // Si tiene padre (no es el nodo raiz) 
-               //Anulamos el puntero que le hace referencia 
-               if(padre->derecho == actual) padre->derecho = NULL;
-               else if(padre->izquierdo == actual) padre->izquierdo = NULL;
-            free(actual); // Borrar el nodo 
-            actual = NULL;
-            return;
-         }
-         else// Si el valor está en el nodo actual, pero no es hoja 
-		 {
-            padre = actual;
-            // Buscar nodo más izquierdo de rama derecha 
-            if(actual->derecho) 
+   while(!Vacio(actual)) 
+   {
+		if(juguete == actual->codigo) //Si el valor está en el nodo actual 
+		{ 
+	        if(EsHoja(actual)) // Y si además es un nodo hoja: lo borramos 
 			{
-               nodo = actual->derecho;
-               while(nodo->izquierdo)
-			   {
-                  padre = nodo;
-                  nodo = nodo->izquierdo;
-               }
-            }
-            // O buscar nodo más derecho de rama izquierda 
-            else
+	            if(padre) // Si tiene padre (no es el nodo raiz) 
+	            //Anulamos el puntero que le hace referencia 
+	            if(padre->derecho == actual) padre->derecho = NULL;
+	            else if(padre->izquierdo == actual) padre->izquierdo = NULL;
+	            free(actual); // Borrar el nodo 
+	            actual = NULL;
+	            return;
+	        }
+	        
+	        else// Si el valor está en el nodo actual, pero no es hoja 
 			{
-               nodo = actual->izquierdo;
-               while(nodo->derecho) 
-			   {
-                  padre = nodo;
-                  nodo = nodo->derecho;
-               }
-            }
-            // Intercambiar valores de no a borrar u nodo encontrado y continuar, cerrando el bucle. El nodo encontrado no tiene
-            //  por qué ser un nodo hoja, cerrando el bucle nos aseguramos de que sólo se eliminan nodos hoja. 
-            aux = actual->codigo;
-            actual->codigo = nodo->codigo;
-            nodo->codigo = aux;
-            actual = nodo;
-         }
-      }
-      else // Todavía no hemos encontrado el valor, seguir buscándolo 
-	  { 
-         padre = actual;
-         if(juguete > actual->codigo) actual = actual->derecho;
-         else if(juguete < actual->codigo) actual = actual->izquierdo;
-      }
-   }
+	            padre = actual;
+	            // Buscar nodo más izquierdo de rama derecha 
+	            if(actual->derecho) 
+				{
+	               nodo = actual->derecho;
+	               while(nodo->izquierdo)
+				   {
+	                  padre = nodo;
+	                  nodo = nodo->izquierdo;
+	               }
+	            }
+	            // O buscar nodo más derecho de rama izquierda 
+	            else
+				{
+	               nodo = actual->izquierdo;
+	               while(nodo->derecho) 
+				   {
+	                  padre = nodo;
+	                  nodo = nodo->derecho;
+	               }
+	            }
+	            // Intercambiar valores de no a borrar u nodo encontrado y continuar, cerrando el bucle. El nodo encontrado no tiene
+	            //  por qué ser un nodo hoja, cerrando el bucle nos aseguramos de que sólo se eliminan nodos hoja. 
+	            aux = actual->codigo;
+	            actual->codigo = nodo->codigo;
+	            nodo->codigo = aux;
+	            actual = nodo;
+	        }
+		}
+       
+		else // Todavía no hemos encontrado el valor, seguir buscándolo 
+		{ 
+	        padre = actual;
+	        if(juguete > actual->codigo) actual = actual->derecho;
+	        else if(juguete < actual->codigo) actual = actual->izquierdo;
+    	}
+	}
 }
 
 // Buscar un valor en el árbol 
@@ -1150,7 +1153,8 @@ void insertarLugar ()
 	printf("Codigo Catalogo: ");
 	scanf("%d",&codigo);
 	
-	while(aux2 != NULL){
+	while(aux2 != NULL)
+	{
 		if (aux2 -> codigo == codigo)
 		{	
 			printf("Error: codigo registrado");
@@ -1164,24 +1168,25 @@ void insertarLugar ()
 	printf("Nombre del lugar: ");
 	fflush (stdin);
 	gets (nombre);
-	while(aux3 != NULL){
+	while(aux3 != NULL)
+	{
 		if (strcmp(aux3-> nombre, nombre)==0)
 		{	
-			printf("Error: nombre registrado");
+			printf("Error: lugar registrado.");
 			return;
 		}
 		aux3 = aux3 -> siguiente;
 	}
 	
 	strcpy(nuevo-> nombre, nombre);
-
 	
 	printf("Código postal: ");
 	scanf("%d",&postal);
 	
 	while(aux != NULL)
 	{
-		if (aux -> postal == postal){
+		if (aux -> postal == postal)
+		{
 			
 			printf("Error: codigo anteriormente registrado");
 			return;
@@ -1233,30 +1238,34 @@ void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fi
 	else
 	{
 		a = aux -> adyacencia;
+		
 		while(a -> siguiente != NULL)
 		{
 		
-			if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0){
+			if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0)
+			{
 				printf("Error: ruta ya registrada.");
 				return;
 			}
+			
 			a = a -> siguiente;
 		}
-		if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0){
+		
+		if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0)
+		{
 			printf("\n\nError: ruta ya registrada.\n");
 			return;
 		}
+		
 		nuevo -> vrt = aux2;
 		nuevo -> tiempo = tiempo;
 		nuevo -> distancia = distancia;
 		strcpy(nuevo->tipo_ruta,tipo_ruta);
 		strcpy(nuevo->origen,ini);
 		strcpy(nuevo->destino,fin);
-		a -> siguiente =  nuevo;
-		
-		
+		a -> siguiente =  nuevo;		
 	}
-	printf("\n\n---------- NUEVA RUTA! ----------");
+	printf("\n\n--------------- NUEVA RUTA INSERTADA! ---------------");
 				
 }
 
@@ -1402,6 +1411,7 @@ void modificarDomicilio()
 			printf("\n3. Modificar codigo postal");
 			printf("\nOpcion: ");
 			scanf("%d", &i);
+			
 			while (i>3 || i<1)
 			{
 				printf("\nERROR: opcion no valida. \nOpcion: ");
@@ -1414,44 +1424,47 @@ void modificarDomicilio()
 				printf("\nNuevo nombre: ");
 				fflush (stdin);
 				gets (nombre);
-					while(aux2 != NULL)
+				
+				while(aux2 != NULL)
+				{
+					if (strcmp(aux2 -> nombre, nombre)==0)
 					{
-						if (strcmp(aux2 -> nombre, nombre)==0)
-						{
-							printf("\nERROR: nombre anteriormente registrado");
-							return;
-						}
-						aux2 = aux2 -> siguiente;
+						printf("\nERROR: nombre anteriormente registrado");
+						return;
 					}
-					strcpy(aux->nombre,nombre);
-					printf("\n MODIFICADO !! ");
-					printf("\n___________________________________");
-					printf("\n\nDOMICILIO: %s", aux -> nombre);
-					printf("\nCODIGO # %d", aux -> codigo);
-					printf("\nCODIGO POSTAL: %d", aux -> postal);
-					return;	
-					
+					aux2 = aux2 -> siguiente;
+				}
+				
+				strcpy(aux->nombre,nombre);
+				printf("\n MODIFICADO !! ");
+				printf("\n___________________________________");
+				printf("\n\nDOMICILIO: %s", aux -> nombre);
+				printf("\nCODIGO #%d", aux -> codigo);
+				printf("\nCODIGO POSTAL: %d", aux -> postal);
+				return;			
 			}
 			
 			if(i==2)
 			{
 				Domicilio* aux2 = inicio;
 				printf("\nNuevo codigo: ");
-					scanf("%d", &codigo);
-					while(aux2 != NULL)
+				scanf("%d", &codigo);
+				
+				while(aux2 != NULL)
+				{
+					if (aux2 -> codigo == codigo)
 					{
-						if (aux2 -> codigo == codigo)
-						{
-							printf("\nERROR: codigo anteriormente registrado");
-							return;
-						}
-						aux2 = aux2 -> siguiente;
+						printf("\nERROR: codigo anteriormente registrado");
+						return;
 					}
+					aux2 = aux2 -> siguiente;
+				}
+				
 				aux -> codigo = codigo;
-				printf("\n MOFICADO !!!");
+				printf("\n MOFICADO!!!");
 				printf("\n___________________________________");
 				printf("\n\nDOMICILIO: %s", aux -> nombre);
-				printf("\nCODIGO # %d", aux -> codigo);
+				printf("\nCODIGO #%d", aux -> codigo);
 				printf("\nCODIGO POSTAL: %d", aux -> postal);
 				return;			
 			}
@@ -1460,16 +1473,18 @@ void modificarDomicilio()
 			{
 				Domicilio* aux2  = inicio;
 				printf("\nNuevo codigo postal: ");
-					scanf("%d", &postal);
-					while(aux2 != NULL)
+				scanf("%d", &postal);
+				
+				while(aux2 != NULL)
+				{
+					if (aux2 -> postal == postal)
 					{
-						if (aux2 -> postal == postal)
-						{
-							printf("\nERROR: codigo anteriormente registrado");
-							return;
-						}
-						aux2 = aux2 -> siguiente;
+						printf("\nERROR: codigo anteriormente registrado");
+						return;
 					}
+					aux2 = aux2 -> siguiente;
+				}
+				
 				aux -> postal = postal;
 				printf("\n MOFICADO !!!");
 				printf("\n___________________________________");
@@ -1478,10 +1493,10 @@ void modificarDomicilio()
 				printf("\nCODIGO POSTAL: %d", aux -> postal);
 				
 				return;		
-			}
-				
+			}		
 		}
-			aux = aux -> siguiente;			
+		
+		aux = aux -> siguiente;			
 	}	
 	
 	if (aux == NULL)
@@ -1499,10 +1514,12 @@ void modificarDomicilio()
 
 
 
-void vaciar_aristas(Domicilio*aux){
+void vaciar_aristas(Domicilio*aux)
+{
 	Ruta * q, *r;
 	q = aux -> adyacencia;
-	while(q -> siguiente != NULL){
+	while(q -> siguiente != NULL)
+	{
 		r=q;
 		q = q->siguiente;
 		free(r);
@@ -1516,11 +1533,11 @@ void borrarDomicilio(){
 	
 	if (inicio==NULL)
 	{
-		printf("\nGrafo esta vacio\n");
+		printf("\nERROR: no hay domicilios registrados.\n");
 		return;
 	}
 	
-	printf("Nombre del domicilio que desea eliminar: ");
+	printf("Ingrese el nombre del domicilio que desea eliminar: ");
 	fflush (stdin);
 	gets (domicilio);
 	
@@ -1548,7 +1565,7 @@ void borrarDomicilio(){
 		}
 	}
 	if(aux == NULL){
-		printf("\nError: Domicilio no encontrado");
+		printf("\nERROR: Domicilio no encontrado");
 	}
 }
 
@@ -1560,51 +1577,62 @@ void eliminarArista(){
 	char fin [15];
 	Domicilio * aux, *aux2;
 	Ruta * q, *r;
-	printf("\nIngrese origen:");
+	printf("\nIngrese el origen:");
 	fflush (stdin);
 	gets (ini);
-	printf("\nIngrese final:");
+	printf("\nIngrese el final:");
 	fflush (stdin);
 	gets (fin);
 	
 	aux = inicio;
 	aux2 = inicio;
-	while(aux2 != NULL){
-		if(strcmp(aux2 -> nombre,fin)==0){
+	while(aux2 != NULL)
+	{
+		if(strcmp(aux2 -> nombre,fin)==0)
+		{
 			break;
-		}else{
+		}
+		else
+		{
 			aux2 = aux -> siguiente;
 		}	
 	}
-	while(aux != NULL){
-		if(strcmp(aux -> nombre,ini)==0){
-			
+	while(aux != NULL)
+	{
+		if(strcmp(aux -> nombre,ini)==0)
+		{
 			q = aux -> adyacencia;
-			while(q!=NULL){
-				if(q -> vrt ==aux2){
-					if(q== aux -> adyacencia){
+			while(q!=NULL)
+			{
+				if(q -> vrt ==aux2)
+				{
+					if(q== aux -> adyacencia)
+					{
 						aux -> adyacencia = aux -> adyacencia -> siguiente;
-					}else{
+					}
+					else
+					{
 						r -> siguiente = q -> siguiente;
 					}
+					
 					free(q);
 					printf("\nRuta %s -> %s eliminada!!", aux-> nombre, aux2 -> nombre);
-					return;
-					
+					return;	
 				}
 			}
-			r = q;
-			q = q = q-> siguiente;
 			
+			r = q;
+			q = q = q-> siguiente;		
 		}
+		
 		aux = aux -> siguiente;
-	}
-	
+	}	
 }
 
 //MODIFICAR ARISTA
 
-modificar_ruta_aux(char ini[15], char fin[15], float distancia, float tiempo, char tipo_ruta [15]){
+modificar_ruta_aux(char ini[15], char fin[15], float distancia, float tiempo, char tipo_ruta [15])
+{
 	int op;
 	printf("\n----MODIFICAR RUTA-----\n\n");
 	printf("\n1. Modificar punto de origen");
@@ -1614,7 +1642,8 @@ modificar_ruta_aux(char ini[15], char fin[15], float distancia, float tiempo, ch
 	printf("\n5. Modificar tipo de ruta");
 	printf("\nopcion: ");
 	scanf("%d",&op);
-	switch(op){
+	switch(op)
+	{
 		case 1:
 			printf("Escriba el nuevo punto de origen: ");
 			fflush (stdin);
@@ -1640,9 +1669,10 @@ modificar_ruta_aux(char ini[15], char fin[15], float distancia, float tiempo, ch
 			break;		
 	}
 	
-	RutaModificar(ini,fin,distancia, tiempo,tipo_ruta);
-	
+	RutaModificar(ini,fin,distancia, tiempo,tipo_ruta);	
 }
+
+
 modificarArista(){
 	char ini [15];
 	char fin [15];
@@ -1654,47 +1684,58 @@ modificarArista(){
 	Ruta * q, *r;
 	
 
-	printf("\n----DATOS-----");
-	printf("\n\n\nIngrese origen:");
+	printf("\n--------------- DATOS ---------------");
+	printf("\n\nIngrese el origen: ");
 	fflush (stdin);
 	gets (ini);
-	printf("\nIngrese final:");
+	printf("\nIngrese el final: ");
 	fflush (stdin);
 	gets (fin);
 
 	aux = inicio;
 	aux2 = inicio;
-	while(aux2 != NULL){
-		if(strcmp(aux2 -> nombre,fin)==0){
+	while(aux2 != NULL)
+	{
+		if(strcmp(aux2 -> nombre,fin)==0)
+		{
 			break;
-		}else{
+		}
+		else
+		{
 			aux2 = aux -> siguiente;
 		}	
 	}
-	while(aux != NULL){
-		if(strcmp(aux -> nombre,ini)==0){
-			
+	while(aux != NULL)
+	{
+		if(strcmp(aux -> nombre,ini)==0)
+		{
 			q = aux -> adyacencia;
-			while(q!=NULL){
-				if(q -> vrt ==aux2){
-					if(q== aux -> adyacencia){
+			while(q!=NULL)
+			{
+				if(q -> vrt ==aux2)
+				{
+					if(q== aux -> adyacencia)
+					{
 						aux -> adyacencia = aux -> adyacencia -> siguiente;
-					}else{
+					}
+					else
+					{
 						r -> siguiente = q -> siguiente;
 					}
+					
 					tiempo = q -> tiempo;
 					distancia = q -> distancia;
 					strcpy(q-> tipo_ruta,tipo_ruta);
 					free(q);
 					
-					modificar_ruta_aux(ini, fin, distancia, tiempo, tipo_ruta);	
-					
+					modificar_ruta_aux(ini, fin, distancia, tiempo, tipo_ruta);		
 				}
 			}
-			r = q;
-			q = q = q-> siguiente;
 			
+			r = q;
+			q = q = q-> siguiente;		
 		}
+		
 		aux = aux -> siguiente;
 	}
 	printf("Error: ruta no encontrada");
@@ -1845,15 +1886,15 @@ void RegistrarComportamientoMain(ImprimirComportamiento *ColaComportamientos, Im
 		{
 			contador = 1;
 			
-			printf ("\nIngrese el nombre del padre que registra el comportamiento: ");
+			printf ("Ingrese el nombre del padre que registra el comportamiento: ");
 			fflush (stdin);
 			gets (nombre_padre);
 			
-			printf ("\nIngrese la fecha del registro [dd/mm/yy]: ");
+			printf ("Ingrese la fecha del registro [dd/mm/yy]: ");
 			fflush (stdin);
 			gets (fecha_registro);
 			
-			printf ("\nIngrese una breve descripcion del comportamiento: ");
+			printf ("Ingrese una breve descripcion del comportamiento: ");
 			fflush (stdin);
 			gets (descripcion_comportamiento);
 			
