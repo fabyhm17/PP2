@@ -1862,7 +1862,7 @@ int ConsultarComportamientos(ImprimirComportamiento *ColaComportamientos)
 	return 0;
 }
 
-/* ----------------------- REGISTRAR NIÑO EN EL MAIN ----------------------- */
+/* ----------------------- REGISTRAR COMPORTAMIENTO EN EL MAIN ----------------------- */
 
 void RegistrarComportamientoMain(ImprimirComportamiento *ColaComportamientos, Imprimir *ColaKids)
 {
@@ -1941,6 +1941,226 @@ void RegistrarComportamientoMain(ImprimirComportamiento *ColaComportamientos, Im
 
 
 
+/* ---------------------------- LISTA DE DESEOS -------------------------------------- */
+
+/* --------------------------- STRUCT DE LA lISTA DE DESEOS--------------------------- */
+
+typedef struct ListaDeseos
+{
+	char cedula[15];
+	char juguetes_LD [500];
+
+	struct ListaDeseos * next;	
+}ListaDeseos;
+
+typedef struct ImprimirLD
+{
+	ListaDeseos*front;
+	ListaDeseos *rear;
+	int size;
+}ImprimirLD;
+
+/* ----------------------- CREAR NUEVA COLA LISTA DE DESEOS ----------------------- */
+
+ImprimirLD * CrearColaListaDeseos(ImprimirLD* ColaListaDeseos)
+{
+	ColaListaDeseos = NULL;
+	ColaListaDeseos = (ImprimirLD *) malloc(sizeof(ImprimirLD));	
+	ColaListaDeseos -> front = NULL;
+	ColaListaDeseos -> rear = NULL;
+	return ColaListaDeseos;
+}
+
+/* ----------------------- CREAR NODO LISTA DE DESEOS ----------------------- */
+
+ListaDeseos * CrearListaDeseos(char cedula[15], char juguetes_LD[500])
+{
+	struct ListaDeseos *nuevo;
+	nuevo = (ListaDeseos *) malloc(sizeof(ListaDeseos));
+	nuevo -> next = NULL;
+	
+	strcpy(nuevo->cedula,cedula);
+	strcpy(nuevo->juguetes_LD,juguetes_LD);	
+
+	return nuevo;
+}
+
+/* ----------------------- REGISTRAR LISTA DE DESEOS ----------------------- */
+
+ImprimirLD * InsertarListaDeseos(ImprimirLD* ColaListaDeseos,char cedula[15], char juguetes_LD[500] )
+{
+	ColaListaDeseos->size = ColaListaDeseos-> size + 1;
+	if(ColaListaDeseos->front == NULL) 
+	{
+		ColaListaDeseos->front = CrearListaDeseos(cedula, juguetes_LD);
+		ColaListaDeseos->rear = ColaListaDeseos->front;
+		return ColaListaDeseos;
+	}
+	ColaListaDeseos ->rear->next = CrearListaDeseos(cedula, juguetes_LD);
+	ColaListaDeseos ->rear = ColaListaDeseos->rear->next;
+}
+
+/* ----------------------- CONSULTAR LISTA DE DESEOS----------------------- */
+
+int ConsultarListaDeseos(ImprimirLD *ColaListaDeseos)
+{
+	ListaDeseos *i;
+	char verificar_cedula[15];
+	char verificar_year[15];
+	int contador; 
+	
+	if (ColaListaDeseos -> front == NULL)
+	{
+		printf ("\nERROR: No hay listas de deseos registradas.");
+		return;
+	}
+	else
+	{
+		printf ("\nIngrese la cedula del niño al que pertenece la lista de deseos: ")	;
+		fflush (stdin);
+		gets (verificar_cedula);
+
+		printf("\nLista de juguetes solicitados");
+		for(i = ColaListaDeseos->front; i!= NULL; i = i->next)
+		{
+			if (strcmp(i->cedula,verificar_cedula)==0)
+			{
+				contador = 1;
+				
+				printf("\n%s",i->juguetes_LD);
+			}
+		}			
+					
+		if (contador == 0)
+		{
+			printf ("\nERROR: la cedula ingresada no contiene lista de deseos, la accion no se puede realizar.");
+			return;
+		}
+	}
+
+	return 0;
+}
+
+
+
+
+/* --------------------------------- CARTA ---------------------------------- */
+
+/* --------------------------- STRUCT DE LA CARTA --------------------------- */
+
+typedef struct Carta
+{
+	char year[10];
+	char cedula [50];
+	char juguetes [50];
+
+	struct Carta * next;	
+}Carta;
+
+typedef struct ImprimirCarta
+{
+	Carta*front;
+	Carta *rear;
+	int size;
+}ImprimirCarta;
+
+/* ----------------------- CREAR NUEVA COLA CARTA ----------------------- */
+
+ImprimirCarta * CrearColaCartas(ImprimirCarta * ColaCartas)
+{
+	ColaCartas = NULL;
+	ColaCartas = (ImprimirCarta *) malloc(sizeof(ImprimirCarta));	
+	ColaCartas -> front = NULL;
+	ColaCartas -> rear = NULL;
+	return ColaCartas;
+}
+
+/* ----------------------- CREAR NODO CARTA ----------------------- */
+
+Carta * CrearCarta(char cedula[15], char year[10], char juguetes[500])
+{
+	struct Carta *nuevo;
+	nuevo = (Carta *) malloc(sizeof(Carta));
+	nuevo -> next = NULL;
+	
+	strcpy(nuevo->cedula,cedula);
+	strcpy(nuevo->year,year);
+	strcpy(nuevo->juguetes,juguetes);	
+
+	return nuevo;
+}
+
+/* ----------------------- REGISTRAR CARTA ----------------------- */
+
+ImprimirCarta * InsertarCarta(ImprimirCarta * ColaCartas,char cedula[15], char year[10], char juguetes[500] )
+{
+	ColaCartas->size = ColaCartas-> size + 1;
+	if(ColaCartas->front == NULL) 
+	{
+		ColaCartas->front = CrearCarta(cedula, year, juguetes);
+		ColaCartas->rear = ColaCartas->front;
+		return ColaCartas;
+	}
+	ColaCartas ->rear->next = CrearCarta(cedula, year, juguetes);
+	ColaCartas ->rear = ColaCartas->rear->next;
+}
+
+
+/* ----------------------- REGISTRAR CARTA EN EL MAIN ----------------------- */
+
+void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos)
+{
+	char year[10];
+	char cedula [50];
+	char juguetes [50];
+	char juguete_buscado[50];
+	char opc_carta[10];
+	
+	printf ("          BIENVENIDO AL REGSITRO DE CARTAS \n\n");
+	
+	printf ("Ingrese la cedula del niño que desea registrar la carta: ");
+	fflush (stdin);
+	gets (cedula);
+	
+	printf ("Ingrese el año para el que corresponde la carta [yyyy] : ");
+	fflush (stdin);
+	gets (year);
+	
+	printf("\n   SELECCION DE JUGUETES \n\n");
+	printf("Los juguetes disponibles son: \n\n");
+	//Imprimir Arbol con la lista de juguetes
+	
+	printf ("Ingrese el nombre del juguete que desea buscar: ");
+	fflush (stdin);
+	gets (juguete_buscado);
+	printf ("Los datos del juguete son:\n ");
+	//Consultar juguete en el arbol
+	
+	printf ("\n  OPCIONES DISPONIBLES \n");
+	printf ("1. Añadir juguete a la carta\n");
+	printf ("2. Añadir juguete a la lista de deseos\n");
+
+	printf("\nIngrese el numero de la opcion que desea realizar: ");
+	fflush (stdin);
+	gets (opc_carta);
+			
+	if (strcmp(opc_carta,"1")==0)
+	{
+		//Validar cantidad de juguetes
+		InsertarCarta(ColaCartas, cedula, year, juguete_buscado );
+		//Cambiar el estado del juguete
+	}
+	else if (strcmp(opc_carta,"2")==0)
+	{
+		InsertarListaDeseos(ColaListaDeseos,cedula, juguete_buscado);
+		ConsultarListaDeseos(ColaListaDeseos); //Para realizar las pruebas 
+	}
+		
+}
+
+
+
+
 
 
 
@@ -1954,6 +2174,48 @@ void RegistrarComportamientoMain(ImprimirComportamiento *ColaComportamientos, Im
 /* --------------------------------------------------------------- 12. CONSULTAR CARTA PARA SANTA ------------------------------------------------------------- */
 
 
+
+int ConsultarCartas(ImprimirCarta *ColaCartas)
+{
+	Carta *i;
+	char verificar_cedula[15];
+	char verificar_year[15];
+	int contador; 
+	
+	if (ColaCartas -> front == NULL)
+	{
+		printf ("\nERROR: No hay cartas registradas.");
+		return;
+	}
+	else
+	{
+		printf ("\nIngrese la cedula del niño al que pertenece la carta: ")	;
+		fflush (stdin);
+		gets (verificar_cedula);
+		printf ("Ingrese el año para el que se solicito la carta: ")	;
+		fflush (stdin);
+		gets (verificar_year);
+		
+		printf("\nLista de juguetes solicitados");
+		for(i = ColaCartas->front; i!= NULL; i = i->next)
+		{
+			if (strcmp(i->cedula,verificar_cedula)==0 && strcmp(i->year,verificar_year)==0)
+			{
+				contador = 1;
+				
+				printf("\n%s",i->juguetes);
+			}
+		}			
+					
+		if (contador == 0)
+		{
+			printf ("\nERROR: la cedula o año ingresad@ no contiene cartas, la accion no se puede realizar.");
+			return;
+		}
+	}
+
+	return 0;
+}
 
 
 
@@ -2014,6 +2276,8 @@ int main()
 	ImprimirAyudante * ColaAyudantes = CrearColaAyudantes(ColaAyudantes);
 	ImprimirComportamiento * ColaComportamientos = CrearColaComportamientos(ColaComportamientos);
 	Arbol *a;
+	ImprimirCarta * ColaCartas = CrearColaCartas(ColaCartas);
+	ImprimirLD *ColaListaDeseos = CrearColaListaDeseos(ColaListaDeseos);
 	
 	//MENU PRINCIPAL DE LA FUNCION
 	printf ("\n --------------------- BIENVENIDO AL SISTEMA DE REGISTRO Y PROCESAMIENTO DE CARTAS DE SANTA --------------------- \n");
@@ -2160,7 +2424,7 @@ int main()
 		
 		else if (opcion == 10)
 		{
-			return 0;
+			RegistrarCartaMain(ColaCartas, ColaListaDeseos);
 		}
 		
 		
@@ -2172,7 +2436,8 @@ int main()
 		
 		else if (opcion == 12)
 		{
-			return 0;
+			printf("     BINVENIDOS A  LA CONSULTA DE CARTAS");
+			ConsultarCartas(ColaCartas);
 		}
 		
 		
