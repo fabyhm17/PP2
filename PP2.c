@@ -1941,7 +1941,7 @@ void RegistrarComportamientoMain(ImprimirComportamiento *ColaComportamientos, Im
 
 
 
-/* ---------------------------- LISTA DE DESEOS -------------------------------------- */
+/* ----------------------------------------------------- LISTA DE DESEOS --------------------------------------------------------------- */
 
 /* --------------------------- STRUCT DE LA lISTA DE DESEOS--------------------------- */
 
@@ -2116,7 +2116,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos)
 	char juguete_buscado[50];
 	char opc_carta[10];
 	
-	printf ("          BIENVENIDO AL REGSITRO DE CARTAS \n\n");
+	printf ("--------------------- BIENVENIDO AL REGISTRO DE CARTAS ---------------------\n\n");
 	
 	printf ("Ingrese la cedula del niño que desea registrar la carta: ");
 	fflush (stdin);
@@ -2126,8 +2126,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos)
 	fflush (stdin);
 	gets (year);
 	
-	printf("\n   SELECCION DE JUGUETES \n\n");
-	printf("Los juguetes disponibles son: \n\n");
+	printf("\n----------- JUGUETES DISPONIBLES -----------\n\n");
 	//Imprimir Arbol con la lista de juguetes
 	
 	printf ("Ingrese el nombre del juguete que desea buscar: ");
@@ -2187,8 +2186,10 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 		printf ("\nERROR: No hay cartas registradas.");
 		return;
 	}
+	
 	else
 	{
+		printf("\n------------------------ CONSULTA DE CARTAS ------------------------\n");
 		printf ("\nIngrese la cedula del niño al que pertenece la carta: ")	;
 		fflush (stdin);
 		gets (verificar_cedula);
@@ -2209,7 +2210,7 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 					
 		if (contador == 0)
 		{
-			printf ("\nERROR: la cedula o año ingresad@ no contiene cartas, la accion no se puede realizar.");
+			printf ("\nERROR: la cedula o año ingresado no contiene cartas, la accion no se puede realizar.");
 			return;
 		}
 	}
@@ -2279,9 +2280,12 @@ int main()
 	ImprimirCarta * ColaCartas = CrearColaCartas(ColaCartas);
 	ImprimirLD *ColaListaDeseos = CrearColaListaDeseos(ColaListaDeseos);
 	
-	//MENU PRINCIPAL DE LA FUNCION
+	
+	
 	printf ("\n --------------------- BIENVENIDO AL SISTEMA DE REGISTRO Y PROCESAMIENTO DE CARTAS DE SANTA --------------------- \n");
-
+	
+	
+	//MENU PRINCIPAL DE LA FUNCION
 	printf ("\n\n -------------------------- MENU PRINCIPAL -------------------------- \n");
 	printf ("\n 1.  Registrar niño.");
 	printf ("\n 2.  Modificar informacion de un niño.");
@@ -2335,7 +2339,7 @@ int main()
 		else if (opcion == 5)
 		{
 			RegistrarJuguetesMain(a);
-			//imprimir_arbol(a);
+			//imprimir_arbol(a);      //Funcion para probar otras, no la piden	
 
 		}
 		
@@ -2418,7 +2422,7 @@ int main()
 		{
 			RegistrarComportamientoMain(ColaComportamientos, ColaKids);
 			//ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
-			ConsultarComportamientos(ColaComportamientos);   //Funcion para probar otras, no la piden
+			//ConsultarComportamientos(ColaComportamientos);   //Funcion para probar otras, no la piden
 		}
 		
 		
@@ -2436,7 +2440,6 @@ int main()
 		
 		else if (opcion == 12)
 		{
-			printf("     BIENVENIDOS A  LA CONSULTA DE CARTAS");
 			ConsultarCartas(ColaCartas);
 		}
 		
