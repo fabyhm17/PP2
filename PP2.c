@@ -138,6 +138,7 @@ int ConsultarKids(Imprimir *ColaKids)
 
 void RegistrarKidMain(Imprimir *ColaKids)
 {
+	
 	char nombre_kid[100];
 	char nombre_usuario_kid[100];
 	char correo_kid[100];
@@ -178,6 +179,22 @@ void RegistrarKidMain(Imprimir *ColaKids)
 	printf ("Ingrese el lugar de residencia del niño que desea registrar: ");
 	fflush (stdin);
 	gets (residencia_kid);
+	/*Domicilio * a;
+	int x = 0;
+	while (a -> siguiente != NULL)
+	{
+		if(strcmp(a ->nombre,residencia_kid)==0){
+			x = 1;
+		}
+		a = a -> siguiente;
+	}
+	if( x == 1){
+		printf("Error: Domicilio no registrado.");
+		printf ("Ingrese el lugar de residencia del niño que desea registrar: ");
+		fflush (stdin);
+		gets (residencia_kid);	
+	}*/
+
 	
 	printf ("Ingrese la edad del niño que desea registrar: ");
 	fflush (stdin);
@@ -256,6 +273,7 @@ int ModificarInfoKid (Imprimir *ColaKids)
 			{
 				printf ("Ingrese el nuevo lugar de residencia del niño: ");
 				fflush (stdin);
+				
 				gets (i->lugar_residencia);				
 			}
 			
@@ -1003,9 +1021,6 @@ void RegistrarJuguetesMain( )
 	
 
 }
-
-
-
 
 
 
@@ -2470,5 +2485,4 @@ int main()
 	return 0;
 }
 	
-
 
