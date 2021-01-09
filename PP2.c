@@ -875,8 +875,23 @@ int EsHoja(pNodo r)
 }
 
 
+int BuscarCodigo(Arbol a, int dat)
+{
+   pNodo actual = a;
+
+ 
+   while(!Vacio(actual)) {
+      if(dat == actual->dato) { 
+	  	return 0;
+		}
+      else if(dat < actual->dato) actual = actual->izquierdo; 
+      else if(dat > actual->dato) actual = actual->derecho;
+   }
+   return 1; 
+}
+
 //INSERTAR ARBOL DE JUGUETES
-void InsertarArbol(Arbol *a, int dat,char nombre[15], char descripcion [30],char categoria [15],int edad_minima, int edad_maxima, int costo, int contador)
+void InsertarArbol(Arbol *a, int dat,char nombre[15], char descripcion [30],char categoria [15], int edad_minima, int edad_maxima, int costo, int contador)
 {
    pNodo padre = NULL;
    pNodo actual = *a;
@@ -889,7 +904,11 @@ void InsertarArbol(Arbol *a, int dat,char nombre[15], char descripcion [30],char
    }
 
    /* Si se ha encontrado el elemento, regresar sin insertar */
-   if(!Vacio(actual)) return;
+   if(!Vacio(actual)) {
+   	printf("Error: juguete ya registrado");
+   	return;
+   	
+   }
    
    //PADRE
    if(Vacio(padre)) {
@@ -914,7 +933,7 @@ void InsertarArbol(Arbol *a, int dat,char nombre[15], char descripcion [30],char
       actual-> edad_minima = edad_minima;
       actual->costo= costo;
       actual->contador= contador;
-      actual->edad_maxima= edad_maxima;
+      actual->edad_maxima = edad_maxima;
 	  strcpy(actual->categoria,categoria);
       strcpy(actual->descripcion,descripcion);
 	  strcpy(actual->nombre,nombre);
@@ -926,10 +945,10 @@ void InsertarArbol(Arbol *a, int dat,char nombre[15], char descripcion [30],char
       actual = (Arbol)malloc(sizeof(tipoNodo));
       padre->derecho = actual;
       actual->dato = dat;
-       actual-> edad_minima = edad_minima;
+	  actual->edad_minima = edad_minima;
       actual->costo= costo;
-      actual->contador= contador;
-      actual->edad_maxima= edad_maxima;
+      actual->contador = contador;
+      actual->edad_maxima = edad_maxima;
       strcpy(actual->categoria,categoria);
       strcpy(actual->descripcion,descripcion);
 	  strcpy(actual->nombre,nombre);
@@ -1007,7 +1026,7 @@ void RegistrarJuguetesMain( )
 	
 	printf("Ingrese el rango de edad para la que recomienda el juguete: ");
 	printf("\nEdad minima:");
-	scanf("%d",&edad_minima );
+	scanf("%d",&edad_minima);
 	printf("Edad máxima: ");
 	scanf("%d",&edad_maxima);
 	
@@ -1017,10 +1036,245 @@ void RegistrarJuguetesMain( )
 
 	InsertarArbol( &ArbolInt, dato, nombre, descripcion, categoria, edad_minima, edad_maxima, costo,0);
 	
-	return;
-	
+	return;	
 
 }
+
+//BUSCAR JUGUETE
+void Buscar(Arbol a, int dat)
+{
+   pNodo actual = a;
+
+   /* Todavía puede aparecer, ya que quedan nodos por mirar */
+   while(!Vacio(actual)) {
+      if(dat == actual->dato){
+      		printf("\n----INFORMACIÓN JUGUETE-----");
+      		printf("\nID: %d", actual -> dato);
+      		printf("\nNombre: %s", actual -> nombre);
+      		printf("\nCategoria: %s", actual -> categoria);
+      		printf("\nRango de edad: %d a %d", actual -> edad_minima, actual -> edad_maxima);
+      		printf("\nCosto: %d", actual -> costo);	
+      		printf("\nDescripcion: %s", actual -> descripcion);	
+      		return;
+		}
+      else if(dat < actual->dato) actual = actual->izquierdo; /* Seguir */
+      else if(dat > actual->dato) actual = actual->derecho;
+   }
+   printf("Error: No encontrado");
+   return; /* No está en árbol */
+}
+
+
+
+
+//----------------------------------------------6.MODIFICAR JUGUETE----------------------------------------------------------------//
+//ELIMINAR JUGUETE
+void BorrarJuguete(Arbol *a, int dat)
+{
+   pNodo padre = NULL;
+   pNodo actual;
+   pNodo nodo;
+   int aux;
+
+   actual = *a;
+  
+   while(!Vacio(actual)) {
+      if(dat == actual->dato) { 
+         if(EsHoja(actual)) { 
+            if(padre) 
+               /* Anulamos el puntero que le hace referencia */
+               if(padre->derecho == actual) padre->derecho = NULL;
+               else if(padre->izquierdo == actual) padre->izquierdo = NULL;
+            free(actual); /* Borrar el nodo */
+            actual = NULL;
+            return;
+         }
+         else { /* Si el valor está en el nodo actual, pero no es hoja */
+            padre = actual;
+            
+            if(actual->derecho) {
+               nodo = actual->derecho;
+               while(nodo->izquierdo) {
+                  padre = nodo;
+                  nodo = nodo->izquierdo;
+               }
+            }
+            
+            else {
+               nodo = actual->izquierdo;
+               while(nodo->derecho) {
+                  padre = nodo;
+                  nodo = nodo->derecho;
+               }
+            }
+            /* Intercambiar valores*/ 
+            aux = actual->dato;
+            actual->dato = nodo->dato;
+            nodo->dato = aux;
+            actual = nodo;
+         }
+      }
+      else { 
+         padre = actual;
+         if(dat > actual->dato) actual = actual->derecho;
+         else if(dat < actual->dato) actual = actual->izquierdo;
+      }
+   }
+   
+}
+
+//MODIFICAR DATOS JUGUETE
+modificarJuguete(Arbol a ){
+	pNodo actual = a;
+   char nombre [15];
+   char descripcion [30];
+   char categoria [15];
+   char eleccion_categ [10];
+   int edad_minima;
+   int edad_maxima;
+   int costo;
+   int contador;
+   
+   
+	int dat;
+	int x = 0;
+	char dato_mod [10];
+	printf("\n---------MOFICAR JUGUETE--------");
+	printf("\nID del juguete: ");
+	scanf("%d", &dat);
+	
+	
+ 
+   while(!Vacio(actual)) {
+      if(dat == actual->dato){
+      		
+      		Buscar(ArbolInt, dat);
+      		printf("\n__________________________________________\n\n\n\n");
+			printf("\n---------DATOS A MODIFICAR--------------");
+	      	printf("\n1.Nombre");
+			printf("\n2.Descripcion");
+			printf("\n3.Categoria ");
+			printf("\n4.Rango de edad recomendado");
+			printf("\n5.Costo de fabricacion");
+			printf("-----------------------------------------------");    
+			
+			printf("\nIngrese el numero del dato que desea modificar: ");
+			fflush (stdin);
+			gets (dato_mod);
+			
+			if (strcmp(dato_mod,"1")==0)
+			{
+				printf("\nNuevo nombre:");
+				fflush (stdin);
+				gets (nombre);
+				strcpy(actual->nombre,nombre);
+				x=1;
+				break;
+			
+				
+			}
+			else if (strcmp(dato_mod,"2")==0)
+			{
+				printf("\nNueva descripcion:");
+				fflush (stdin);
+				gets (descripcion);
+				strcpy(actual->descripcion,descripcion);
+				x=1;
+				break;
+			}
+			else if (strcmp(dato_mod,"3")==0)
+			{
+				
+					printf("\n\n--------------CATEGORIAS DISPONIBLES---------------\n\n");
+					printf("\n 1. Peluches");
+					printf("\n 2. Muñecas");
+					printf("\n 3. Vehiculos");
+					printf("\n 4. Juguestes de contruccion");
+					printf("\n 5. Juguetes educativos");
+					printf("\n 6. Juguetes para bebes");
+					
+					printf("\nIngrese nueva categoria: ");
+					fflush (stdin);
+					gets (eleccion_categ);
+							
+							if (strcmp(eleccion_categ,"1")==0)
+							{
+								strcpy(actual->categoria,"Peluches");
+							}
+							else if (strcmp(eleccion_categ,"2")==0)
+							{
+								strcpy(actual->categoria,"Munecas");
+							}
+							else if (strcmp(eleccion_categ,"3")==0)
+							{
+								strcpy(actual->categoria,"Vehiculos");
+							}
+							else if (strcmp(eleccion_categ,"4")==0)
+							{
+								strcpy(actual->categoria,"Juguetes de construccion");
+							}
+							else if (strcmp(eleccion_categ,"5")==0)
+							{
+								strcpy(actual->categoria,"Juguetes educativos");
+							}
+							else if (strcmp(eleccion_categ,"6")==0)
+							{
+								strcpy(actual->categoria,"Juguetes para bebes");
+							}
+							else{
+								printf("Error: fuera de rango.");
+							}
+								x=1;
+								break;
+								
+			}
+			else if (strcmp(dato_mod,"4")==0)
+			{
+				printf("\nRango de edad:");
+				printf("\nEdad minima:");
+				scanf("%d", &edad_minima);
+				printf("\nEdad maxima");
+				scanf("%d", &edad_maxima);
+				actual -> edad_minima = edad_minima;
+				actual -> edad_maxima = edad_maxima;
+				x=1;
+				break;
+			}
+			else if (strcmp(dato_mod,"5")==0)
+			{
+				printf("\nNuevo costo de fabricación:");
+				scanf("%d", &costo);
+				actual -> costo = costo;
+				x=1;
+				break;
+			}
+			else
+			{
+				printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
+				x=0;
+			}
+		
+      	
+	  }
+	   
+      else if(dat < actual->dato) actual = actual->izquierdo; 
+      else if(dat > actual->dato) actual = actual->derecho;
+   }
+   
+   if(x==0){
+   	printf("Error: juguete no registrado");
+   } 
+   else{
+   	printf("\n--- MODIFICADO!! ---\n\n\n");
+   	Buscar(ArbolInt, dat);
+   	
+   }
+}
+	
+		
+	
+	
+
 
 
 
@@ -1742,7 +1996,6 @@ ImprimirComportamiento * InsertarComportamiento(ImprimirComportamiento * ColaCom
 	if(ColaComportamientos->front == NULL) 
 	{
 		ColaComportamientos->front = CrearComportamiento(cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
-		ColaComportamientos->rear = ColaComportamientos->front;
 		return ColaComportamientos;
 	}
 	ColaComportamientos ->rear->next = CrearComportamiento(cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
@@ -2209,16 +2462,17 @@ int main()
 	printf ("\n 4.  Modificar informacion de un ayudante de Santa.");
 	printf ("\n 5.  Registrar juguete.");
 	printf ("\n 6.  Modificar informacion de un juguete.");
-	printf ("\n 7.  Registrar lugar de domicilio en el catalogo.");
-	printf ("\n 8.  Modificar lugar de domicilio en el catalogo.");
-	printf ("\n 9.  Registrar comportamiento de un niño.");
-	printf ("\n 10. Registrar carta para Santa.");
-	printf ("\n 11. Modificar carta para Santa.");
-	printf ("\n 12. Consultar carta para Santa.");
-	printf ("\n 13. Procesar carta para Santa.");
-	printf ("\n 14. Realizar entrega de juguetes.");
-	printf ("\n 15. Analizar datos.");
-	printf ("\n 16. Finalizar programa.");
+	printf ("\n 7. 	Eliminar juguete.");
+	printf ("\n 8.  Registrar lugar de domicilio en el catalogo.");
+	printf ("\n 9.  Modificar lugar de domicilio en el catalogo.");
+	printf ("\n 10.  Registrar comportamiento de un niño.");
+	printf ("\n 11. Registrar carta para Santa.");
+	printf ("\n 12. Modificar carta para Santa.");
+	printf ("\n 13. Consultar carta para Santa.");
+	printf ("\n 14. Procesar carta para Santa.");
+	printf ("\n 15. Realizar entrega de juguetes.");
+	printf ("\n 16. Analizar datos.");
+	printf ("\n 17. Finalizar programa.");
 	
 	int opcion;
 	printf ("\n\nIngrese el numero de la accion que desea realizar:  ");
@@ -2262,11 +2516,29 @@ int main()
 	
 		else if (opcion == 6)
 		{
+			modificarJuguete(ArbolInt);
+		
+		}
+		else if (opcion == 7)
+		{
+			int dat;
+			printf("----ELIMINAR JUGUETE----");
+			printf("\nID del juguete que desea eliminar: ");
+			scanf("%d",&dat);
+			
+			if(BuscarCodigo(ArbolInt, dat)==0){
+				BorrarJuguete(&ArbolInt, dat);
+				printf("\n--BORRADO!!---");
+				
+			}else{
+				printf("Error: ID no registrado.");
+			}
+			
 		
 		}
 		
 		
-		else if (opcion == 7)
+		else if (opcion == 8)
 		{
 			int domicilios, d, rutas, r;
 			
@@ -2291,7 +2563,7 @@ int main()
 		}
 			
 			
-		else if (opcion == 8)
+		else if (opcion == 9)
 		{
 			int op;
 			printf("\n--------------- MODIFICAR CATALOGO DOMICILIO ---------------\n");
@@ -2334,7 +2606,7 @@ int main()
 		}
 		
 		
-		else if (opcion == 9)
+		else if (opcion == 10)
 		{
 			RegistrarComportamientoMain(ColaComportamientos, ColaKids);
 			//ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
@@ -2342,27 +2614,21 @@ int main()
 		}
 		
 		
-		else if (opcion == 10)
+		else if (opcion == 11)
 		{
 			RegistrarCartaMain(ColaCartas, ColaListaDeseos);
 		}
 		
 		
-		else if (opcion == 11)
-		{
-			return 0;
-		}
-		
-		
 		else if (opcion == 12)
 		{
-			ConsultarCartas(ColaCartas);
+			return 0;
 		}
 		
 		
 		else if (opcion == 13)
 		{
-			return 0;
+			ConsultarCartas(ColaCartas);
 		}
 		
 		
@@ -2373,6 +2639,12 @@ int main()
 		
 		
 		else if (opcion == 15)
+		{
+			return 0;
+		}
+		
+		
+		else if (opcion == 16)
 		{
 			char opcion_analisis[10];
 			
@@ -2461,16 +2733,17 @@ int main()
 			printf ("\n 4.  Modificar informacion de un ayudante de Santa.");
 			printf ("\n 5.  Registrar juguete.");
 			printf ("\n 6.  Modificar informacion de un juguete.");
-			printf ("\n 7.  Registrar lugar de domicilio en el catalogo.");
-			printf ("\n 8.  Modificar lugar de domicilio en el catalogo.");
-			printf ("\n 9.  Registrar comportamiento de un niño.");
-			printf ("\n 10. Registrar carta para Santa.");
-			printf ("\n 11. Modificar carta para Santa.");
-			printf ("\n 12. Consultar carta para Santa.");
-			printf ("\n 13. Procesar carta para Santa.");
-			printf ("\n 14. Realizar entrega de juguetes.");
-			printf ("\n 15. Analizar datos.");
-			printf ("\n 16. Finalizar programa.");
+			printf ("\n 7. 	Eliminar juguete.");
+			printf ("\n 8.  Registrar lugar de domicilio en el catalogo.");
+			printf ("\n 9.  Modificar lugar de domicilio en el catalogo.");
+			printf ("\n 10.  Registrar comportamiento de un niño.");
+			printf ("\n 11. Registrar carta para Santa.");
+			printf ("\n 12. Modificar carta para Santa.");
+			printf ("\n 13. Consultar carta para Santa.");
+			printf ("\n 14. Procesar carta para Santa.");
+			printf ("\n 15. Realizar entrega de juguetes.");
+			printf ("\n 16. Analizar datos.");
+			printf ("\n 17. Finalizar programa.");
 			
 			printf ("\n\nIngrese el numero de la accion que desea realizar:  ");
 			scanf_s ("%d", &opcion);
