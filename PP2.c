@@ -824,117 +824,118 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 /* ------------------------------------------------------------------ 5. REGISTRAR JUGUETE ------------------------------------------------------------------ */
 
 
-/* Estructuras y tipos */
-typedef struct juguete 
-{
-   int codigo;
-   char nombre[50];
-   char descripcion[100];
-   char categoria[100];
-   char rango_edad[10];
-   int costo_fabricacion;
-   char estado[50];     
-      
-   struct juguete *derecho;
-   struct juguete *izquierdo;
-   struct juguete *next;
-} juguetes;
-
-typedef juguetes *pNodo;
-typedef juguetes *Arbol;
-
-
-/* ----------------------- CREAR NODO JUGUETE ----------------------- */
-
-juguetes* CrearJuguete( int codigo, char nombre[50], char descripcion[100], char categoria[100], char rango_edad[10], int costo_fabricacion, char estado[50] )
-{
-	struct juguete *nuevo;
-	nuevo = (juguetes *) malloc(sizeof(juguetes));
-	nuevo -> next = NULL;
+typedef struct _nodo {
 	
-	nuevo->codigo=codigo;
-	strcpy(nuevo->nombre,nombre);	
-	strcpy(nuevo->descripcion,descripcion);
-	strcpy(nuevo->categoria,categoria);
-	strcpy(nuevo->rango_edad,rango_edad);
-	nuevo->costo_fabricacion=costo_fabricacion;
-	strcpy(nuevo->estado,estado);
+   	//DATOS DEL JUGUETE
+   int dato;
+   char nombre [15];
+   char descripcion [30];
+   char categoria [15];
+   int edad_minima;
+   int edad_maxima;
+   int costo;
+   int contador;
+   struct _nodo *derecho;
+   struct _nodo *izquierdo;
+} tipoNodo;
 
-	return nuevo;
-}
+typedef tipoNodo *pNodo;
+typedef tipoNodo *Arbol;
+Arbol ArbolInt=NULL;
 
-/* ----------------------- COMPROBAR SI EL ÁRBOL ES VACÍO----------------------- */
+
+//FUNCIONES AUXILIARES ARBOL BINARIO
 int Vacio(Arbol r)
 {
    return r==NULL;
 }
 
-/* ----------------------- INSERTAR JUGUETE----------------------- */
-void InsertarJuguete(Arbol *a, int codigo, char nombre[50], char descripcion[100], char categoria[100], char rango_edad[10], int costo_fabricacion, char estado[50] )
+
+int EsHoja(pNodo r)
 {
-   pNodo padre = NULL;
-   pNodo actual = *a;
-   
-   // Buscar el dato en el árbol, manteniendo un puntero al nodo padre 
-   while(!Vacio(actual) && codigo != actual->codigo) 
-   {
-      padre = actual;
-      if(codigo < actual->codigo) actual = actual->izquierdo;
-      else if(codigo > actual->codigo) actual = actual->derecho;
-   }
-
-   //Si se ha encontrado el elemento, regresar sin insertar
-   if(!Vacio(actual)) return;
-   
-   // Si padre es NULL, entonces el árbol estaba vacío, el nuevo nodo será el nodo raiz 
-   if(Vacio(padre)) 
-   {
-      actual = (Arbol)malloc(sizeof(juguetes));
-      padre->izquierdo = actual;
-      actual=CrearJuguete(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
-
-      actual->izquierdo = (*a)->derecho = NULL;
-   }
-   
-   // Si el código es menor que el que contiene el nodo padre, lo insertamos en la rama izquierda
-   else if(codigo < padre->codigo) 
-   {
-      actual = (Arbol)malloc(sizeof(juguetes));
-      padre->izquierdo = actual;
-	  actual=CrearJuguete(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
-      
-      actual->izquierdo = actual->derecho = NULL;
-   }
-   
-   // Si el código es mayor que el que contiene el nodo padre, lo insertamos en la rama derecha
-   else if(codigo > padre->codigo) 
-   {
-      actual = (Arbol)malloc(sizeof(juguetes));
-      padre->derecho = actual;
-   	  actual=CrearJuguete(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
-      
-      actual->izquierdo = actual->derecho = NULL;
-   }
+   return !r->derecho && !r->izquierdo;
 }
 
 
+//INSERTAR ARBOL DE JUGUETES
+void InsertarArbol(Arbol *a, int dat,char nombre[15], char descripcion [30],char categoria [15],int edad_minima, int edad_maxima, int costo, int contador)
+{
+   pNodo padre = NULL;
+   pNodo actual = *a;
+
+  
+   while(!Vacio(actual) && dat != actual->dato) {
+      padre = actual;
+      if(dat < actual->dato) actual = actual->izquierdo;
+      else if(dat > actual->dato) actual = actual->derecho;
+   }
+
+   /* Si se ha encontrado el elemento, regresar sin insertar */
+   if(!Vacio(actual)) return;
+   
+   //PADRE
+   if(Vacio(padre)) {
+      *a = (Arbol)malloc(sizeof(tipoNodo));
+      (*a)->dato = dat;
+      (*a)-> edad_minima = edad_minima;
+      (*a)->costo= costo;
+       (*a)->contador= contador;
+      (*a)->edad_maxima= edad_maxima;
+      strcpy((*a)->categoria,categoria);
+      strcpy((*a)->descripcion,descripcion);
+	  strcpy((*a)->nombre,nombre);
+      (*a)->izquierdo = (*a)->derecho = NULL;
+      
+   }
+   //IZQUIERDA
+
+   else if(dat < padre->dato) {
+      actual = (Arbol)malloc(sizeof(tipoNodo));
+      padre->izquierdo = actual;
+      actual->dato = dat;
+      actual-> edad_minima = edad_minima;
+      actual->costo= costo;
+      actual->contador= contador;
+      actual->edad_maxima= edad_maxima;
+	  strcpy(actual->categoria,categoria);
+      strcpy(actual->descripcion,descripcion);
+	  strcpy(actual->nombre,nombre);
+      
+      actual->izquierdo = actual->derecho = NULL;
+   }
+	//DERECHA
+   else if(dat > padre->dato) {
+      actual = (Arbol)malloc(sizeof(tipoNodo));
+      padre->derecho = actual;
+      actual->dato = dat;
+       actual-> edad_minima = edad_minima;
+      actual->costo= costo;
+      actual->contador= contador;
+      actual->edad_maxima= edad_maxima;
+      strcpy(actual->categoria,categoria);
+      strcpy(actual->descripcion,descripcion);
+	  strcpy(actual->nombre,nombre);
+      actual->izquierdo = actual->derecho = NULL;
+  }
+  printf("----REGISTRADO!!-----");
+}
+
 /* ----------------------- REGISTRAR JUGUETES EN EL MAIN ----------------------- */
 
-void RegistrarJuguetesMain(Arbol *a)
+void RegistrarJuguetesMain( )
 {
-	int codigo;
+	int dato;
 	char nombre[50];
     char descripcion[100];
-    char categoria[100];
-    char rango_edad[10];
-    int costo_fabricacion;
-    char estado[50];  
-    
+    int edad_minima;
+   	int edad_maxima;
+    int costo;
+    char categoria[15];
     char eleccion_categ[10];
     
 	printf("--------------REGISTRO DE JUGUETES---------------\n\n");
 	printf("Ingrese el codigo del juguete: ");
-	scanf("%d", &codigo);
+	scanf("%d", &dato);
 	
 	printf("Ingrese el nombre del juguete: ");
 	fflush (stdin);
@@ -987,251 +988,21 @@ void RegistrarJuguetesMain(Arbol *a)
 	}			
 	
 	printf("Ingrese el rango de edad para la que recomienda el juguete: ");
-	fflush (stdin);
-	gets (rango_edad);
+	printf("\nEdad minima:");
+	scanf("%d",&edad_minima );
+	printf("Edad máxima: ");
+	scanf("%d",&edad_maxima);
+	
 	
 	printf("Ingrese el costo total de fabricacion del juguete: ");
-	scanf("%d", &costo_fabricacion);
+	scanf("%d", &costo);
 
-	InsertarJuguete(a, codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, "Disponible" );
+	InsertarArbol( &ArbolInt, dato, nombre, descripcion, categoria, edad_minima, edad_maxima, costo,0);
 	
 	return;
 	
 
 }
-
-
-
-
-/* ----------------------- IMPRIMIR REGISTRO DE JUGUETES----------------------- */
-
-
-void imprimir_juguetes( int codigo, char nombre[50], char descripcion[100], char categoria[100], char rango_edad[10], int costo_fabricacion, char estado[50] )
-{
-	printf("Codigo: %d\n",codigo);
-	printf("Nombre: %s\n",nombre);
-	printf("Descripcion: %s\n",descripcion);
-	printf("Categoria: %s\n",categoria);
-	printf("Rango de edad recomendado: %s\n",rango_edad);
-	printf("Costo de fabricacion: %s\n",costo_fabricacion);
-	printf("Estado: %s\n",estado);
-	printf("-----------------------------------------------");
-	
-}
-
-/*void imprir_arbol(Arbol* a)
-{
-	int codigo;
-	char nombre[50];
-    char descripcion[100];
-    char categoria[100];
-    char rango_edad[10];
-    int costo_fabricacion;
-    char estado[50];  
-
-    
-	if(a==NULL) //Condicion de parada
-	{
-		return;
-	}
-	else //Se imprime la lisa de juguetes, se hace co recorrido in orden para que se imprima de menor a mayor
-	{
-		//Se recorre la rama izquierda del arbol
-		imprimir_arbol(a->izquierdo);
-		//Se imprimer los datos
-		imprimir_juguetes(codigo, nombre, descripcion, categoria, rango_edad, costo_fabricacion, estado);
-		//Se recorre el lado derecho del arbol
-		imprimir_arbol(a->derecho);
-	}
-}*/
-
-
-
-
-
-/* ----------------------------------------------------------- 6. MODIFICAR INFORMACION DE UN JUGUETE -------------------------------------------------------- */
-
-
-
-
-// Eliminar un juguete de un árbol ABB 
-
-void Borrar_Juguete(Arbol *a, int juguete)
-{
-   pNodo padre = NULL;
-   pNodo actual;
-   pNodo nodo;
-   int aux;
-
-   actual = *a;
-   //Mientras sea posible que el valor esté en el árbol 
-   while(!Vacio(actual)) 
-   {
-		if(juguete == actual->codigo) //Si el valor está en el nodo actual 
-		{ 
-	        if(EsHoja(actual)) // Y si además es un nodo hoja: lo borramos 
-			{
-	            if(padre) // Si tiene padre (no es el nodo raiz) 
-	            //Anulamos el puntero que le hace referencia 
-	            if(padre->derecho == actual) padre->derecho = NULL;
-	            else if(padre->izquierdo == actual) padre->izquierdo = NULL;
-	            free(actual); // Borrar el nodo 
-	            actual = NULL;
-	            return;
-	        }
-	        
-	        else// Si el valor está en el nodo actual, pero no es hoja 
-			{
-	            padre = actual;
-	            // Buscar nodo más izquierdo de rama derecha 
-	            if(actual->derecho) 
-				{
-	               nodo = actual->derecho;
-	               while(nodo->izquierdo)
-				   {
-	                  padre = nodo;
-	                  nodo = nodo->izquierdo;
-	               }
-	            }
-	            // O buscar nodo más derecho de rama izquierda 
-	            else
-				{
-	               nodo = actual->izquierdo;
-	               while(nodo->derecho) 
-				   {
-	                  padre = nodo;
-	                  nodo = nodo->derecho;
-	               }
-	            }
-	            // Intercambiar valores de no a borrar u nodo encontrado y continuar, cerrando el bucle. El nodo encontrado no tiene
-	            //  por qué ser un nodo hoja, cerrando el bucle nos aseguramos de que sólo se eliminan nodos hoja. 
-	            aux = actual->codigo;
-	            actual->codigo = nodo->codigo;
-	            nodo->codigo = aux;
-	            actual = nodo;
-	        }
-		}
-       
-		else // Todavía no hemos encontrado el valor, seguir buscándolo 
-		{ 
-	        padre = actual;
-	        if(juguete > actual->codigo) actual = actual->derecho;
-	        else if(juguete < actual->codigo) actual = actual->izquierdo;
-    	}
-	}
-}
-
-// Buscar un valor en el árbol 
-int Modificar(Arbol *a, int juguete)
-{
-	pNodo actual = *a;
-	char dato_mod[10];
-
-   //Todavía puede aparecer, ya que quedan nodos por mirar 
-	while(!Vacio(actual)) 
-	{
-   		if(juguete == actual->codigo)  // dato encontrado 
-        {
-	      	printf("\n---------DATOS A MODIFICAR--------------");
-	      	printf("1. Nombre");
-			printf("2. Descripcion");
-			printf("3. Categoria ");
-			printf("4. Rango de edad recomendado");
-			printf("5. Costo de fabricacion");
-			printf("6. Estado");
-			printf("-----------------------------------------------");    
-			
-			printf("Ingrese el numero del dato que desea modificar: ");
-			fflush (stdin);
-			gets (dato_mod);
-			
-			if (strcmp(dato_mod,"1")==0)
-			{
-				return 0;
-			}
-			else if (strcmp(dato_mod,"2")==0)
-			{
-				return 0;
-			}
-			else if (strcmp(dato_mod,"3")==0)
-			{
-				return 0;
-			}
-			else if (strcmp(dato_mod,"4")==0)
-			{
-				return 0;
-			}
-			else if (strcmp(dato_mod,"5")==0)
-			{
-				return 0;
-			}
-			else if (strcmp(dato_mod,"6")==0)
-			{
-				return 0;
-			}
-			else
-			{
-				printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
-				return;
-			}
-			printf("Dato modificado exitosamente");
-			return;
-						 	
-	   }
-       else if(juguete < actual->codigo) actual = actual->izquierdo; //Seguir 
-       else if(juguete > actual->codigo) actual = actual->derecho;
-   }
-   printf("El dato no se ha encontrado");
-   
-}
-
-
-//Función Auxiliar
-
-
-// Comprobar si un nodo es hoja 
-int EsHoja(pNodo r)
-{
-   return !r->derecho && !r->izquierdo;
-}
-
-
-void Modificar_Juguetes(Arbol *a)
-{
-	char opc_moficar[10];
-	int codigo_mod;
-	
-	 
-	printf("\n------------OPCIONES DISPONIBLES-------------");
-	printf("\n1. Modificar informacion del jugute");
-	printf("\n2. Eliminar juguete");
-	
-	printf("\n\nIngrese el numero de la opcion que desea realizar: ");
-	fflush (stdin);
-	gets (opc_moficar);
-	
-	if (strcmp(opc_moficar,"1")==0)
-	{
-		printf("Ingrese el codigo del juguete: ");
-		scanf("%d", codigo_mod);
-		Modificar(a, codigo_mod);
-
-	}
-	else if (strcmp(opc_moficar,"2")==0)
-	{
-		printf("Ingrese el codigo del juguete: ");
-		scanf("%d", codigo_mod);
-		Borrar_Juguete(a, codigo_mod);
-	}
-	else
-	{
-		printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
-		return;
-	}			
-	
-	
-}
-
 
 
 
@@ -2467,7 +2238,7 @@ int main()
 		
 		else if (opcion == 5)
 		{
-			RegistrarJuguetesMain(a);
+			RegistrarJuguetesMain( );
 			//imprimir_arbol(a);      //Funcion para probar otras, no la piden	
 
 		}
@@ -2475,7 +2246,7 @@ int main()
 	
 		else if (opcion == 6)
 		{
-			Modificar_Juguetes(a);
+		
 		}
 		
 		
