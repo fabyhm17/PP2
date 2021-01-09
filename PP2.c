@@ -2277,53 +2277,81 @@ ImprimirCarta * InsertarCarta(ImprimirCarta * ColaCartas,char cedula[15], char y
 
 /* ----------------------- REGISTRAR CARTA EN EL MAIN ----------------------- */
 
-void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos)
+void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imprimir *ColaKids)
 {
 	char year[10];
-	char cedula [50];
+	char cedula_kid [50];
 	char juguetes [50];
 	char juguete_buscado[50];
 	char opc_carta[10];
+	int cantidad_jug=0;
+	int contador=0;
 	
 	printf ("--------------------- BIENVENIDO AL REGISTRO DE CARTAS ---------------------\n\n");
 	
 	printf ("Ingrese la cedula del niño que desea registrar la carta: ");
 	fflush (stdin);
-	gets (cedula);
+	gets (cedula_kid);
 	
-	printf ("Ingrese el año para el que corresponde la carta [yyyy] : ");
-	fflush (stdin);
-	gets (year);
+	Kid *i;
 	
-	printf("\n----------- JUGUETES DISPONIBLES -----------\n\n");
-	//Imprimir Arbol con la lista de juguetes
+	for(i = ColaKids->front; i != NULL; i = i->next)
+	{
+		if(strcmp(i->cedula,cedula_kid)==0)
+		{
+			contador = 1;
 	
-	printf ("Ingrese el nombre del juguete que desea buscar: ");
-	fflush (stdin);
-	gets (juguete_buscado);
-	printf ("Los datos del juguete son:\n ");
-	//Consultar juguete en el arbol
 	
-	printf ("\n  OPCIONES DISPONIBLES \n");
-	printf ("1. Añadir juguete a la carta\n");
-	printf ("2. Añadir juguete a la lista de deseos\n");
-
-	printf("\nIngrese el numero de la opcion que desea realizar: ");
-	fflush (stdin);
-	gets (opc_carta);
+			printf ("Ingrese el año para el que corresponde la carta [yyyy] : ");
+			fflush (stdin);
+			gets (year);
 			
-	if (strcmp(opc_carta,"1")==0)
-	{
-		//Validar cantidad de juguetes
-		InsertarCarta(ColaCartas, cedula, year, juguete_buscado );
-		//Cambiar el estado del juguete
-	}
-	else if (strcmp(opc_carta,"2")==0)
-	{
-		InsertarListaDeseos(ColaListaDeseos,cedula, juguete_buscado);
-		ConsultarListaDeseos(ColaListaDeseos); //Para realizar las pruebas 
-	}
+			printf("\n----------- JUGUETES DISPONIBLES -----------\n\n");
+			//Imprimir Arbol con la lista de juguetes
+			
+			printf ("Ingrese el nombre del juguete que desea buscar: ");
+			fflush (stdin);
+			gets (juguete_buscado);
+			printf ("Los datos del juguete son:\n ");
+			//Consultar juguete en el arbol
+			
+			printf ("\n  OPCIONES DISPONIBLES \n");
+			printf ("1. Añadir juguete a la carta\n");
+			printf ("2. Añadir juguete a la lista de deseos\n");
 		
+			printf("\nIngrese el numero de la opcion que desea realizar: ");
+			fflush (stdin);
+			gets (opc_carta);
+					
+			if (strcmp(opc_carta,"1")==0)
+			{
+				if (cantidad_jug > 10)
+				{
+					printf("ERROR: se ha alcanzado la cantidad máxima de juguetes en la carta.");
+				}
+				else
+				{
+					InsertarCarta(ColaCartas, cedula_kid, year, juguete_buscado );
+				
+					ConsultarCartas(ColaCartas);
+					printf("%d",cantidad_jug);
+					//Cambiar el estado del juguete
+				}
+				cantidad_jug ++;
+			}
+			else if (strcmp(opc_carta,"2")==0)
+			{
+				InsertarListaDeseos(ColaListaDeseos,cedula_kid, juguete_buscado);
+				ConsultarListaDeseos(ColaListaDeseos); //Para realizar las pruebas 
+			}
+		}
+	}
+	if (contador == 0)
+	{
+		printf("ERROR: la cedula no existe, la accion no se pudo completar.");
+		return;
+	}
+
 }
 
 
@@ -2616,7 +2644,7 @@ int main()
 		
 		else if (opcion == 11)
 		{
-			RegistrarCartaMain(ColaCartas, ColaListaDeseos);
+			RegistrarCartaMain(ColaCartas, ColaListaDeseos, ColaKids);
 		}
 		
 		
