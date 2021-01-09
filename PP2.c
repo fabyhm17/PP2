@@ -234,27 +234,29 @@ int ModificarInfoKid (Imprimir *ColaKids)
 			if (dato == 1)
 			{
 				printf ("Ingrese el nuevo nombre del niño: ");
-				scanf("%s",i->nombre);
+				fflush (stdin);
+				gets (i->nombre);
 			}
 			
 			else if (dato == 2)
 			{
 				printf ("Ingrese el nuevo nombre de usuario del niño: ");
-				scanf("%s",i->nombre_usuario);
+				fflush (stdin);
+				gets (i->nombre_usuario);
 			}
 			
 			else if (dato == 3)
 			{
 				printf ("Ingrese el nuevo correo del niño: ");
-				scanf("%s",i->correo);	
+				fflush (stdin);
+				gets (i->correo);	
 			}
 			
 			else if (dato == 4)
 			{
-				char modificar_lugar_residencia[100];
-				
 				printf ("Ingrese el nuevo lugar de residencia del niño: ");
-				scanf("%s",i->lugar_residencia);				
+				fflush (stdin);
+				gets (i->lugar_residencia);				
 			}
 			
 			else if (dato == 5)
@@ -266,7 +268,8 @@ int ModificarInfoKid (Imprimir *ColaKids)
 			else if (dato == 6)
 			{
 				printf ("Ingrese las nuevas necesidades especiales del niño: ");
-				scanf("%s",i->necesidades_especiales);		
+				fflush (stdin);
+				gets (i->necesidades_especiales);			
 			}
 			
 			else
@@ -629,9 +632,8 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 				
 				printf ("\n\n-------------------- DATOS A MODIFICAR --------------------");
 				printf ("\n1. Modificar nombre.");
-				printf ("\n2. Modificar puesto.");
-				printf ("\n3. Modificar correo.");
-				printf ("\n4. Modificar funcion.");
+				printf ("\n2. Modificar correo.");
+				printf ("\n3. Modificar puesto y funcion.");
 				
 				int dato;
 				printf ("\n\nIngrese el numero del dato que desea modificar: ");
@@ -640,25 +642,151 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 				if (dato == 1)
 				{
 					printf ("Ingrese el nuevo nombre del ayudante: ");
-					scanf("%s",i->nombre);
+					fflush (stdin);
+					gets (i->nombre);
 				}
 				
 				else if (dato == 2)
 				{
-					printf ("Ingrese el nuevo puesto del ayudante: ");
-					scanf("%s",i->puesto);
+					printf ("Ingrese el nuevo correo del ayudante: ");
+					fflush (stdin);
+					gets (i->correo);
 				}
 				
 				else if (dato == 3)
 				{
-					printf ("Ingrese el nuevo correo del ayudante: ");
-					scanf("%s",i->correo);	
-				}
+					char num_puesto[20];
+					char num_funcion[20];
+					
+					printf ("\n\n---------------- PUESTOS DISPONIBLES ----------------");
+					printf ("\n1. Gestion de cartas");
+					printf ("\n2. Produccion de juguetes");
+					printf ("\n3. Envoltorio de juguetes");
+					printf ("\n4. Distribucion de regalos");
 				
-				else if (dato == 4)
-				{
-					printf ("Ingrese la nueva funcion del ayudante: ");
-					scanf("%s",i->funcion);				
+					printf ("Ingrese el numero del nuevo puesto del ayudante: ");
+					fflush (stdin);
+					gets (num_puesto);
+					
+					if (strcmp(num_puesto,"1")==0)
+					{
+						strcpy(i->puesto,"Gestion de cartas");
+						
+						printf ("\n\n---------------- FUNCIONES DISPONIBLES ----------------");
+						printf ("\n1. Seleccion de cartas.");
+						printf ("\n2. Clasificacion de niños segun su comportamiento.");	
+						printf ("\n\nIngrese la funcion que realiza el ayudante: ");
+						fflush (stdin);
+						gets (num_funcion);
+						
+						if (strcmp(num_funcion,"1")==0)
+						{
+							strcpy(i->funcion,"Seleccion de cartas");
+						}
+						else if (strcmp(num_funcion,"2")==0)
+						{
+							strcpy(i->funcion,"Clasificacion de niños segun su comportamiento");
+						}
+						else
+						{
+							printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
+							return;
+						}
+					}
+					
+					else if (strcmp(num_puesto,"2")==0)
+					{
+						strcpy(i->puesto,"Produccion de juguetes");
+
+						printf ("\n\n---------------- FUNCIONES DISPONIBLES ----------------");
+						printf ("\n1. Ensamblaje de juguetes.");
+						printf ("\n2. Inventario de juguetes producidos.");
+						printf ("\n3. Manipulacion de materia prima.");	
+						printf ("\n\nIngrese la funcion que realiza el ayudante: ");
+						fflush (stdin);
+						gets (num_funcion);
+						
+						if (strcmp(num_funcion,"1")==0)
+						{
+							strcpy(i->funcion,"Ensamblaje de juguetes");
+						}
+						else if (strcmp(num_funcion,"2")==0)
+						{
+							strcpy(i->funcion,"Inventario de juguetes producidos");
+						}
+						else if (strcmp(num_funcion,"3")==0)
+						{
+							strcpy(i->funcion,"Manipulacion de materia prima");
+						}
+						else
+						{
+							printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
+							return;
+						}
+					}
+					
+					else if (strcmp(num_puesto,"3")==0)
+					{
+						strcpy(i->puesto,"Envoltorio de juguetes");
+						
+						printf ("\n\n---------------- FUNCIONES DISPONIBLES ----------------");
+						printf ("\n1. Inventario de envoltorios de navidad.");
+						printf ("\n2. Envoltorio de regalos.");
+						printf ("\n3. Inventario de juguetes envueltos.");	
+						printf ("\n\nIngrese la funcion que realiza el ayudante: ");
+						fflush (stdin);
+						gets (num_funcion);
+						
+						if (strcmp(num_funcion,"1")==0)
+						{
+							strcpy(i->funcion,"Inventario de envoltorios de navidad");
+						}
+						else if (strcmp(num_funcion,"2")==0)
+						{
+							strcpy(i->funcion,"Envoltorio de regalos");
+						}
+						else if (strcmp(num_funcion,"3")==0)
+						{
+							strcpy(i->funcion,"Inventario de juguetes envueltos");
+						}
+						else
+						{
+							printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
+							return;
+						}
+					}
+					
+					else if (strcmp(num_puesto,"4")==0)
+					{
+						strcpy(i->puesto,"Distribucion de regalos");
+						
+						printf ("\n\n---------------- FUNCIONES DISPONIBLES ----------------");
+						printf ("\n1. Inventario de regalos a entregar.");
+						printf ("\n2. Distribucion de regalos segun la region.");	
+						printf ("\n\nIngrese la funcion que realiza el ayudante: ");
+						fflush (stdin);
+						gets (num_funcion);
+						
+						if (strcmp(num_funcion,"1")==0)
+						{
+							strcpy(i->funcion,"Inventario de regalos a entregar");
+						}
+						else if (strcmp(num_funcion,"2")==0)
+						{
+							strcpy(i->funcion,"Distribucion de regalos segun la region");
+						}
+						else
+						{
+							printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
+							return;
+						}
+					}	
+					
+					else
+					{
+						printf("\nERROR: el puesto no existe, la accion no se pudo realizar con exito.");
+						return;
+					}	
 				}
 				
 				else
@@ -670,10 +798,10 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 				printf ("\nLa informacion fue modificada con exito.");
 				printf ("\n\n-------------------- DATOS MODIFICADOS --------------------");
 				printf("\n\nNombre: %s", i->nombre);
-				printf("\n\nPuesto: %s", i->puesto);
+				printf("\nPuesto: %s", i->puesto);
 				printf("\nCorreo: %s", i->correo);
 				printf("\nFuncion: %s", i->funcion);
-				printf("\nCedula: %d", i->cedula);
+				printf("\nCedula: %s", i->cedula);
 				printf("\nFecha en que comienza a trabajar: %s", i->fecha_entrada);
 				printf("\n____________________________________________________________________________\n");	
 				return;		
