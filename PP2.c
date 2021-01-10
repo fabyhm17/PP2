@@ -745,15 +745,35 @@ void Buscar(Arbol a, int dat)
       		printf("\nDescripcion: %s", actual -> descripcion);	
       		return;
 		}
-      else if(dat < actual->dato) actual = actual->izquierdo; /* Seguir */
+      else if(dat < actual->dato) actual = actual->izquierdo; 
       else if(dat > actual->dato) actual = actual->derecho;
    }
    printf("Error: No encontrado");
-   return; /* No está en árbol */
+   return; 
 }
 
 
-
+void PreOrden(Arbol a)
+{
+	 if(!Vacio(a)) {
+     
+		printf("\nID: %d", a-> dato);
+		printf("\nNombre: %s", a -> nombre);
+		printf("\nCategoria: %s", a -> categoria);
+		printf("\nRango de edad: %d a %d", a -> edad_minima, a -> edad_maxima);
+		printf("\nCosto: %d", a -> costo);	
+		printf("\nDescripcion: %s", a -> descripcion);	
+		printf("\n_______________________________\n\n");
+	
+   
+   if(a->izquierdo) PreOrden(a->izquierdo);
+   if(a->derecho) PreOrden(a->derecho);
+	}else{
+		printf("\n\n\n---Catalogo vacio!! ----");
+		return;
+		
+	}	
+}
 
 //----------------------------------------------6.MODIFICAR JUGUETE----------------------------------------------------------------//
 //ELIMINAR JUGUETE
@@ -1539,7 +1559,7 @@ modificarArista(){
 	char tipo_ruta [15];
 	Domicilio * aux, *aux2;
 	Ruta * q, *r;
-	
+	 
 
 	printf("\n--------------- DATOS ---------------");
 	printf("\n\nIngrese el origen: ");
@@ -2545,8 +2565,11 @@ int main()
 		
 		else if (opcion == 5)
 		{
+			
+			printf("\n\n\n------CATALOGO JUGUETES-------");
+			PreOrden(ArbolInt);
 			RegistrarJuguetesMain( );
-			//imprimir_arbol(a);      //Funcion para probar otras, no la piden	
+			
 
 		}
 		
