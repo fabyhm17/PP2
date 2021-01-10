@@ -2515,7 +2515,7 @@ int main()
 	printf ("\n\nIngrese el numero de la accion que desea realizar:  ");
 	scanf_s ("%d", &opcion);
 	
-	while (opcion != 16)
+	while (opcion != 17)
 	{
 		if (opcion == 1)
 		{
