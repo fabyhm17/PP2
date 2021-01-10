@@ -370,7 +370,7 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 					printf ("\n3. Envoltorio de juguetes");
 					printf ("\n4. Distribucion de regalos");
 				
-					printf ("Ingrese el numero del nuevo puesto del ayudante: ");
+					printf ("\nIngrese el numero del nuevo puesto del ayudante: ");
 					fflush (stdin);
 					gets (num_puesto);
 					
@@ -2499,10 +2499,10 @@ int main()
 	printf ("\n 4.  Modificar informacion de un ayudante de Santa.");
 	printf ("\n 5.  Registrar juguete.");
 	printf ("\n 6.  Modificar informacion de un juguete.");
-	printf ("\n 7. 	Eliminar juguete.");
+	printf ("\n 7.  Eliminar juguete.");
 	printf ("\n 8.  Registrar lugar de domicilio en el catalogo.");
 	printf ("\n 9.  Modificar lugar de domicilio en el catalogo.");
-	printf ("\n 10.  Registrar comportamiento de un niño.");
+	printf ("\n 10. Registrar comportamiento de un niño.");
 	printf ("\n 11. Registrar carta para Santa.");
 	printf ("\n 12. Modificar carta para Santa.");
 	printf ("\n 13. Consultar carta para Santa.");
