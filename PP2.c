@@ -658,7 +658,7 @@ void RegistrarJuguetesMain( )
     char categoria[15];
     char eleccion_categ[10];
     
-	printf("--------------REGISTRO DE JUGUETES---------------\n\n");
+	printf("\n--------------REGISTRO DE JUGUETES---------------\n\n");
 	printf("Ingrese el codigo del juguete: ");
 	scanf("%d", &dato);
 	
@@ -753,6 +753,7 @@ void Buscar(Arbol a, int dat)
 }
 
 
+//MOSTRAR ARBOL
 void PreOrden(Arbol a)
 {
 	 if(!Vacio(a)) {
@@ -1821,21 +1822,24 @@ void RegistrarKidMain(Imprimir *ColaKids)
 	printf ("Ingrese el lugar de residencia del niño que desea registrar: ");
 	fflush (stdin);
 	gets (residencia_kid);
-	/*Domicilio * a;
+	Domicilio * a;
+	a =  inicio;
 	int x = 0;
 	while (a -> siguiente != NULL)
 	{
 		if(strcmp(a ->nombre,residencia_kid)==0){
 			x = 1;
+			
 		}
 		a = a -> siguiente;
 	}
-	if( x == 1){
-		printf("Error: Domicilio no registrado.");
-		printf ("Ingrese el lugar de residencia del niño que desea registrar: ");
+	if( x == 0){
+		printf("E\nrror: Domicilio no registrado.");
+		printf ("\nIngrese el lugar de residencia del niño que desea registrar: ");
 		fflush (stdin);
 		gets (residencia_kid);	
-	}*/
+	}
+
 
 	
 	printf ("Ingrese la edad del niño que desea registrar: ");
@@ -1862,6 +1866,7 @@ void RegistrarKidMain(Imprimir *ColaKids)
 
 int ModificarInfoKid (Imprimir *ColaKids)
 {
+	char residencia_kid [15];
 	char cedula_verificar[15];
 	int contador = 0;
 	
@@ -1915,8 +1920,23 @@ int ModificarInfoKid (Imprimir *ColaKids)
 			{
 				printf ("Ingrese el nuevo lugar de residencia del niño: ");
 				fflush (stdin);
-				
-				gets (i->lugar_residencia);				
+				gets (residencia_kid);
+					Domicilio * a;
+					a =  inicio;
+					int x = 0;
+					while (a -> siguiente != NULL)
+					{
+						if(strcmp(a ->nombre,residencia_kid)==0){
+							strcpy(i->lugar_residencia,residencia_kid );
+							x = 1;
+							
+						}
+						a = a -> siguiente;
+					}
+					if( x == 0){
+						printf("E\nrror: Domicilio no registrado.");
+				}
+									
 			}
 			
 			else if (dato == 5)
