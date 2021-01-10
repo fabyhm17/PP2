@@ -1143,7 +1143,6 @@ void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fi
 		strcpy(nuevo->destino,fin);
 		a -> siguiente =  nuevo;		
 	}
-	printf("\n\n--------------- NUEVA RUTA INSERTADA! ---------------");
 				
 }
 
@@ -1197,9 +1196,27 @@ void insertarRuta()
 			scanf("%f", &distancia);
 			printf("Ingresar tiempo estimado [min]:");
 			scanf("%f", &tiempo);
-			printf("Ingresar tipo de ruta:");
+			printf("\n-------RUTAS--------");
+			printf("\n1.Terrestre.");
+			printf("\n2.Aerea.");
+			printf("\n3.Maritima.");
+			printf("\nIngresar tipo de ruta:");
 			scanf("%s", tipo_ruta);
+			if(strcmp(tipo_ruta,"1")==0){
+				strcpy(tipo_ruta, "Terrestre");
+			}
+			else if(strcmp(tipo_ruta,"2")==0){
+				strcpy(tipo_ruta, "Aerea");
+			}
+			else if(strcmp(tipo_ruta,"3")==0){
+				strcpy(tipo_ruta, "Maritima");
+			}else{
+				printf("\nERROR: opción incorrecta.");
+				return;
+			}
 			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
+			printf("\n\n--------------- NUEVA RUTA INSERTADA! ---------------");
+			agregarRuta(aux, aux2, nuevo,fin,ini,distancia,tiempo, tipo_ruta);
 			return;
 		}
 		aux = aux -> siguiente;
@@ -1385,7 +1402,54 @@ void modificarDomicilio()
 }
 
 
-
+//ELIMINAR ARISTA AUX
+void eliminarAristaAux(char ini [15], char fin[15]){
+	Domicilio * aux, *aux2;
+	Ruta * q, *r;
+	aux = inicio;
+	aux2 = inicio;
+	while(aux2 != NULL)
+	{
+		if(strcmp(aux2 -> nombre,fin)==0)
+		{
+			break;
+		}
+		else
+		{
+			aux2 = aux -> siguiente;
+		}	
+	}
+	while(aux != NULL)
+	{
+		if(strcmp(aux -> nombre,ini)==0)
+		{
+			q = aux -> adyacencia;
+			while(q!=NULL)
+			{
+				if(q -> vrt ==aux2)
+				{
+					if(q== aux -> adyacencia)
+					{
+						aux -> adyacencia = aux -> adyacencia -> siguiente;
+					}
+					else
+					{
+						r -> siguiente = q -> siguiente;
+					}
+					
+					free(q);
+					printf("\nRuta %s -> %s eliminada!!", aux-> nombre, aux2 -> nombre);
+					return;	
+				}
+			}
+			
+			r = q;
+			q = q = q-> siguiente;		
+		}
+		
+		aux = aux -> siguiente;
+	}	
+}
 
 
 //ELIMINAR NODO
@@ -1400,6 +1464,7 @@ void vaciar_aristas(Domicilio*aux)
 	{
 		r=q;
 		q = q->siguiente;
+		eliminarAristaAux(r->vrt->nombre, aux->nombre);
 		free(r);
 	}
 }
@@ -2542,14 +2607,16 @@ int main()
 	printf ("\n 7.  Eliminar juguete.");
 	printf ("\n 8.  Registrar lugar de domicilio en el catalogo.");
 	printf ("\n 9.  Modificar lugar de domicilio en el catalogo.");
-	printf ("\n 10. Registrar comportamiento de un niño.");
-	printf ("\n 11. Registrar carta para Santa.");
-	printf ("\n 12. Modificar carta para Santa.");
-	printf ("\n 13. Consultar carta para Santa.");
-	printf ("\n 14. Procesar carta para Santa.");
-	printf ("\n 15. Realizar entrega de juguetes.");
-	printf ("\n 16. Analizar datos.");
-	printf ("\n 17. Finalizar programa.");
+	printf ("\n 10. Registrar ruta en el catalogo");
+	printf ("\n 11.  Modificar ruta en el catalogo.");
+	printf ("\n 12. Registrar comportamiento de un niño.");
+	printf ("\n 13. Registrar carta para Santa.");
+	printf ("\n 14. Modificar carta para Santa.");
+	printf ("\n 15. Consultar carta para Santa.");
+	printf ("\n 16. Procesar carta para Santa.");
+	printf ("\n 17. Realizar entrega de juguetes.");
+	printf ("\n 18. Analizar datos.");
+	printf ("\n 19. Finalizar programa.");
 	
 	int opcion;
 	printf ("\n\nIngrese el numero de la accion que desea realizar:  ");
@@ -2620,7 +2687,7 @@ int main()
 		
 		else if (opcion == 8)
 		{
-			int domicilios, d, rutas, r;
+			int domicilios, d;
 			
 			printf("\n\n------------------------ CATALOGO DE DOMICILIOS ------------------------\n\n");
 			printf("Ingrese la cantidad domicilios que desea registrar: ");
@@ -2629,31 +2696,20 @@ int main()
 			for(d=0; d<domicilios; d++)
 			{
 				printf("\n\n-------------- DOMICILIO #%d --------------\n", d+1 );
-				insertarLugar ();					
+				insertarLugar ();
+										
 			}
 			
-			printf("\n\nIngrese la cantidad rutas: ");
-			scanf("%d", &rutas);
-			
-			for(r=0; r<rutas; r++)
-			{
-				printf("\n\n-------------- RUTA #%d --------------\n", r+1 );
-				insertarRuta();	
-			}
 		}
-			
-			
-		else if (opcion == 9)
+			else if (opcion == 9)
 		{
 			int op;
 			printf("\n--------------- MODIFICAR CATALOGO DOMICILIO ---------------\n");
 			printf("\n1. Modificar datos domicilio.");
 			printf("\n2. Eliminar domicilio.");
-			printf("\n3. Modificar ruta.");
-			printf("\n4. Eliminar ruta.");
 			printf("\nInserte el numero de la accion que desea realizar: ");
 			scanf("%d", &op);
-			if(op>0 && op<5)
+			if(op>0 && op<3)
 			{
 				if (op ==1)
 				{
@@ -2662,19 +2718,7 @@ int main()
 				
 				if (op ==2)
 				{
-					visualizarGrafo();
 					borrarDomicilio();
-					visualizarGrafo();
-				}
-				
-				if (op ==3)
-				{
-					modificarArista();
-				}
-				if(op ==4){
-					visualizarGrafo();
-					eliminarArista();
-					visualizarGrafo();
 				}
 			}
 			
@@ -2684,9 +2728,43 @@ int main()
 				return;
 			}	
 		}
+			else if (opcion == 10)
+		{
+			printf("\n\n--------------INSERTAR RUTA-----------------");
+			insertarRuta();
+		}
+		
+		else if (opcion == 11)
+		{
+			int op;
+			printf("\n--------------- MODIFICAR CATALOGO RUTAS ---------------\n");
+			printf("\n1. Modificar ruta.");
+			printf("\n2. Eliminar ruta.");
+			printf("\nInserte el numero de la accion que desea realizar: ");
+			scanf("%d", &op);
+			if(op>0 && op<3)
+			{
+				printf("///////// RUTAS //////////");
+				visualizarGrafo();
+		
+				if (op ==1)
+				{
+					modificarArista();
+				}
+				if(op ==2){
+					eliminarArista();
+				}
+				printf("\n\n-----NUEVO GRAFO!!-----");
+				visualizarGrafo();
+			}else
+			{
+				printf("ERROR: opcion no disponible");
+				return;
+			}	
+		}
 		
 		
-		else if (opcion == 10)
+		else if (opcion == 12)
 		{
 			RegistrarComportamientoMain(ColaComportamientos, ColaKids);
 			//ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
@@ -2694,21 +2772,9 @@ int main()
 		}
 		
 		
-		else if (opcion == 11)
-		{
-			RegistrarCartaMain(ColaCartas, ColaListaDeseos, ColaKids);
-		}
-		
-		
-		else if (opcion == 12)
-		{
-			return 0;
-		}
-		
-		
 		else if (opcion == 13)
 		{
-			ConsultarCartas(ColaCartas);
+			RegistrarCartaMain(ColaCartas, ColaListaDeseos, ColaKids);
 		}
 		
 		
@@ -2720,11 +2786,23 @@ int main()
 		
 		else if (opcion == 15)
 		{
-			return 0;
+			ConsultarCartas(ColaCartas);
 		}
 		
 		
 		else if (opcion == 16)
+		{
+			return 0;
+		}
+		
+		
+		else if (opcion == 17)
+		{
+			return 0;
+		}
+		
+		
+		else if (opcion == 18)
 		{
 			char opcion_analisis[10];
 			
@@ -2805,6 +2883,7 @@ int main()
 		
 		if (opcion_p ==1)
 		{
+			//MENU PRINCIPAL DE LA FUNCION
 			printf ("\n\n -------------------------- MENU PRINCIPAL -------------------------- \n");
 			printf ("\n 1.  Registrar niño.");
 			printf ("\n 2.  Modificar informacion de un niño.");
@@ -2812,17 +2891,20 @@ int main()
 			printf ("\n 4.  Modificar informacion de un ayudante de Santa.");
 			printf ("\n 5.  Registrar juguete.");
 			printf ("\n 6.  Modificar informacion de un juguete.");
-			printf ("\n 7. 	Eliminar juguete.");
+			printf ("\n 7.  Eliminar juguete.");
 			printf ("\n 8.  Registrar lugar de domicilio en el catalogo.");
 			printf ("\n 9.  Modificar lugar de domicilio en el catalogo.");
-			printf ("\n 10.  Registrar comportamiento de un niño.");
-			printf ("\n 11. Registrar carta para Santa.");
-			printf ("\n 12. Modificar carta para Santa.");
-			printf ("\n 13. Consultar carta para Santa.");
-			printf ("\n 14. Procesar carta para Santa.");
-			printf ("\n 15. Realizar entrega de juguetes.");
-			printf ("\n 16. Analizar datos.");
-			printf ("\n 17. Finalizar programa.");
+			printf ("\n 10. Registrar ruta en el catalogo");
+			printf ("\n 11.  Modificar ruta en el catalogo.");
+			printf ("\n 12. Registrar comportamiento de un niño.");
+			printf ("\n 13. Registrar carta para Santa.");
+			printf ("\n 14. Modificar carta para Santa.");
+			printf ("\n 15. Consultar carta para Santa.");
+			printf ("\n 16. Procesar carta para Santa.");
+			printf ("\n 17. Realizar entrega de juguetes.");
+			printf ("\n 18. Analizar datos.");
+			printf ("\n 19. Finalizar programa.");
+	
 			
 			printf ("\n\nIngrese el numero de la accion que desea realizar:  ");
 			scanf_s ("%d", &opcion);
