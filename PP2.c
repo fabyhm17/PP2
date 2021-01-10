@@ -2746,7 +2746,6 @@ int main()
 			else
 			{
 				printf ("\n\nERROR: La accion solicitada no existe.");
-				return;
 			}
 		}
 		
