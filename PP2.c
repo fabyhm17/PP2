@@ -1643,7 +1643,7 @@ modificarArista(){
 	char tipo_ruta [15];
 	Domicilio * aux, *aux2;
 	Ruta * q, *r;
-	 
+	int x=0;
 
 	printf("\n--------------- DATOS ---------------");
 	printf("\n\nIngrese el origen: ");
@@ -1655,10 +1655,12 @@ modificarArista(){
 
 	aux = inicio;
 	aux2 = inicio;
+
 	while(aux2 != NULL)
 	{
 		if(strcmp(aux2 -> nombre,fin)==0)
 		{
+		
 			break;
 		}
 		else
@@ -1666,13 +1668,18 @@ modificarArista(){
 			aux2 = aux -> siguiente;
 		}	
 	}
+
 	while(aux != NULL)
 	{
+	
 		if(strcmp(aux -> nombre,ini)==0)
 		{
+		
+			x =1;
 			q = aux -> adyacencia;
 			while(q!=NULL)
 			{
+				
 				if(q -> vrt ==aux2)
 				{
 					if(q== aux -> adyacencia)
@@ -1699,8 +1706,9 @@ modificarArista(){
 		
 		aux = aux -> siguiente;
 	}
-	printf("Error: ruta no encontrada");
-	return;
+	if(x==0){
+		printf("Error: ruta no encontrada");
+	}
 }
 
 
@@ -1796,7 +1804,7 @@ void dijkstra(){
 	printf("Ingresar punto final:");
 	fflush(stdin);
 	gets(b);
-	printf("x");
+	
 	while(aux!=NULL){
 		if(strcmp(aux->nombre,a)==0){
 			aux->terminado=1;
@@ -2022,6 +2030,10 @@ void RegistrarKidMain(Imprimir *ColaKids)
 	Domicilio * a;
 	a =  inicio;
 	int x = 0;
+	if(inicio ==NULL){
+		printf("\nError: No hay domicilios en el catalogo.");
+		return;
+	}		
 	while (a -> siguiente != NULL)
 	{
 		if(strcmp(a ->nombre,residencia_kid)==0){
@@ -2032,9 +2044,7 @@ void RegistrarKidMain(Imprimir *ColaKids)
 	}
 	if( x == 0){
 		printf("E\nrror: Domicilio no registrado.");
-		printf ("\nIngrese el lugar de residencia del niño que desea registrar: ");
-		fflush (stdin);
-		gets (residencia_kid);	
+		return;
 	}
 
 
@@ -2121,6 +2131,11 @@ int ModificarInfoKid (Imprimir *ColaKids)
 					Domicilio * a;
 					a =  inicio;
 					int x = 0;
+					if(inicio== NULL){
+						printf("\n----No existen domicilos registrados!!! ----");
+						return;
+					}
+					
 					while (a -> siguiente != NULL)
 					{
 						if(strcmp(a ->nombre,residencia_kid)==0){
@@ -2132,9 +2147,10 @@ int ModificarInfoKid (Imprimir *ColaKids)
 					}
 					if( x == 0){
 						printf("E\nrror: Domicilio no registrado.");
+						return;
 				}
-									
 			}
+									
 			
 			else if (dato == 5)
 			{
