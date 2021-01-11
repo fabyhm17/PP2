@@ -1796,7 +1796,8 @@ void reiniciar(){
 
 void dijkstra(){
 	Domicilio*aux=inicio;
-	char a [15],b [15];
+	char a [15];
+	char b [15];
 	fflush(stdin);
 	printf("Ingresar punto inicial:");
 	fflush(stdin);
@@ -1809,6 +1810,7 @@ void dijkstra(){
 		if(strcmp(aux->nombre,a)==0){
 			aux->terminado=1;
 			aux->monto=0;
+			printf("XX");
 			break;
 		}
 		aux=aux->siguiente;
@@ -1823,6 +1825,7 @@ void dijkstra(){
 		    if(a->vrt->monto==-1 || (aux->monto+a->distancia)<a->vrt->monto){
 		    	a->vrt->monto=aux->monto+a->distancia;
 		        strcpy(a->vrt->anterior, aux->nombre);
+		        printf("XX");
 			}
 		    a=a->siguiente;
 	    }
@@ -2141,7 +2144,7 @@ int ModificarInfoKid (Imprimir *ColaKids)
 						if(strcmp(a ->nombre,residencia_kid)==0){
 							strcpy(i->lugar_residencia,residencia_kid );
 							x = 1;
-							
+						
 						}
 						a = a -> siguiente;
 					}
