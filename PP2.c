@@ -1250,6 +1250,7 @@ void insertarRuta()
 
 void RutaModificar(char ini[15],char fin [15], float distancia, float tiempo, char tipo_ruta[15])
 {
+	int x=0;
 	Ruta*nuevo = (Ruta*)malloc(sizeof(Ruta));
 	Domicilio *aux2, *aux;
 	
@@ -1284,13 +1285,12 @@ void RutaModificar(char ini[15],char fin [15], float distancia, float tiempo, ch
 			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
 			printf("\n\n---------- RUTA MODIFICADA ----------");
 			printf("\nRuta %s -> %s", aux-> nombre, aux2 -> nombre);
-			
-			return;
+			x =1;
 		}
 		aux = aux -> siguiente;
 	}
 	
-	if(aux == NULL)
+	if(x == 0)
 	{
 		printf("\n\nERROR: Domicilio no encontrado\n");
 	}
@@ -1660,12 +1660,13 @@ modificarArista(){
 	{
 		if(strcmp(aux2 -> nombre,fin)==0)
 		{
+			
 		
 			break;
 		}
 		else
 		{
-			aux2 = aux -> siguiente;
+			aux2 = aux2 -> siguiente;
 		}	
 	}
 
@@ -1677,6 +1678,7 @@ modificarArista(){
 		
 			x =1;
 			q = aux -> adyacencia;
+			printf("3");
 			while(q!=NULL)
 			{
 				
