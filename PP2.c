@@ -9,6 +9,7 @@
 
 #define Domicilio struct domicilio
 #define Ruta struct ruta
+#define Lista struct pila
 
 
 
@@ -998,7 +999,13 @@ Domicilio
 	int postal;
 	
 	Domicilio*siguiente;
-	Ruta*adyacencia;	
+	Ruta*adyacencia;
+	
+	//Algoritmos DJISK
+	int visitado,terminado;
+	int monto;
+	char anterior [15];
+		
 };
 
 Ruta
@@ -1012,7 +1019,14 @@ Ruta
 	Ruta*siguiente;
 };
 
+Lista{
+	Domicilio* dato;
+	Lista*siguiente;
+};
+
 Domicilio*inicio = NULL;
+Lista*ini=NULL;
+Lista*final=NULL; 
 
 
 //FUNCIÓN DE CREAR EL NODO DOMOCILIO
@@ -1075,6 +1089,11 @@ void insertarLugar ()
 	nuevo -> postal = postal;
 	nuevo -> siguiente = NULL;
 	nuevo -> adyacencia = NULL;
+	
+	//ALGORITMO RECORRIDOS
+	nuevo->visitado=nuevo->terminado=0;
+    nuevo->monto=-1;
+    strcpy(nuevo->anterior, "0");
 	
 	if (inicio==NULL)
 	{
@@ -1154,6 +1173,7 @@ void insertarRuta()
 	char ini[15], fin[15], tipo_ruta [15];
 	float tiempo, distancia;
 	Ruta*nuevo = (Ruta*)malloc(sizeof(Ruta));
+	nuevo -> siguiente = NULL;
 	Domicilio *aux2, *aux, *aux3; 
 	Ruta * a;
 	
@@ -1216,7 +1236,6 @@ void insertarRuta()
 			}
 			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
 			printf("\n\n--------------- NUEVA RUTA INSERTADA! ---------------");
-			agregarRuta(aux, aux2, nuevo,fin,ini,distancia,tiempo, tipo_ruta);
 			return;
 		}
 		aux = aux -> siguiente;
@@ -1464,7 +1483,6 @@ void vaciar_aristas(Domicilio*aux)
 	{
 		r=q;
 		q = q->siguiente;
-		eliminarAristaAux(r->vrt->nombre, aux->nombre);
 		free(r);
 	}
 }
@@ -1712,10 +1730,124 @@ void visualizarGrafo()
 }
 
 
+//----------------------------------------------------ALGORITMO DJSKITE--------------------------------------------------------------//
 
+//PILA PARA RECORRIDO
 
+void insertarPila(Domicilio* aux){
+	Lista*nuevo=(Lista*)malloc(sizeof(Lista));
+	nuevo->dato=aux;
+	nuevo->siguiente=NULL;
+	if(ini==NULL){
+		ini=nuevo;
+		final=nuevo;
+	}else{
+	   nuevo->siguiente=ini;
+	   ini=nuevo;    	
+	}
+}
 
+void insertarCola(Domicilio*aux){
+	Lista*nuevo=(Lista*)malloc(sizeof(Lista));
+	nuevo->dato=aux;
+	nuevo->siguiente=NULL;
+	if(ini==NULL){
+		ini=nuevo;
+		final=nuevo;
+	}else{
+		final->siguiente=nuevo;
+		final=nuevo;
+	}
+}
 
+Domicilio*desencolar(){
+	Lista*aux;
+	if(ini==NULL){
+		return NULL;
+	}else{
+		aux=ini;
+		ini=ini->siguiente;
+		aux->siguiente=NULL;
+		if(ini==NULL)
+		final=NULL;
+	}
+	Domicilio*resultado=aux->dato;
+	free(aux);
+	return resultado;
+}
+
+void reiniciar(){
+	if(inicio!=NULL){
+		Domicilio*aux=inicio;
+		while(aux!=NULL){
+			aux->visitado=aux->terminado=0;
+		    aux=aux->siguiente;
+		}
+	}
+}
+
+void dijkstra(){
+	Domicilio*aux=inicio;
+	char a [15],b [15];
+	fflush(stdin);
+	printf("Ingresar punto inicial:");
+	fflush(stdin);
+	gets(a);
+	printf("Ingresar punto final:");
+	fflush(stdin);
+	gets(b);
+	printf("x");
+	while(aux!=NULL){
+		if(strcmp(aux->nombre,a)==0){
+			aux->terminado=1;
+			aux->monto=0;
+			break;
+		}
+		aux=aux->siguiente;
+	}
+	if(aux==NULL){
+		printf("Vertice no encontrado\n");
+		return;
+	}
+	while(aux!=NULL){
+		Ruta*a=aux->adyacencia;
+	    while(a!=NULL){
+		    if(a->vrt->monto==-1 || (aux->monto+a->distancia)<a->vrt->monto){
+		    	a->vrt->monto=aux->monto+a->distancia;
+		        strcpy(a->vrt->anterior, aux->nombre);
+			}
+		    a=a->siguiente;
+	    }
+	    aux=inicio;
+	    Domicilio*min=inicio;
+	    while(min->anterior==0 || min->terminado ==1)
+	    min=min->siguiente;
+	    while(aux!=NULL){
+	    	if(aux->monto<min->monto && aux->terminado==0 && aux->anterior!=0)
+	    	min=aux;
+	    	aux=aux->siguiente;
+		}
+		aux=min;
+		aux->terminado=1;
+		if(strcmp(aux->nombre,b)==0)
+		break;
+	}
+	while(aux->anterior!=0){
+		insertarPila(aux);
+		char temp [15];
+		strcpy(temp,aux->anterior);
+		aux=inicio;
+		while(strcmp(aux->nombre,temp)==1){
+		   aux=aux->siguiente;	
+		}
+	}
+	insertarPila(aux);
+	while(ini!=NULL){
+		printf("%s ",desencolar()->nombre);
+	}
+		printf("\n");
+	reiniciar();
+}
 
 
 
@@ -2730,7 +2862,7 @@ int main()
 		}
 			else if (opcion == 10)
 		{
-			printf("\n\n--------------INSERTAR RUTA-----------------");
+			printf("\n\n--------------INSERTAR RUTA-----------------\n\n");
 			insertarRuta();
 		}
 		
@@ -2738,14 +2870,14 @@ int main()
 		{
 			int op;
 			printf("\n--------------- MODIFICAR CATALOGO RUTAS ---------------\n");
+			visualizarGrafo();
 			printf("\n1. Modificar ruta.");
 			printf("\n2. Eliminar ruta.");
 			printf("\nInserte el numero de la accion que desea realizar: ");
 			scanf("%d", &op);
 			if(op>0 && op<3)
 			{
-				printf("///////// RUTAS //////////");
-				visualizarGrafo();
+				
 		
 				if (op ==1)
 				{
@@ -2754,8 +2886,8 @@ int main()
 				if(op ==2){
 					eliminarArista();
 				}
-				printf("\n\n-----NUEVO GRAFO!!-----");
-				visualizarGrafo();
+				printf("\n\n----GRAFO MODFICADO!!-----");
+	
 			}else
 			{
 				printf("ERROR: opcion no disponible");
@@ -2780,7 +2912,7 @@ int main()
 		
 		else if (opcion == 14)
 		{
-			return 0;
+			dijkstra();
 		}
 		
 		
