@@ -1286,6 +1286,7 @@ void RutaModificar(char ini[15],char fin [15], float distancia, float tiempo, ch
 			printf("\n\n---------- RUTA MODIFICADA ----------");
 			printf("\nRuta %s -> %s", aux-> nombre, aux2 -> nombre);
 			x =1;
+			return;   
 		}
 		aux = aux -> siguiente;
 	}
@@ -1673,12 +1674,11 @@ modificarArista(){
 	while(aux != NULL)
 	{
 	
-		if(strcmp(aux -> nombre,ini)==0)
+		if(strcmp(aux -> nombre,ini )==0 && aux2 !=NULL)
 		{
 		
-			x =1;
+		
 			q = aux -> adyacencia;
-			printf("3");
 			while(q!=NULL)
 			{
 				
@@ -1692,7 +1692,7 @@ modificarArista(){
 					{
 						r -> siguiente = q -> siguiente;
 					}
-					
+					x=1;
 					tiempo = q -> tiempo;
 					distancia = q -> distancia;
 					strcpy(q-> tipo_ruta,tipo_ruta);
@@ -1712,6 +1712,7 @@ modificarArista(){
 		printf("Error: ruta no encontrada");
 	}
 }
+
 
 
 void visualizarGrafo()
