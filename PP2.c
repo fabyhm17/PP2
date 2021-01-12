@@ -1535,6 +1535,7 @@ void borrarDomicilio(){
 
 //ELIMINAR ARISTA
 void eliminarArista(){
+	int x = 0;
 	char ini [15];
 	char fin [15];
 	Domicilio * aux, *aux2;
@@ -1556,12 +1557,12 @@ void eliminarArista(){
 		}
 		else
 		{
-			aux2 = aux -> siguiente;
+			aux2 = aux2 -> siguiente;
 		}	
 	}
 	while(aux != NULL)
 	{
-		if(strcmp(aux -> nombre,ini)==0)
+		if(strcmp(aux -> nombre,ini)==0 && aux2 != NULL)
 		{
 			q = aux -> adyacencia;
 			while(q!=NULL)
@@ -1578,6 +1579,7 @@ void eliminarArista(){
 					}
 					
 					free(q);
+					x = 1;
 					printf("\nRuta %s -> %s eliminada!!", aux-> nombre, aux2 -> nombre);
 					return;	
 				}
@@ -1588,6 +1590,9 @@ void eliminarArista(){
 		}
 		
 		aux = aux -> siguiente;
+	}
+	if(x==0){
+		printf("Error: Ruta no encontrada.");
 	}	
 }
 
