@@ -1424,10 +1424,29 @@ void modificarDomicilio()
 
 //ELIMINAR ARISTA AUX
 void eliminarAristaAux(char ini [15], char fin[15]){
-	Domicilio * aux, *aux2;
-	Ruta * q, *r;
+	Domicilio * aux, *aux2, *aux3;
+	Ruta * q, *r ,*a;
 	aux = inicio;
 	aux2 = inicio;
+	aux3 = inicio;
+	int y =0;
+	a = aux3 -> adyacencia;
+		
+		while(a != NULL)
+		{
+			
+		
+			if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0)
+			{
+				y=1;
+				
+			}
+			
+			a = a -> siguiente;
+		}
+		
+	if(y ==1){
+
 	while(aux2 != NULL)
 	{
 		if(strcmp(aux2 -> nombre,fin)==0)
@@ -1468,7 +1487,10 @@ void eliminarAristaAux(char ini [15], char fin[15]){
 		}
 		
 		aux = aux -> siguiente;
-	}	
+	}
+} else{
+	printf("\nError: ruta no registrada");
+}
 }
 
 
@@ -1533,13 +1555,14 @@ void borrarDomicilio(){
 
 	
 
-//ELIMINAR ARISTA
+//ELIMINAR ARISTA -----------------------------------------------------------
 void eliminarArista(){
 	int x = 0;
+	int y = 0;
 	char ini [15];
 	char fin [15];
-	Domicilio * aux, *aux2;
-	Ruta * q, *r;
+	Domicilio * aux, *aux2, *aux3;
+	Ruta * q, *r, *a;
 	printf("\nIngrese el origen:");
 	fflush (stdin);
 	gets (ini);
@@ -1549,6 +1572,24 @@ void eliminarArista(){
 	
 	aux = inicio;
 	aux2 = inicio;
+	aux3 = inicio;
+	a = aux3 -> adyacencia;
+		
+		while(a  != NULL)
+		{
+			printf("x");
+		
+			if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0)
+			{
+				y=1;
+				printf("y");
+				
+			}
+			
+			a = a -> siguiente;
+		}
+	if(y==1){
+	
 	while(aux2 != NULL)
 	{
 		if(strcmp(aux2 -> nombre,fin)==0)
@@ -1562,7 +1603,7 @@ void eliminarArista(){
 	}
 	while(aux != NULL)
 	{
-		if(strcmp(aux -> nombre,ini)==0 && aux2 != NULL)
+		if(strcmp(aux -> nombre,ini) == 0 && aux2 != NULL)
 		{
 			q = aux -> adyacencia;
 			while(q!=NULL)
@@ -1593,6 +1634,8 @@ void eliminarArista(){
 	}
 	if(x==0){
 		printf("Error: Ruta no encontrada.");
+	}}else{
+			printf("Error: Ruta no encontrada.");	
 	}	
 }
 
@@ -2913,7 +2956,7 @@ int main()
 				if(op ==2){
 					eliminarArista();
 				}
-				printf("\n\n----GRAFO MODFICADO!!-----");
+			
 	
 			}else
 			{
