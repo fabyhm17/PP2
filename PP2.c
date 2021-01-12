@@ -1577,12 +1577,12 @@ void eliminarArista(){
 		
 		while(a  != NULL)
 		{
-			printf("x");
+		
 		
 			if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0)
 			{
 				y=1;
-				printf("y");
+			
 				
 			}
 			
