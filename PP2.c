@@ -1013,7 +1013,7 @@ Ruta
 	char origen [15];
 	char destino [15];
 	float tiempo;
-	float distancia;
+	int distancia;
 	char tipo_ruta [15];
 	Domicilio*vrt;
 	Ruta*siguiente;
@@ -1055,7 +1055,6 @@ void insertarLugar ()
 		aux2 = aux2 -> siguiente;
 	}
 	
-	nuevo -> codigo = codigo;
 	
 	printf("Nombre del lugar: ");
 	fflush (stdin);
@@ -1070,7 +1069,7 @@ void insertarLugar ()
 		aux3 = aux3 -> siguiente;
 	}
 	
-	strcpy(nuevo-> nombre, nombre);
+	
 	
 	printf("Código postal: ");
 	scanf("%d",&postal);
@@ -1085,8 +1084,9 @@ void insertarLugar ()
 		}
 		aux = aux -> siguiente;
 	}
-	
+	nuevo -> codigo = codigo;
 	nuevo -> postal = postal;
+	strcpy(nuevo-> nombre, nombre);
 	nuevo -> siguiente = NULL;
 	nuevo -> adyacencia = NULL;
 	
@@ -1171,7 +1171,8 @@ void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fi
 void insertarRuta()
 {
 	char ini[15], fin[15], tipo_ruta [15];
-	float tiempo, distancia;
+	float tiempo; 
+	int distancia;
 	Ruta*nuevo = (Ruta*)malloc(sizeof(Ruta));
 	nuevo -> siguiente = NULL;
 	Domicilio *aux2, *aux, *aux3; 
@@ -1190,6 +1191,7 @@ void insertarRuta()
 	printf("Ingresar lugar de destino:");
 	fflush (stdin);
 	gets (fin);
+	
 	aux = inicio;
 	aux2 = inicio;
 
@@ -1213,7 +1215,7 @@ void insertarRuta()
 		if(strcmp(ini,aux ->nombre)== 0)
 		{
 			printf("Ingresar distancia [km]:");
-			scanf("%f", &distancia);
+			scanf("%d", &distancia);
 			printf("Ingresar tiempo estimado [min]:");
 			scanf("%f", &tiempo);
 			printf("\n-------RUTAS--------");
@@ -1641,7 +1643,7 @@ void eliminarArista(){
 
 //MODIFICAR ARISTA
 
-modificar_ruta_aux(char ini[15], char fin[15], float distancia, float tiempo, char tipo_ruta [15])
+modificar_ruta_aux(char ini[15], char fin[15], int distancia, float tiempo, char tipo_ruta [15])
 {
 	int op;
 	printf("\n----MODIFICAR RUTA-----\n\n");
@@ -1670,7 +1672,7 @@ modificar_ruta_aux(char ini[15], char fin[15], float distancia, float tiempo, ch
 			break;
 		case 4:
 			printf("Escriba la nueva distancia:");
-			scanf("%f",&distancia);
+			scanf("%d",&distancia);
 			break;
 		case 5:
 			printf("Escriba el nuevo tipo de ruta:");
@@ -1688,7 +1690,7 @@ modificarArista(){
 	char fin [15];
 
 	float tiempo;
-	float distancia;
+	int distancia;
 	char tipo_ruta [15];
 	Domicilio * aux, *aux2;
 	Ruta * q, *r;
@@ -1804,6 +1806,7 @@ void insertarPila(Domicilio* aux){
 	   nuevo->siguiente=ini;
 	   ini=nuevo;    	
 	}
+
 }
 
 void insertarCola(Domicilio*aux){
@@ -1819,7 +1822,7 @@ void insertarCola(Domicilio*aux){
 	}
 }
 
-Domicilio*desencolar(){
+Domicilio * desencolar(){
 	Lista*aux;
 	if(ini==NULL){
 		return NULL;
@@ -1827,13 +1830,16 @@ Domicilio*desencolar(){
 		aux=ini;
 		ini=ini->siguiente;
 		aux->siguiente=NULL;
-		if(ini==NULL)
-		final=NULL;
+		if(ini==NULL){
+			final=NULL;
+
+		}	
 	}
 	Domicilio*resultado=aux->dato;
 	free(aux);
 	return resultado;
 }
+
 
 void reiniciar(){
 	if(inicio!=NULL){
@@ -1849,7 +1855,7 @@ void dijkstra(){
 	Domicilio*aux=inicio;
 	char a [15];
 	char b [15];
-	fflush(stdin);
+	char temp [15];
 	printf("Ingresar punto inicial:");
 	fflush(stdin);
 	gets(a);
@@ -1861,13 +1867,13 @@ void dijkstra(){
 		if(strcmp(aux->nombre,a)==0){
 			aux->terminado=1;
 			aux->monto=0;
-			printf("XX");
+	
 			break;
 		}
 		aux=aux->siguiente;
 	}
 	if(aux==NULL){
-		printf("Vertice no encontrado\n");
+		printf("ERROR: ruta no encontrada\n");
 		return;
 	}
 	while(aux!=NULL){
@@ -1876,27 +1882,28 @@ void dijkstra(){
 		    if(a->vrt->monto==-1 || (aux->monto+a->distancia)<a->vrt->monto){
 		    	a->vrt->monto=aux->monto+a->distancia;
 		        strcpy(a->vrt->anterior, aux->nombre);
-		        printf("XX");
 			}
 		    a=a->siguiente;
 	    }
 	    aux=inicio;
-	    Domicilio*min=inicio;
-	    while(min->anterior==0 || min->terminado ==1)
-	    min=min->siguiente;
+	    Domicilio*min= inicio;
+	    while(min->anterior==0 || min->terminado ==1){
+	    	min=min->siguiente;
+		}
 	    while(aux!=NULL){
-	    	if(aux->monto<min->monto && aux->terminado==0 && aux->anterior!=0)
-	    	min=aux;
+	    	if(aux->monto<min->monto && aux->terminado==0 && aux->anterior!=0){
+	    		min=aux;
+	    	}
 	    	aux=aux->siguiente;
 		}
 		aux=min;
 		aux->terminado=1;
-		if(strcmp(aux->nombre,b)==0)
-		break;
+		if(strcmp(aux->nombre,b)==0){
+			break;
+		}
 	}
-	while(aux->anterior!=0){
+	while(strcmp(aux->anterior,"0")==1){
 		insertarPila(aux);
-		char temp [15];
 		strcpy(temp,aux->anterior);
 		aux=inicio;
 		while(strcmp(aux->nombre,temp)==1){
@@ -2088,7 +2095,7 @@ void RegistrarKidMain(Imprimir *ColaKids)
 		printf("\nError: No hay domicilios en el catalogo.");
 		return;
 	}		
-	while (a  != NULL)
+	while (a -> siguiente != NULL)
 	{
 		if(strcmp(a ->nombre,residencia_kid)==0){
 			x = 1;
@@ -2190,7 +2197,7 @@ int ModificarInfoKid (Imprimir *ColaKids)
 						return;
 					}
 					
-					while (a  != NULL)
+					while (a -> siguiente != NULL)
 					{
 						if(strcmp(a ->nombre,residencia_kid)==0){
 							strcpy(i->lugar_residencia,residencia_kid );
@@ -2426,24 +2433,14 @@ void RegistrarComportamientoMain(ImprimirComportamiento *ColaComportamientos, Im
 
 
 
-
 /* ----------------------------------------------------- LISTA DE DESEOS --------------------------------------------------------------- */
 
 /* --------------------------- STRUCT DE LA lISTA DE DESEOS--------------------------- */
 
-typedef struct ListaDeseos  
+typedef struct ListaDeseos
 {
 	char cedula[15];
-	char jugueteLD1[50];
-	char jugueteLD2[50];
-	char jugueteLD3[50];
-	char jugueteLD4[50];
-	char jugueteLD5[50];
-	char jugueteLD6[50];
-	char jugueteLD7[50];
-	char jugueteLD8[50];
-	char jugueteLD9[50];
-	char jugueteLD10[50];
+	char juguetes_LD [500];
 
 	struct ListaDeseos * next;	
 }ListaDeseos;
@@ -2468,39 +2465,30 @@ ImprimirLD * CrearColaListaDeseos(ImprimirLD* ColaListaDeseos)
 
 /* ----------------------- CREAR NODO LISTA DE DESEOS ----------------------- */
 
-ListaDeseos * CrearListaDeseos(char cedula[15], char jugueteLD1[50],char jugueteLD2[50],char jugueteLD3[50],char jugueteLD4[50],char jugueteLD5[50],char jugueteLD6[50],char jugueteLD7[50],char jugueteLD8[50],char jugueteLD9[50],char jugueteLD10[50])
+ListaDeseos * CrearListaDeseos(char cedula[15], char juguetes_LD[500])
 {
 	struct ListaDeseos *nuevo;
 	nuevo = (ListaDeseos *) malloc(sizeof(ListaDeseos));
 	nuevo -> next = NULL;
 	
 	strcpy(nuevo->cedula,cedula);
-	strcpy(nuevo->jugueteLD1,jugueteLD1);
-	strcpy(nuevo->jugueteLD2,jugueteLD2);
-	strcpy(nuevo->jugueteLD3,jugueteLD3);
-	strcpy(nuevo->jugueteLD4,jugueteLD4);
-	strcpy(nuevo->jugueteLD5,jugueteLD5);
-	strcpy(nuevo->jugueteLD6,jugueteLD6);
-	strcpy(nuevo->jugueteLD7,jugueteLD7);
-	strcpy(nuevo->jugueteLD8,jugueteLD8);
-	strcpy(nuevo->jugueteLD9,jugueteLD9);
-	strcpy(nuevo->jugueteLD10,jugueteLD10);	
+	strcpy(nuevo->juguetes_LD,juguetes_LD);	
 
 	return nuevo;
 }
 
 /* ----------------------- REGISTRAR LISTA DE DESEOS ----------------------- */
 
-ImprimirLD * InsertarListaDeseos(ImprimirLD* ColaListaDeseos,char cedula[15],char jugueteLD1[50],char jugueteLD2[50],char jugueteLD3[50],char jugueteLD4[50],char jugueteLD5[50],char jugueteLD6[50],char jugueteLD7[50],char jugueteLD8[50],char jugueteLD9[50],char jugueteLD10[50])
+ImprimirLD * InsertarListaDeseos(ImprimirLD* ColaListaDeseos,char cedula[15], char juguetes_LD[500] )
 {
 	ColaListaDeseos->size = ColaListaDeseos-> size + 1;
 	if(ColaListaDeseos->front == NULL) 
 	{
-		ColaListaDeseos->front = CrearListaDeseos(cedula, jugueteLD1,jugueteLD2, jugueteLD3, jugueteLD4, jugueteLD5, jugueteLD6, jugueteLD7,jugueteLD8, jugueteLD9, jugueteLD10);
+		ColaListaDeseos->front = CrearListaDeseos(cedula, juguetes_LD);
 		ColaListaDeseos->rear = ColaListaDeseos->front;
 		return ColaListaDeseos;
 	}
-	ColaListaDeseos ->rear->next = CrearListaDeseos(cedula, jugueteLD1,jugueteLD2, jugueteLD3, jugueteLD4, jugueteLD5, jugueteLD6, jugueteLD7,jugueteLD8, jugueteLD9, jugueteLD10);
+	ColaListaDeseos ->rear->next = CrearListaDeseos(cedula, juguetes_LD);
 	ColaListaDeseos ->rear = ColaListaDeseos->rear->next;
 }
 
@@ -2531,78 +2519,7 @@ int ConsultarListaDeseos(ImprimirLD *ColaListaDeseos)
 			{
 				contador = 1;
 				
-				if (strcmp(i->jugueteLD1,"0")==0)
-				{
-					printf("\n ERROR: no hay juguetes en la lista de deseos\n");	
-				}
-				else if (strcmp(i->jugueteLD2,"0")==0) 
-				{
-					printf("1. %s\n",i->jugueteLD1);	
-				}	
-				else if (strcmp(i->jugueteLD3,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);	
-				}
-				else if (strcmp(i->jugueteLD4,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-				}
-				else if (strcmp(i->jugueteLD5,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("3. %s\n",i->jugueteLD4);
-				}	
-				else if (strcmp(i->jugueteLD6,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("3. %s\n",i->jugueteLD4);
-					printf("3. %s\n",i->jugueteLD5);
-				}
-				else if (strcmp(i->jugueteLD7,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("3. %s\n",i->jugueteLD4);
-					printf("3. %s\n",i->jugueteLD5);
-					printf("3. %s\n",i->jugueteLD6);
-				}
-				else if (strcmp(i->jugueteLD8,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("3. %s\n",i->jugueteLD4);
-					printf("3. %s\n",i->jugueteLD5);
-					printf("3. %s\n",i->jugueteLD6);
-					printf("3. %s\n",i->jugueteLD7);
-				}
-				else if (strcmp(i->jugueteLD9,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("3. %s\n",i->jugueteLD4);
-					printf("3. %s\n",i->jugueteLD5);
-					printf("3. %s\n",i->jugueteLD6);
-					printf("3. %s\n",i->jugueteLD7);
-					printf("3. %s\n",i->jugueteLD8);
-				}	
-				
+				printf("\n%s",i->juguetes_LD);
 			}
 		}			
 					
@@ -2627,17 +2544,8 @@ typedef struct Carta
 {
 	char year[10];
 	char cedula [50];
-	char juguete1[50];
-	char juguete2[50];
-	char juguete3[50];
-	char juguete4[50];
-	char juguete5[50];
-	char juguete6[50];
-	char juguete7[50];
-	char juguete8[50];
-	char juguete9[50];
-	char juguete10[50];
-	
+	char juguetes [50];
+
 	struct Carta * next;	
 }Carta;
 
@@ -2661,7 +2569,7 @@ ImprimirCarta * CrearColaCartas(ImprimirCarta * ColaCartas)
 
 /* ----------------------- CREAR NODO CARTA ----------------------- */
 
-Carta * CrearCarta(char cedula[15], char year[10], char juguete1[50],char juguete2[50],char juguete3[50],char juguete4[50],char juguete5[50],char juguete6[50],char juguete7[50],char juguete8[50],char juguete9[50],char juguete10[50])
+Carta * CrearCarta(char cedula[15], char year[10], char juguetes[500])
 {
 	struct Carta *nuevo;
 	nuevo = (Carta *) malloc(sizeof(Carta));
@@ -2669,32 +2577,23 @@ Carta * CrearCarta(char cedula[15], char year[10], char juguete1[50],char juguet
 	
 	strcpy(nuevo->cedula,cedula);
 	strcpy(nuevo->year,year);
-	strcpy(nuevo->juguete1,juguete1);
-	strcpy(nuevo->juguete2,juguete2);
-	strcpy(nuevo->juguete3,juguete3);
-	strcpy(nuevo->juguete4,juguete4);
-	strcpy(nuevo->juguete5,juguete5);
-	strcpy(nuevo->juguete6,juguete6);
-	strcpy(nuevo->juguete7,juguete7);
-	strcpy(nuevo->juguete8,juguete8);
-	strcpy(nuevo->juguete9,juguete9);
-	strcpy(nuevo->juguete10,juguete10);		
+	strcpy(nuevo->juguetes,juguetes);	
 
 	return nuevo;
 }
 
 /* ----------------------- REGISTRAR CARTA ----------------------- */
 
-ImprimirCarta * InsertarCarta(ImprimirCarta * ColaCartas,char cedula[15], char year[10],  char juguete1[50],char juguete2[50],char juguete3[50],char juguete4[50],char juguete5[50],char juguete6[50],char juguete7[50],char juguete8[50],char juguete9[50],char juguete10[50] )
+ImprimirCarta * InsertarCarta(ImprimirCarta * ColaCartas,char cedula[15], char year[10], char juguetes[500] )
 {
 	ColaCartas->size = ColaCartas-> size + 1;
 	if(ColaCartas->front == NULL) 
 	{
-		ColaCartas->front = CrearCarta(cedula, year, juguete1,juguete2, juguete3, juguete4, juguete5, juguete6, juguete7,juguete8, juguete9, juguete10);
+		ColaCartas->front = CrearCarta(cedula, year, juguetes);
 		ColaCartas->rear = ColaCartas->front;
 		return ColaCartas;
 	}
-	ColaCartas ->rear->next = CrearCarta(cedula, year, juguete1,juguete2, juguete3, juguete4, juguete5, juguete6, juguete7,juguete8, juguete9, juguete10);
+	ColaCartas ->rear->next = CrearCarta(cedula, year, juguetes);
 	ColaCartas ->rear = ColaCartas->rear->next;
 }
 
@@ -2703,35 +2602,12 @@ ImprimirCarta * InsertarCarta(ImprimirCarta * ColaCartas,char cedula[15], char y
 
 void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imprimir *ColaKids)
 {
-	
-	Arbol a;
-	
 	char year[10];
 	char cedula_kid [50];
-	char juguete1[50]="0";
-	char juguete2[50]="0";
-	char juguete3[50]="0";
-	char juguete4[50]="0";
-	char juguete5[50]="0";
-	char juguete6[50]="0";
-	char juguete7[50]="0";
-	char juguete8[50]="0";
-	char juguete9[50]="0";
-	char juguete10[50]="0";
-
-	char jugueteLD1[50]="0";
-	char jugueteLD2[50]="0";
-	char jugueteLD3[50]="0";
-	char jugueteLD4[50]="0";
-	char jugueteLD5[50]="0";
-	char jugueteLD6[50]="0";
-	char jugueteLD7[50]="0";
-	char jugueteLD8[50]="0";
-	char jugueteLD9[50]="0";
-	char jugueteLD10[50]="0";
-
+	char juguetes [50];
+	char juguete_buscado[50];
 	char opc_carta[10];
-	char cantidad_jug[10];
+	int cantidad_jug=0;
 	int contador=0;
 	
 	printf ("--------------------- BIENVENIDO AL REGISTRO DE CARTAS ---------------------\n\n");
@@ -2754,743 +2630,41 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 			gets (year);
 			
 			printf("\n----------- JUGUETES DISPONIBLES -----------\n\n");
-			PreOrden( a);
+			//Imprimir Arbol con la lista de juguetes
+			
+			printf ("Ingrese el nombre del juguete que desea buscar: ");
+			fflush (stdin);
+			gets (juguete_buscado);
+			printf ("Los datos del juguete son:\n ");
+			//Consultar juguete en el arbol
 			
 			printf ("\n  OPCIONES DISPONIBLES \n");
 			printf ("1. Añadir juguete a la carta\n");
 			printf ("2. Añadir juguete a la lista de deseos\n");
-			
+		
 			printf("\nIngrese el numero de la opcion que desea realizar: ");
 			fflush (stdin);
 			gets (opc_carta);
-			
-	
+					
 			if (strcmp(opc_carta,"1")==0)
 			{
-				printf("Ingrese la catidad de juguetes que desea seleccionar: ");
-				fflush (stdin);
-				gets (cantidad_jug);
-				
-				if (strcmp(cantidad_jug,"1")==0)
+				if (cantidad_jug > 10)
 				{
-					printf ("Ingrese el nombre del juguete que desea seleccionar: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"2")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"3")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"4")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}						
-
-				else if (strcmp(cantidad_jug,"5")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				
-				else if (strcmp(cantidad_jug,"6")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (juguete6);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"7")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (juguete6);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (juguete7);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"8")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (juguete6);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (juguete7);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (juguete8);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"9")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (juguete6);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (juguete7);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (juguete8);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (juguete9);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}	
-				else if (strcmp(cantidad_jug,"10")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (juguete6);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (juguete7);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (juguete8);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (juguete9);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (juguete10);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
+					printf("ERROR: se ha alcanzado la cantidad máxima de juguetes en la carta.");
 				}
 				else
 				{
-					printf("ERROR: Solo se permite un maximo de 10 juguetes en la carta");
+					InsertarCarta(ColaCartas, cedula_kid, year, juguete_buscado );
+				
+					ConsultarCartas(ColaCartas);
+					printf("%d",cantidad_jug);
+					//Cambiar el estado del juguete
 				}
-
-				InsertarCarta(ColaCartas, cedula_kid, year, juguete1,juguete2, juguete3,juguete4,juguete5, juguete6, juguete7, juguete8, juguete9, juguete10);
-
-				//Cambiar el estado del juguete
+				cantidad_jug ++;
 			}
 			else if (strcmp(opc_carta,"2")==0)
 			{
-				printf("Ingrese la catidad de juguetes que desea seleccionar: "); 
-				gets (cantidad_jug);
-				
-				if (strcmp(cantidad_jug,"1")==0)
-				{
-					printf ("Ingrese el nombre del juguete que desea seleccionar: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"2")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"3")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"4")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}						
-
-				else if (strcmp(cantidad_jug,"5")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				
-				else if (strcmp(cantidad_jug,"6")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"7")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"8")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}
-				else if (strcmp(cantidad_jug,"9")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}	
-				else if (strcmp(cantidad_jug,"10")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-
-					printf ("Ingrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-					
-					printf ("Ingrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Los datos del juguete son:\n ");
-					//Consultar juguete en el arbol
-				}				
-				
-				InsertarListaDeseos(ColaListaDeseos,cedula_kid, jugueteLD1,jugueteLD2, jugueteLD3, jugueteLD4, jugueteLD5, jugueteLD6, jugueteLD7,jugueteLD8, jugueteLD9, jugueteLD10);
+				InsertarListaDeseos(ColaListaDeseos,cedula_kid, juguete_buscado);
 				ConsultarListaDeseos(ColaListaDeseos); //Para realizar las pruebas 
 			}
 		}
@@ -3517,7 +2691,6 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 
 
 /* --------------------------------------------------------------- 12. CONSULTAR CARTA PARA SANTA ------------------------------------------------------------- */
-
 
 
 
@@ -3551,78 +2724,7 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 			{
 				contador = 1;
 				
-				if (strcmp(i->juguete1,"0")==0)
-				{
-					printf("1. %s\n",i->juguete1);	
-				}	
-				
-				else if(strcmp(i->juguete2,"0")==0)
-				{
-					printf("1. %s\n",i->juguete1);	
-				}	
-				else if (strcmp(i->juguete3,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->juguete1);
-					printf("2. %s\n",i->juguete2);	
-				}
-				else if (strcmp(i->juguete4,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->juguete1);
-					printf("2. %s\n",i->juguete2);
-					printf("3. %s\n",i->juguete3);
-				}
-				else if (strcmp(i->juguete5,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->juguete1);
-					printf("2. %s\n",i->juguete2);
-					printf("3. %s\n",i->juguete3);
-					printf("3. %s\n",i->juguete4);
-				}	
-				else if (strcmp(i->juguete6,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->juguete1);
-					printf("2. %s\n",i->juguete2);
-					printf("3. %s\n",i->juguete3);
-					printf("3. %s\n",i->juguete4);
-					printf("3. %s\n",i->juguete5);
-				}
-				else if (strcmp(i->juguete7,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->juguete1);
-					printf("2. %s\n",i->juguete2);
-					printf("3. %s\n",i->juguete3);
-					printf("3. %s\n",i->juguete4);
-					printf("3. %s\n",i->juguete5);
-					printf("3. %s\n",i->juguete6);
-				}
-				else if (strcmp(i->juguete8,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->juguete1);
-					printf("2. %s\n",i->juguete2);
-					printf("3. %s\n",i->juguete3);
-					printf("3. %s\n",i->juguete4);
-					printf("3. %s\n",i->juguete5);
-					printf("3. %s\n",i->juguete6);
-					printf("3. %s\n",i->juguete7);
-				}
-				else if (strcmp(i->juguete9,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->juguete1);
-					printf("2. %s\n",i->juguete2);
-					printf("3. %s\n",i->juguete3);
-					printf("3. %s\n",i->juguete4);
-					printf("3. %s\n",i->juguete5);
-					printf("3. %s\n",i->juguete6);
-					printf("3. %s\n",i->juguete7);
-					printf("3. %s\n",i->juguete8);
-				}					
+				printf("\n%s",i->juguetes);
 			}
 		}			
 					
@@ -3635,7 +2737,6 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 
 	return 0;
 }
-
 
 
 
@@ -3730,7 +2831,7 @@ int main()
 	printf ("\n\nIngrese el numero de la accion que desea realizar:  ");
 	scanf_s ("%d", &opcion);
 	
-	while (opcion != 19)
+	while (opcion != 17)
 	{
 		if (opcion == 1)
 		{
