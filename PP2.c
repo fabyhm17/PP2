@@ -533,18 +533,20 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 
 typedef struct _nodo {
 	
-   	//DATOS DEL JUGUETE
-   int dato;
-   char nombre [15];
-   char descripcion [30];
-   char categoria [15];
-   int edad_minima;
-   int edad_maxima;
-   int costo;
-   int contador;
-   struct _nodo *derecho;
-   struct _nodo *izquierdo;
+	//DATOS DEL JUGUETE
+	int dato;
+	char nombre [15];
+	char descripcion [30];
+	char categoria [15];
+	int edad_minima;
+	int edad_maxima;
+	int costo;
+	int contador;
+	struct _nodo *derecho;
+	struct _nodo *izquierdo;\
+	
 } tipoNodo;
+
 
 typedef tipoNodo *pNodo;
 typedef tipoNodo *Arbol;
@@ -566,84 +568,88 @@ int EsHoja(pNodo r)
 
 int BuscarCodigo(Arbol a, int dat)
 {
-   pNodo actual = a;
+	pNodo actual = a;
 
- 
-   while(!Vacio(actual)) {
-      if(dat == actual->dato) { 
-	  	return 0;
+	while(!Vacio(actual)) 
+	{
+		if(dat == actual->dato) 
+		{ 
+			return 0;
 		}
-      else if(dat < actual->dato) actual = actual->izquierdo; 
-      else if(dat > actual->dato) actual = actual->derecho;
-   }
-   return 1; 
+		else if(dat < actual->dato) actual = actual->izquierdo; 
+		else if(dat > actual->dato) actual = actual->derecho;
+	}
+	return 1; 
 }
 
 //INSERTAR ARBOL DE JUGUETES
 void InsertarArbol(Arbol *a, int dat,char nombre[15], char descripcion [30],char categoria [15], int edad_minima, int edad_maxima, int costo, int contador)
 {
-   pNodo padre = NULL;
-   pNodo actual = *a;
+	pNodo padre = NULL;
+	pNodo actual = *a;
 
-  
-   while(!Vacio(actual) && dat != actual->dato) {
-      padre = actual;
-      if(dat < actual->dato) actual = actual->izquierdo;
-      else if(dat > actual->dato) actual = actual->derecho;
-   }
+	while(!Vacio(actual) && dat != actual->dato) 
+	{
+		padre = actual;
+		if(dat < actual->dato) actual = actual->izquierdo;
+		else if(dat > actual->dato) actual = actual->derecho;
+	}
 
    /* Si se ha encontrado el elemento, regresar sin insertar */
-   if(!Vacio(actual)) {
-   	printf("Error: juguete ya registrado");
-   	return;
-   	
-   }
+	if(!Vacio(actual)) 
+	{
+		printf("Error: juguete ya registrado");
+		return;	
+	}
    
    //PADRE
-   if(Vacio(padre)) {
-      *a = (Arbol)malloc(sizeof(tipoNodo));
-      (*a)->dato = dat;
-      (*a)-> edad_minima = edad_minima;
-      (*a)->costo= costo;
-       (*a)->contador= contador;
-      (*a)->edad_maxima= edad_maxima;
-      strcpy((*a)->categoria,categoria);
-      strcpy((*a)->descripcion,descripcion);
-	  strcpy((*a)->nombre,nombre);
-      (*a)->izquierdo = (*a)->derecho = NULL;
-      
-   }
+	if(Vacio(padre)) 
+	{
+		*a = (Arbol)malloc(sizeof(tipoNodo));
+		(*a)->dato = dat;
+    	(*a)-> edad_minima = edad_minima;
+    	(*a)->costo= costo;
+    	(*a)->contador= contador;
+    	(*a)->edad_maxima= edad_maxima;
+    	strcpy((*a)->categoria,categoria);
+    	strcpy((*a)->descripcion,descripcion);
+		strcpy((*a)->nombre,nombre);
+    	(*a)->izquierdo = (*a)->derecho = NULL;
+	}
+	
    //IZQUIERDA
-
-   else if(dat < padre->dato) {
-      actual = (Arbol)malloc(sizeof(tipoNodo));
-      padre->izquierdo = actual;
-      actual->dato = dat;
-      actual-> edad_minima = edad_minima;
-      actual->costo= costo;
-      actual->contador= contador;
-      actual->edad_maxima = edad_maxima;
-	  strcpy(actual->categoria,categoria);
-      strcpy(actual->descripcion,descripcion);
-	  strcpy(actual->nombre,nombre);
-      
-      actual->izquierdo = actual->derecho = NULL;
-   }
+	else if(dat < padre->dato) 
+	{
+		actual = (Arbol)malloc(sizeof(tipoNodo));
+		padre->izquierdo = actual;
+		actual->dato = dat;
+		actual-> edad_minima = edad_minima;
+		actual->costo= costo;
+		actual->contador= contador;
+		actual->edad_maxima = edad_maxima;
+		strcpy(actual->categoria,categoria);
+		strcpy(actual->descripcion,descripcion);
+		strcpy(actual->nombre,nombre);
+		
+		actual->izquierdo = actual->derecho = NULL;
+	}
+	
 	//DERECHA
-   else if(dat > padre->dato) {
-      actual = (Arbol)malloc(sizeof(tipoNodo));
-      padre->derecho = actual;
-      actual->dato = dat;
-	  actual->edad_minima = edad_minima;
-      actual->costo= costo;
-      actual->contador = contador;
-      actual->edad_maxima = edad_maxima;
-      strcpy(actual->categoria,categoria);
-      strcpy(actual->descripcion,descripcion);
-	  strcpy(actual->nombre,nombre);
-      actual->izquierdo = actual->derecho = NULL;
-  }
-  printf("----REGISTRADO!!-----");
+	else if(dat > padre->dato) 
+	{
+		actual = (Arbol)malloc(sizeof(tipoNodo));
+		padre->derecho = actual;
+		actual->dato = dat;
+		actual->edad_minima = edad_minima;
+		actual->costo= costo;
+		actual->contador = contador;
+		actual->edad_maxima = edad_maxima;
+		strcpy(actual->categoria,categoria);
+		strcpy(actual->descripcion,descripcion);
+		strcpy(actual->nombre,nombre);
+		actual->izquierdo = actual->derecho = NULL;
+	}
+	printf("---------REGISTRADO!!----------");
 }
 
 /* ----------------------- REGISTRAR JUGUETES EN EL MAIN ----------------------- */
@@ -654,7 +660,7 @@ void RegistrarJuguetesMain( )
 	char nombre[50];
     char descripcion[100];
     int edad_minima;
-   	int edad_maxima;
+	int edad_maxima;
     int costo;
     char categoria[15];
     char eleccion_categ[10];
@@ -718,15 +724,12 @@ void RegistrarJuguetesMain( )
 	scanf("%d",&edad_minima);
 	printf("Edad máxima: ");
 	scanf("%d",&edad_maxima);
-	
-	
 	printf("Ingrese el costo total de fabricacion del juguete: ");
 	scanf("%d", &costo);
 
 	InsertarArbol( &ArbolInt, dato, nombre, descripcion, categoria, edad_minima, edad_maxima, costo,0);
 	
 	return;	
-
 }
 
 //BUSCAR JUGUETE
@@ -735,21 +738,23 @@ void Buscar(Arbol a, int dat)
    pNodo actual = a;
 
    /* Todavía puede aparecer, ya que quedan nodos por mirar */
-   while(!Vacio(actual)) {
-      if(dat == actual->dato){
-      		printf("\n----INFORMACIÓN JUGUETE-----");
-      		printf("\nID: %d", actual -> dato);
-      		printf("\nNombre: %s", actual -> nombre);
-      		printf("\nCategoria: %s", actual -> categoria);
-      		printf("\nRango de edad: %d a %d", actual -> edad_minima, actual -> edad_maxima);
-      		printf("\nCosto: %d", actual -> costo);	
-      		printf("\nDescripcion: %s", actual -> descripcion);	
-      		return;
+	while(!Vacio(actual)) 
+	{
+    	if(dat == actual->dato)
+		{
+			printf("\n-------------- INFORMACIÓN DEL JUGUETE --------------");
+			printf("\nID: %d", actual -> dato);
+			printf("\nNombre: %s", actual -> nombre);
+			printf("\nCategoria: %s", actual -> categoria);
+			printf("\nRango de edad: %d a %d", actual -> edad_minima, actual -> edad_maxima);
+			printf("\nCosto: %d", actual -> costo);	
+			printf("\nDescripcion: %s", actual -> descripcion);	
+			return;
 		}
-      else if(dat < actual->dato) actual = actual->izquierdo; 
-      else if(dat > actual->dato) actual = actual->derecho;
+    	else if(dat < actual->dato) actual = actual->izquierdo; 
+    	else if(dat > actual->dato) actual = actual->derecho;
    }
-   printf("Error: No encontrado");
+   printf("ERROR: No encontrado");
    return; 
 }
 
@@ -757,7 +762,8 @@ void Buscar(Arbol a, int dat)
 //MOSTRAR ARBOL
 void PreOrden(Arbol a)
 {
-	 if(!Vacio(a)) {
+	if(!Vacio(a)) 
+	{
      
 		printf("\nID: %d", a-> dato);
 		printf("\nNombre: %s", a -> nombre);
@@ -767,13 +773,14 @@ void PreOrden(Arbol a)
 		printf("\nDescripcion: %s", a -> descripcion);	
 		printf("\n_______________________________\n\n");
 	
-   
-   if(a->izquierdo) PreOrden(a->izquierdo);
-   if(a->derecho) PreOrden(a->derecho);
-	}else{
-		printf("\n\n\n---Catalogo vacio!! ----");
-		return;
-		
+		if(a->izquierdo) PreOrden(a->izquierdo);
+		if(a->derecho) PreOrden(a->derecho);
+	}
+	
+	else
+	{
+		printf("\n\n---------- Catalogo vacio!! ----------");
+		return;	
 	}	
 }
 
@@ -781,71 +788,83 @@ void PreOrden(Arbol a)
 //ELIMINAR JUGUETE
 void BorrarJuguete(Arbol *a, int dat)
 {
-   pNodo padre = NULL;
-   pNodo actual;
-   pNodo nodo;
-   int aux;
-
-   actual = *a;
+	pNodo padre = NULL;
+	pNodo actual;
+	pNodo nodo;
+	int aux;
+	
+	actual = *a;
   
-   while(!Vacio(actual)) {
-      if(dat == actual->dato) { 
-         if(EsHoja(actual)) { 
-            if(padre) 
+	while(!Vacio(actual)) 
+	{
+		if(dat == actual->dato) 
+		{ 
+        	if(EsHoja(actual)) 
+			{ 
+            	if(padre) 
                /* Anulamos el puntero que le hace referencia */
-               if(padre->derecho == actual) padre->derecho = NULL;
-               else if(padre->izquierdo == actual) padre->izquierdo = NULL;
-            free(actual); /* Borrar el nodo */
-            actual = NULL;
-            return;
-         }
-         else { /* Si el valor está en el nodo actual, pero no es hoja */
-            padre = actual;
+            	if(padre->derecho == actual) padre->derecho = NULL;
+            	else if(padre->izquierdo == actual) padre->izquierdo = NULL;
+            	free(actual); /* Borrar el nodo */
+            	actual = NULL;
+            	return;
+        	}
+         	
+        	else 
+			{ /* Si el valor está en el nodo actual, pero no es hoja */
+            	padre = actual;
             
-            if(actual->derecho) {
-               nodo = actual->derecho;
-               while(nodo->izquierdo) {
-                  padre = nodo;
-                  nodo = nodo->izquierdo;
-               }
-            }
-            
-            else {
-               nodo = actual->izquierdo;
-               while(nodo->derecho) {
-                  padre = nodo;
-                  nodo = nodo->derecho;
-               }
-            }
-            /* Intercambiar valores*/ 
-            aux = actual->dato;
-            actual->dato = nodo->dato;
-            nodo->dato = aux;
-            actual = nodo;
-         }
-      }
-      else { 
-         padre = actual;
-         if(dat > actual->dato) actual = actual->derecho;
-         else if(dat < actual->dato) actual = actual->izquierdo;
-      }
-   }
-   
+		        if(actual->derecho) 
+				{
+		        	nodo = actual->derecho;
+		        	while(nodo->izquierdo) 
+					{
+		            	padre = nodo;
+		            	nodo = nodo->izquierdo;
+		        	}
+		        }
+		        
+		        else 
+				{
+		        	nodo = actual->izquierdo;
+		        	while(nodo->derecho) 
+					{
+		            	padre = nodo;
+		            	nodo = nodo->derecho;
+		        	}
+		        }
+		        
+		        /* Intercambiar valores*/ 
+		        aux = actual->dato;
+		        actual->dato = nodo->dato;
+		        nodo->dato = aux;
+		        actual = nodo;
+        	}
+    	}
+    	
+    	else 
+		{ 
+        	padre = actual;
+        	if(dat > actual->dato) actual = actual->derecho;
+        	else if(dat < actual->dato) actual = actual->izquierdo;
+    	}
+   }  
 }
 
 //MODIFICAR DATOS JUGUETE
-modificarJuguete(Arbol a ){
+modificarJuguete(Arbol a )
+{
 	pNodo actual = a;
-   char nombre [15];
-   char descripcion [30];
-   char categoria [15];
-   char eleccion_categ [10];
-   int edad_minima;
-   int edad_maxima;
-   int costo;
-   int contador;
-   
-   
+	char nombre [15];
+	char descripcion [30];
+	char categoria [15];
+	char eleccion_categ [10];
+	int edad_minima;
+	int edad_maxima;
+	int costo;
+	int contador;
+	
+	
 	int dat;
 	int x = 0;
 	char dato_mod [10];
@@ -854,14 +873,15 @@ modificarJuguete(Arbol a ){
 	scanf("%d", &dat);
 	
 	
- 
-   while(!Vacio(actual)) {
-      if(dat == actual->dato){
-      		
-      		Buscar(ArbolInt, dat);
-      		printf("\n__________________________________________\n\n\n\n");
+	
+	while(!Vacio(actual)) 
+	{
+    	if(dat == actual->dato)
+		{
+			Buscar(ArbolInt, dat);
+			printf("\n__________________________________________\n\n\n\n");
 			printf("\n---------DATOS A MODIFICAR--------------");
-	      	printf("\n1.Nombre");
+			printf("\n1.Nombre");
 			printf("\n2.Descripcion");
 			printf("\n3.Categoria ");
 			printf("\n4.Rango de edad recomendado");
@@ -879,10 +899,9 @@ modificarJuguete(Arbol a ){
 				gets (nombre);
 				strcpy(actual->nombre,nombre);
 				x=1;
-				break;
-			
-				
+				break;	
 			}
+			
 			else if (strcmp(dato_mod,"2")==0)
 			{
 				printf("\nNueva descripcion:");
@@ -892,52 +911,53 @@ modificarJuguete(Arbol a ){
 				x=1;
 				break;
 			}
+			
 			else if (strcmp(dato_mod,"3")==0)
 			{
+				printf("\n\n--------------CATEGORIAS DISPONIBLES---------------\n\n");
+				printf("\n 1. Peluches");
+				printf("\n 2. Muñecas");
+				printf("\n 3. Vehiculos");
+				printf("\n 4. Juguestes de contruccion");
+				printf("\n 5. Juguetes educativos");
+				printf("\n 6. Juguetes para bebes");
 				
-					printf("\n\n--------------CATEGORIAS DISPONIBLES---------------\n\n");
-					printf("\n 1. Peluches");
-					printf("\n 2. Muñecas");
-					printf("\n 3. Vehiculos");
-					printf("\n 4. Juguestes de contruccion");
-					printf("\n 5. Juguetes educativos");
-					printf("\n 6. Juguetes para bebes");
-					
-					printf("\nIngrese nueva categoria: ");
-					fflush (stdin);
-					gets (eleccion_categ);
-							
-							if (strcmp(eleccion_categ,"1")==0)
-							{
-								strcpy(actual->categoria,"Peluches");
-							}
-							else if (strcmp(eleccion_categ,"2")==0)
-							{
-								strcpy(actual->categoria,"Munecas");
-							}
-							else if (strcmp(eleccion_categ,"3")==0)
-							{
-								strcpy(actual->categoria,"Vehiculos");
-							}
-							else if (strcmp(eleccion_categ,"4")==0)
-							{
-								strcpy(actual->categoria,"Juguetes de construccion");
-							}
-							else if (strcmp(eleccion_categ,"5")==0)
-							{
-								strcpy(actual->categoria,"Juguetes educativos");
-							}
-							else if (strcmp(eleccion_categ,"6")==0)
-							{
-								strcpy(actual->categoria,"Juguetes para bebes");
-							}
-							else{
-								printf("Error: fuera de rango.");
-							}
-								x=1;
-								break;
-								
+				printf("\nIngrese nueva categoria: ");
+				fflush (stdin);
+				gets (eleccion_categ);
+				
+				if (strcmp(eleccion_categ,"1")==0)
+				{
+					strcpy(actual->categoria,"Peluches");
+				}
+				else if (strcmp(eleccion_categ,"2")==0)
+				{
+					strcpy(actual->categoria,"Munecas");
+				}
+				else if (strcmp(eleccion_categ,"3")==0)
+				{
+					strcpy(actual->categoria,"Vehiculos");
+				}
+				else if (strcmp(eleccion_categ,"4")==0)
+				{
+					strcpy(actual->categoria,"Juguetes de construccion");
+				}
+				else if (strcmp(eleccion_categ,"5")==0)
+				{
+					strcpy(actual->categoria,"Juguetes educativos");
+				}
+				else if (strcmp(eleccion_categ,"6")==0)
+				{
+					strcpy(actual->categoria,"Juguetes para bebes");
+				}
+				else
+				{
+					printf("Error: fuera de rango.");
+				}
+				x=1;
+				break;		
 			}
+			
 			else if (strcmp(dato_mod,"4")==0)
 			{
 				printf("\nRango de edad:");
@@ -950,6 +970,7 @@ modificarJuguete(Arbol a ){
 				x=1;
 				break;
 			}
+			
 			else if (strcmp(dato_mod,"5")==0)
 			{
 				printf("\nNuevo costo de fabricación:");
@@ -958,27 +979,28 @@ modificarJuguete(Arbol a ){
 				x=1;
 				break;
 			}
+			
 			else
 			{
 				printf("\nERROR: la funcion no existe, la accion no se pudo realizar con exito.");
 				x=0;
-			}
-		
-      	
-	  }
+			}	
+		}
 	   
-      else if(dat < actual->dato) actual = actual->izquierdo; 
-      else if(dat > actual->dato) actual = actual->derecho;
-   }
+    	else if(dat < actual->dato) actual = actual->izquierdo; 
+    	else if(dat > actual->dato) actual = actual->derecho;
+	}
    
-   if(x==0){
-   	printf("Error: juguete no registrado");
-   } 
-   else{
-   	printf("\n--- MODIFICADO!! ---\n\n\n");
-   	Buscar(ArbolInt, dat);
-   	
-   }
+	if(x==0)
+	{
+		printf("Error: juguete no registrado");
+	} 
+	
+	else
+	{
+		printf("\n------------- MODIFICADO!! -------------\n\n");
+		Buscar(ArbolInt, dat);	
+	}
 }
 	
 		
@@ -1004,8 +1026,7 @@ Domicilio
 	//Algoritmos DJISK
 	int visitado,terminado;
 	int monto;
-	char anterior [15];
-		
+	char anterior [15];		
 };
 
 Ruta
@@ -1019,7 +1040,8 @@ Ruta
 	Ruta*siguiente;
 };
 
-Lista{
+Lista
+{
 	Domicilio* dato;
 	Lista*siguiente;
 };
@@ -1068,9 +1090,7 @@ void insertarLugar ()
 		}
 		aux3 = aux3 -> siguiente;
 	}
-	
-	
-	
+		
 	printf("Código postal: ");
 	scanf("%d",&postal);
 	
@@ -1224,22 +1244,32 @@ void insertarRuta()
 			printf("\n3.Maritima.");
 			printf("\nIngresar tipo de ruta:");
 			scanf("%s", tipo_ruta);
-			if(strcmp(tipo_ruta,"1")==0){
+			if(strcmp(tipo_ruta,"1")==0)
+			{
 				strcpy(tipo_ruta, "Terrestre");
 			}
-			else if(strcmp(tipo_ruta,"2")==0){
+			
+			else if(strcmp(tipo_ruta,"2")==0)
+			{
 				strcpy(tipo_ruta, "Aerea");
 			}
-			else if(strcmp(tipo_ruta,"3")==0){
+			
+			else if(strcmp(tipo_ruta,"3")==0)
+			{
 				strcpy(tipo_ruta, "Maritima");
-			}else{
+			}
+			
+			else
+			{
 				printf("\nERROR: opción incorrecta.");
 				return;
 			}
+			
 			agregarRuta(aux, aux2, nuevo,ini,fin,distancia,tiempo, tipo_ruta);
 			printf("\n\n--------------- NUEVA RUTA INSERTADA! ---------------");
 			return;
 		}
+		
 		aux = aux -> siguiente;
 	}
 	
@@ -1349,6 +1379,7 @@ void modificarDomicilio()
 						printf("\nERROR: nombre anteriormente registrado");
 						return;
 					}
+					
 					aux2 = aux2 -> siguiente;
 				}
 				
@@ -1374,6 +1405,7 @@ void modificarDomicilio()
 						printf("\nERROR: codigo anteriormente registrado");
 						return;
 					}
+					
 					aux2 = aux2 -> siguiente;
 				}
 				
@@ -1399,6 +1431,7 @@ void modificarDomicilio()
 						printf("\nERROR: codigo anteriormente registrado");
 						return;
 					}
+					
 					aux2 = aux2 -> siguiente;
 				}
 				
@@ -1434,71 +1467,71 @@ void eliminarAristaAux(char ini [15], char fin[15]){
 	int y =0;
 	a = aux3 -> adyacencia;
 		
-		while(a != NULL)
+	while(a != NULL)
+	{
+		if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0)
 		{
-			
+			y=1;		
+		}
 		
-			if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0)
+		a = a -> siguiente;
+	}
+		
+	if(y ==1)
+	{	
+		while(aux2 != NULL)
+		{
+			if(strcmp(aux2 -> nombre,fin)==0)
 			{
-				y=1;
+				break;
+			}
+			else
+			{
+				aux2 = aux -> siguiente;
+			}	
+		}
+		
+		while(aux != NULL)
+		{
+			if(strcmp(aux -> nombre,ini)==0)
+			{
+				q = aux -> adyacencia;
 				
-			}
-			
-			a = a -> siguiente;
-		}
-		
-	if(y ==1){
-
-	while(aux2 != NULL)
-	{
-		if(strcmp(aux2 -> nombre,fin)==0)
-		{
-			break;
-		}
-		else
-		{
-			aux2 = aux -> siguiente;
-		}	
-	}
-	while(aux != NULL)
-	{
-		if(strcmp(aux -> nombre,ini)==0)
-		{
-			q = aux -> adyacencia;
-			while(q!=NULL)
-			{
-				if(q -> vrt ==aux2)
+				while(q!=NULL)
 				{
-					if(q== aux -> adyacencia)
+					if(q -> vrt ==aux2)
 					{
-						aux -> adyacencia = aux -> adyacencia -> siguiente;
+						if(q== aux -> adyacencia)
+						{
+							aux -> adyacencia = aux -> adyacencia -> siguiente;
+						}
+						else
+						{
+							r -> siguiente = q -> siguiente;
+						}
+						
+						free(q);
+						printf("\nRuta %s -> %s eliminada!!", aux-> nombre, aux2 -> nombre);
+						return;	
 					}
-					else
-					{
-						r -> siguiente = q -> siguiente;
-					}
-					
-					free(q);
-					printf("\nRuta %s -> %s eliminada!!", aux-> nombre, aux2 -> nombre);
-					return;	
 				}
+				
+				r = q;
+				q = q = q-> siguiente;		
 			}
 			
-			r = q;
-			q = q = q-> siguiente;		
+			aux = aux -> siguiente;
 		}
-		
-		aux = aux -> siguiente;
+	} 
+	
+	else
+	{
+		printf("\nERROR: ruta no registrada");
 	}
-} else{
-	printf("\nError: ruta no registrada");
-}
 }
 
 
 //ELIMINAR NODO
-
-
 
 void vaciar_aristas(Domicilio*aux)
 {
@@ -1512,7 +1545,8 @@ void vaciar_aristas(Domicilio*aux)
 	}
 }
 
-void borrarDomicilio(){
+void borrarDomicilio()
+{
 	char domicilio [15];
 	Domicilio* aux = inicio;
 	Domicilio * ant;
@@ -1527,38 +1561,50 @@ void borrarDomicilio(){
 	fflush (stdin);
 	gets (domicilio);
 	
-	while(aux != NULL){
-		if(strcmp(domicilio,aux->nombre)==0){
-			if(aux -> adyacencia != NULL){
+	while(aux != NULL)
+	{
+		if(strcmp(domicilio,aux->nombre)==0)
+		{
+			if(aux -> adyacencia != NULL)
+			{
 				vaciar_aristas(aux);
 			}
-			if(aux == inicio){
+			
+			if(aux == inicio)
+			{
 				inicio = inicio -> siguiente;
 				free(aux);
 				printf("\nDomicilio eliminado");
-				return;
-				
-			}else{
+				return;	
+			}
+			
+			else
+			{
 				ant -> siguiente = aux -> siguiente;
 				free(aux);
 				printf("\nDomicilio eliminado");
 				return;	
 			}
 		}
-		else{
+		
+		else
+		{
 			ant = aux;
 			aux = aux -> siguiente;
 		}
 	}
-	if(aux == NULL){
+	
+	if(aux == NULL)
+	{
 		printf("\nERROR: Domicilio no encontrado");
 	}
 }
 
 	
 
-//ELIMINAR ARISTA -----------------------------------------------------------
-void eliminarArista(){
+//ELIMINAR ARISTA 
+void eliminarArista()
+{
 	int x = 0;
 	int y = 0;
 	char ini [15];
@@ -1577,69 +1623,76 @@ void eliminarArista(){
 	aux3 = inicio;
 	a = aux3 -> adyacencia;
 		
-		while(a  != NULL)
-		{
-		
-		
-			if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0)
-			{
-				y=1;
-			
-				
-			}
-			
-			a = a -> siguiente;
-		}
-	if(y==1){
+	while(a != NULL)
+	{
 	
-	while(aux2 != NULL)
-	{
-		if(strcmp(aux2 -> nombre,fin)==0)
+	
+		if(strcmp(a->origen,ini)==0 && strcmp(a->destino,fin)==0)
 		{
-			break;
-		}
-		else
-		{
-			aux2 = aux2 -> siguiente;
-		}	
-	}
-	while(aux != NULL)
-	{
-		if(strcmp(aux -> nombre,ini) == 0 && aux2 != NULL)
-		{
-			q = aux -> adyacencia;
-			while(q!=NULL)
-			{
-				if(q -> vrt ==aux2)
-				{
-					if(q== aux -> adyacencia)
-					{
-						aux -> adyacencia = aux -> adyacencia -> siguiente;
-					}
-					else
-					{
-						r -> siguiente = q -> siguiente;
-					}
-					
-					free(q);
-					x = 1;
-					printf("\nRuta %s -> %s eliminada!!", aux-> nombre, aux2 -> nombre);
-					return;	
-				}
-			}
-			
-			r = q;
-			q = q = q-> siguiente;		
+			y=1;	
 		}
 		
-		aux = aux -> siguiente;
+		a = a -> siguiente;
 	}
-	if(x==0){
-		printf("Error: Ruta no encontrada.");
-	}}else{
-			printf("Error: Ruta no encontrada.");	
+	
+	if(y==1)
+	{
+		while(aux2 != NULL)
+		{
+			if(strcmp(aux2 -> nombre,fin)==0)
+			{
+				break;
+			}
+			else
+			{
+				aux2 = aux2 -> siguiente;
+			}	
+		}
+		
+		while(aux != NULL)
+		{
+			if(strcmp(aux -> nombre,ini) == 0 && aux2 != NULL)
+			{
+				q = aux -> adyacencia;
+				while(q!=NULL)
+				{
+					if(q -> vrt ==aux2)
+					{
+						if(q== aux -> adyacencia)
+						{
+							aux -> adyacencia = aux -> adyacencia -> siguiente;
+						}
+						else
+						{
+							r -> siguiente = q -> siguiente;
+						}
+						
+						free(q);
+						x = 1;
+						printf("\nRuta %s -> %s eliminada!!", aux-> nombre, aux2 -> nombre);
+						return;	
+					}
+				}
+				
+				r = q;
+				q = q = q-> siguiente;		
+			}
+			
+			aux = aux -> siguiente;
+		}
+	}
+		
+	if(x==0)
+	{
+		printf("ERROR: Ruta no encontrada.");
+	}
+	
+	else
+	{
+		printf("ERROR: Ruta no encontrada.");	
 	}	
 }
+
 
 //MODIFICAR ARISTA
 
@@ -1654,6 +1707,7 @@ modificar_ruta_aux(char ini[15], char fin[15], int distancia, float tiempo, char
 	printf("\n5. Modificar tipo de ruta");
 	printf("\nopcion: ");
 	scanf("%d",&op);
+	
 	switch(op)
 	{
 		case 1:
@@ -1685,7 +1739,8 @@ modificar_ruta_aux(char ini[15], char fin[15], int distancia, float tiempo, char
 }
 
 
-modificarArista(){
+modificarArista()
+{
 	char ini [15];
 	char fin [15];
 
@@ -1711,10 +1766,9 @@ modificarArista(){
 	{
 		if(strcmp(aux2 -> nombre,fin)==0)
 		{
-			
-		
 			break;
 		}
+		
 		else
 		{
 			aux2 = aux2 -> siguiente;
@@ -1726,22 +1780,21 @@ modificarArista(){
 	
 		if(strcmp(aux -> nombre,ini )==0 && aux2 !=NULL)
 		{
-		
-		
 			q = aux -> adyacencia;
 			while(q!=NULL)
 			{
-				
 				if(q -> vrt ==aux2)
 				{
 					if(q== aux -> adyacencia)
 					{
 						aux -> adyacencia = aux -> adyacencia -> siguiente;
 					}
+					
 					else
 					{
 						r -> siguiente = q -> siguiente;
 					}
+					
 					x=1;
 					tiempo = q -> tiempo;
 					distancia = q -> distancia;
@@ -1758,8 +1811,10 @@ modificarArista(){
 		
 		aux = aux -> siguiente;
 	}
-	if(x==0){
-		printf("Error: ruta no encontrada");
+	
+	if(x==0)
+	{
+		printf("ERROR: ruta no encontrada");
 	}
 }
 
@@ -1791,71 +1846,94 @@ void visualizarGrafo()
 }
 
 
-//----------------------------------------------------ALGORITMO DJSKITE--------------------------------------------------------------//
+//----------------------------------------------------ALGORITMO DIJKSTRA--------------------------------------------------------------//
 
 //PILA PARA RECORRIDO
 
-void insertarPila(Domicilio* aux){
+void insertarPila(Domicilio* aux)
+{
 	Lista*nuevo=(Lista*)malloc(sizeof(Lista));
 	nuevo->dato=aux;
 	nuevo->siguiente=NULL;
-	if(ini==NULL){
+	if(ini==NULL)
+	{
 		ini=nuevo;
 		final=nuevo;
-	}else{
+	}
+	
+	else
+	{
 	   nuevo->siguiente=ini;
 	   ini=nuevo;    	
 	}
-
 }
 
-void insertarCola(Domicilio*aux){
+
+void insertarCola(Domicilio*aux)
+{
 	Lista*nuevo=(Lista*)malloc(sizeof(Lista));
 	nuevo->dato=aux;
 	nuevo->siguiente=NULL;
-	if(ini==NULL){
+	if(ini==NULL)
+	{
 		ini=nuevo;
 		final=nuevo;
-	}else{
+	}
+	
+	else
+	{
 		final->siguiente=nuevo;
 		final=nuevo;
 	}
 }
 
-Domicilio * desencolar(){
+
+Domicilio * desencolar()
+{
 	Lista*aux;
-	if(ini==NULL){
+	if(ini==NULL)
+	{
 		return NULL;
-	}else{
+	}
+	
+	else
+	{
 		aux=ini;
 		ini=ini->siguiente;
 		aux->siguiente=NULL;
-		if(ini==NULL){
+		if(ini==NULL)
+		{
 			final=NULL;
-
 		}	
 	}
+	
 	Domicilio*resultado=aux->dato;
 	free(aux);
 	return resultado;
 }
 
 
-void reiniciar(){
-	if(inicio!=NULL){
+void reiniciar()
+{
+	if(inicio!=NULL)
+	{
 		Domicilio*aux=inicio;
-		while(aux!=NULL){
+		while(aux!=NULL)
+		{
 			aux->visitado=aux->terminado=0;
 		    aux=aux->siguiente;
 		}
 	}
 }
 
-void dijkstra(){
+
+void dijkstra()
+{
 	Domicilio*aux=inicio;
 	char a [15];
 	char b [15];
 	char temp [15];
+	
 	printf("Ingresar punto inicial:");
 	fflush(stdin);
 	gets(a);
@@ -1863,58 +1941,85 @@ void dijkstra(){
 	fflush(stdin);
 	gets(b);
 	
-	while(aux!=NULL){
-		if(strcmp(aux->nombre,a)==0){
+	while(aux!=NULL)
+	{
+		if(strcmp(aux->nombre,a)==0)
+		{
 			aux->terminado=1;
 			aux->monto=0;
 	
 			break;
 		}
+		
 		aux=aux->siguiente;
 	}
-	if(aux==NULL){
-		printf("ERROR: ruta no encontrada\n");
+	
+	if(aux==NULL)
+	{
+		printf("ERROR: ruta no encontrada.");
 		return;
 	}
-	while(aux!=NULL){
+	
+	while(aux!=NULL)
+	{
 		Ruta*a=aux->adyacencia;
-	    while(a!=NULL){
-		    if(a->vrt->monto==-1 || (aux->monto+a->distancia)<a->vrt->monto){
+	    while(a!=NULL)
+		{
+		    if(a->vrt->monto==-1 || (aux->monto+a->distancia)<a->vrt->monto)
+			{
 		    	a->vrt->monto=aux->monto+a->distancia;
 		        strcpy(a->vrt->anterior, aux->nombre);
 			}
+			
 		    a=a->siguiente;
 	    }
+	    
 	    aux=inicio;
 	    Domicilio*min= inicio;
-	    while(min->anterior==0 || min->terminado ==1){
+	    
+	    while(min->anterior==0 || min->terminado ==1)
+		{
 	    	min=min->siguiente;
 		}
-	    while(aux!=NULL){
-	    	if(aux->monto<min->monto && aux->terminado==0 && aux->anterior!=0){
+		
+	    while(aux!=NULL)
+		{
+	    	if(aux->monto<min->monto && aux->terminado==0 && aux->anterior!=0)
+			{
 	    		min=aux;
 	    	}
+	    	
 	    	aux=aux->siguiente;
 		}
+		
 		aux=min;
 		aux->terminado=1;
-		if(strcmp(aux->nombre,b)==0){
+		
+		if(strcmp(aux->nombre,b)==0)
+		{
 			break;
 		}
 	}
-	while(strcmp(aux->anterior,"0")==1){
+	
+	while(strcmp(aux->anterior,"0")==1)
+	{
 		insertarPila(aux);
 		strcpy(temp,aux->anterior);
 		aux=inicio;
-		while(strcmp(aux->nombre,temp)==1){
+		while(strcmp(aux->nombre,temp)==1)
+		{
 		   aux=aux->siguiente;	
 		}
 	}
+	
 	insertarPila(aux);
-	while(ini!=NULL){
+	
+	while(ini!=NULL)
+	{
 		printf("%s ",desencolar()->nombre);
 	}
-		printf("\n");
+	
+	printf("\n");
 	reiniciar();
 }
 
@@ -3120,7 +3225,7 @@ int main()
 	printf ("\n\nIngrese el numero de la accion que desea realizar:  ");
 	scanf_s ("%d", &opcion);
 	
-	while (opcion != 17)
+	while (opcion != 19)
 	{
 		if (opcion == 1)
 		{
@@ -3149,21 +3254,19 @@ int main()
 		
 		
 		else if (opcion == 5)
-		{
-			
+		{	
 			printf("\n\n\n------CATALOGO JUGUETES-------");
 			PreOrden(ArbolInt);
 			RegistrarJuguetesMain( );
-			
-
 		}
 		
 	
 		else if (opcion == 6)
 		{
 			modificarJuguete(ArbolInt);
-		
 		}
+		
+		
 		else if (opcion == 7)
 		{
 			int dat;
