@@ -5516,9 +5516,7 @@ void modificar_carta(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imp
 		printf ("Ingrese el año para el que se solicito la carta: ")	;
 		fflush (stdin);
 		gets (verificar_year);
-		
-
-		
+			
 		for(i = ColaCartas->front; i!= NULL; i = i->next)
 		{
 			if (strcmp(i->cedula,verificar_cedula)==0 && strcmp(i->year,verificar_year)==0)
@@ -5543,13 +5541,13 @@ void modificar_carta(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imp
 						fflush (stdin);
 						gets (i->juguete1);	
 					}
-					if(strcmp(i->juguete2,"0")==0)
+					else if(strcmp(i->juguete2,"0")==0)
 					{
 						printf ("Ingrese el nombre del juguete: ");
 						fflush (stdin);
 						gets (i->juguete2);
 					}
-					if (strcmp(i->juguete3,"0")==0)
+					else if (strcmp(i->juguete3,"0")==0)
 					{
 						printf ("Ingrese el nombre del juguete: ");
 						fflush (stdin);
