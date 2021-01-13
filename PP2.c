@@ -2755,25 +2755,178 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 
 
 
+
+
+
 /* ------------------------------------------------------------------ 15. ANALISIS DE DATOS ------------------------------------------------------------------- */
 
 
 /* ------------------------------------ 15.1 Cantidad de juguetes solicitados por año ------------------------------------- */
 
 
+
+
 /* ------------------------------------ 15.2 Lugar donde se solicitaron más y menos juguetes ------------------------------------- */
+
+
+/* ------------------------ STRUCT DE LA COLA ------------------------ */
+
+typedef struct LugarP
+{
+	int cant_juguetes;
+	char nombre_lugar [200];
+	struct LugarP * next;
+}LugarP;
+
+
+typedef struct TopLugarP
+{
+	int size;
+	LugarP * front;
+	LugarP * rear;
+}TopLugarP;
+
+/* ----------------------- CREAR NUEVA COLA ----------------------- */
+
+TopLugarP * CrearColaTopLugar(TopLugarP * C)
+{
+	C= NULL;
+	C = (TopLugarP *) malloc(sizeof(TopLugarP));	
+	C-> front = NULL;
+	C-> rear = NULL;
+	return C;
+}
+
+/* ----------------------- CREAR NODO ----------------------- */
+
+LugarP * CrearNodoTopLugar(int cant_juguetes, char nombre_lugar [200])
+{
+	struct LugarP *nuevo;
+	nuevo = (LugarP *) malloc(sizeof(LugarP));
+	nuevo-> next = NULL;
+	
+	nuevo->cant_juguetes=cant_juguetes;
+	strcpy(nuevo->nombre_lugar,nombre_lugar);
+	return nuevo;
+}
+
+/* ----------------------- AGREGAR ELEMENTO ----------------------- */
+
+TopLugarP * InsertarTopLugar(TopLugarP * C, int cant_juguetes, char nombre_lugar [200])
+{
+	C->size = C-> size + 1;
+	if(C->front == NULL) 
+	{
+		C->front = CrearNodoTopLugar(cant_juguetes,nombre_lugar);
+		C->rear = C->front;
+		return C;
+	}
+	C->rear->next = CrearNodoTopLugar(cant_juguetes,nombre_lugar);
+	C->rear = C->rear->next;
+}
+
+/* ----------------------- IMPRIMIR COLA ----------------------- */
+
+void ImprimirColaTopLugar(TopLugarP *C)
+{
+	LugarP *i;
+	i = C->front;
+	int contador = 0;
+	if (C -> front == NULL)
+	{
+		printf ("\nERROR: No hay lugares o juguetes registrados");
+	}
+	else
+	{
+		printf("\n\n------------------- LUGAR CON MAS Y MENOS JUGUETES ------------------- \n");
+		
+		printf("\n\nLugar: %s", i->nombre_lugar);
+		printf ("\tCantidad de Juguetes: %d", i->cant_juguetes);
+		
+		while(i!=NULL)
+		{
+			if (i->next == NULL)
+			{
+				printf("\n\nLugar: %s", i->nombre_lugar);
+				printf ("\tCantidad de Juguetes: %d", i->cant_juguetes);	
+			}
+			
+			i = i->next;
+		}
+	}
+	printf("\n");
+}
+				
+/* ----------------------- ELIMINAR ELEMENTO ----------------------- */
+
+TopLugarP *EliminarTopLugar(TopLugarP * C, char Auxiliar[30])
+{
+	LugarP *i;
+	TopLugarP *C2= CrearColaTopLugar(C2);
+	for(i = C->front; i!= NULL; i = i->next)
+	{
+		if ((strcmp(i->nombre_lugar,Auxiliar)!=0))
+		{
+			C2= InsertarTopLugar(C2,i->cant_juguetes,i->nombre_lugar);
+		}
+	}
+	return C2;
+}
+
+/* ----------------------- ORDENAR POR PRIORIDAD ----------------------- */
+
+TopLugarP *PrioridadTopLugar(TopLugarP * C)
+{
+	int contador=0;
+	TopLugarP * C2= CrearColaTopLugar(C2);
+	LugarP *i;
+	struct LugarP * menor;
+	menor = (LugarP *) malloc(sizeof(LugarP));
+	menor-> next = NULL;
+	
+	for(i = C->front; i!= NULL; i = i->next)
+	{
+		contador++;	
+	}
+	while (contador>0)
+	{
+		menor->cant_juguetes = 0;
+		for(i = C->front; i!= NULL; i = i->next)
+		{
+			if (menor->cant_juguetes <= i->cant_juguetes)
+			{
+				menor->cant_juguetes = i->cant_juguetes;
+				strcpy (menor->nombre_lugar,i->nombre_lugar);
+			}	
+		}
+		C2= InsertarTopLugar(C2,menor->cant_juguetes,menor->nombre_lugar);
+		contador--;
+		C= EliminarTopLugar(C,menor->nombre_lugar);
+	}
+	return C2;
+}
+
+
 
 
 /* ------------------------------------ 15.3 Cantidad de niños a los que se les aprobó su carta por año  ------------------------------------- */
 
 
+
+
 /* ------------------------------------ 15.4 Cantidad de niños a los que se les rechazó su carta por año ------------------------------------- */
 
 
+
+
 /* ------------------------------------ 15.5 Cantidad de comportamientos buenos y malos registrados  ------------------------------------- */
+//COMPLETA EN EL MAIN
+
 
 
 /* ------------------------------------ 15.6 Cantidad de cartas procesadas según ayudante. ------------------------------------- */
+
+
 
 
 /* ------------------------------------ 15.7 Top 10 de los juguetes más pedidos  ------------------------------------- */
@@ -2817,7 +2970,7 @@ int main()
 	printf ("\n 8.  Registrar lugar de domicilio en el catalogo.");
 	printf ("\n 9.  Modificar lugar de domicilio en el catalogo.");
 	printf ("\n 10. Registrar ruta en el catalogo");
-	printf ("\n 11.  Modificar ruta en el catalogo.");
+	printf ("\n 11. Modificar ruta en el catalogo.");
 	printf ("\n 12. Registrar comportamiento de un niño.");
 	printf ("\n 13. Registrar carta para Santa.");
 	printf ("\n 14. Modificar carta para Santa.");
@@ -2878,19 +3031,19 @@ int main()
 		else if (opcion == 7)
 		{
 			int dat;
-			printf("----ELIMINAR JUGUETE----");
+			printf("--------------ELIMINAR JUGUETE--------------");
 			printf("\nID del juguete que desea eliminar: ");
 			scanf("%d",&dat);
 			
-			if(BuscarCodigo(ArbolInt, dat)==0){
+			if(BuscarCodigo(ArbolInt, dat)==0)
+			{
 				BorrarJuguete(&ArbolInt, dat);
-				printf("\n--BORRADO!!---");
-				
-			}else{
-				printf("Error: ID no registrado.");
+				printf("\n--BORRADO!!---");		
 			}
-			
-		
+			else
+			{
+				printf("ERROR: ID no registrado.");
+			}
 		}
 		
 		
@@ -2905,12 +3058,12 @@ int main()
 			for(d=0; d<domicilios; d++)
 			{
 				printf("\n\n-------------- DOMICILIO #%d --------------\n", d+1 );
-				insertarLugar ();
-										
-			}
-			
+				insertarLugar ();								
+			}	
 		}
-			else if (opcion == 9)
+		
+		
+		else if (opcion == 9)
 		{
 			int op;
 			printf("\n--------------- MODIFICAR CATALOGO DOMICILIO ---------------\n");
@@ -2937,11 +3090,14 @@ int main()
 				return;
 			}	
 		}
-			else if (opcion == 10)
+		
+		
+		else if (opcion == 10)
 		{
 			printf("\n\n--------------INSERTAR RUTA-----------------\n\n");
 			insertarRuta();
 		}
+		
 		
 		else if (opcion == 11)
 		{
@@ -2954,18 +3110,16 @@ int main()
 			scanf("%d", &op);
 			if(op>0 && op<3)
 			{
-				
-		
 				if (op ==1)
 				{
 					modificarArista();
 				}
-				if(op ==2){
+				if(op ==2)
+				{
 					eliminarArista();
 				}
-			
-	
-			}else
+			}
+			else
 			{
 				printf("ERROR: opcion no disponible");
 				return;
@@ -2989,7 +3143,7 @@ int main()
 		
 		else if (opcion == 14)
 		{
-			dijkstra();
+			//dijkstra();
 		}
 		
 		
@@ -3104,7 +3258,7 @@ int main()
 			printf ("\n 8.  Registrar lugar de domicilio en el catalogo.");
 			printf ("\n 9.  Modificar lugar de domicilio en el catalogo.");
 			printf ("\n 10. Registrar ruta en el catalogo");
-			printf ("\n 11.  Modificar ruta en el catalogo.");
+			printf ("\n 11. Modificar ruta en el catalogo.");
 			printf ("\n 12. Registrar comportamiento de un niño.");
 			printf ("\n 13. Registrar carta para Santa.");
 			printf ("\n 14. Modificar carta para Santa.");
