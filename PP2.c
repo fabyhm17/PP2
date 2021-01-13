@@ -2200,7 +2200,7 @@ void RegistrarKidMain(Imprimir *ColaKids)
 		printf("\nError: No hay domicilios en el catalogo.");
 		return;
 	}		
-	while (a -> siguiente != NULL)
+	while (a != NULL)
 	{
 		if(strcmp(a ->nombre,residencia_kid)==0){
 			x = 1;
@@ -2302,7 +2302,7 @@ int ModificarInfoKid (Imprimir *ColaKids)
 						return;
 					}
 					
-					while (a -> siguiente != NULL)
+					while (a != NULL)
 					{
 						if(strcmp(a ->nombre,residencia_kid)==0){
 							strcpy(i->lugar_residencia,residencia_kid );
