@@ -1023,6 +1023,8 @@ Domicilio
 	Domicilio*siguiente;
 	Ruta*adyacencia;
 	
+	//ANALISIS
+	int contador;
 	//Algoritmos DJISK
 	int visitado,terminado;
 	int monto;
@@ -1109,6 +1111,7 @@ void insertarLugar ()
 	strcpy(nuevo-> nombre, nombre);
 	nuevo -> siguiente = NULL;
 	nuevo -> adyacencia = NULL;
+	nuevo -> contador = 0;
 	
 	//ALGORITMO RECORRIDOS
 	nuevo->visitado=nuevo->terminado=0;
