@@ -1134,6 +1134,47 @@ void insertarLugar ()
 	}
 }
 
+//INSERTAR POLO NORTE
+void insertarLugarPolo (char nombre [15],int codigo,int postal)
+{
+
+	Domicilio*aux;
+	Domicilio* nuevo = (Domicilio*)malloc(sizeof(Domicilio));
+	aux = inicio;
+	while(aux != NULL)
+	{
+		aux = aux -> siguiente;
+	}
+	nuevo -> codigo = codigo;
+	nuevo -> postal = postal;
+	strcpy(nuevo-> nombre, nombre);
+	nuevo -> siguiente = NULL;
+	nuevo -> adyacencia = NULL;
+	nuevo -> contador = 0;
+	
+	//ALGORITMO RECORRIDOS
+	nuevo->visitado=nuevo->terminado=0;
+    nuevo->monto=-1;
+    strcpy(nuevo->anterior, "0");
+	
+	if (inicio==NULL)
+	{
+		inicio = nuevo;
+	}
+	
+	else
+	{
+		aux = inicio;
+		while (aux -> siguiente != NULL)
+		{
+			aux = aux -> siguiente;
+		}
+		aux -> siguiente = nuevo;
+	}
+}
+
+
+
 
 
 //FUNCIÓN DE CREAR LAS CONEXION DE RUTAS CON DOMOCILIOS
@@ -1930,19 +1971,12 @@ void reiniciar()
 }
 
 
-void dijkstra()
+void dijkstra(char a [15], char b [15])
 {
 	Domicilio*aux=inicio;
-	char a [15];
-	char b [15];
+
 	char temp [15];
 	
-	printf("Ingresar punto inicial:");
-	fflush(stdin);
-	gets(a);
-	printf("Ingresar punto final:");
-	fflush(stdin);
-	gets(b);
 	
 	while(aux!=NULL)
 	{
@@ -2044,6 +2078,7 @@ typedef struct Kid
 	char necesidades_especiales [50];	
 	int contador_comportamiento_bueno;
 	int contador_comportamiento_malo;
+	char estado_carta [15];
 	struct Kid * next;	
 }Kid;
 
@@ -2067,7 +2102,7 @@ Imprimir * CrearColaKids(Imprimir * ColaKids)
 
 /* ----------------------- CREAR NODO NIÑO ----------------------- */
 
-Kid * CrearKid(char cedula[15], char nombre[200], char nombre_usuario[200],char correo [200], char lugar_residencia [50], char edad [50], char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
+Kid * CrearKid( char estado_carta [15], char cedula[15], char nombre[200], char nombre_usuario[200],char correo [200], char lugar_residencia [50], char edad [50], char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
 {
 	struct Kid *nuevo;
 	nuevo = (Kid *) malloc(sizeof(Kid));
@@ -2077,6 +2112,7 @@ Kid * CrearKid(char cedula[15], char nombre[200], char nombre_usuario[200],char 
 	strcpy(nuevo->nombre,nombre);	
 	strcpy(nuevo->nombre_usuario,nombre_usuario);
 	strcpy(nuevo->correo,correo);
+	strcpy(nuevo->estado_carta,"Sin asignar");
 	strcpy(nuevo->lugar_residencia,lugar_residencia);
 	strcpy(nuevo->edad,edad);
 	strcpy(nuevo->fecha_nacimiento,fecha_nacimiento);
@@ -2088,16 +2124,16 @@ Kid * CrearKid(char cedula[15], char nombre[200], char nombre_usuario[200],char 
 
 /* ----------------------- REGISTRAR NIÑO ----------------------- */
 
-Imprimir * InsertarKid(Imprimir * ColaKids, char cedula[15], char nombre[200], char nombre_usuario[200], char correo [200], char lugar_residencia [50], char edad [50], char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
+Imprimir * InsertarKid(Imprimir * ColaKids,char estado_carta [15], char cedula[15], char nombre[200], char nombre_usuario[200], char correo [200], char lugar_residencia [50], char edad [50], char fecha_nacimiento [50], char necesidades_especiales [200], int contador_comportamiento_bueno, int contador_comportamiento_malo)
 {
 	ColaKids->size = ColaKids-> size + 1;
 	if(ColaKids->front == NULL) 
 	{
-		ColaKids->front = CrearKid(cedula,nombre, nombre_usuario, correo,lugar_residencia,edad,fecha_nacimiento,necesidades_especiales,contador_comportamiento_bueno, contador_comportamiento_malo);
+		ColaKids->front = CrearKid( estado_carta, cedula,nombre, nombre_usuario, correo,lugar_residencia,edad,fecha_nacimiento,necesidades_especiales,contador_comportamiento_bueno, contador_comportamiento_malo);
 		ColaKids->rear = ColaKids->front;
 		return ColaKids;
 	}
-	ColaKids ->rear->next = CrearKid(cedula,nombre, nombre_usuario, correo,lugar_residencia,edad,fecha_nacimiento,necesidades_especiales,contador_comportamiento_bueno,contador_comportamiento_malo);
+	ColaKids ->rear->next = CrearKid( estado_carta, cedula,nombre, nombre_usuario, correo,lugar_residencia,edad,fecha_nacimiento,necesidades_especiales,contador_comportamiento_bueno,contador_comportamiento_malo);
 	ColaKids ->rear = ColaKids->rear->next;
 }
 
@@ -2231,7 +2267,7 @@ void RegistrarKidMain(Imprimir *ColaKids)
 	gets (necesidades_especiales_kid);
 	
 	
-	InsertarKid(ColaKids, cedula_kid, nombre_kid, nombre_usuario_kid, correo_kid, residencia_kid, edad_kid, nacimiento_kid, necesidades_especiales_kid, 0, 0);		
+	InsertarKid(ColaKids, "sin asignar", cedula_kid, nombre_kid, nombre_usuario_kid, correo_kid, residencia_kid, edad_kid, nacimiento_kid, necesidades_especiales_kid, 0, 0);		
 }
 
 
@@ -6019,8 +6055,82 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 
 /* ------------------------------------------------------------------ 14. ENTREGA DE JUGUETES ----------------------------------------------------------------- */
 
+int verificarEntregaNodo(char dom [15], Imprimir * ColaKids){
+	Kid * k;
+		
+		for(k = ColaKids->front; k!= NULL; k = k->next){
+			 if(strcmp(k->lugar_residencia,dom)==0 && strcmp(k->estado_carta, "Listo para entregar")==0){
+			 	return 1;
+			 }
+		}
+	return 0;
+}
 
+int ListaNinos (char dom [15], Imprimir * ColaKids){
+	Kid * k;
+		
+		for(k = ColaKids->front; k!= NULL; k = k->next){
+			 if(strcmp(k->lugar_residencia,dom)==0 && strcmp(k->estado_carta, "Listo para entregar")==0){
+			 	printf("\n%s", k -> nombre);
+			 }
+		}
+	return 0;
+}
+void entregarJuguetes(Imprimir * ColaKids){
+	//Estructuras
+	Domicilio * d; 
+	Ruta * r;
+	Carta * c;
+	Kid * k;
+	d = inicio;
+	int op;
+	
+	//opciones de entrega
+	printf("\n\n-------MENÚ ENTREGA JUGUETES---------");
+	printf("\n1. Todas las rutas.");
+	printf("\n2. Ruta terrestre.");
+	printf("\n3. Ruta marítima.");
+	printf("\n4. Ruta aérea.");
+	printf("\nOpcion:");
+	scanf("%d",op);
+	switch(op){
+		case 1:
+			printf("\n\n------TODAS LAS RUTAS-------");
+			while(d != NULL)
+			{
+				if (verificarEntregaNodo(d -> nombre , ColaKids)==1){
+					printf("\n-------- POLO NORTE -> %s ---------", d->nombre);
+					dijkstra("Polo Norte", d -> nombre);
+					printf("\n\n\n-------- LISTA NINOS EN %s ---------", d->nombre);
+					ListaNinos (d -> nombre, ColaKids);
+				
+				}
+				d = d -> siguiente;
+			}
+			
+			break;
+		case 2:
+			break;
+			printf("\n\n------RUTA TERRESTRE-------");
+	
+				
+	
+			d = d -> siguiente;
+			
+		case 3:
+			printf("\n\n------RUTA MARITIMA-------");
+			break;
+		case 4:
+			printf("\n\n------RUTA AEREA-------");
+			break;
+		default:
+			printf("\nERROR: opción no válida.");
+			break;
+		}
+		
+	}
 
+	
 
 
 
@@ -6357,6 +6467,7 @@ int main()
 	Arbol *a;
 	ImprimirCarta * ColaCartas = CrearColaCartas(ColaCartas);
 	ImprimirLD *ColaListaDeseos = CrearColaListaDeseos(ColaListaDeseos);
+	insertarLugarPolo ("Polo Norte", 000 ,101);
 	
 	
 	
