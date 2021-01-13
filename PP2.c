@@ -747,7 +747,7 @@ void Buscar(Arbol a, int dat)
 			printf("\nNombre: %s", actual -> nombre);
 			printf("\nCategoria: %s", actual -> categoria);
 			printf("\nRango de edad: %d a %d", actual -> edad_minima, actual -> edad_maxima);
-			printf("\nCosto: %d", actual -> costo);	
+			//printf("\nCosto: %d", actual -> costo);	
 			printf("\nDescripcion: %s", actual -> descripcion);	
 			return;
 		}
@@ -769,7 +769,7 @@ void PreOrden(Arbol a)
 		printf("\nNombre: %s", a -> nombre);
 		printf("\nCategoria: %s", a -> categoria);
 		printf("\nRango de edad: %d a %d", a -> edad_minima, a -> edad_maxima);
-		printf("\nCosto: %d", a -> costo);	
+		//printf("\nCosto: %d", a -> costo);	
 		printf("\nDescripcion: %s", a -> descripcion);	
 		printf("\n_______________________________\n\n");
 	
@@ -3044,6 +3044,13 @@ typedef struct Carta
 	int cod8;
 	int cod9;
 	int cod10;
+	char estado_jug[30];
+	
+	int contador_2017;
+	int contador_2018;
+	int contador_2019;
+	int contador_2020;
+	int contador_2021;
 	
 	struct Carta * next;	
 }Carta;
@@ -3068,7 +3075,7 @@ ImprimirCarta * CrearColaCartas(ImprimirCarta * ColaCartas)
 
 /* ----------------------- CREAR NODO CARTA ----------------------- */
 
-Carta * CrearCarta(char cedula[15], char year[10], char juguete1[50], int cod1, char juguete2[50], int cod2,char juguete3[50], int cod3,char juguete4[50], int cod4,char juguete5[50], int cod5,char juguete6[50], int cod6,char juguete7[50], int cod7,char juguete8[50], int cod8,char juguete9[50], int cod9,char juguete10[50], int cod10 )
+Carta * CrearCarta(char cedula[15], char year[10], char juguete1[50], int cod1, char juguete2[50], int cod2,char juguete3[50], int cod3,char juguete4[50], int cod4,char juguete5[50], int cod5,char juguete6[50], int cod6,char juguete7[50], int cod7,char juguete8[50], int cod8,char juguete9[50], int cod9,char juguete10[50], int cod10, char estado_jug[30], int contador_2017, int contador_2018, int contador_2019, int contador_2020, int contador_2021)
 {
 	struct Carta *nuevo;
 	nuevo = (Carta *) malloc(sizeof(Carta));
@@ -3096,22 +3103,28 @@ Carta * CrearCarta(char cedula[15], char year[10], char juguete1[50], int cod1, 
 	nuevo->cod9=cod9;
 	strcpy(nuevo->juguete10,juguete10);	
 	nuevo->cod10=cod10;	
+	strcpy(nuevo->estado_jug,estado_jug);
+	nuevo->contador_2017=contador_2017;	
+	nuevo->contador_2018=contador_2018;	
+	nuevo->contador_2019=contador_2019;	
+	nuevo->contador_2020=contador_2020;	
+	nuevo->contador_2021=contador_2021;		
 
 	return nuevo;
 }
 
 /* ----------------------- REGISTRAR CARTA ----------------------- */
 
-ImprimirCarta * InsertarCarta(ImprimirCarta * ColaCartas,char cedula[15], char year[10],  char juguete1[50], int cod1, char juguete2[50], int cod2,char juguete3[50], int cod3,char juguete4[50], int cod4,char juguete5[50], int cod5,char juguete6[50], int cod6,char juguete7[50], int cod7,char juguete8[50], int cod8,char juguete9[50], int cod9,char juguete10[50], int cod10 )
+ImprimirCarta * InsertarCarta(ImprimirCarta * ColaCartas,char cedula[15], char year[10],  char juguete1[50], int cod1, char juguete2[50], int cod2,char juguete3[50], int cod3,char juguete4[50], int cod4,char juguete5[50], int cod5,char juguete6[50], int cod6,char juguete7[50], int cod7,char juguete8[50], int cod8,char juguete9[50], int cod9,char juguete10[50], int cod10, char estado_jug[30], int contador_2017, int contador_2018, int contador_2019, int contador_2020, int contador_2021)
 {
 	ColaCartas->size = ColaCartas-> size + 1;
 	if(ColaCartas->front == NULL) 
 	{
-		ColaCartas->front = CrearCarta(cedula, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6,cod6, juguete7,cod7,juguete8,cod8, juguete9, cod9, juguete10,cod10);
+		ColaCartas->front = CrearCarta(cedula, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6,cod6, juguete7,cod7,juguete8,cod8, juguete9, cod9, juguete10,cod10, estado_jug, contador_2017, contador_2018, contador_2019, contador_2020, contador_2021);
 		ColaCartas->rear = ColaCartas->front;
 		return ColaCartas;
 	}
-	ColaCartas ->rear->next = CrearCarta(cedula, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6,cod6, juguete7,cod7,juguete8,cod8, juguete9, cod9, juguete10,cod10);
+	ColaCartas ->rear->next = CrearCarta(cedula, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6,cod6, juguete7,cod7,juguete8,cod8, juguete9, cod9, juguete10,cod10, estado_jug,contador_2017, contador_2018, contador_2019, contador_2020, contador_2021);
 }
 
 
@@ -3145,6 +3158,14 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 	int cod8;
 	int cod9;
 	int cod10;
+	
+	char estado_jug[30];
+	int contador_2017=0;
+	int contador_2018=0;
+	int contador_2019=0;
+	int contador_2020=0;
+	int contador_2021=0;
+	
 
 	char jugueteLD1[50]="0";
 	char jugueteLD2[50]="0";
@@ -3210,6 +3231,28 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 			fflush (stdin);
 			gets (year);
 			
+			if(strcmp(year,"2017")==0)
+			{
+				contador_2017++;
+			}
+			else if(strcmp(year,"2018")==0)
+			{
+				contador_2018++;
+			}
+			else if(strcmp(year,"2019")==0)
+			{
+				contador_2019++;
+			}
+			else if(strcmp(year,"2020")==0)
+			{
+				contador_2020++;
+			}
+			else if(strcmp(year,"2021")==0)
+			{
+				contador_2021++;
+			}
+
+
 			printf("\n----------- JUGUETES DISPONIBLES -----------\n\n");
 			PreOrden(ArbolInt);
 			
@@ -3694,9 +3737,10 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 				{
 					printf("ERROR: Solo se permite un maximo de 10 juguetes en la carta");
 				}
-
-				InsertarCarta(ColaCartas, cedula_kid, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6, cod6, juguete7, cod7, juguete8, cod8, juguete9, cod9, juguete10, cod10);
-
+				
+				strcpy(estado_jug,"Solicitado");
+				InsertarCarta(ColaCartas, cedula_kid, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6, cod6, juguete7, cod7, juguete8, cod8, juguete9, cod9, juguete10, cod10, estado_jug, contador_2017, contador_2018,contador_2019,contador_2020, contador_2021);
+				
 				//Cambiar el estado del juguete
 			}
 			else if (strcmp(opc_carta,"2")==0)
