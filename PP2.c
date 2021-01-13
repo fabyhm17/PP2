@@ -5477,7 +5477,6 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 				}	
 									
 				InsertarListaDeseos(ColaListaDeseos,cedula_kid, jugueteLD1,jugueteLD2, jugueteLD3, jugueteLD4, jugueteLD5, jugueteLD6, jugueteLD7,jugueteLD8, jugueteLD9, jugueteLD10, jugueteLD11, jugueteLD12, jugueteLD13, jugueteLD14, jugueteLD15, jugueteLD16, jugueteLD17, jugueteLD18, jugueteLD19, jugueteLD20, codLD1, codLD2, codLD3, codLD4, codLD5, codLD6, codLD7, codLD8, codLD9, codLD10, codLD11, codLD12, codLD13, codLD14, codLD15, codLD16, codLD17, codLD18, codLD19, codLD20);
-				ConsultarListaDeseos(ColaListaDeseos); //Para realizar las pruebas 
 			}
 		}
 	}
