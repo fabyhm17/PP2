@@ -2632,7 +2632,7 @@ typedef struct ListaDeseos
 
 typedef struct ImprimirLD
 {
-	ListaDeseos*front;
+	ListaDeseos *front;
 	ListaDeseos *rear;
 	int size;
 }ImprimirLD;
@@ -2667,16 +2667,16 @@ ListaDeseos * CrearListaDeseos(char cedula[15], char jugueteLD1[50],char juguete
 	strcpy(nuevo->jugueteLD8,jugueteLD8);
 	strcpy(nuevo->jugueteLD9,jugueteLD9);
 	strcpy(nuevo->jugueteLD10,jugueteLD10);	
-	strcpy(nuevo->jugueteLD1,jugueteLD11);
-	strcpy(nuevo->jugueteLD2,jugueteLD12);
-	strcpy(nuevo->jugueteLD3,jugueteLD13);
-	strcpy(nuevo->jugueteLD4,jugueteLD14);
-	strcpy(nuevo->jugueteLD5,jugueteLD15);
-	strcpy(nuevo->jugueteLD6,jugueteLD16);
-	strcpy(nuevo->jugueteLD7,jugueteLD17);
-	strcpy(nuevo->jugueteLD8,jugueteLD18);
-	strcpy(nuevo->jugueteLD9,jugueteLD19);
-	strcpy(nuevo->jugueteLD10,jugueteLD20);	
+	strcpy(nuevo->jugueteLD11,jugueteLD11);
+	strcpy(nuevo->jugueteLD12,jugueteLD12);
+	strcpy(nuevo->jugueteLD13,jugueteLD13);
+	strcpy(nuevo->jugueteLD14,jugueteLD14);
+	strcpy(nuevo->jugueteLD15,jugueteLD15);
+	strcpy(nuevo->jugueteLD16,jugueteLD16);
+	strcpy(nuevo->jugueteLD17,jugueteLD17);
+	strcpy(nuevo->jugueteLD18,jugueteLD18);
+	strcpy(nuevo->jugueteLD19,jugueteLD19);
+	strcpy(nuevo->jugueteLD20,jugueteLD20);	
 	nuevo->codLD1=codLD1;
 	nuevo->codLD2=codLD2;
 	nuevo->codLD3=codLD3;
@@ -2763,7 +2763,7 @@ typedef struct Carta
 
 typedef struct ImprimirCarta
 {
-	Carta*front;
+	Carta *front;
 	Carta *rear;
 	int size;
 }ImprimirCarta;
@@ -2831,6 +2831,7 @@ ImprimirCarta * InsertarCarta(ImprimirCarta * ColaCartas,char cedula[15], char y
 		return ColaCartas;
 	}
 	ColaCartas ->rear->next = CrearCarta(cedula, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6,cod6, juguete7,cod7,juguete8,cod8, juguete9, cod9, juguete10,cod10, estado_jug,contador_2017, contador_2018, contador_2019, contador_2020, contador_2021);
+	ColaCartas ->rear = ColaCartas ->rear->next;
 }
 
 
@@ -2936,2450 +2937,2457 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 			printf ("Ingrese el año para el que corresponde la carta [yyyy] : ");
 			fflush (stdin);
 			gets (year);
-		
-
-
-			printf("\n----------- JUGUETES DISPONIBLES -----------\n\n");
-			PreOrden(ArbolInt);
 			
-			printf ("\n  OPCIONES DISPONIBLES \n");
-			printf ("1. Añadir juguete a la carta\n");
-			printf ("2. Añadir juguete a la lista de deseos\n");
-			
-			printf("\nIngrese el numero de la opcion que desea realizar: ");
-			fflush (stdin);
-			gets (opc_carta);
-			
-	
-			if (strcmp(opc_carta,"1")==0)
+			if (strcmp(year,"2017")==1 || strcmp(year,"2018")==1 || strcmp(year,"2019")==1 || strcmp(year,"2020")==1 || strcmp(year,"2021")==1) 
 			{
-				printf("Ingrese la catidad de juguetes que desea seleccionar: ");
-				fflush (stdin);
-				gets (cantidad_jug);
-				
-				if (strcmp(cantidad_jug,"1")==0)
-				{
-					printf ("Ingrese el nombre del juguete que desea seleccionar: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Ingrese el codigo del juguete que desea seleccionar: ");
-					scanf("%d",&cod1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod1);	
-
-					if(strcmp(year,"2017")==0)
-					{
-						contador_2017 = 1;
-					}
-					if(strcmp(year,"2018")==0)
-					{
-						contador_2018 = 1;
-					}
-					if(strcmp(year,"2019")==0)
-					{
-						contador_2019 = 1;
-					}
-					if(strcmp(year,"2020")==0)
-					{
-						contador_2020 = 1;
-					}
-					if(strcmp(year,"2021")==0)
-					{
-						contador_2021 = 1;
-					}
-				}
-				
-				else if (strcmp(cantidad_jug,"2")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&cod1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod1);	
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&cod2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod2);	
-
-					if(strcmp(year,"2017")==0)
-					{
-						contador_2017 = 2;
-					}
-					if(strcmp(year,"2018")==0)
-					{
-						contador_2018 = 2;
-					}
-					if(strcmp(year,"2019")==0)
-					{
-						contador_2019 = 2;
-					}
-				    if(strcmp(year,"2020")==0)
-					{
-						contador_2020 = 2;
-					}
-					if(strcmp(year,"2021")==0)
-					{
-						contador_2021 = 2;
-					}
-				}
-				else if (strcmp(cantidad_jug,"3")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&cod1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod1);	
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&cod2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod2);	
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&cod3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod3);	
-					
-					if(strcmp(year,"2017")==0)
-					{
-						contador_2017 = 3;
-					}
-					else if(strcmp(year,"2018")==0)
-					{
-						contador_2018 = 3;
-					}
-					else if(strcmp(year,"2019")==0)
-					{
-						contador_2019 = 3;
-					}
-					else if(strcmp(year,"2020")==0)
-					{
-						contador_2020 = 3;
-					}
-					else if(strcmp(year,"2021")==0)
-					{
-						contador_2021 = 3;
-					}
-				}
-				
-				else if (strcmp(cantidad_jug,"4")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&cod1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod1);	
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&cod2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod2);	
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&cod3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod3);	
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&cod4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod4);	
-					
-					if(strcmp(year,"2017")==0)
-					{
-						contador_2017 = 4;
-					}
-					else if(strcmp(year,"2018")==0)
-					{
-						contador_2018 = 4;
-					}
-					else if(strcmp(year,"2019")==0)
-					{
-						contador_2019 = 4;
-					}
-					else if(strcmp(year,"2020")==0)
-					{
-						contador_2020 = 4;
-					}
-					else if(strcmp(year,"2021")==0)
-					{
-						contador_2021 = 4;
-					}
-				}						
-
-				else if (strcmp(cantidad_jug,"5")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&cod1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod1);	
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&cod2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod2);	
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&cod3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod3);	
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&cod4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod4);	
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&cod5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod5);	
-					
-					if(strcmp(year,"2017")==0)
-					{
-						contador_2017 = 5;
-					}
-					else if(strcmp(year,"2018")==0)
-					{
-						contador_2018 = 5;
-					}
-					else if(strcmp(year,"2019")==0)
-					{
-						contador_2019 = 5;
-					}
-					else if(strcmp(year,"2020")==0)
-					{
-						contador_2020 = 5;
-					}
-					else if(strcmp(year,"2021")==0)
-					{
-						contador_2021 = 5;
-					}
-				}
-				
-				else if (strcmp(cantidad_jug,"6")==0)
-				{
-					printf ("\nIngrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&cod1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod1);	
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&cod2);
-					printf ("\nLos datos del juguete son:\n ");
-					Buscar(ArbolInt, cod2);	
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&cod3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod3);	
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&cod4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod4);	
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&cod5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod5);	
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (juguete6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&cod6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod6);	
-					
-					if(strcmp(year,"2017")==0)
-					{
-						contador_2017 = 6;
-					}
-					else if(strcmp(year,"2018")==0)
-					{
-						contador_2018 = 6;
-					}
-					else if(strcmp(year,"2019")==0)
-					{
-						contador_2019 = 6;
-					}
-					else if(strcmp(year,"2020")==0)
-					{
-						contador_2020 = 6;
-					}
-					else if(strcmp(year,"2021")==0)
-					{
-						contador_2021 = 6;
-					}
-				}
-				
-				else if (strcmp(cantidad_jug,"7")==0)
-				{
-					printf ("\nIngrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&cod1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod1);	
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&cod2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod2);	
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&cod3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod3);	
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&cod4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod4);	
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&cod5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod5);	
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (juguete6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&cod6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod6);	
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (juguete7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&cod7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod7);	
-
-					if(strcmp(year,"2017")==0)
-					{
-						contador_2017 = 7;
-					}
-					else if(strcmp(year,"2018")==0)
-					{
-						contador_2018 = 7;
-					}
-					else if(strcmp(year,"2019")==0)
-					{
-						contador_2019 = 7;
-					}
-					else if(strcmp(year,"2020")==0)
-					{
-						contador_2020 = 7;
-					}
-					else if(strcmp(year,"2021")==0)
-					{
-						contador_2021 = 7;
-					}
-				}
-				
-				else if (strcmp(cantidad_jug,"8")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&cod1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod1);	
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&cod2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod2);	
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&cod3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod3);	
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&cod4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod4);	
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&cod5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod5);	
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (juguete6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&cod6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod6);	
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (juguete7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&cod7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod7);	
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (juguete8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&cod8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod8);	
-					
-					if(strcmp(year,"2017")==0)
-					{
-						contador_2017 = 8;
-					}
-					else if(strcmp(year,"2018")==0)
-					{
-						contador_2018 = 8;
-					}
-					else if(strcmp(year,"2019")==0)
-					{
-						contador_2019 = 8;
-					}
-					else if(strcmp(year,"2020")==0)
-					{
-						contador_2020 = 8;
-					}
-					else if(strcmp(year,"2021")==0)
-					{
-						contador_2021 = 8;
-					}
-				}
-				
-				else if (strcmp(cantidad_jug,"9")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&cod1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod1);	
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&cod2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod2);	
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&cod3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod3);	
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&cod4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod4);	
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&cod5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod5);	
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (juguete6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&cod6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod6);	
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (juguete7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&cod7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod7);	
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (juguete8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&cod8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod8);	
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (juguete9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&cod9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod9);	
-
-					if(strcmp(year,"2017")==0)
-					{
-						contador_2017 = 9;
-					}
-					else if(strcmp(year,"2018")==0)
-					{
-						contador_2018 = 9;
-					}
-					else if(strcmp(year,"2019")==0)
-					{
-						contador_2019 = 9;
-					}
-					else if(strcmp(year,"2020")==0)
-					{
-						contador_2020 = 9;
-					}
-					else if(strcmp(year,"2021")==0)
-					{
-						contador_2021 = 9;
-					}
-				}
-					
-				else if (strcmp(cantidad_jug,"10")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (juguete1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&cod1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod1);	
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (juguete2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&cod2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod2);	
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (juguete3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&cod3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod3);	
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (juguete4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&cod4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod4);	
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (juguete5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&cod5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod5);	
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (juguete6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&cod6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod6);	
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (juguete7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&cod7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod7);	
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (juguete8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&cod8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod8);	
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (juguete9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&cod9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod9);	
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (juguete10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&cod10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod10);
-					
-					if(strcmp(year,"2017")==0)
-					{
-						contador_2017 = 10;
-					}
-					else if(strcmp(year,"2018")==0)
-					{
-						contador_2018 = 10;
-					}
-					else if(strcmp(year,"2019")==0)
-					{
-						contador_2019 = 10;
-					}
-					else if(strcmp(year,"2020")==0)
-					{
-						contador_2020 = 10;
-					}
-					else if(strcmp(year,"2021")==0)
-					{
-						contador_2021 = 10;
-					}	
-				}
-				else
-				{
-					printf("ERROR: Solo se permite un maximo de 10 juguetes en la carta");
-				}
-				
-				strcpy(estado_jug,"Solicitado");
-				InsertarCarta(ColaCartas, cedula_kid, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6, cod6, juguete7, cod7, juguete8, cod8, juguete9, cod9, juguete10, cod10, estado_jug, contador_2017, contador_2018,contador_2019,contador_2020, contador_2021);
-				
-				//Cambiar el estado del juguete
+         		printf("ERROR: solo se aceptan cartas de los años 2017, 2018, 2019, 2020, 2021. La carta no se pudo registrar");
+         		return;
 			}
-			else if (strcmp(opc_carta,"2")==0)
+			else
 			{
-				printf("Ingrese la catidad de juguetes que desea seleccionar: "); 
-				gets (cantidad_jug);
+
+				printf("\n----------- JUGUETES DISPONIBLES -----------\n\n");
+				PreOrden(ArbolInt);
 				
-				if (strcmp(cantidad_jug,"1")==0)
-				{
-					printf ("Ingrese el nombre del juguete que desea seleccionar: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete que desea seleccionar: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);	
-				}
-				else if (strcmp(cantidad_jug,"2")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-				}
-				else if (strcmp(cantidad_jug,"3")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-				}
-				else if (strcmp(cantidad_jug,"4")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-				}						
-
-				else if (strcmp(cantidad_jug,"5")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-				}
+				printf ("\n  OPCIONES DISPONIBLES \n");
+				printf ("1. Añadir juguete a la carta\n");
+				printf ("2. Añadir juguete a la lista de deseos\n");
 				
-				else if (strcmp(cantidad_jug,"6")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-				}
-				else if (strcmp(cantidad_jug,"7")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-				}
-				else if (strcmp(cantidad_jug,"8")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-				}
-				else if (strcmp(cantidad_jug,"9")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-				}	
-				else if (strcmp(cantidad_jug,"10")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-				}	
-				else if (strcmp(cantidad_jug,"11")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-
-					printf ("\nIngrese el nombre del juguete 11: ");
-					fflush (stdin);
-					gets (jugueteLD11);
-					printf ("Ingrese el codigo del juguete 11: ");
-					scanf("%d",&codLD11);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD11);
-				}
+				printf("\nIngrese el numero de la opcion que desea realizar: ");
+				fflush (stdin);
+				gets (opc_carta);
 				
-				else if (strcmp(cantidad_jug,"12")==0)
+		
+				if (strcmp(opc_carta,"1")==0)
 				{
-					printf ("Ingrese el nombre del juguete 1: ");
+					printf("Ingrese la catidad de juguetes que desea seleccionar: ");
 					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
+					gets (cantidad_jug);
 					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
+					if (strcmp(cantidad_jug,"1")==0)
+					{
+						printf ("Ingrese el nombre del juguete que desea seleccionar: ");
+						fflush (stdin);
+						gets (juguete1);
+						printf ("Ingrese el codigo del juguete que desea seleccionar: ");
+						scanf("%d",&cod1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod1);	
+	
+						if(strcmp(year,"2017")==0)
+						{
+							contador_2017 = 1;
+						}
+						if(strcmp(year,"2018")==0)
+						{
+							contador_2018 = 1;
+						}
+						if(strcmp(year,"2019")==0)
+						{
+							contador_2019 = 1;
+						}
+						if(strcmp(year,"2020")==0)
+						{
+							contador_2020 = 1;
+						}
+						if(strcmp(year,"2021")==0)
+						{
+							contador_2021 = 1;
+						}
+					}
 					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
+					else if (strcmp(cantidad_jug,"2")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (juguete1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&cod1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod1);	
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (juguete2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&cod2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod2);	
+	
+						if(strcmp(year,"2017")==0)
+						{
+							contador_2017 = 2;
+						}
+						if(strcmp(year,"2018")==0)
+						{
+							contador_2018 = 2;
+						}
+						if(strcmp(year,"2019")==0)
+						{
+							contador_2019 = 2;
+						}
+					    if(strcmp(year,"2020")==0)
+						{
+							contador_2020 = 2;
+						}
+						if(strcmp(year,"2021")==0)
+						{
+							contador_2021 = 2;
+						}
+					}
+					else if (strcmp(cantidad_jug,"3")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (juguete1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&cod1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod1);	
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (juguete2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&cod2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod2);	
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (juguete3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&cod3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod3);	
+						
+						if(strcmp(year,"2017")==0)
+						{
+							contador_2017 = 3;
+						}
+						if(strcmp(year,"2018")==0)
+						{
+							contador_2018 = 3;
+						}
+						if(strcmp(year,"2019")==0)
+						{
+							contador_2019 = 3;
+						}
+						if(strcmp(year,"2020")==0)
+						{
+							contador_2020 = 3;
+						}
+						if(strcmp(year,"2021")==0)
+						{
+							contador_2021 = 3;
+						}
+					}
 					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
+					else if (strcmp(cantidad_jug,"4")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (juguete1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&cod1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod1);	
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (juguete2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&cod2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod2);	
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (juguete3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&cod3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod3);	
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (juguete4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&cod4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod4);	
+						
+						if(strcmp(year,"2017")==0)
+						{
+							contador_2017 = 4;
+						}
+						if(strcmp(year,"2018")==0)
+						{
+							contador_2018 = 4;
+						}
+						if(strcmp(year,"2019")==0)
+						{
+							contador_2019 = 4;
+						}
+						if(strcmp(year,"2020")==0)
+						{
+							contador_2020 = 4;
+						}
+						if(strcmp(year,"2021")==0)
+						{
+							contador_2021 = 4;
+						}
+					}						
+	
+					else if (strcmp(cantidad_jug,"5")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (juguete1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&cod1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod1);	
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (juguete2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&cod2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod2);	
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (juguete3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&cod3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod3);	
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (juguete4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&cod4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod4);	
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (juguete5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&cod5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod5);	
+						
+						if(strcmp(year,"2017")==0)
+						{
+							contador_2017 = 5;
+						}
+						if(strcmp(year,"2018")==0)
+						{
+							contador_2018 = 5;
+						}
+						if(strcmp(year,"2019")==0)
+						{
+							contador_2019 = 5;
+						}
+						if(strcmp(year,"2020")==0)
+						{
+							contador_2020 = 5;
+						}
+						if(strcmp(year,"2021")==0)
+						{
+							contador_2021 = 5;
+						}
+					}
 					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
+					else if (strcmp(cantidad_jug,"6")==0)
+					{
+						printf ("\nIngrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (juguete1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&cod1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod1);	
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (juguete2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&cod2);
+						printf ("\nLos datos del juguete son:\n ");
+						Buscar(ArbolInt, cod2);	
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (juguete3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&cod3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod3);	
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (juguete4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&cod4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod4);	
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (juguete5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&cod5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod5);	
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (juguete6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&cod6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod6);	
+						
+						if(strcmp(year,"2017")==0)
+						{
+							contador_2017 = 6;
+						}
+						if(strcmp(year,"2018")==0)
+						{
+							contador_2018 = 6;
+						}
+						if(strcmp(year,"2019")==0)
+						{
+							contador_2019 = 6;
+						}
+						if(strcmp(year,"2020")==0)
+						{
+							contador_2020 = 6;
+						}
+						if(strcmp(year,"2021")==0)
+						{
+							contador_2021 = 6;
+						}
+					}
 					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
+					else if (strcmp(cantidad_jug,"7")==0)
+					{
+						printf ("\nIngrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (juguete1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&cod1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod1);	
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (juguete2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&cod2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod2);	
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (juguete3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&cod3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod3);	
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (juguete4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&cod4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod4);	
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (juguete5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&cod5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod5);	
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (juguete6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&cod6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod6);	
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (juguete7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&cod7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod7);	
+	
+						if(strcmp(year,"2017")==0)
+						{
+							contador_2017 = 7;
+						}
+						if(strcmp(year,"2018")==0)
+						{
+							contador_2018 = 7;
+						}
+						if(strcmp(year,"2019")==0)
+						{
+							contador_2019 = 7;
+						}
+						if(strcmp(year,"2020")==0)
+						{
+							contador_2020 = 7;
+						}
+						if(strcmp(year,"2021")==0)
+						{
+							contador_2021 = 7;
+						}
+					}
 					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
+					else if (strcmp(cantidad_jug,"8")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (juguete1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&cod1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod1);	
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (juguete2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&cod2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod2);	
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (juguete3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&cod3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod3);	
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (juguete4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&cod4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod4);	
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (juguete5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&cod5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod5);	
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (juguete6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&cod6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod6);	
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (juguete7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&cod7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod7);	
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (juguete8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&cod8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod8);	
+						
+						if(strcmp(year,"2017")==0)
+						{
+							contador_2017 = 8;
+						}
+						if(strcmp(year,"2018")==0)
+						{
+							contador_2018 = 8;
+						}
+						if(strcmp(year,"2019")==0)
+						{
+							contador_2019 = 8;
+						}
+						if(strcmp(year,"2020")==0)
+						{
+							contador_2020 = 8;
+						}
+						if(strcmp(year,"2021")==0)
+						{
+							contador_2021 = 8;
+						}
+					}
 					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-
-					printf ("\nIngrese el nombre del juguete 11: ");
-					fflush (stdin);
-					gets (jugueteLD11);
-					printf ("Ingrese el codigo del juguete 11: ");
-					scanf("%d",&codLD11);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD11);
+					else if (strcmp(cantidad_jug,"9")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (juguete1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&cod1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod1);	
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (juguete2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&cod2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod2);	
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (juguete3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&cod3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod3);	
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (juguete4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&cod4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod4);	
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (juguete5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&cod5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod5);	
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (juguete6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&cod6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod6);	
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (juguete7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&cod7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod7);	
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (juguete8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&cod8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod8);	
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (juguete9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&cod9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod9);	
+	
+						if(strcmp(year,"2017")==0)
+						{
+							contador_2017 = 9;
+						}
+						if(strcmp(year,"2018")==0)
+						{
+							contador_2018 = 9;
+						}
+						if(strcmp(year,"2019")==0)
+						{
+							contador_2019 = 9;
+						}
+						if(strcmp(year,"2020")==0)
+						{
+							contador_2020 = 9;
+						}
+						if(strcmp(year,"2021")==0)
+						{
+							contador_2021 = 9;
+						}
+					}
+						
+					else if (strcmp(cantidad_jug,"10")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (juguete1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&cod1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod1);	
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (juguete2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&cod2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod2);	
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (juguete3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&cod3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod3);	
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (juguete4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&cod4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod4);	
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (juguete5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&cod5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod5);	
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (juguete6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&cod6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod6);	
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (juguete7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&cod7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod7);	
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (juguete8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&cod8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod8);	
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (juguete9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&cod9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod9);	
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (juguete10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&cod10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, cod10);
+						
+						if(strcmp(year,"2017")==0)
+						{
+							contador_2017 = 10;
+						}
+						if(strcmp(year,"2018")==0)
+						{
+							contador_2018 = 10;
+						}
+						if(strcmp(year,"2019")==0)
+						{
+							contador_2019 = 10;
+						}
+						if(strcmp(year,"2020")==0)
+						{
+							contador_2020 = 10;
+						}
+						if(strcmp(year,"2021")==0)
+						{
+							contador_2021 = 10;
+						}	
+					}
+					else
+					{
+						printf("ERROR: Solo se permite un maximo de 10 juguetes en la carta");
+					}
 					
-					printf ("\nIngrese el nombre del juguete 12: ");
-					fflush (stdin);
-					gets (jugueteLD12);
-					printf ("Ingrese el codigo del juguete 12: ");
-					scanf("%d",&codLD12);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD12);
+					strcpy(estado_jug,"Solicitado");
+					InsertarCarta(ColaCartas, cedula_kid, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6, cod6, juguete7, cod7, juguete8, cod8, juguete9, cod9, juguete10, cod10, estado_jug, contador_2017, contador_2018,contador_2019,contador_2020, contador_2021);
+					
+					//Cambiar el estado del juguete
 				}
-				else if (strcmp(cantidad_jug,"13")==0)
+				else if (strcmp(opc_carta,"2")==0)
 				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
+					printf("Ingrese la catidad de juguetes que desea seleccionar: "); 
+					gets (cantidad_jug);
 					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
+					if (strcmp(cantidad_jug,"1")==0)
+					{
+						printf ("Ingrese el nombre del juguete que desea seleccionar: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete que desea seleccionar: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);	
+					}
+					else if (strcmp(cantidad_jug,"2")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+					}
+					else if (strcmp(cantidad_jug,"3")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+					}
+					else if (strcmp(cantidad_jug,"4")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+					}						
+	
+					else if (strcmp(cantidad_jug,"5")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+					}
 					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
+					else if (strcmp(cantidad_jug,"6")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+					}
+					else if (strcmp(cantidad_jug,"7")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+					}
+					else if (strcmp(cantidad_jug,"8")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+					}
+					else if (strcmp(cantidad_jug,"9")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+					}	
+					else if (strcmp(cantidad_jug,"10")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+					}	
+					else if (strcmp(cantidad_jug,"11")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+	
+						printf ("\nIngrese el nombre del juguete 11: ");
+						fflush (stdin);
+						gets (jugueteLD11);
+						printf ("Ingrese el codigo del juguete 11: ");
+						scanf("%d",&codLD11);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD11);
+					}
 					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
+					else if (strcmp(cantidad_jug,"12")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+	
+						printf ("\nIngrese el nombre del juguete 11: ");
+						fflush (stdin);
+						gets (jugueteLD11);
+						printf ("Ingrese el codigo del juguete 11: ");
+						scanf("%d",&codLD11);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD11);
+						
+						printf ("\nIngrese el nombre del juguete 12: ");
+						fflush (stdin);
+						gets (jugueteLD12);
+						printf ("Ingrese el codigo del juguete 12: ");
+						scanf("%d",&codLD12);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD12);
+					}
+					else if (strcmp(cantidad_jug,"13")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+	
+						printf ("\nIngrese el nombre del juguete 11: ");
+						fflush (stdin);
+						gets (jugueteLD11);
+						printf ("Ingrese el codigo del juguete 11: ");
+						scanf("%d",&codLD11);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD11);
+						
+						printf ("\nIngrese el nombre del juguete 12: ");
+						fflush (stdin);
+						gets (jugueteLD12);
+						printf ("Ingrese el codigo del juguete 12: ");
+						scanf("%d",&codLD12);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD12);
+						
+						printf ("\nIngrese el nombre del juguete 13: ");
+						fflush (stdin);
+						gets (jugueteLD13);
+						printf ("Ingrese el codigo del juguete 13: ");
+						scanf("%d",&codLD13);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD13);
+					}
+					else if (strcmp(cantidad_jug,"14")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+	
+						printf ("\nIngrese el nombre del juguete 11: ");
+						fflush (stdin);
+						gets (jugueteLD11);
+						printf ("Ingrese el codigo del juguete 11: ");
+						scanf("%d",&codLD11);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD11);
+						
+						printf ("\nIngrese el nombre del juguete 12: ");
+						fflush (stdin);
+						gets (jugueteLD12);
+						printf ("Ingrese el codigo del juguete 12: ");
+						scanf("%d",&codLD12);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD12);
+						
+						printf ("\nIngrese el nombre del juguete 13: ");
+						fflush (stdin);
+						gets (jugueteLD13);
+						printf ("Ingrese el codigo del juguete 13: ");
+						scanf("%d",&codLD13);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD13);
+						
+						printf ("\nIngrese el nombre del juguete 14: ");
+						fflush (stdin);
+						gets (jugueteLD14);
+						printf ("Ingrese el codigo del juguete 14: ");
+						scanf("%d",&codLD14);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD14);
+					}			
+					else if (strcmp(cantidad_jug,"15")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+	
+						printf ("\nIngrese el nombre del juguete 11: ");
+						fflush (stdin);
+						gets (jugueteLD11);
+						printf ("Ingrese el codigo del juguete 11: ");
+						scanf("%d",&codLD11);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD11);
+						
+						printf ("\nIngrese el nombre del juguete 12: ");
+						fflush (stdin);
+						gets (jugueteLD12);
+						printf ("Ingrese el codigo del juguete 12: ");
+						scanf("%d",&codLD12);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD12);
+						
+						printf ("\nIngrese el nombre del juguete 13: ");
+						fflush (stdin);
+						gets (jugueteLD13);
+						printf ("Ingrese el codigo del juguete 13: ");
+						scanf("%d",&codLD13);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD13);
+						
+						printf ("\nIngrese el nombre del juguete 14: ");
+						fflush (stdin);
+						gets (jugueteLD14);
+						printf ("Ingrese el codigo del juguete 14: ");
+						scanf("%d",&codLD14);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD14);
+						
+						printf ("\nIngrese el nombre del juguete 15: ");
+						fflush (stdin);
+						gets (jugueteLD15);
+						printf ("Ingrese el codigo del juguete 15: ");
+						scanf("%d",&codLD15);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD15);
+					}	
+					else if (strcmp(cantidad_jug,"16")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+	
+						printf ("\nIngrese el nombre del juguete 11: ");
+						fflush (stdin);
+						gets (jugueteLD11);
+						printf ("Ingrese el codigo del juguete 11: ");
+						scanf("%d",&codLD11);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD11);
+						
+						printf ("\nIngrese el nombre del juguete 12: ");
+						fflush (stdin);
+						gets (jugueteLD12);
+						printf ("Ingrese el codigo del juguete 12: ");
+						scanf("%d",&codLD12);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD12);
+						
+						printf ("\nIngrese el nombre del juguete 13: ");
+						fflush (stdin);
+						gets (jugueteLD13);
+						printf ("Ingrese el codigo del juguete 13: ");
+						scanf("%d",&codLD13);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD13);
+						
+						printf ("\nIngrese el nombre del juguete 14: ");
+						fflush (stdin);
+						gets (jugueteLD14);
+						printf ("Ingrese el codigo del juguete 14: ");
+						scanf("%d",&codLD14);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD14);
+						
+						printf ("\nIngrese el nombre del juguete 15: ");
+						fflush (stdin);
+						gets (jugueteLD15);
+						printf ("Ingrese el codigo del juguete 15: ");
+						scanf("%d",&codLD15);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD15);
+	
+						printf ("\nIngrese el nombre del juguete 16: ");
+						fflush (stdin);
+						gets (jugueteLD16);
+						printf ("Ingrese el codigo del juguete 16: ");
+						scanf("%d",&codLD16);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD16);
+					}	
+	
+					else if (strcmp(cantidad_jug,"17")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+	
+						printf ("\nIngrese el nombre del juguete 11: ");
+						fflush (stdin);
+						gets (jugueteLD11);
+						printf ("Ingrese el codigo del juguete 11: ");
+						scanf("%d",&codLD11);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD11);
+						
+						printf ("\nIngrese el nombre del juguete 12: ");
+						fflush (stdin);
+						gets (jugueteLD12);
+						printf ("Ingrese el codigo del juguete 12: ");
+						scanf("%d",&codLD12);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD12);
+						
+						printf ("\nIngrese el nombre del juguete 13: ");
+						fflush (stdin);
+						gets (jugueteLD13);
+						printf ("Ingrese el codigo del juguete 13: ");
+						scanf("%d",&codLD13);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD13);
+						
+						printf ("\nIngrese el nombre del juguete 14: ");
+						fflush (stdin);
+						gets (jugueteLD14);
+						printf ("Ingrese el codigo del juguete 14: ");
+						scanf("%d",&codLD14);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD14);
+						
+						printf ("\nIngrese el nombre del juguete 15: ");
+						fflush (stdin);
+						gets (jugueteLD15);
+						printf ("Ingrese el codigo del juguete 15: ");
+						scanf("%d",&codLD15);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD15);
+	
+						printf ("\nIngrese el nombre del juguete 16: ");
+						fflush (stdin);
+						gets (jugueteLD16);
+						printf ("Ingrese el codigo del juguete 16: ");
+						scanf("%d",&codLD16);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD16);
+						
+						printf ("\nIngrese el nombre del juguete 17: ");
+						fflush (stdin);
+						gets (jugueteLD17);
+						printf ("Ingrese el codigo del juguete 17: ");
+						scanf("%d",&codLD17);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD17);
+					}
+	
+					else if (strcmp(cantidad_jug,"18")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+	
+						printf ("\nIngrese el nombre del juguete 11: ");
+						fflush (stdin);
+						gets (jugueteLD11);
+						printf ("Ingrese el codigo del juguete 11: ");
+						scanf("%d",&codLD11);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD11);
+						
+						printf ("\nIngrese el nombre del juguete 12: ");
+						fflush (stdin);
+						gets (jugueteLD12);
+						printf ("Ingrese el codigo del juguete 12: ");
+						scanf("%d",&codLD12);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD12);
+						
+						printf ("\nIngrese el nombre del juguete 13: ");
+						fflush (stdin);
+						gets (jugueteLD13);
+						printf ("Ingrese el codigo del juguete 13: ");
+						scanf("%d",&codLD13);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD13);
+						
+						printf ("\nIngrese el nombre del juguete 14: ");
+						fflush (stdin);
+						gets (jugueteLD14);
+						printf ("Ingrese el codigo del juguete 14: ");
+						scanf("%d",&codLD14);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD14);
+						
+						printf ("\nIngrese el nombre del juguete 15: ");
+						fflush (stdin);
+						gets (jugueteLD15);
+						printf ("Ingrese el codigo del juguete 15: ");
+						scanf("%d",&codLD15);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD15);
+	
+						printf ("\nIngrese el nombre del juguete 16: ");
+						fflush (stdin);
+						gets (jugueteLD16);
+						printf ("Ingrese el codigo del juguete 16: ");
+						scanf("%d",&codLD16);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD16);
+						
+						printf ("\nIngrese el nombre del juguete 17: ");
+						fflush (stdin);
+						gets (jugueteLD17);
+						printf ("Ingrese el codigo del juguete 17: ");
+						scanf("%d",&codLD17);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD17);
+						
+						printf ("\nIngrese el nombre del juguete 18: ");
+						fflush (stdin);
+						gets (jugueteLD18);
+						printf ("Ingrese el codigo del juguete 18: ");
+						scanf("%d",&codLD18);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD18);
+					}	
 					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
+					else if (strcmp(cantidad_jug,"19")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+	
+						printf ("\nIngrese el nombre del juguete 11: ");
+						fflush (stdin);
+						gets (jugueteLD11);
+						printf ("Ingrese el codigo del juguete 11: ");
+						scanf("%d",&codLD11);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD11);
+						
+						printf ("\nIngrese el nombre del juguete 12: ");
+						fflush (stdin);
+						gets (jugueteLD12);
+						printf ("Ingrese el codigo del juguete 12: ");
+						scanf("%d",&codLD12);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD12);
+						
+						printf ("\nIngrese el nombre del juguete 13: ");
+						fflush (stdin);
+						gets (jugueteLD13);
+						printf ("Ingrese el codigo del juguete 13: ");
+						scanf("%d",&codLD13);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD13);
+						
+						printf ("\nIngrese el nombre del juguete 14: ");
+						fflush (stdin);
+						gets (jugueteLD14);
+						printf ("Ingrese el codigo del juguete 14: ");
+						scanf("%d",&codLD14);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD14);
+						
+						printf ("\nIngrese el nombre del juguete 15: ");
+						fflush (stdin);
+						gets (jugueteLD15);
+						printf ("Ingrese el codigo del juguete 15: ");
+						scanf("%d",&codLD15);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD15);
+	
+						printf ("\nIngrese el nombre del juguete 16: ");
+						fflush (stdin);
+						gets (jugueteLD16);
+						printf ("Ingrese el codigo del juguete 16: ");
+						scanf("%d",&codLD16);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD16);
+						
+						printf ("\nIngrese el nombre del juguete 17: ");
+						fflush (stdin);
+						gets (jugueteLD17);
+						printf ("Ingrese el codigo del juguete 17: ");
+						scanf("%d",&codLD17);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD17);
+						
+						printf ("\nIngrese el nombre del juguete 18: ");
+						fflush (stdin);
+						gets (jugueteLD18);
+						printf ("Ingrese el codigo del juguete 18: ");
+						scanf("%d",&codLD18);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD18);
+						
+						printf ("\nIngrese el nombre del juguete 19: ");
+						fflush (stdin);
+						gets (jugueteLD19);
+						printf ("Ingrese el codigo del juguete 19: ");
+						scanf("%d",&codLD19);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD19);
+					}	
 					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-
-					printf ("\nIngrese el nombre del juguete 11: ");
-					fflush (stdin);
-					gets (jugueteLD11);
-					printf ("Ingrese el codigo del juguete 11: ");
-					scanf("%d",&codLD11);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD11);
-					
-					printf ("\nIngrese el nombre del juguete 12: ");
-					fflush (stdin);
-					gets (jugueteLD12);
-					printf ("Ingrese el codigo del juguete 12: ");
-					scanf("%d",&codLD12);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD12);
-					
-					printf ("\nIngrese el nombre del juguete 13: ");
-					fflush (stdin);
-					gets (jugueteLD13);
-					printf ("Ingrese el codigo del juguete 13: ");
-					scanf("%d",&codLD13);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD13);
+					else if (strcmp(cantidad_jug,"20")==0)
+					{
+						printf ("Ingrese el nombre del juguete 1: ");
+						fflush (stdin);
+						gets (jugueteLD1);
+						printf ("Ingrese el codigo del juguete 1: ");
+						scanf("%d",&codLD1);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD1);
+						
+						printf ("\nIngrese el nombre del juguete 2: ");
+						fflush (stdin);
+						gets (jugueteLD2);
+						printf ("Ingrese el codigo del juguete 2: ");
+						scanf("%d",&codLD2);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD2);
+						
+						printf ("\nIngrese el nombre del juguete 3: ");
+						fflush (stdin);
+						gets (jugueteLD3);
+						printf ("Ingrese el codigo del juguete 3: ");
+						scanf("%d",&codLD3);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD3);
+	
+						printf ("\nIngrese el nombre del juguete 4: ");
+						fflush (stdin);
+						gets (jugueteLD4);
+						printf ("Ingrese el codigo del juguete 4: ");
+						scanf("%d",&codLD4);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD4);
+						
+						printf ("\nIngrese el nombre del juguete 5: ");
+						fflush (stdin);
+						gets (jugueteLD5);
+						printf ("Ingrese el codigo del juguete 5: ");
+						scanf("%d",&codLD5);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD5);
+						
+						printf ("\nIngrese el nombre del juguete 6: ");
+						fflush (stdin);
+						gets (jugueteLD6);
+						printf ("Ingrese el codigo del juguete 6: ");
+						scanf("%d",&codLD6);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD6);
+	
+						printf ("\nIngrese el nombre del juguete 7: ");
+						fflush (stdin);
+						gets (jugueteLD7);
+						printf ("Ingrese el codigo del juguete 7: ");
+						scanf("%d",&codLD7);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD7);
+						
+						printf ("\nIngrese el nombre del juguete 8: ");
+						fflush (stdin);
+						gets (jugueteLD8);
+						printf ("Ingrese el codigo del juguete 8: ");
+						scanf("%d",&codLD8);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD8);
+						
+						printf ("\nIngrese el nombre del juguete 9: ");
+						fflush (stdin);
+						gets (jugueteLD9);
+						printf ("Ingrese el codigo del juguete 9: ");
+						scanf("%d",&codLD9);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD9);
+						
+						printf ("\nIngrese el nombre del juguete 10: ");
+						fflush (stdin);
+						gets (jugueteLD10);
+						printf ("Ingrese el codigo del juguete 10: ");
+						scanf("%d",&codLD10);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD10);
+	
+						printf ("\nIngrese el nombre del juguete 11: ");
+						fflush (stdin);
+						gets (jugueteLD11);
+						printf ("Ingrese el codigo del juguete 11: ");
+						scanf("%d",&codLD11);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD11);
+						
+						printf ("\nIngrese el nombre del juguete 12: ");
+						fflush (stdin);
+						gets (jugueteLD12);
+						printf ("Ingrese el codigo del juguete 12: ");
+						scanf("%d",&codLD12);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD12);
+						
+						printf ("\nIngrese el nombre del juguete 13: ");
+						fflush (stdin);
+						gets (jugueteLD13);
+						printf ("Ingrese el codigo del juguete 13: ");
+						scanf("%d",&codLD13);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD13);
+						
+						printf ("\nIngrese el nombre del juguete 14: ");
+						fflush (stdin);
+						gets (jugueteLD14);
+						printf ("Ingrese el codigo del juguete 14: ");
+						scanf("%d",&codLD14);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD14);
+						
+						printf ("\nIngrese el nombre del juguete 15: ");
+						fflush (stdin);
+						gets (jugueteLD15);
+						printf ("Ingrese el codigo del juguete 15: ");
+						scanf("%d",&codLD15);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD15);
+	
+						printf ("\nIngrese el nombre del juguete 16: ");
+						fflush (stdin);
+						gets (jugueteLD16);
+						printf ("Ingrese el codigo del juguete 16: ");
+						scanf("%d",&codLD16);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD16);
+						
+						printf ("\nIngrese el nombre del juguete 17: ");
+						fflush (stdin);
+						gets (jugueteLD17);
+						printf ("Ingrese el codigo del juguete 17: ");
+						scanf("%d",&codLD17);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD17);
+						
+						printf ("\nIngrese el nombre del juguete 18: ");
+						fflush (stdin);
+						gets (jugueteLD18);
+						printf ("Ingrese el codigo del juguete 18: ");
+						scanf("%d",&codLD18);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD18);
+						
+						printf ("\nIngrese el nombre del juguete 19: ");
+						fflush (stdin);
+						gets (jugueteLD19);
+						printf ("Ingrese el codigo del juguete 19: ");
+						scanf("%d",&codLD19);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD19);
+						
+						printf ("\nIngrese el nombre del juguete 20: ");
+						fflush (stdin);
+						gets (jugueteLD20);
+						printf ("Ingrese el codigo del juguete 20: ");
+						scanf("%d",&codLD20);
+						printf ("Los datos del juguete son:\n ");
+						Buscar(ArbolInt, codLD20);
+					}	
+										
+					InsertarListaDeseos(ColaListaDeseos,cedula_kid, jugueteLD1,jugueteLD2, jugueteLD3, jugueteLD4, jugueteLD5, jugueteLD6, jugueteLD7,jugueteLD8, jugueteLD9, jugueteLD10, jugueteLD11, jugueteLD12, jugueteLD13, jugueteLD14, jugueteLD15, jugueteLD16, jugueteLD17, jugueteLD18, jugueteLD19, jugueteLD20, codLD1, codLD2, codLD3, codLD4, codLD5, codLD6, codLD7, codLD8, codLD9, codLD10, codLD11, codLD12, codLD13, codLD14, codLD15, codLD16, codLD17, codLD18, codLD19, codLD20);
+					ConsultarListaDeseos(ColaListaDeseos,cedula_kid);
 				}
-				else if (strcmp(cantidad_jug,"14")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-
-					printf ("\nIngrese el nombre del juguete 11: ");
-					fflush (stdin);
-					gets (jugueteLD11);
-					printf ("Ingrese el codigo del juguete 11: ");
-					scanf("%d",&codLD11);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD11);
-					
-					printf ("\nIngrese el nombre del juguete 12: ");
-					fflush (stdin);
-					gets (jugueteLD12);
-					printf ("Ingrese el codigo del juguete 12: ");
-					scanf("%d",&codLD12);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD12);
-					
-					printf ("\nIngrese el nombre del juguete 13: ");
-					fflush (stdin);
-					gets (jugueteLD13);
-					printf ("Ingrese el codigo del juguete 13: ");
-					scanf("%d",&codLD13);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD13);
-					
-					printf ("\nIngrese el nombre del juguete 14: ");
-					fflush (stdin);
-					gets (jugueteLD14);
-					printf ("Ingrese el codigo del juguete 14: ");
-					scanf("%d",&codLD14);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD14);
-				}			
-				else if (strcmp(cantidad_jug,"15")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-
-					printf ("\nIngrese el nombre del juguete 11: ");
-					fflush (stdin);
-					gets (jugueteLD11);
-					printf ("Ingrese el codigo del juguete 11: ");
-					scanf("%d",&codLD11);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD11);
-					
-					printf ("\nIngrese el nombre del juguete 12: ");
-					fflush (stdin);
-					gets (jugueteLD12);
-					printf ("Ingrese el codigo del juguete 12: ");
-					scanf("%d",&codLD12);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD12);
-					
-					printf ("\nIngrese el nombre del juguete 13: ");
-					fflush (stdin);
-					gets (jugueteLD13);
-					printf ("Ingrese el codigo del juguete 13: ");
-					scanf("%d",&codLD13);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD13);
-					
-					printf ("\nIngrese el nombre del juguete 14: ");
-					fflush (stdin);
-					gets (jugueteLD14);
-					printf ("Ingrese el codigo del juguete 14: ");
-					scanf("%d",&codLD14);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD14);
-					
-					printf ("\nIngrese el nombre del juguete 15: ");
-					fflush (stdin);
-					gets (jugueteLD15);
-					printf ("Ingrese el codigo del juguete 15: ");
-					scanf("%d",&codLD15);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD15);
-				}	
-				else if (strcmp(cantidad_jug,"16")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-
-					printf ("\nIngrese el nombre del juguete 11: ");
-					fflush (stdin);
-					gets (jugueteLD11);
-					printf ("Ingrese el codigo del juguete 11: ");
-					scanf("%d",&codLD11);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD11);
-					
-					printf ("\nIngrese el nombre del juguete 12: ");
-					fflush (stdin);
-					gets (jugueteLD12);
-					printf ("Ingrese el codigo del juguete 12: ");
-					scanf("%d",&codLD12);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD12);
-					
-					printf ("\nIngrese el nombre del juguete 13: ");
-					fflush (stdin);
-					gets (jugueteLD13);
-					printf ("Ingrese el codigo del juguete 13: ");
-					scanf("%d",&codLD13);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD13);
-					
-					printf ("\nIngrese el nombre del juguete 14: ");
-					fflush (stdin);
-					gets (jugueteLD14);
-					printf ("Ingrese el codigo del juguete 14: ");
-					scanf("%d",&codLD14);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD14);
-					
-					printf ("\nIngrese el nombre del juguete 15: ");
-					fflush (stdin);
-					gets (jugueteLD15);
-					printf ("Ingrese el codigo del juguete 15: ");
-					scanf("%d",&codLD15);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD15);
-
-					printf ("\nIngrese el nombre del juguete 16: ");
-					fflush (stdin);
-					gets (jugueteLD16);
-					printf ("Ingrese el codigo del juguete 16: ");
-					scanf("%d",&codLD16);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD16);
-				}	
-
-				else if (strcmp(cantidad_jug,"17")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-
-					printf ("\nIngrese el nombre del juguete 11: ");
-					fflush (stdin);
-					gets (jugueteLD11);
-					printf ("Ingrese el codigo del juguete 11: ");
-					scanf("%d",&codLD11);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD11);
-					
-					printf ("\nIngrese el nombre del juguete 12: ");
-					fflush (stdin);
-					gets (jugueteLD12);
-					printf ("Ingrese el codigo del juguete 12: ");
-					scanf("%d",&codLD12);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD12);
-					
-					printf ("\nIngrese el nombre del juguete 13: ");
-					fflush (stdin);
-					gets (jugueteLD13);
-					printf ("Ingrese el codigo del juguete 13: ");
-					scanf("%d",&codLD13);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD13);
-					
-					printf ("\nIngrese el nombre del juguete 14: ");
-					fflush (stdin);
-					gets (jugueteLD14);
-					printf ("Ingrese el codigo del juguete 14: ");
-					scanf("%d",&codLD14);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD14);
-					
-					printf ("\nIngrese el nombre del juguete 15: ");
-					fflush (stdin);
-					gets (jugueteLD15);
-					printf ("Ingrese el codigo del juguete 15: ");
-					scanf("%d",&codLD15);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD15);
-
-					printf ("\nIngrese el nombre del juguete 16: ");
-					fflush (stdin);
-					gets (jugueteLD16);
-					printf ("Ingrese el codigo del juguete 16: ");
-					scanf("%d",&codLD16);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD16);
-					
-					printf ("\nIngrese el nombre del juguete 17: ");
-					fflush (stdin);
-					gets (jugueteLD17);
-					printf ("Ingrese el codigo del juguete 17: ");
-					scanf("%d",&codLD17);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD17);
-				}
-
-				else if (strcmp(cantidad_jug,"18")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-
-					printf ("\nIngrese el nombre del juguete 11: ");
-					fflush (stdin);
-					gets (jugueteLD11);
-					printf ("Ingrese el codigo del juguete 11: ");
-					scanf("%d",&codLD11);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD11);
-					
-					printf ("\nIngrese el nombre del juguete 12: ");
-					fflush (stdin);
-					gets (jugueteLD12);
-					printf ("Ingrese el codigo del juguete 12: ");
-					scanf("%d",&codLD12);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD12);
-					
-					printf ("\nIngrese el nombre del juguete 13: ");
-					fflush (stdin);
-					gets (jugueteLD13);
-					printf ("Ingrese el codigo del juguete 13: ");
-					scanf("%d",&codLD13);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD13);
-					
-					printf ("\nIngrese el nombre del juguete 14: ");
-					fflush (stdin);
-					gets (jugueteLD14);
-					printf ("Ingrese el codigo del juguete 14: ");
-					scanf("%d",&codLD14);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD14);
-					
-					printf ("\nIngrese el nombre del juguete 15: ");
-					fflush (stdin);
-					gets (jugueteLD15);
-					printf ("Ingrese el codigo del juguete 15: ");
-					scanf("%d",&codLD15);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD15);
-
-					printf ("\nIngrese el nombre del juguete 16: ");
-					fflush (stdin);
-					gets (jugueteLD16);
-					printf ("Ingrese el codigo del juguete 16: ");
-					scanf("%d",&codLD16);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD16);
-					
-					printf ("\nIngrese el nombre del juguete 17: ");
-					fflush (stdin);
-					gets (jugueteLD17);
-					printf ("Ingrese el codigo del juguete 17: ");
-					scanf("%d",&codLD17);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD17);
-					
-					printf ("\nIngrese el nombre del juguete 18: ");
-					fflush (stdin);
-					gets (jugueteLD18);
-					printf ("Ingrese el codigo del juguete 18: ");
-					scanf("%d",&codLD18);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD18);
-				}	
-				
-				else if (strcmp(cantidad_jug,"19")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-
-					printf ("\nIngrese el nombre del juguete 11: ");
-					fflush (stdin);
-					gets (jugueteLD11);
-					printf ("Ingrese el codigo del juguete 11: ");
-					scanf("%d",&codLD11);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD11);
-					
-					printf ("\nIngrese el nombre del juguete 12: ");
-					fflush (stdin);
-					gets (jugueteLD12);
-					printf ("Ingrese el codigo del juguete 12: ");
-					scanf("%d",&codLD12);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD12);
-					
-					printf ("\nIngrese el nombre del juguete 13: ");
-					fflush (stdin);
-					gets (jugueteLD13);
-					printf ("Ingrese el codigo del juguete 13: ");
-					scanf("%d",&codLD13);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD13);
-					
-					printf ("\nIngrese el nombre del juguete 14: ");
-					fflush (stdin);
-					gets (jugueteLD14);
-					printf ("Ingrese el codigo del juguete 14: ");
-					scanf("%d",&codLD14);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD14);
-					
-					printf ("\nIngrese el nombre del juguete 15: ");
-					fflush (stdin);
-					gets (jugueteLD15);
-					printf ("Ingrese el codigo del juguete 15: ");
-					scanf("%d",&codLD15);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD15);
-
-					printf ("\nIngrese el nombre del juguete 16: ");
-					fflush (stdin);
-					gets (jugueteLD16);
-					printf ("Ingrese el codigo del juguete 16: ");
-					scanf("%d",&codLD16);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD16);
-					
-					printf ("\nIngrese el nombre del juguete 17: ");
-					fflush (stdin);
-					gets (jugueteLD17);
-					printf ("Ingrese el codigo del juguete 17: ");
-					scanf("%d",&codLD17);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD17);
-					
-					printf ("\nIngrese el nombre del juguete 18: ");
-					fflush (stdin);
-					gets (jugueteLD18);
-					printf ("Ingrese el codigo del juguete 18: ");
-					scanf("%d",&codLD18);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD18);
-					
-					printf ("\nIngrese el nombre del juguete 19: ");
-					fflush (stdin);
-					gets (jugueteLD19);
-					printf ("Ingrese el codigo del juguete 19: ");
-					scanf("%d",&codLD19);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD19);
-				}	
-				
-				else if (strcmp(cantidad_jug,"20")==0)
-				{
-					printf ("Ingrese el nombre del juguete 1: ");
-					fflush (stdin);
-					gets (jugueteLD1);
-					printf ("Ingrese el codigo del juguete 1: ");
-					scanf("%d",&codLD1);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD1);
-					
-					printf ("\nIngrese el nombre del juguete 2: ");
-					fflush (stdin);
-					gets (jugueteLD2);
-					printf ("Ingrese el codigo del juguete 2: ");
-					scanf("%d",&codLD2);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD2);
-					
-					printf ("\nIngrese el nombre del juguete 3: ");
-					fflush (stdin);
-					gets (jugueteLD3);
-					printf ("Ingrese el codigo del juguete 3: ");
-					scanf("%d",&codLD3);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD3);
-
-					printf ("\nIngrese el nombre del juguete 4: ");
-					fflush (stdin);
-					gets (jugueteLD4);
-					printf ("Ingrese el codigo del juguete 4: ");
-					scanf("%d",&codLD4);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD4);
-					
-					printf ("\nIngrese el nombre del juguete 5: ");
-					fflush (stdin);
-					gets (jugueteLD5);
-					printf ("Ingrese el codigo del juguete 5: ");
-					scanf("%d",&codLD5);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD5);
-					
-					printf ("\nIngrese el nombre del juguete 6: ");
-					fflush (stdin);
-					gets (jugueteLD6);
-					printf ("Ingrese el codigo del juguete 6: ");
-					scanf("%d",&codLD6);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD6);
-
-					printf ("\nIngrese el nombre del juguete 7: ");
-					fflush (stdin);
-					gets (jugueteLD7);
-					printf ("Ingrese el codigo del juguete 7: ");
-					scanf("%d",&codLD7);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD7);
-					
-					printf ("\nIngrese el nombre del juguete 8: ");
-					fflush (stdin);
-					gets (jugueteLD8);
-					printf ("Ingrese el codigo del juguete 8: ");
-					scanf("%d",&codLD8);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD8);
-					
-					printf ("\nIngrese el nombre del juguete 9: ");
-					fflush (stdin);
-					gets (jugueteLD9);
-					printf ("Ingrese el codigo del juguete 9: ");
-					scanf("%d",&codLD9);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD9);
-					
-					printf ("\nIngrese el nombre del juguete 10: ");
-					fflush (stdin);
-					gets (jugueteLD10);
-					printf ("Ingrese el codigo del juguete 10: ");
-					scanf("%d",&codLD10);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD10);
-
-					printf ("\nIngrese el nombre del juguete 11: ");
-					fflush (stdin);
-					gets (jugueteLD11);
-					printf ("Ingrese el codigo del juguete 11: ");
-					scanf("%d",&codLD11);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD11);
-					
-					printf ("\nIngrese el nombre del juguete 12: ");
-					fflush (stdin);
-					gets (jugueteLD12);
-					printf ("Ingrese el codigo del juguete 12: ");
-					scanf("%d",&codLD12);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD12);
-					
-					printf ("\nIngrese el nombre del juguete 13: ");
-					fflush (stdin);
-					gets (jugueteLD13);
-					printf ("Ingrese el codigo del juguete 13: ");
-					scanf("%d",&codLD13);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD13);
-					
-					printf ("\nIngrese el nombre del juguete 14: ");
-					fflush (stdin);
-					gets (jugueteLD14);
-					printf ("Ingrese el codigo del juguete 14: ");
-					scanf("%d",&codLD14);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD14);
-					
-					printf ("\nIngrese el nombre del juguete 15: ");
-					fflush (stdin);
-					gets (jugueteLD15);
-					printf ("Ingrese el codigo del juguete 15: ");
-					scanf("%d",&codLD15);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD15);
-
-					printf ("\nIngrese el nombre del juguete 16: ");
-					fflush (stdin);
-					gets (jugueteLD16);
-					printf ("Ingrese el codigo del juguete 16: ");
-					scanf("%d",&codLD16);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD16);
-					
-					printf ("\nIngrese el nombre del juguete 17: ");
-					fflush (stdin);
-					gets (jugueteLD17);
-					printf ("Ingrese el codigo del juguete 17: ");
-					scanf("%d",&codLD17);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD17);
-					
-					printf ("\nIngrese el nombre del juguete 18: ");
-					fflush (stdin);
-					gets (jugueteLD18);
-					printf ("Ingrese el codigo del juguete 18: ");
-					scanf("%d",&codLD18);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD18);
-					
-					printf ("\nIngrese el nombre del juguete 19: ");
-					fflush (stdin);
-					gets (jugueteLD19);
-					printf ("Ingrese el codigo del juguete 19: ");
-					scanf("%d",&codLD19);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD19);
-					
-					printf ("\nIngrese el nombre del juguete 20: ");
-					fflush (stdin);
-					gets (jugueteLD20);
-					printf ("Ingrese el codigo del juguete 20: ");
-					scanf("%d",&codLD20);
-					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, codLD20);
-				}	
-									
-				InsertarListaDeseos(ColaListaDeseos,cedula_kid, jugueteLD1,jugueteLD2, jugueteLD3, jugueteLD4, jugueteLD5, jugueteLD6, jugueteLD7,jugueteLD8, jugueteLD9, jugueteLD10, jugueteLD11, jugueteLD12, jugueteLD13, jugueteLD14, jugueteLD15, jugueteLD16, jugueteLD17, jugueteLD18, jugueteLD19, jugueteLD20, codLD1, codLD2, codLD3, codLD4, codLD5, codLD6, codLD7, codLD8, codLD9, codLD10, codLD11, codLD12, codLD13, codLD14, codLD15, codLD16, codLD17, codLD18, codLD19, codLD20);
-				ConsultarListaDeseos(ColaListaDeseos,cedula_kid);
 			}
 		}
 	}
@@ -5638,7 +5646,7 @@ void modificar_carta(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imp
 				{
 					ConsultarListaDeseos(ColaListaDeseos,verificar_cedula, verificar_year);
 					
-					printf("Ingrese el numero de juguete que desea pasar a la carta: ");
+					printf("\nIngrese el numero de juguete que desea pasar a la carta: ");
 					fflush (stdin);
 					gets (num_jugLD);
 					
@@ -6884,7 +6892,7 @@ int ConsultarListaDeseos(ImprimirLD *ColaListaDeseos,char verificar_cedula[15])
 					printf("9. %s\n",i->jugueteLD9);
 					printf("10. %s\n",i->jugueteLD10);
 				}	
-				if (strcmp(i->jugueteLD12,"0")==0)
+				else if (strcmp(i->jugueteLD12,"0")==0)
 				{
 					printf("1. %s\n",i->jugueteLD1);
 					printf("2. %s\n",i->jugueteLD2);
