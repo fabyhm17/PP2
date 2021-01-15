@@ -7318,6 +7318,7 @@ void procesar_carta(ImprimirCProcesada  * ColaCartasProcesadas, Imprimir * ColaK
 					printf("\n\nLa carta se ha registrado exitosamente.");
 				}
 			}
+			h->contador_cartas++;
 		}
 		else
 		{
