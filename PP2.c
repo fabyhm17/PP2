@@ -6137,102 +6137,110 @@ void procesar_carta(ImprimirCProcesada  * ColaCartasProcesadas, Imprimir * ColaK
 			Carta *i;
 			Kid *j;
 			
-			printf("Los niños que registraron cartas para el año %s son: \n", yearConsultar);
-			for(i = ColaCartas->front; i!= NULL; i = i->next)
+			if (ColaCartas -> front == NULL)
 			{
-				if (strcmp(i->year,yearConsultar)==0)
-				{
-					for(j = ColaKids->front; j!= NULL; j = j->next)
-					{
-						if (strcmp(i->cedula,j->cedula)==0)
-						{
-							printf("Nombre: %s\nCedula: %s\n",j->nombre, j->cedula);
-							printf("--------------------------------------\n");
-						}
-					}
-					
-				}
+				printf ("\nERROR: No hay cartas registradas");
+				return;
 			}
-			
-			printf("\nIngrese la cedula del niño al que se le precesará la carta: \n");
-			fflush (stdin);
-			gets (ced_Procesar);
-			
-			if (ValidarComportamiento(ColaKids, ced_Procesar)==0)
-			{
-				for(j = ColaKids->front; j!= NULL; j = j->next)
-				{
-					if (strcmp(ced_Procesar,j->cedula)==0)
-					{
-						if(j->contador_comportamiento_malo > 6)
-						{
-							
-						}
-					}
-					
-				}
-				
-				printf("------INFORMACIÓN DE LA CARTA-------\n");
-				
+			else
+			{			
+				printf("Los niños que registraron cartas para el año %s son: \n", yearConsultar);
 				for(i = ColaCartas->front; i!= NULL; i = i->next)
 				{
-					if (strcmp(i->cedula,ced_Procesar)==0)
+					if (strcmp(i->year,yearConsultar)==0)
 					{
 						for(j = ColaKids->front; j!= NULL; j = j->next)
 						{
-							if (strcmp(ced_Procesar,j->cedula)==0)
+							if (strcmp(i->cedula,j->cedula)==0)
 							{
-								printf("Nombre del niño: %s\nCedula: %s\n",j->nombre,j->cedula),
-								ConsultarCartas(ColaCartas, ced_Procesar, yearConsultar);
-								
-								printf("\nESTADO DE LA CARTA\n");
-								printf("1. Todos los juguetes estan listos para entragar\n");
-								printf("2. Los juguetes NO estan listos para entragar\n");
-								printf("Ingrese la opcion que corresponda: ");
-								fflush (stdin);
-								gets (opcion);
-								
-								if (strcmp(opcion,"1")==0)
-								{
-									strcpy(i->estado_jug,"Entregar");
-									strcpy(j->estado_carta,"Entregar");
-								}
-								else if (strcmp(opcion,"2")==0)
-								{
-									strcpy(i->estado_jug,"Rechazado");
-									strcpy(j->estado_carta,"Rechazado");
-
-								}
-								else
-								{
-									printf("ERROR: opcion no disponible");
-									return;
-								}			
+								printf("Nombre: %s\nCedula: %s\n",j->nombre, j->cedula);
+								printf("--------------------------------------\n");
 							}
 						}
-			
 						
 					}
 				}
-			}
-			else
-			{
-				printf("\n\nEstimado padre o madre del niño. \n Se le comunica que su hijo cuenta con un registro de más de 6 omportamientos malos,\n por lo cual este año no recibirá regalos por parte de Santa y la carta será rechazada.");
-				for(i = ColaCartas->front; i!= NULL; i = i->next)
+				
+				printf("\nIngrese la cedula del niño al que se le precesará la carta: \n");
+				fflush (stdin);
+				gets (ced_Procesar);
+				
+				if (ValidarComportamiento(ColaKids, ced_Procesar)==0)
 				{
-					if (strcmp(i->cedula,ced_Procesar)==0)
+					for(j = ColaKids->front; j!= NULL; j = j->next)
 					{
-						strcpy(i->estado_jug,"Rechazado");
+						if (strcmp(ced_Procesar,j->cedula)==0)
+						{
+							if(j->contador_comportamiento_malo > 6)
+							{
+								
+							}
+						}
+						
+					}
+					
+					printf("------INFORMACIÓN DE LA CARTA-------\n");
+					
+					for(i = ColaCartas->front; i!= NULL; i = i->next)
+					{
+						if (strcmp(i->cedula,ced_Procesar)==0)
+						{
+							for(j = ColaKids->front; j!= NULL; j = j->next)
+							{
+								if (strcmp(ced_Procesar,j->cedula)==0)
+								{
+									printf("Nombre del niño: %s\nCedula: %s\n",j->nombre,j->cedula),
+									ConsultarCartas(ColaCartas, ced_Procesar, yearConsultar);
+									
+									printf("\nESTADO DE LA CARTA\n");
+									printf("1. Todos los juguetes estan listos para entragar\n");
+									printf("2. Los juguetes NO estan listos para entragar\n");
+									printf("Ingrese la opcion que corresponda: ");
+									fflush (stdin);
+									gets (opcion);
+									
+									if (strcmp(opcion,"1")==0)
+									{
+										strcpy(i->estado_jug,"Entregar");
+										strcpy(j->estado_carta,"Entregar");
+									}
+									else if (strcmp(opcion,"2")==0)
+									{
+										strcpy(i->estado_jug,"Rechazado");
+										strcpy(j->estado_carta,"Rechazado");
+	
+									}
+									else
+									{
+										printf("ERROR: opcion no disponible");
+										return;
+									}			
+								}
+							}
+				
+							
+						}
 					}
 				}
+				else
+				{
+					printf("\n\nEstimado padre o madre del niño. \n Se le comunica que su hijo cuenta con un registro de más de 6 omportamientos malos,\n por lo cual este año no recibirá regalos por parte de Santa y la carta será rechazada.");
+					for(i = ColaCartas->front; i!= NULL; i = i->next)
+					{
+						if (strcmp(i->cedula,ced_Procesar)==0)
+						{
+							strcpy(i->estado_jug,"Rechazado");
+						}
+					}
+				}
+				
+				strcpy(Ide_Ayudante,ver_Ayu);
+				strcpy(Year,yearConsultar);
+				strcpy(Ide_Kid,ced_Procesar);
+				
+				InsertarCartaProcesada (ColaCartasProcesadas, Ide_Ayudante, Year, Ide_Kid);
+				printf("\n\nLa carta se ha registrado exitosamente.");
 			}
-			
-			strcpy(Ide_Ayudante,ver_Ayu);
-			strcpy(Year,yearConsultar);
-			strcpy(Ide_Kid,ced_Procesar);
-			
-			InsertarCartaProcesada (ColaCartasProcesadas, Ide_Ayudante, Year, Ide_Kid);
-			printf("\n\nLa carta se ha registrado exitosamente.");
 		}
 		else
 		{
