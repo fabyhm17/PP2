@@ -2936,27 +2936,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 			printf ("Ingrese el año para el que corresponde la carta [yyyy] : ");
 			fflush (stdin);
 			gets (year);
-			
-			if(strcmp(year,"2017")==0)
-			{
-				contador_2017++;
-			}
-			else if(strcmp(year,"2018")==0)
-			{
-				contador_2018++;
-			}
-			else if(strcmp(year,"2019")==0)
-			{
-				contador_2019++;
-			}
-			else if(strcmp(year,"2020")==0)
-			{
-				contador_2020++;
-			}
-			else if(strcmp(year,"2021")==0)
-			{
-				contador_2021++;
-			}
+		
 
 
 			printf("\n----------- JUGUETES DISPONIBLES -----------\n\n");
@@ -2986,7 +2966,29 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 					scanf("%d",&cod1);
 					printf ("Los datos del juguete son:\n ");
 					Buscar(ArbolInt, cod1);	
+
+					if(strcmp(year,"2017")==0)
+					{
+						contador_2017 = 1;
+					}
+					if(strcmp(year,"2018")==0)
+					{
+						contador_2018 = 1;
+					}
+					if(strcmp(year,"2019")==0)
+					{
+						contador_2019 = 1;
+					}
+					if(strcmp(year,"2020")==0)
+					{
+						contador_2020 = 1;
+					}
+					if(strcmp(year,"2021")==0)
+					{
+						contador_2021 = 1;
+					}
 				}
+				
 				else if (strcmp(cantidad_jug,"2")==0)
 				{
 					printf ("Ingrese el nombre del juguete 1: ");
@@ -3004,6 +3006,27 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 					scanf("%d",&cod2);
 					printf ("Los datos del juguete son:\n ");
 					Buscar(ArbolInt, cod2);	
+
+					if(strcmp(year,"2017")==0)
+					{
+						contador_2017 = 2;
+					}
+					if(strcmp(year,"2018")==0)
+					{
+						contador_2018 = 2;
+					}
+					if(strcmp(year,"2019")==0)
+					{
+						contador_2019 = 2;
+					}
+				    if(strcmp(year,"2020")==0)
+					{
+						contador_2020 = 2;
+					}
+					if(strcmp(year,"2021")==0)
+					{
+						contador_2021 = 2;
+					}
 				}
 				else if (strcmp(cantidad_jug,"3")==0)
 				{
@@ -3030,7 +3053,29 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 					scanf("%d",&cod3);
 					printf ("Los datos del juguete son:\n ");
 					Buscar(ArbolInt, cod3);	
+					
+					if(strcmp(year,"2017")==0)
+					{
+						contador_2017 = 3;
+					}
+					else if(strcmp(year,"2018")==0)
+					{
+						contador_2018 = 3;
+					}
+					else if(strcmp(year,"2019")==0)
+					{
+						contador_2019 = 3;
+					}
+					else if(strcmp(year,"2020")==0)
+					{
+						contador_2020 = 3;
+					}
+					else if(strcmp(year,"2021")==0)
+					{
+						contador_2021 = 3;
+					}
 				}
+				
 				else if (strcmp(cantidad_jug,"4")==0)
 				{
 					printf ("Ingrese el nombre del juguete 1: ");
@@ -3064,6 +3109,27 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 					scanf("%d",&cod4);
 					printf ("Los datos del juguete son:\n ");
 					Buscar(ArbolInt, cod4);	
+					
+					if(strcmp(year,"2017")==0)
+					{
+						contador_2017 = 4;
+					}
+					else if(strcmp(year,"2018")==0)
+					{
+						contador_2018 = 4;
+					}
+					else if(strcmp(year,"2019")==0)
+					{
+						contador_2019 = 4;
+					}
+					else if(strcmp(year,"2020")==0)
+					{
+						contador_2020 = 4;
+					}
+					else if(strcmp(year,"2021")==0)
+					{
+						contador_2021 = 4;
+					}
 				}						
 
 				else if (strcmp(cantidad_jug,"5")==0)
@@ -3107,6 +3173,27 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 					scanf("%d",&cod5);
 					printf ("Los datos del juguete son:\n ");
 					Buscar(ArbolInt, cod5);	
+					
+					if(strcmp(year,"2017")==0)
+					{
+						contador_2017 = 5;
+					}
+					else if(strcmp(year,"2018")==0)
+					{
+						contador_2018 = 5;
+					}
+					else if(strcmp(year,"2019")==0)
+					{
+						contador_2019 = 5;
+					}
+					else if(strcmp(year,"2020")==0)
+					{
+						contador_2020 = 5;
+					}
+					else if(strcmp(year,"2021")==0)
+					{
+						contador_2021 = 5;
+					}
 				}
 				
 				else if (strcmp(cantidad_jug,"6")==0)
@@ -3158,7 +3245,29 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 					scanf("%d",&cod6);
 					printf ("Los datos del juguete son:\n ");
 					Buscar(ArbolInt, cod6);	
+					
+					if(strcmp(year,"2017")==0)
+					{
+						contador_2017 = 6;
+					}
+					else if(strcmp(year,"2018")==0)
+					{
+						contador_2018 = 6;
+					}
+					else if(strcmp(year,"2019")==0)
+					{
+						contador_2019 = 6;
+					}
+					else if(strcmp(year,"2020")==0)
+					{
+						contador_2020 = 6;
+					}
+					else if(strcmp(year,"2021")==0)
+					{
+						contador_2021 = 6;
+					}
 				}
+				
 				else if (strcmp(cantidad_jug,"7")==0)
 				{
 					printf ("\nIngrese el nombre del juguete 1: ");
@@ -3216,7 +3325,29 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 					scanf("%d",&cod7);
 					printf ("Los datos del juguete son:\n ");
 					Buscar(ArbolInt, cod7);	
+
+					if(strcmp(year,"2017")==0)
+					{
+						contador_2017 = 7;
+					}
+					else if(strcmp(year,"2018")==0)
+					{
+						contador_2018 = 7;
+					}
+					else if(strcmp(year,"2019")==0)
+					{
+						contador_2019 = 7;
+					}
+					else if(strcmp(year,"2020")==0)
+					{
+						contador_2020 = 7;
+					}
+					else if(strcmp(year,"2021")==0)
+					{
+						contador_2021 = 7;
+					}
 				}
+				
 				else if (strcmp(cantidad_jug,"8")==0)
 				{
 					printf ("Ingrese el nombre del juguete 1: ");
@@ -3282,7 +3413,29 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 					scanf("%d",&cod8);
 					printf ("Los datos del juguete son:\n ");
 					Buscar(ArbolInt, cod8);	
+					
+					if(strcmp(year,"2017")==0)
+					{
+						contador_2017 = 8;
+					}
+					else if(strcmp(year,"2018")==0)
+					{
+						contador_2018 = 8;
+					}
+					else if(strcmp(year,"2019")==0)
+					{
+						contador_2019 = 8;
+					}
+					else if(strcmp(year,"2020")==0)
+					{
+						contador_2020 = 8;
+					}
+					else if(strcmp(year,"2021")==0)
+					{
+						contador_2021 = 8;
+					}
 				}
+				
 				else if (strcmp(cantidad_jug,"9")==0)
 				{
 					printf ("Ingrese el nombre del juguete 1: ");
@@ -3356,7 +3509,29 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 					scanf("%d",&cod9);
 					printf ("Los datos del juguete son:\n ");
 					Buscar(ArbolInt, cod9);	
-				}	
+
+					if(strcmp(year,"2017")==0)
+					{
+						contador_2017 = 9;
+					}
+					else if(strcmp(year,"2018")==0)
+					{
+						contador_2018 = 9;
+					}
+					else if(strcmp(year,"2019")==0)
+					{
+						contador_2019 = 9;
+					}
+					else if(strcmp(year,"2020")==0)
+					{
+						contador_2020 = 9;
+					}
+					else if(strcmp(year,"2021")==0)
+					{
+						contador_2021 = 9;
+					}
+				}
+					
 				else if (strcmp(cantidad_jug,"10")==0)
 				{
 					printf ("Ingrese el nombre del juguete 1: ");
@@ -3437,7 +3612,28 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 					printf ("Ingrese el codigo del juguete 10: ");
 					scanf("%d",&cod10);
 					printf ("Los datos del juguete son:\n ");
-					Buscar(ArbolInt, cod10);	
+					Buscar(ArbolInt, cod10);
+					
+					if(strcmp(year,"2017")==0)
+					{
+						contador_2017 = 10;
+					}
+					else if(strcmp(year,"2018")==0)
+					{
+						contador_2018 = 10;
+					}
+					else if(strcmp(year,"2019")==0)
+					{
+						contador_2019 = 10;
+					}
+					else if(strcmp(year,"2020")==0)
+					{
+						contador_2020 = 10;
+					}
+					else if(strcmp(year,"2021")==0)
+					{
+						contador_2021 = 10;
+					}	
 				}
 				else
 				{
@@ -7780,7 +7976,27 @@ int main()
 			
 			if (strcmp(opcion_analisis,"1")==0)
 			{
-				return 0;
+				int juguetes_2017 = 0;
+				int juguetes_2018 = 0;
+				int juguetes_2019 = 0;
+				int juguetes_2020 = 0;
+				int juguetes_2021 = 0;
+				
+				Carta *aux;
+				for (aux = ColaCartas->front; aux!= NULL; aux = aux->next)
+				{
+					juguetes_2017 = juguetes_2017 + aux->contador_2017;
+					juguetes_2018 = juguetes_2018 + aux->contador_2018;
+					juguetes_2019 = juguetes_2019 + aux->contador_2019;
+					juguetes_2020 = juguetes_2020 + aux->contador_2020;
+					juguetes_2021 = juguetes_2021 + aux->contador_2021;
+				}
+				
+				printf ("\nCantidad de juguetes solicitados en el 2017: %d", juguetes_2017);
+				printf ("\nCantidad de juguetes solicitados en el 2018: %d", juguetes_2018);
+				printf ("\nCantidad de juguetes solicitados en el 2019: %d", juguetes_2019);
+				printf ("\nCantidad de juguetes solicitados en el 2020: %d", juguetes_2020);
+				printf ("\nCantidad de juguetes solicitados en el 2021: %d", juguetes_2021);
 			}
 			
 			else if (strcmp(opcion_analisis,"2")==0)
