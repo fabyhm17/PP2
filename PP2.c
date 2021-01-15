@@ -2938,7 +2938,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 			fflush (stdin);
 			gets (year);
 			
-			if (strcmp(year,"2017")==1 || strcmp(year,"2018")==1 || strcmp(year,"2019")==1 || strcmp(year,"2020")==1 || strcmp(year,"2021")==1) 
+			if (strcmp(year,"2017")==1 && strcmp(year,"2018")==1 && strcmp(year,"2019")==1 && strcmp(year,"2020")==1 && strcmp(year,"2021")==1) 
 			{
          		printf("ERROR: solo se aceptan cartas de los años 2017, 2018, 2019, 2020, 2021. La carta no se pudo registrar");
          		return;
@@ -5432,6 +5432,8 @@ void modificar_carta(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imp
 			
 		for(i = ColaCartas->front; i!= NULL; i = i->next)
 		{
+			for(j = ColaListaDeseos->front; j!= NULL; j = j->next)
+			
 			if (strcmp(i->cedula,verificar_cedula)==0 && strcmp(i->year,verificar_year)==0)
 			{
 				contador = 1;
