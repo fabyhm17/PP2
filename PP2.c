@@ -6194,8 +6194,8 @@ void procesar_carta(ImprimirCProcesada  * ColaCartasProcesadas, Imprimir * ColaK
 								
 								if (strcmp(opcion,"1")==0)
 								{
-									strcpy(i->estado_jug,"Listo para entregar");
-									strcpy(j->estado_carta,"Listo para entregar");
+									strcpy(i->estado_jug,"Entregar");
+									strcpy(j->estado_carta,"Entregar");
 								}
 								else if (strcmp(opcion,"2")==0)
 								{
