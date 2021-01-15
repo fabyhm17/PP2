@@ -2463,6 +2463,7 @@ ImprimirComportamiento * InsertarComportamiento(ImprimirComportamiento * ColaCom
 	if(ColaComportamientos->front == NULL) 
 	{
 		ColaComportamientos->front = CrearComportamiento(cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
+		ColaComportamientos->rear = ColaComportamientos->front;
 		return ColaComportamientos;
 	}
 	ColaComportamientos ->rear->next = CrearComportamiento(cedula_kid,nombre_padre,comportamiento,fecha_registro,descripcion_comportamiento);
@@ -6216,7 +6217,7 @@ void procesar_carta(ImprimirCProcesada  * ColaCartasProcesadas, Imprimir * ColaK
 			}
 			else
 			{
-				printf("\n\nEstimado padre o madre del niño. \n Se le comunica que su hijo cuenta con un registro de más de 6 omportamientos malos,\n por lo cual este año no recibirá regalos por parte de Santa y la carta será rechazada");
+				printf("\n\nEstimado padre o madre del niño. \n Se le comunica que su hijo cuenta con un registro de más de 6 omportamientos malos,\n por lo cual este año no recibirá regalos por parte de Santa y la carta será rechazada.");
 				for(i = ColaCartas->front; i!= NULL; i = i->next)
 				{
 					if (strcmp(i->cedula,ced_Procesar)==0)
@@ -6224,16 +6225,14 @@ void procesar_carta(ImprimirCProcesada  * ColaCartasProcesadas, Imprimir * ColaK
 						strcpy(i->estado_jug,"Rechazado");
 					}
 				}
-				printf("\n\n%s",i->estado_jug);
 			}
-			
 			
 			strcpy(Ide_Ayudante,ver_Ayu);
 			strcpy(Year,yearConsultar);
 			strcpy(Ide_Kid,ced_Procesar);
 			
 			InsertarCartaProcesada (ColaCartasProcesadas, Ide_Ayudante, Year, Ide_Kid);
-			printf("La carta se ha registrado exitosamente.");
+			printf("\n\nLa carta se ha registrado exitosamente.");
 		}
 		else
 		{
