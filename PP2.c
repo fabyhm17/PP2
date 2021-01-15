@@ -2716,340 +2716,6 @@ ImprimirLD * InsertarListaDeseos(ImprimirLD* ColaListaDeseos,char cedula[15], ch
 	ColaListaDeseos ->rear = ColaListaDeseos->rear->next;
 }
 
-/* ----------------------- CONSULTAR LISTA DE DESEOS----------------------- */
-
-int ConsultarListaDeseos(ImprimirLD *ColaListaDeseos)
-{
-	ListaDeseos *i;
-	char verificar_cedula[15];
-	char verificar_year[15];
-	int contador; 
-	
-	if (ColaListaDeseos -> front == NULL)
-	{
-		printf ("\nERROR: No hay listas de deseos registradas.");
-		return;
-	}
-	else
-	{
-		printf ("\nIngrese la cedula del niño al que pertenece la lista de deseos: ")	;
-		fflush (stdin);
-		gets (verificar_cedula);
-
-		printf("\nLista de juguetes solicitados");
-		for(i = ColaListaDeseos->front; i!= NULL; i = i->next)
-		{
-			if (strcmp(i->cedula,verificar_cedula)==0)
-			{
-				contador = 1;
-				
-				if (strcmp(i->jugueteLD1,"0")==0)
-				{
-					printf("\n ERROR: no hay juguetes en la lista de deseos\n");	
-				}
-				else if (strcmp(i->jugueteLD2,"0")==0) 
-				{
-					printf("1. %s\n",i->jugueteLD1);	
-				}	
-				else if (strcmp(i->jugueteLD3,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);	
-				}
-				else if (strcmp(i->jugueteLD4,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-				}
-				else if (strcmp(i->jugueteLD5,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-				}	
-				else if (strcmp(i->jugueteLD6,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-				}
-				else if (strcmp(i->jugueteLD7,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-				}
-				else if (strcmp(i->jugueteLD8,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-				}
-				else if (strcmp(i->jugueteLD9,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-				}
-				else if (strcmp(i->jugueteLD10,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-				}
-				else if (strcmp(i->jugueteLD11,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-				}	
-				if (strcmp(i->jugueteLD12,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-					printf("11. %s\n",i->jugueteLD11);	
-				}
-				else if (strcmp(i->jugueteLD13,"0")==0) 
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-					printf("11. %s\n",i->jugueteLD11);	
-					printf("12. %s\n",i->jugueteLD12);
-				}	
-				else if (strcmp(i->jugueteLD14,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-					printf("11. %s\n",i->jugueteLD11);	
-					printf("12. %s\n",i->jugueteLD12);	
-					printf("13. %s\n",i->jugueteLD13);	
-				}
-				else if (strcmp(i->jugueteLD15,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-					printf("11. %s\n",i->jugueteLD11);	
-					printf("12. %s\n",i->jugueteLD12);	
-					printf("13. %s\n",i->jugueteLD13);
-					printf("14. %s\n",i->jugueteLD14);	
-				}
-				else if (strcmp(i->jugueteLD16,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-					printf("11. %s\n",i->jugueteLD11);	
-					printf("12. %s\n",i->jugueteLD12);	
-					printf("13. %s\n",i->jugueteLD13);
-					printf("14. %s\n",i->jugueteLD14);
-					printf("15. %s\n",i->jugueteLD15);
-				}	
-				else if (strcmp(i->jugueteLD17,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-					printf("11. %s\n",i->jugueteLD11);	
-					printf("12. %s\n",i->jugueteLD12);	
-					printf("13. %s\n",i->jugueteLD13);
-					printf("14. %s\n",i->jugueteLD14);
-					printf("15. %s\n",i->jugueteLD15);
-					printf("16. %s\n",i->jugueteLD16);
-				}
-				else if (strcmp(i->jugueteLD18,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-					printf("11. %s\n",i->jugueteLD11);	
-					printf("12. %s\n",i->jugueteLD12);	
-					printf("13. %s\n",i->jugueteLD13);
-					printf("14. %s\n",i->jugueteLD14);
-					printf("15. %s\n",i->jugueteLD15);
-					printf("16. %s\n",i->jugueteLD16);
-					printf("17. %s\n",i->jugueteLD17);
-				}
-				else if (strcmp(i->jugueteLD19,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-					printf("11. %s\n",i->jugueteLD11);	
-					printf("12. %s\n",i->jugueteLD12);	
-					printf("13. %s\n",i->jugueteLD13);
-					printf("14. %s\n",i->jugueteLD14);
-					printf("15. %s\n",i->jugueteLD15);
-					printf("16. %s\n",i->jugueteLD16);
-					printf("17. %s\n",i->jugueteLD17);
-					printf("18. %s\n",i->jugueteLD18);
-				}
-				else if (strcmp(i->jugueteLD20,"0")==0)
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-					printf("11. %s\n",i->jugueteLD11);	
-					printf("12. %s\n",i->jugueteLD12);	
-					printf("13. %s\n",i->jugueteLD13);
-					printf("14. %s\n",i->jugueteLD14);
-					printf("15. %s\n",i->jugueteLD15);
-					printf("16. %s\n",i->jugueteLD16);
-					printf("17. %s\n",i->jugueteLD17);
-					printf("18. %s\n",i->jugueteLD18);
-					printf("19. %s\n",i->jugueteLD19);
-				}
-
-				else 
-				{
-					printf("Los juguetes de la lista de deseos son:\n");
-					printf("1. %s\n",i->jugueteLD1);
-					printf("2. %s\n",i->jugueteLD2);
-					printf("3. %s\n",i->jugueteLD3);
-					printf("4. %s\n",i->jugueteLD4);
-					printf("5. %s\n",i->jugueteLD5);
-					printf("6. %s\n",i->jugueteLD6);
-					printf("7. %s\n",i->jugueteLD7);
-					printf("8. %s\n",i->jugueteLD8);
-					printf("9. %s\n",i->jugueteLD9);
-					printf("10. %s\n",i->jugueteLD10);
-					printf("11. %s\n",i->jugueteLD11);	
-					printf("12. %s\n",i->jugueteLD12);	
-					printf("13. %s\n",i->jugueteLD13);
-					printf("14. %s\n",i->jugueteLD14);
-					printf("15. %s\n",i->jugueteLD15);
-					printf("16. %s\n",i->jugueteLD16);
-					printf("17. %s\n",i->jugueteLD17);
-					printf("18. %s\n",i->jugueteLD18);
-					printf("19. %s\n",i->jugueteLD19);
-					printf("20. %s\n",i->jugueteLD20);
-				}		
-			}
-		}			
-			
-		if (contador == 0)
-		{
-			printf ("\nERROR: la cedula ingresada no contiene lista de deseos, la accion no se puede realizar.");
-			return;
-		}
-	}
-
-	return 0;
-}
-
 
 
 
@@ -5517,6 +5183,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 				}	
 									
 				InsertarListaDeseos(ColaListaDeseos,cedula_kid, jugueteLD1,jugueteLD2, jugueteLD3, jugueteLD4, jugueteLD5, jugueteLD6, jugueteLD7,jugueteLD8, jugueteLD9, jugueteLD10, jugueteLD11, jugueteLD12, jugueteLD13, jugueteLD14, jugueteLD15, jugueteLD16, jugueteLD17, jugueteLD18, jugueteLD19, jugueteLD20, codLD1, codLD2, codLD3, codLD4, codLD5, codLD6, codLD7, codLD8, codLD9, codLD10, codLD11, codLD12, codLD13, codLD14, codLD15, codLD16, codLD17, codLD18, codLD19, codLD20);
+				ConsultarListaDeseos(ColaListaDeseos,cedula_kid);
 			}
 		}
 	}
@@ -5536,11 +5203,13 @@ void modificar_carta(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imp
 {
 	Carta *i;
 	ListaDeseos *j;
+	
 	char verificar_cedula[15];
 	char verificar_year[15];
 	int contador; 
 	char op_modif[10];
 	char num_jug[10];
+	char num_jugLD[10];
 	if (ColaCartas -> front == NULL)
 	{
 		printf ("\nERROR: No hay cartas registradas.");
@@ -5642,111 +5311,8 @@ void modificar_carta(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imp
 				}
 				else if (strcmp(op_modif,"2")==0)
 				{
-					printf("\nJuguetes Registrados:\n\n");
-					for(i = ColaCartas->front; i!= NULL; i = i->next)
-					{
-	
-						if (strcmp(i->juguete1,"0")==0)
-						{
-							printf("1. %s\n",i->juguete1);	
-						}	
-						
-						else if(strcmp(i->juguete2,"0")==0)
-						{
-							printf("1. %s\n",i->juguete1);	
-						}	
-						else if (strcmp(i->juguete3,"0")==0)
-						{
-							printf("Los juguetes de la lista de deseos son:\n");
-							printf("1. %s\n",i->juguete1);
-							printf("2. %s\n",i->juguete2);	
-						}
-						else if (strcmp(i->juguete4,"0")==0)
-						{
-							printf("Los juguetes de la lista de deseos son:\n");
-							printf("1. %s\n",i->juguete1);
-							printf("2. %s\n",i->juguete2);
-							printf("3. %s\n",i->juguete3);
-						}
-						else if (strcmp(i->juguete5,"0")==0)
-						{
-							printf("Los juguetes de la lista de deseos son:\n");
-							printf("1. %s\n",i->juguete1);
-							printf("2. %s\n",i->juguete2);
-							printf("3. %s\n",i->juguete3);
-							printf("4. %s\n",i->juguete4);
-						}	
-						else if (strcmp(i->juguete6,"0")==0)
-						{
-							printf("Los juguetes de la lista de deseos son:\n");
-							printf("1. %s\n",i->juguete1);
-							printf("2. %s\n",i->juguete2);
-							printf("3. %s\n",i->juguete3);
-							printf("4. %s\n",i->juguete4);
-							printf("5. %s\n",i->juguete5);
-						}
-						else if (strcmp(i->juguete7,"0")==0)
-						{
-							printf("Los juguetes de la lista de deseos son:\n");
-							printf("1. %s\n",i->juguete1);
-							printf("2. %s\n",i->juguete2);
-							printf("3. %s\n",i->juguete3);
-							printf("4. %s\n",i->juguete4);
-							printf("5. %s\n",i->juguete5);
-							printf("6. %s\n",i->juguete6);
-						}
-						else if (strcmp(i->juguete8,"0")==0)
-						{
-							printf("Los juguetes de la lista de deseos son:\n");
-							printf("1. %s\n",i->juguete1);
-							printf("2. %s\n",i->juguete2);
-							printf("3. %s\n",i->juguete3);
-							printf("4. %s\n",i->juguete4);
-							printf("5. %s\n",i->juguete5);
-							printf("6. %s\n",i->juguete6);
-							printf("7. %s\n",i->juguete7);
-						}
-						else if (strcmp(i->juguete9,"0")==0)
-						{
-							printf("Los juguetes de la lista de deseos son:\n");
-							printf("1. %s\n",i->juguete1);
-							printf("2. %s\n",i->juguete2);
-							printf("3. %s\n",i->juguete3);
-							printf("4. %s\n",i->juguete4);
-							printf("5. %s\n",i->juguete5);
-							printf("6. %s\n",i->juguete6);
-							printf("7. %s\n",i->juguete7);
-							printf("8. %s\n",i->juguete8);
-						}	
-						else if (strcmp(i->juguete10,"0")==0)
-						{
-							printf("Los juguetes de la lista de deseos son:\n");
-							printf("1. %s\n",i->juguete1);
-							printf("2. %s\n",i->juguete2);
-							printf("3. %s\n",i->juguete3);
-							printf("4. %s\n",i->juguete4);
-							printf("5. %s\n",i->juguete5);
-							printf("6. %s\n",i->juguete6);
-							printf("7. %s\n",i->juguete7);
-							printf("8. %s\n",i->juguete8);
-							printf("9. %s\n",i->juguete9);
-						}
-						else 
-						{
-							printf("Los juguetes de la lista de deseos son:\n");
-							printf("1. %s\n",i->juguete1);
-							printf("2. %s\n",i->juguete2);
-							printf("3. %s\n",i->juguete3);
-							printf("4. %s\n",i->juguete4);
-							printf("5. %s\n",i->juguete5);
-							printf("6. %s\n",i->juguete6);
-							printf("7. %s\n",i->juguete7);
-							printf("8. %s\n",i->juguete8);
-							printf("9. %s\n",i->juguete9);
-							printf("10. %s\n",i->juguete10);
-						}
-					}
-	
+					ConsultarCartas(ColaCartas, verificar_cedula, verificar_year);
+					
 					printf("Ingrese el numero de juguete que desea eliminar de la carta: ");
 					fflush (stdin);
 					gets (num_jug);
@@ -5874,7 +5440,993 @@ void modificar_carta(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imp
 				}
 				else if (strcmp(op_modif,"3")==0)
 				{
-					return;
+					ConsultarListaDeseos(ColaListaDeseos,verificar_cedula, verificar_year);
+					
+					printf("Ingrese el numero de juguete que desea pasar a la carta: ");
+					fflush (stdin);
+					gets (num_jugLD);
+					
+					if (strcmp(num_jugLD,"1")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD1);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD1);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD1);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD1);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD1);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD1);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD1);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD1);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD1);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD1);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD1,"0");
+					}
+					else if (strcmp(num_jugLD,"2")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD2);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD2);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD2);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD2);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD2);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD2);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD2);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD2);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD2);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD2);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD2,"0");
+					}
+					else if (strcmp(num_jugLD,"3")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD3);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD3);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD3);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD3);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD3);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD3);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD3);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD3);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD3);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD3);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD3,"0");
+					}
+					else if (strcmp(num_jugLD,"4")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD4);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD4);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD4);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD4);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD4);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD4);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD4);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD4);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD4);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD4);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD4,"0");
+					}						
+					else if (strcmp(num_jugLD,"5")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD5);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD5);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD5);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD5);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD5);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD5);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD5);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD5);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD5);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD5);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD5,"0");			
+					}
+					else if (strcmp(num_jugLD,"6")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD6);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD6);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD6);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD6);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD6);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD6);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD6);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD6);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD6);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD6);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD6,"0");			
+					}					
+					else if (strcmp(num_jugLD,"7")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD7);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD7);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD7);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD7);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD7);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD7);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD7);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD7);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD7);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD7);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD7,"0");			
+					}		
+					else if (strcmp(num_jugLD,"8")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD8);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD8);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD8);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD8);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD8);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD8);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD8);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD8);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD8);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD8);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD8,"0");			
+					}
+					else if (strcmp(num_jugLD,"9")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD9);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD9);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD9);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD9);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD9);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD9);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD9);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD9);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD9);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD9);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD9,"0");			
+					}	
+					else if (strcmp(num_jugLD,"10")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD10);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD10);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD10);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD10);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD10);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD10);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD10);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD10);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD10);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD10);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD10,"0");			
+					}
+
+					else if (strcmp(num_jugLD,"11")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD11);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD11);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD11);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD11);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD11);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD11);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD11);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD11);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD11);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD11);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD11,"0");
+					}
+					else if (strcmp(num_jugLD,"12")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD12);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD12);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD12);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD12);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD12);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD12);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD12);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD12);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD12);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD12);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD12,"0");
+					}
+					else if (strcmp(num_jugLD,"13")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD13);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD13);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD13);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD13);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD13);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD13);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD13);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD13);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD13);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD13);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD13,"0");
+					}
+					else if (strcmp(num_jugLD,"14")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD14);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD14);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD14);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD14);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD14);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD14);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD14);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD14);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD14);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD14);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD14,"0");
+					}						
+					else if (strcmp(num_jugLD,"15")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD15);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD15);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD15);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD15);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD15);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD15);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD15);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD15);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD15);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD15);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD15,"0");			
+					}
+					else if (strcmp(num_jugLD,"16")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD16);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD16);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD16);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD16);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD16);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD16);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD16);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD16);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD16);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD16);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD16,"0");			
+					}					
+					else if (strcmp(num_jugLD,"17")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD17);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD17);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD17);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD17);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD17);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD17);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD17);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD17);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD17);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD17);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD7,"0");			
+					}		
+					else if (strcmp(num_jugLD,"18")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD18);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD18);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD18);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD18);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD18);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD18);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD18);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD18);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD18);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD18);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD18,"0");			
+					}
+					else if (strcmp(num_jugLD,"19")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD19);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD19);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD19);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD19);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD19);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD19);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD19);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD19);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD19);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD19);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD19,"0");			
+					}	
+					else if (strcmp(num_jugLD,"20")==0)
+					{
+						if (strcmp(i->juguete1,"0")==0 )
+						{
+							strcpy(i->juguete1,j->jugueteLD20);
+						}
+						else if (strcmp(i->juguete2,"0")==0 )
+						{
+							strcpy(i->juguete2,j->jugueteLD20);
+						}
+						else if (strcmp(i->juguete3,"0")==0 )
+						{
+							strcpy(i->juguete3,j->jugueteLD20);
+						}
+						else if (strcmp(i->juguete4,"0")==0 )
+						{
+							strcpy(i->juguete4,j->jugueteLD20);
+						}
+						else if (strcmp(i->juguete5,"0")==0 )
+						{
+							strcpy(i->juguete5,j->jugueteLD20);
+						}
+						else if (strcmp(i->juguete6,"0")==0 )
+						{
+							strcpy(i->juguete6,j->jugueteLD20);
+						}
+						else if (strcmp(i->juguete7,"0")==0 )
+						{
+							strcpy(i->juguete7,j->jugueteLD20);
+						}
+						else if (strcmp(i->juguete8,"0")==0 )
+						{
+							strcpy(i->juguete8,j->jugueteLD20);
+						}
+						else if (strcmp(i->juguete9,"0")==0 )
+						{
+							strcpy(i->juguete9,j->jugueteLD20);
+						}
+						else if (strcmp(i->juguete10,"0")==0 )
+						{
+							strcpy(i->juguete10,j->jugueteLD20);
+						}
+						else
+						{
+							printf("ERROR: No hay espacios disponibles en la carta.");
+							return;
+						}
+						strcpy(j->jugueteLD20,"0");			
+					}							
 				}
 				else
 				{
@@ -6026,6 +6578,315 @@ int ConsultarCartas(ImprimirCarta *ColaCartas, char verificar_cedula[15], char v
 }
 
 
+/* ----------------------- CONSULTAR LISTA DE DESEOS----------------------- */
+
+int ConsultarListaDeseos(ImprimirLD *ColaListaDeseos,char verificar_cedula[15])
+{
+	ListaDeseos *i;
+	int contador; 
+	
+	if (ColaListaDeseos -> front == NULL)
+	{
+		printf ("\nERROR: No hay listas de deseos registradas.");
+		return;
+	}
+	else
+	{
+		printf("\nLista de juguetes almacenados en la lista de deseos: \n");
+		for(i = ColaListaDeseos->front; i!= NULL; i = i->next)
+		{
+			if (strcmp(i->cedula,verificar_cedula)==0)
+			{
+				contador = 1;
+				
+				if (strcmp(i->jugueteLD1,"0")==0)
+				{
+					printf("\n ERROR: no hay juguetes en la lista de deseos\n");	
+				}
+				else if (strcmp(i->jugueteLD2,"0")==0) 
+				{
+					printf("1. %s\n",i->jugueteLD1);	
+				}	
+				else if (strcmp(i->jugueteLD3,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);	
+				}
+				else if (strcmp(i->jugueteLD4,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+				}
+				else if (strcmp(i->jugueteLD5,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+				}	
+				else if (strcmp(i->jugueteLD6,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+				}
+				else if (strcmp(i->jugueteLD7,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+				}
+				else if (strcmp(i->jugueteLD8,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+				}
+				else if (strcmp(i->jugueteLD9,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+				}
+				else if (strcmp(i->jugueteLD10,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+				}
+				else if (strcmp(i->jugueteLD11,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+				}	
+				if (strcmp(i->jugueteLD12,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+					printf("11. %s\n",i->jugueteLD11);	
+				}
+				else if (strcmp(i->jugueteLD13,"0")==0) 
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+					printf("11. %s\n",i->jugueteLD11);	
+					printf("12. %s\n",i->jugueteLD12);
+				}	
+				else if (strcmp(i->jugueteLD14,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+					printf("11. %s\n",i->jugueteLD11);	
+					printf("12. %s\n",i->jugueteLD12);	
+					printf("13. %s\n",i->jugueteLD13);	
+				}
+				else if (strcmp(i->jugueteLD15,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+					printf("11. %s\n",i->jugueteLD11);	
+					printf("12. %s\n",i->jugueteLD12);	
+					printf("13. %s\n",i->jugueteLD13);
+					printf("14. %s\n",i->jugueteLD14);	
+				}
+				else if (strcmp(i->jugueteLD16,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+					printf("11. %s\n",i->jugueteLD11);	
+					printf("12. %s\n",i->jugueteLD12);	
+					printf("13. %s\n",i->jugueteLD13);
+					printf("14. %s\n",i->jugueteLD14);
+					printf("15. %s\n",i->jugueteLD15);
+				}	
+				else if (strcmp(i->jugueteLD17,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+					printf("11. %s\n",i->jugueteLD11);	
+					printf("12. %s\n",i->jugueteLD12);	
+					printf("13. %s\n",i->jugueteLD13);
+					printf("14. %s\n",i->jugueteLD14);
+					printf("15. %s\n",i->jugueteLD15);
+					printf("16. %s\n",i->jugueteLD16);
+				}
+				else if (strcmp(i->jugueteLD18,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+					printf("11. %s\n",i->jugueteLD11);	
+					printf("12. %s\n",i->jugueteLD12);	
+					printf("13. %s\n",i->jugueteLD13);
+					printf("14. %s\n",i->jugueteLD14);
+					printf("15. %s\n",i->jugueteLD15);
+					printf("16. %s\n",i->jugueteLD16);
+					printf("17. %s\n",i->jugueteLD17);
+				}
+				else if (strcmp(i->jugueteLD19,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+					printf("11. %s\n",i->jugueteLD11);	
+					printf("12. %s\n",i->jugueteLD12);	
+					printf("13. %s\n",i->jugueteLD13);
+					printf("14. %s\n",i->jugueteLD14);
+					printf("15. %s\n",i->jugueteLD15);
+					printf("16. %s\n",i->jugueteLD16);
+					printf("17. %s\n",i->jugueteLD17);
+					printf("18. %s\n",i->jugueteLD18);
+				}
+				else if (strcmp(i->jugueteLD20,"0")==0)
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+					printf("11. %s\n",i->jugueteLD11);	
+					printf("12. %s\n",i->jugueteLD12);	
+					printf("13. %s\n",i->jugueteLD13);
+					printf("14. %s\n",i->jugueteLD14);
+					printf("15. %s\n",i->jugueteLD15);
+					printf("16. %s\n",i->jugueteLD16);
+					printf("17. %s\n",i->jugueteLD17);
+					printf("18. %s\n",i->jugueteLD18);
+					printf("19. %s\n",i->jugueteLD19);
+				}
+
+				else 
+				{
+					printf("1. %s\n",i->jugueteLD1);
+					printf("2. %s\n",i->jugueteLD2);
+					printf("3. %s\n",i->jugueteLD3);
+					printf("4. %s\n",i->jugueteLD4);
+					printf("5. %s\n",i->jugueteLD5);
+					printf("6. %s\n",i->jugueteLD6);
+					printf("7. %s\n",i->jugueteLD7);
+					printf("8. %s\n",i->jugueteLD8);
+					printf("9. %s\n",i->jugueteLD9);
+					printf("10. %s\n",i->jugueteLD10);
+					printf("11. %s\n",i->jugueteLD11);	
+					printf("12. %s\n",i->jugueteLD12);	
+					printf("13. %s\n",i->jugueteLD13);
+					printf("14. %s\n",i->jugueteLD14);
+					printf("15. %s\n",i->jugueteLD15);
+					printf("16. %s\n",i->jugueteLD16);
+					printf("17. %s\n",i->jugueteLD17);
+					printf("18. %s\n",i->jugueteLD18);
+					printf("19. %s\n",i->jugueteLD19);
+					printf("20. %s\n",i->jugueteLD20);
+				}		
+			}
+		}			
+			
+		if (contador == 0)
+		{
+			printf ("\nERROR: la cedula ingresada no contiene lista de deseos, la accion no se puede realizar.");
+			return;
+		}
+	}
+
+	return 0;
+}
+
 
 
 
@@ -6107,7 +6968,22 @@ int ValidarComportamiento(Imprimir * ColaKids, char cedula_ver[10])
 	}
 	return 0;
 	
-}	
+}
+
+int ValidarCedula(ImprimirCarta *ColaCartas, char cedula_proc[10])
+{
+	Carta *i;
+	
+	for(i = ColaCartas->front; i!= NULL; i = i->next)
+	{
+		if (strcmp(i->cedula,cedula_proc)==0)
+		{
+			return 1;
+		}
+	}
+	return 0;
+	
+}		
 
 
 void procesar_carta(ImprimirCProcesada  * ColaCartasProcesadas, Imprimir * ColaKids, ImprimirAyudante *ColaAyudantes, ImprimirCarta *ColaCartas)
@@ -6165,81 +7041,76 @@ void procesar_carta(ImprimirCProcesada  * ColaCartasProcesadas, Imprimir * ColaK
 				fflush (stdin);
 				gets (ced_Procesar);
 				
-				if (ValidarComportamiento(ColaKids, ced_Procesar)==0)
+				if(ValidarCedula(ColaCartas, ced_Procesar)==0)
 				{
-					for(j = ColaKids->front; j!= NULL; j = j->next)
-					{
-						if (strcmp(ced_Procesar,j->cedula)==0)
+					printf("ERROR: EL niño no tiene cartas registradas.");
+					return;
+				}
+				else
+				{							
+					if (ValidarComportamiento(ColaKids, ced_Procesar)==0)
+					{					
+						printf("------INFORMACIÓN DE LA CARTA-------\n");
+						
+						for(i = ColaCartas->front; i!= NULL; i = i->next)
 						{
-							if(j->contador_comportamiento_malo > 6)
+							if (strcmp(i->cedula,ced_Procesar)==0)
 							{
+								for(j = ColaKids->front; j!= NULL; j = j->next)
+								{
+									if (strcmp(ced_Procesar,j->cedula)==0)
+									{
+										printf("Nombre del niño: %s\nCedula: %s\n",j->nombre,j->cedula),
+										ConsultarCartas(ColaCartas, ced_Procesar, yearConsultar);
+										
+										printf("\nESTADO DE LA CARTA\n");
+										printf("1. Todos los juguetes estan listos para entragar\n");
+										printf("2. Los juguetes NO estan listos para entragar\n");
+										printf("Ingrese la opcion que corresponda: ");
+										fflush (stdin);
+										gets (opcion);
+										
+										if (strcmp(opcion,"1")==0)
+										{
+											strcpy(i->estado_jug,"Entregar");
+											strcpy(j->estado_carta,"Entregar");
+										}
+										else if (strcmp(opcion,"2")==0)
+										{
+											strcpy(i->estado_jug,"Rechazado");		
+										}
+										else
+										{
+											printf("ERROR: opcion no disponible");
+											return;
+										}			
+									}
+								}
+					
 								
 							}
 						}
-						
 					}
-					
-					printf("------INFORMACIÓN DE LA CARTA-------\n");
-					
-					for(i = ColaCartas->front; i!= NULL; i = i->next)
+				
+					else
 					{
-						if (strcmp(i->cedula,ced_Procesar)==0)
+						printf("\n\nEstimado padre o madre del niño. \n Se le comunica que su hijo cuenta con un registro de más de 6 omportamientos malos,\n por lo cual este año no recibirá regalos por parte de Santa y la carta será rechazada.");
+						for(i = ColaCartas->front; i!= NULL; i = i->next)
 						{
-							for(j = ColaKids->front; j!= NULL; j = j->next)
+							if (strcmp(i->cedula,ced_Procesar)==0)
 							{
-								if (strcmp(ced_Procesar,j->cedula)==0)
-								{
-									printf("Nombre del niño: %s\nCedula: %s\n",j->nombre,j->cedula),
-									ConsultarCartas(ColaCartas, ced_Procesar, yearConsultar);
-									
-									printf("\nESTADO DE LA CARTA\n");
-									printf("1. Todos los juguetes estan listos para entragar\n");
-									printf("2. Los juguetes NO estan listos para entragar\n");
-									printf("Ingrese la opcion que corresponda: ");
-									fflush (stdin);
-									gets (opcion);
-									
-									if (strcmp(opcion,"1")==0)
-									{
-										strcpy(i->estado_jug,"Entregar");
-										strcpy(j->estado_carta,"Entregar");
-									}
-									else if (strcmp(opcion,"2")==0)
-									{
-										strcpy(i->estado_jug,"Rechazado");
-										strcpy(j->estado_carta,"Rechazado");
-	
-									}
-									else
-									{
-										printf("ERROR: opcion no disponible");
-										return;
-									}			
-								}
+								strcpy(i->estado_jug,"Rechazado");
 							}
-				
-							
 						}
 					}
+					
+					strcpy(Ide_Ayudante,ver_Ayu);
+					strcpy(Year,yearConsultar);
+					strcpy(Ide_Kid,ced_Procesar);
+					
+					InsertarCartaProcesada (ColaCartasProcesadas, Ide_Ayudante, Year, Ide_Kid);
+					printf("\n\nLa carta se ha registrado exitosamente.");
 				}
-				else
-				{
-					printf("\n\nEstimado padre o madre del niño. \n Se le comunica que su hijo cuenta con un registro de más de 6 omportamientos malos,\n por lo cual este año no recibirá regalos por parte de Santa y la carta será rechazada.");
-					for(i = ColaCartas->front; i!= NULL; i = i->next)
-					{
-						if (strcmp(i->cedula,ced_Procesar)==0)
-						{
-							strcpy(i->estado_jug,"Rechazado");
-						}
-					}
-				}
-				
-				strcpy(Ide_Ayudante,ver_Ayu);
-				strcpy(Year,yearConsultar);
-				strcpy(Ide_Kid,ced_Procesar);
-				
-				InsertarCartaProcesada (ColaCartasProcesadas, Ide_Ayudante, Year, Ide_Kid);
-				printf("\n\nLa carta se ha registrado exitosamente.");
 			}
 		}
 		else
