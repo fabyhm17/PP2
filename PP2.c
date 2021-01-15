@@ -5900,11 +5900,10 @@ void modificar_carta(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imp
 
 /* --------------------------------------------------------------- 12. CONSULTAR CARTA PARA SANTA ------------------------------------------------------------- */
 
-int ConsultarCartas(ImprimirCarta *ColaCartas)
+int ConsultarCartas(ImprimirCarta *ColaCartas, char verificar_cedula[15], char verificar_year[15])
 {
+
 	Carta *i;
-	char verificar_cedula[15];
-	char verificar_year[15];
 	int contador; 
 	
 	if (ColaCartas -> front == NULL)
@@ -5915,15 +5914,7 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 	
 	else
 	{
-		printf("\n------------------------ CONSULTA DE CARTAS ------------------------\n");
-		printf ("\nIngrese la cedula del niño al que pertenece la carta: ")	;
-		fflush (stdin);
-		gets (verificar_cedula);
-		printf ("Ingrese el año para el que se solicito la carta: ")	;
-		fflush (stdin);
-		gets (verificar_year);
-		
-		printf("\nLista de juguetes solicitados");
+		printf("Los juguetes de la carta son:\n");
 		for(i = ColaCartas->front; i!= NULL; i = i->next)
 		{
 			if (strcmp(i->cedula,verificar_cedula)==0 && strcmp(i->year,verificar_year)==0)
@@ -5932,7 +5923,7 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 				
 				if (strcmp(i->juguete1,"0")==0)
 				{
-					printf("1. %s\n",i->juguete1);	
+					printf("ERROR: no hay juguetes en la carta");	
 				}	
 				
 				else if(strcmp(i->juguete2,"0")==0)
@@ -5941,20 +5932,17 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 				}	
 				else if (strcmp(i->juguete3,"0")==0)
 				{
-					printf("Los juguetes de la lista de deseos son:\n");
 					printf("1. %s\n",i->juguete1);
 					printf("2. %s\n",i->juguete2);	
 				}
 				else if (strcmp(i->juguete4,"0")==0)
 				{
-					printf("Los juguetes de la lista de deseos son:\n");
 					printf("1. %s\n",i->juguete1);
 					printf("2. %s\n",i->juguete2);
 					printf("3. %s\n",i->juguete3);
 				}
 				else if (strcmp(i->juguete5,"0")==0)
 				{
-					printf("Los juguetes de la lista de deseos son:\n");
 					printf("1. %s\n",i->juguete1);
 					printf("2. %s\n",i->juguete2);
 					printf("3. %s\n",i->juguete3);
@@ -5962,7 +5950,6 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 				}	
 				else if (strcmp(i->juguete6,"0")==0)
 				{
-					printf("Los juguetes de la lista de deseos son:\n");
 					printf("1. %s\n",i->juguete1);
 					printf("2. %s\n",i->juguete2);
 					printf("3. %s\n",i->juguete3);
@@ -5971,7 +5958,6 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 				}
 				else if (strcmp(i->juguete7,"0")==0)
 				{
-					printf("Los juguetes de la lista de deseos son:\n");
 					printf("1. %s\n",i->juguete1);
 					printf("2. %s\n",i->juguete2);
 					printf("3. %s\n",i->juguete3);
@@ -5981,7 +5967,6 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 				}
 				else if (strcmp(i->juguete8,"0")==0)
 				{
-					printf("Los juguetes de la lista de deseos son:\n");
 					printf("1. %s\n",i->juguete1);
 					printf("2. %s\n",i->juguete2);
 					printf("3. %s\n",i->juguete3);
@@ -5992,7 +5977,6 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 				}
 				else if (strcmp(i->juguete9,"0")==0)
 				{
-					printf("Los juguetes de la lista de deseos son:\n");
 					printf("1. %s\n",i->juguete1);
 					printf("2. %s\n",i->juguete2);
 					printf("3. %s\n",i->juguete3);
@@ -6004,7 +5988,6 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 				}	
 				else if (strcmp(i->juguete10,"0")==0)
 				{
-					printf("Los juguetes de la lista de deseos son:\n");
 					printf("1. %s\n",i->juguete1);
 					printf("2. %s\n",i->juguete2);
 					printf("3. %s\n",i->juguete3);
@@ -6017,7 +6000,6 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 				}
 				else 
 				{
-					printf("Los juguetes de la lista de deseos son:\n");
 					printf("1. %s\n",i->juguete1);
 					printf("2. %s\n",i->juguete2);
 					printf("3. %s\n",i->juguete3);
@@ -6048,7 +6030,217 @@ int ConsultarCartas(ImprimirCarta *ColaCartas)
 
 /* ---------------------------------------------------------------- 13. PROCESAR CARTA PARA SANTA ------------------------------------------------------------- */
 
+typedef struct ProcesarCarta
+{
+	char Ide_Ayudante[50];
+	char Year [10];	
+	char Ide_Kid[50];
+	
+	struct ProcesarCarta * next;	
+}ProcesarCarta;
 
+typedef struct ImprimirCProcesada
+{
+	ProcesarCarta *front;
+	ProcesarCarta *rear;
+	int size;
+}ImprimirCProcesada;
+
+
+/* ----------------------- CREAR NUEVA COLA CARTAS PROCESADAS----------------------- */
+
+ImprimirCProcesada * CrearColaCartasProcesadas(ImprimirCProcesada * ColaCartasProcesadas)
+{
+	ColaCartasProcesadas = NULL;
+	ColaCartasProcesadas = (ImprimirCProcesada *) malloc(sizeof(ImprimirCProcesada));	
+	ColaCartasProcesadas -> front = NULL;
+	ColaCartasProcesadas -> rear = NULL;
+	return ColaCartasProcesadas;
+}
+
+
+/* ----------------------- CREAR NODO CARTA PROCESADA ----------------------- */
+
+ProcesarCarta * CrearCartaProcesada(char Ide_Ayudante[50], char Year[10], char Ide_Kid[50])
+{
+	struct ProcesarCarta *nuevo;
+	nuevo = (ProcesarCarta *) malloc(sizeof(ProcesarCarta));
+	nuevo -> next = NULL;
+	
+	strcpy(nuevo->Ide_Ayudante,Ide_Ayudante);
+	strcpy(nuevo->Year,Year);	
+	strcpy(nuevo->Ide_Kid,Ide_Kid);
+
+	return nuevo;
+}
+
+/* ----------------------- REGISTRAR CARTA PROCESADA ----------------------- */
+
+ImprimirCProcesada  * InsertarCartaProcesada (ImprimirCProcesada  * ColaCartasProcesadas, char Ide_Ayudante[50], char Year[10], char Ide_Kid[50])
+{
+	ColaCartasProcesadas->size = ColaCartasProcesadas->size + 1;
+	if(ColaCartasProcesadas->front == NULL) 
+	{
+		ColaCartasProcesadas->front = CrearCartaProcesada(Ide_Ayudante,Year, Ide_Kid);
+		ColaCartasProcesadas->rear = ColaCartasProcesadas->front;
+		return ColaCartasProcesadas;
+	}
+	ColaCartasProcesadas ->rear->next = CrearCartaProcesada(Ide_Ayudante,Year, Ide_Kid);
+	ColaCartasProcesadas ->rear = ColaCartasProcesadas->rear->next;
+}
+
+
+int ValidarComportamiento(Imprimir * ColaKids, char cedula_ver[10])
+{
+	Kid *j;
+	
+	for(j = ColaKids->front; j!= NULL; j = j->next)
+	{
+		if (strcmp(j->cedula,cedula_ver)==0)
+		{
+			if (j->contador_comportamiento_malo > 6)
+			{
+				return 1;
+			}
+		}
+	}
+	return 0;
+	
+}	
+
+
+void procesar_carta(ImprimirCProcesada  * ColaCartasProcesadas, Imprimir * ColaKids, ImprimirAyudante *ColaAyudantes, ImprimirCarta *ColaCartas)
+{
+	char Ide_Ayudante[50];
+	char Year [10];	
+	char Ide_Kid[50];
+	
+	char yearConsultar[10];
+	char ced_Procesar[10];
+	char opcion[10];
+	char ver_Ayu[10];
+	
+	printf("Ingrese la cedula del ayudante que procesará la carta: ");
+	fflush (stdin);
+	gets (ver_Ayu);
+	
+	Ayudante *h;	
+	for(h = ColaAyudantes->front; h!= NULL; h = h->next)
+	{
+		if (strcmp(h->cedula,ver_Ayu)==0)
+		{
+			printf("Indique el año al que corresponden las cartas a procesar: ");
+			fflush (stdin);
+			gets (yearConsultar);
+			
+			Carta *i;
+			Kid *j;
+			
+			printf("Los niños que registraron cartas para el año %s son: \n", yearConsultar);
+			for(i = ColaCartas->front; i!= NULL; i = i->next)
+			{
+				if (strcmp(i->year,yearConsultar)==0)
+				{
+					for(j = ColaKids->front; j!= NULL; j = j->next)
+					{
+						if (strcmp(i->cedula,j->cedula)==0)
+						{
+							printf("Nombre: %s\nCedula: %s\n",j->nombre, j->cedula);
+							printf("--------------------------------------\n");
+						}
+					}
+					
+				}
+			}
+			
+			printf("\nIngrese la cedula del niño al que se le precesará la carta: \n");
+			fflush (stdin);
+			gets (ced_Procesar);
+			
+			if (ValidarComportamiento(ColaKids, ced_Procesar)==0)
+			{
+				for(j = ColaKids->front; j!= NULL; j = j->next)
+				{
+					if (strcmp(ced_Procesar,j->cedula)==0)
+					{
+						if(j->contador_comportamiento_malo > 6)
+						{
+							
+						}
+					}
+					
+				}
+				
+				printf("------INFORMACIÓN DE LA CARTA-------\n");
+				
+				for(i = ColaCartas->front; i!= NULL; i = i->next)
+				{
+					if (strcmp(i->cedula,ced_Procesar)==0)
+					{
+						for(j = ColaKids->front; j!= NULL; j = j->next)
+						{
+							if (strcmp(ced_Procesar,j->cedula)==0)
+							{
+								printf("Nombre del niño: %s\nCedula: %s\n",j->nombre,j->cedula),
+								ConsultarCartas(ColaCartas, ced_Procesar, yearConsultar);
+								
+								printf("\nESTADO DE LA CARTA\n");
+								printf("1. Todos los juguetes estan listos para entragar\n");
+								printf("2. Los juguetes NO estan listos para entragar\n");
+								printf("Ingrese la opcion que corresponda: ");
+								fflush (stdin);
+								gets (opcion);
+								
+								if (strcmp(opcion,"1")==0)
+								{
+									strcpy(i->estado_jug,"Listo para entregar");
+									strcpy(j->estado_carta,"Listo para entregar");
+								}
+								else if (strcmp(opcion,"2")==0)
+								{
+									strcpy(i->estado_jug,"Rechazado");
+									strcpy(j->estado_carta,"Rechazado");
+
+								}
+								else
+								{
+									printf("ERROR: opcion no disponible");
+									return;
+								}			
+							}
+						}
+			
+						
+					}
+				}
+			}
+			else
+			{
+				printf("\n\nEstimado padre o madre del niño. \n Se le comunica que su hijo cuenta con un registro de más de 6 omportamientos malos,\n por lo cual este año no recibirá regalos por parte de Santa y la carta será rechazada");
+				for(i = ColaCartas->front; i!= NULL; i = i->next)
+				{
+					if (strcmp(i->cedula,ced_Procesar)==0)
+					{
+						strcpy(i->estado_jug,"Rechazado");
+					}
+				}
+				printf("\n\n%s",i->estado_jug);
+			}
+			
+			
+			strcpy(Ide_Ayudante,ver_Ayu);
+			strcpy(Year,yearConsultar);
+			strcpy(Ide_Kid,ced_Procesar);
+			
+			InsertarCartaProcesada (ColaCartasProcesadas, Ide_Ayudante, Year, Ide_Kid);
+			printf("La carta se ha registrado exitosamente.");
+		}
+		else
+		{
+			printf("ERROR: la cedula ingresada no se encuentra en el registro de ayudantes");
+		}
+	}
+}
 
 
 
@@ -6467,6 +6659,7 @@ int main()
 	Arbol *a;
 	ImprimirCarta * ColaCartas = CrearColaCartas(ColaCartas);
 	ImprimirLD *ColaListaDeseos = CrearColaListaDeseos(ColaListaDeseos);
+	ImprimirCProcesada *ColaCartasProcesadas = CrearColaCartasProcesadas(ColaCartasProcesadas);
 	insertarLugarPolo ("Polo Norte", 000 ,101);
 	
 	
@@ -6664,13 +6857,24 @@ int main()
 		
 		else if (opcion == 15)
 		{
-			ConsultarCartas(ColaCartas);
+			char verificar_cedula[15];
+			char verificar_year[15];
+			
+			printf("\n------------------------ CONSULTA DE CARTAS ------------------------\n");
+			printf ("\nIngrese la cedula del niño al que pertenece la carta: ")	;
+			fflush (stdin);
+			gets (verificar_cedula);
+			printf ("Ingrese el año para el que se solicito la carta: ")	;
+			fflush (stdin);
+			gets (verificar_year);
+			
+			ConsultarCartas(ColaCartas, verificar_cedula, verificar_year);
 		}
 		
 		
 		else if (opcion == 16)
 		{
-			return 0;
+			procesar_carta(ColaCartasProcesadas, ColaKids, ColaAyudantes, ColaCartas);
 		}
 		
 		
