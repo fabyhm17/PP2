@@ -784,23 +784,6 @@ void PreOrden(Arbol a)
 	}	
 }
 
-int contadorArbol(Arbol a)
-{
-	if(!Vacio(a)) 
-	{
-     	//METES FUNCIÓN
-		
-	
-		if(a->izquierdo) PreOrden(a->izquierdo);
-		if(a->derecho) PreOrden(a->derecho);
-	}
-	
-	else
-	{
-		printf("\n\n---------- Catalogo vacio!! ----------");
-		return;	
-	}	
-}
 
 //----------------------------------------------6.MODIFICAR JUGUETE----------------------------------------------------------------//
 //ELIMINAR JUGUETE
@@ -7772,7 +7755,23 @@ TopJuguetesP *PrioridadTopJuguetes(TopJuguetesP * C)
 
 
 
-
+void contadorArbol(Arbol a, TopJuguetesP * JuguetesPrioridad  )
+{
+	if(!Vacio(a)) 
+	{
+     	JuguetesPrioridad = PrioridadTopJuguetes(InsertarTopJuguetes(JuguetesPrioridad,a->contador,a->nombre));
+		
+	
+		if(a->izquierdo) contadorArbol(a->izquierdo, JuguetesPrioridad );
+		if(a->derecho) contadorArbol(a->derecho, JuguetesPrioridad );
+	}
+	
+	else
+	{
+		printf("\n\n---------- Catalogo juguetes vacio!! ----------");
+		return;	
+	}	
+}
 
 
 
@@ -8175,17 +8174,7 @@ int main()
 			
 			else if (strcmp(opcion_analisis,"7")==0)
 			{
-				/*
-				Arbol j
-				if(!Vacio(j)) 
-				{
-			    	JuguetesPrioridad = PrioridadTopJuguetes(InsertarTopJuguetes(JuguetesPrioridad,j->contador,j->nombre));
-					
-				
-					if(j->izquierdo) PreOrden(j->izquierdo);
-					if(j->derecho) PreOrden(j->derecho);
-				}
-				*/
+				contadorArbol(ArbolInt, JuguetesPrioridad );
 				
 				ImprimirColaTopJuguetes(JuguetesPrioridad);
 				
