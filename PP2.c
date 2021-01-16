@@ -769,12 +769,12 @@ void ValidarCodigoJuguetes(Arbol a, int dat)
     	if(dat == actual->dato)
 		{
 			a -> contador = a -> contador + 1;
+			return;
 		}
     	else if(dat < actual->dato) actual = actual->izquierdo; 
     	else if(dat > actual->dato) actual = actual->derecho;
    }
-   printf("ERROR: juguete no encontrado");
-   return; 
+
 }
 
 
@@ -7771,13 +7771,14 @@ void ImprimirColaTopJuguetes(TopJuguetesP *C)
 	{
 		printf("\n\n------------------- TOP 10 DE JUGUETES MAS SOLICITADOS ------------------- \n");
 		
-		for(contador = 0; contador < 10; contador ++)
+		while (i != NULL)
 		{
 			printf("\n\nJuguete: %s", i->juguete);
 			printf ("\tCantidad: %d", i->cantidad);
 			i = i->next;
+			contador ++;
 			
-			if (i->next == NULL)
+			if (contador == 10)
 			{
 				return;
 			}
@@ -7842,9 +7843,10 @@ void contadorArbol(Arbol a, TopJuguetesP * JuguetesPrioridad  )
 {
 	if(!Vacio(a)) 
 	{
+		CrearColaTopJuguetes(JuguetesPrioridad);
+		
      	JuguetesPrioridad = PrioridadTopJuguetes(InsertarTopJuguetes(JuguetesPrioridad,a->contador,a->nombre));
 		
-	
 		if(a->izquierdo) contadorArbol(a->izquierdo, JuguetesPrioridad );
 		if(a->derecho) contadorArbol(a->derecho, JuguetesPrioridad );
 	}
@@ -8141,15 +8143,14 @@ int main()
 			else if (strcmp(opcion_analisis,"2")==0)
 			
 			{
-				Domicilio * aux;
-				aux = inicio;
-				while(aux != NULL){
-					LugarPrioridad = PrioridadTopLugar(InsertarTopLugar(LugarPrioridad,aux->contador,aux->nombre));
+				Domicilio * p;
+				p = inicio;
+				while(p != NULL)
+				{
+					LugarPrioridad = PrioridadTopLugar(InsertarTopLugar(LugarPrioridad,p->contador,p->nombre));
 					
-					aux = aux -> siguiente;
+					p = p -> siguiente;
 				}
-				
-				
 				
 				ImprimirColaTopLugar(LugarPrioridad);	
 			}
@@ -8263,9 +8264,7 @@ int main()
 			else if (strcmp(opcion_analisis,"7")==0)
 			{
 				contadorArbol(ArbolInt, JuguetesPrioridad );
-				
-				ImprimirColaTopJuguetes(JuguetesPrioridad);
-				
+				ImprimirColaTopJuguetes(JuguetesPrioridad);	
 			}	
 			
 			else
