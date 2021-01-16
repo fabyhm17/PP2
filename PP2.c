@@ -7291,9 +7291,7 @@ void procesar_carta(ImprimirCProcesada  * ColaCartasProcesadas, Imprimir * ColaK
 											return;
 										}			
 									}
-								}
-					
-								
+								}	
 							}
 						}
 					}
@@ -8017,12 +8015,82 @@ int main()
 
 			else if (strcmp(opcion_analisis,"3")==0)
 			{
-				return 0;
+				int aprobado_2017 = 0;
+				int aprobado_2018 = 0;
+				int aprobado_2019 = 0;
+				int aprobado_2020 = 0;
+				int aprobado_2021 = 0;
+				
+				Carta *n;
+				for (n = ColaCartas->front; n!= NULL; n = n->next)
+				{
+					if ((strcmp(n->year,"2017")==0) && (strcmp(n->estado_jug,"Entregar")==0))
+					{
+						aprobado_2017 ++;
+					}
+					if ((strcmp(n->year,"2018")==0) && (strcmp(n->estado_jug,"Entregar")==0))
+					{
+						aprobado_2018 ++;
+					}
+					if ((strcmp(n->year,"2019")==0) && (strcmp(n->estado_jug,"Entregar")==0))
+					{
+						aprobado_2019 ++;
+					}
+					if ((strcmp(n->year,"2020")==0) && (strcmp(n->estado_jug,"Entregar")==0))
+					{
+						aprobado_2020 ++;
+					}
+					if ((strcmp(n->year,"2021")==0) && (strcmp(n->estado_jug,"Entregar")==0))
+					{
+						aprobado_2021 ++;
+					}
+				}
+				
+				printf ("\nCantidad de cartas aprobadas en el 2017: %d", aprobado_2017);
+				printf ("\nCantidad de cartas aprobadas en el 2018: %d", aprobado_2018);
+				printf ("\nCantidad de cartas aprobadas en el 2019: %d", aprobado_2019);
+				printf ("\nCantidad de cartas aprobadas en el 2020: %d", aprobado_2020);
+				printf ("\nCantidad de cartas aprobadas en el 2021: %d", aprobado_2021);
 			}
 			
 			else if (strcmp(opcion_analisis,"4")==0)
 			{
-				return 0;
+				int rechazado_2017 = 0;
+				int rechazado_2018 = 0;
+				int rechazado_2019 = 0;
+				int rechazado_2020 = 0;
+				int rechazado_2021 = 0;
+				
+				Carta *n;
+				for (n = ColaCartas->front; n!= NULL; n = n->next)
+				{
+					if ((strcmp(n->year,"2017")==0) && (strcmp(n->estado_jug,"Rechazado")==0))
+					{
+						rechazado_2017 ++;
+					}
+					if ((strcmp(n->year,"2018")==0) && (strcmp(n->estado_jug,"Rechazado")==0))
+					{
+						rechazado_2018 ++;
+					}
+					if ((strcmp(n->year,"2019")==0) && (strcmp(n->estado_jug,"Rechazado")==0))
+					{
+						rechazado_2019 ++;
+					}
+					if ((strcmp(n->year,"2020")==0) && (strcmp(n->estado_jug,"Rechazado")==0))
+					{
+						rechazado_2020 ++;
+					}
+					if ((strcmp(n->year,"2021")==0) && (strcmp(n->estado_jug,"Rechazado")==0))
+					{
+						rechazado_2021 ++;
+					}
+				}
+				
+				printf ("\nCantidad de cartas rechazadas en el 2017: %d", rechazado_2017);
+				printf ("\nCantidad de cartas rechazadas en el 2018: %d", rechazado_2018);
+				printf ("\nCantidad de cartas rechazadas en el 2019: %d", rechazado_2019);
+				printf ("\nCantidad de cartas rechazadas en el 2020: %d", rechazado_2020);
+				printf ("\nCantidad de cartas rechazadas en el 2021: %d", rechazado_2021);
 			}
 			
 			else if (strcmp(opcion_analisis,"5")==0)
