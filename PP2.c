@@ -784,6 +784,24 @@ void PreOrden(Arbol a)
 	}	
 }
 
+int contadorArbol(Arbol a)
+{
+	if(!Vacio(a)) 
+	{
+     	//METES FUNCIÓN
+		
+	
+		if(a->izquierdo) PreOrden(a->izquierdo);
+		if(a->derecho) PreOrden(a->derecho);
+	}
+	
+	else
+	{
+		printf("\n\n---------- Catalogo vacio!! ----------");
+		return;	
+	}	
+}
+
 //----------------------------------------------6.MODIFICAR JUGUETE----------------------------------------------------------------//
 //ELIMINAR JUGUETE
 void BorrarJuguete(Arbol *a, int dat)
@@ -2916,7 +2934,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 	int codLD20;
 
 	char opc_carta[10];
-	char cantidad_jug[10];
+	int cantidad_jug;
 	int contador=0;
 	
 	printf ("--------------------- BIENVENIDO AL REGISTRO DE CARTAS ---------------------\n\n");
@@ -2933,16 +2951,16 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 		{
 			contador = 1;
 	
-	
-			printf ("Ingrese el año para el que corresponde la carta [yyyy] : ");
+			printf ("Ingrese el año para el que corresponde la carta [yyyy]: ");
 			fflush (stdin);
 			gets (year);
 			
-			if (strcmp(year,"2017")==1 && strcmp(year,"2018")==1 && strcmp(year,"2019")==1 && strcmp(year,"2020")==1 && strcmp(year,"2021")==1) 
+			if ((strcmp(year,"2017")==1) && (strcmp(year,"2018")==1) && (strcmp(year,"2019")==1) && (strcmp(year,"2020")==1) && (strcmp(year,"2021")==1)) 
 			{
          		printf("ERROR: solo se aceptan cartas de los años 2017, 2018, 2019, 2020, 2021. La carta no se pudo registrar");
          		return;
 			}
+			
 			else
 			{
 
@@ -2961,16 +2979,28 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 				if (strcmp(opc_carta,"1")==0)
 				{
 					printf("Ingrese la catidad de juguetes que desea seleccionar: ");
-					fflush (stdin);
-					gets (cantidad_jug);
+					scanf("%d",cantidad_jug);
 					
-					if (strcmp(cantidad_jug,"1")==0)
+					
+					//LLAMAR GRAFO
+					
+					//if (strcmp(i->lugar_residencia, )==0)
+					
+					
+					
+					
+					
+					if (cantidad_jug == 1)
 					{
 						printf ("Ingrese el nombre del juguete que desea seleccionar: ");
 						fflush (stdin);
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete que desea seleccionar: ");
 						scanf("%d",&cod1);
+						
+						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+						
+						
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod1);	
 	
@@ -2996,13 +3026,17 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						}
 					}
 					
-					else if (strcmp(cantidad_jug,"2")==0)
+					else if (cantidad_jug==2)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
+						
+						//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
+						
+						
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod1);	
 						
@@ -3011,6 +3045,10 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						
+						//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
+						
+						
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod2);	
 	
@@ -3035,13 +3073,17 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 							contador_2021 = 2;
 						}
 					}
-					else if (strcmp(cantidad_jug,"3")==0)
+					else if (cantidad_jug==3)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
+						
+						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+						
+						
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod1);	
 						
@@ -3050,6 +3092,10 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						
+						//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
+						
+						
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod2);	
 						
@@ -3083,13 +3129,17 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						}
 					}
 					
-					else if (strcmp(cantidad_jug,"4")==0)
+					else if (cantidad_jug==4)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
+						
+						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+						
+						
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod1);	
 						
@@ -3098,6 +3148,10 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						
+						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+						
+						
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod2);	
 						
@@ -3106,6 +3160,10 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete3);
 						printf ("Ingrese el codigo del juguete 3: ");
 						scanf("%d",&cod3);
+						
+						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+						
+						
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod3);	
 	
@@ -3114,6 +3172,10 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete4);
 						printf ("Ingrese el codigo del juguete 4: ");
 						scanf("%d",&cod4);
+						
+						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+						
+						
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod4);	
 						
@@ -3139,7 +3201,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						}
 					}						
 	
-					else if (strcmp(cantidad_jug,"5")==0)
+					else if (cantidad_jug==5)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3203,7 +3265,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						}
 					}
 					
-					else if (strcmp(cantidad_jug,"6")==0)
+					else if (cantidad_jug==6)
 					{
 						printf ("\nIngrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3275,7 +3337,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						}
 					}
 					
-					else if (strcmp(cantidad_jug,"7")==0)
+					else if (cantidad_jug==7)
 					{
 						printf ("\nIngrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3355,7 +3417,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						}
 					}
 					
-					else if (strcmp(cantidad_jug,"8")==0)
+					else if (cantidad_jug==8)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3443,7 +3505,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						}
 					}
 					
-					else if (strcmp(cantidad_jug,"9")==0)
+					else if (cantidad_jug==9)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3539,7 +3601,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						}
 					}
 						
-					else if (strcmp(cantidad_jug,"10")==0)
+					else if (cantidad_jug==10)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3618,6 +3680,11 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete10);
 						printf ("Ingrese el codigo del juguete 10: ");
 						scanf("%d",&cod10);
+						
+						//-------------------------------------- ULTIMA VALIDACION ARBOL --------------------------------------------------- 
+						
+						
+						
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod10);
 						
@@ -3655,9 +3722,9 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 				else if (strcmp(opc_carta,"2")==0)
 				{
 					printf("Ingrese la catidad de juguetes que desea seleccionar: "); 
-					gets (cantidad_jug);
+					int cantidad_jug;
 					
-					if (strcmp(cantidad_jug,"1")==0)
+					if (cantidad_jug==1)
 					{
 						printf ("Ingrese el nombre del juguete que desea seleccionar: ");
 						fflush (stdin);
@@ -3667,7 +3734,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD1);	
 					}
-					else if (strcmp(cantidad_jug,"2")==0)
+					else if (cantidad_jug==2)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3685,7 +3752,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD2);
 					}
-					else if (strcmp(cantidad_jug,"3")==0)
+					else if (cantidad_jug==3)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3711,7 +3778,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD3);
 					}
-					else if (strcmp(cantidad_jug,"4")==0)
+					else if (cantidad_jug==4)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3746,7 +3813,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						Buscar(ArbolInt, codLD4);
 					}						
 	
-					else if (strcmp(cantidad_jug,"5")==0)
+					else if (cantidad_jug==5)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3789,7 +3856,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						Buscar(ArbolInt, codLD5);
 					}
 					
-					else if (strcmp(cantidad_jug,"6")==0)
+					else if (cantidad_jug==6)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3839,7 +3906,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD6);
 					}
-					else if (strcmp(cantidad_jug,"7")==0)
+					else if (cantidad_jug==7)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3897,7 +3964,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD7);
 					}
-					else if (strcmp(cantidad_jug,"8")==0)
+					else if (cantidad_jug==8)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -3963,7 +4030,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD8);
 					}
-					else if (strcmp(cantidad_jug,"9")==0)
+					else if (cantidad_jug==9)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -4037,7 +4104,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD9);
 					}	
-					else if (strcmp(cantidad_jug,"10")==0)
+					else if (cantidad_jug==10)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -4119,7 +4186,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD10);
 					}	
-					else if (strcmp(cantidad_jug,"11")==0)
+					else if (cantidad_jug==11)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -4210,7 +4277,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						Buscar(ArbolInt, codLD11);
 					}
 					
-					else if (strcmp(cantidad_jug,"12")==0)
+					else if (cantidad_jug==12)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -4308,7 +4375,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD12);
 					}
-					else if (strcmp(cantidad_jug,"13")==0)
+					else if (cantidad_jug==13)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -4414,7 +4481,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD13);
 					}
-					else if (strcmp(cantidad_jug,"14")==0)
+					else if (cantidad_jug==14)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -4528,7 +4595,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD14);
 					}			
-					else if (strcmp(cantidad_jug,"15")==0)
+					else if (cantidad_jug==15)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -4650,7 +4717,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, codLD15);
 					}	
-					else if (strcmp(cantidad_jug,"16")==0)
+					else if (cantidad_jug==16)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -4781,7 +4848,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						Buscar(ArbolInt, codLD16);
 					}	
 	
-					else if (strcmp(cantidad_jug,"17")==0)
+					else if (cantidad_jug==17)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -4920,7 +4987,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						Buscar(ArbolInt, codLD17);
 					}
 	
-					else if (strcmp(cantidad_jug,"18")==0)
+					else if (cantidad_jug==18)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -5067,7 +5134,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						Buscar(ArbolInt, codLD18);
 					}	
 					
-					else if (strcmp(cantidad_jug,"19")==0)
+					else if (cantidad_jug==19)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -5222,7 +5289,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						Buscar(ArbolInt, codLD19);
 					}	
 					
-					else if (strcmp(cantidad_jug,"20")==0)
+					else if (cantidad_jug==20)
 					{
 						printf ("Ingrese el nombre del juguete 1: ");
 						fflush (stdin);
@@ -7563,25 +7630,6 @@ TopLugarP *PrioridadTopLugar(TopLugarP * C)
 
 
 
-/* ------------------------------------ 15.3 Cantidad de niños a los que se les aprobó su carta por año  ------------------------------------- */
-
-
-
-
-/* ------------------------------------ 15.4 Cantidad de niños a los que se les rechazó su carta por año ------------------------------------- */
-
-
-
-
-/* ------------------------------------ 15.5 Cantidad de comportamientos buenos y malos registrados  ------------------------------------- */
-//COMPLETA EN EL MAIN
-
-
-
-/* ------------------------------------ 15.6 Cantidad de cartas procesadas según ayudante. ------------------------------------- */
-
-
-
 
 /* ------------------------------------ 15.7 Top 10 de los juguetes más pedidos  ------------------------------------- */
 
@@ -7745,6 +7793,9 @@ int main()
 	ImprimirCProcesada *ColaCartasProcesadas = CrearColaCartasProcesadas(ColaCartasProcesadas);
 	insertarLugarPolo ("Polo Norte", 000 ,101);
 	
+	
+	TopJuguetesP * JuguetesPrioridad = CrearColaTopJuguetes(JuguetesPrioridad);
+	TopLugarP * LugarPrioridad = CrearColaTopLugar(LugarPrioridad);
 	
 	
 	printf ("\n --------------------- BIENVENIDO AL SISTEMA DE REGISTRO Y PROCESAMIENTO DE CARTAS DE SANTA --------------------- \n");
@@ -7920,8 +7971,6 @@ int main()
 		else if (opcion == 12)
 		{
 			RegistrarComportamientoMain(ColaComportamientos, ColaKids);
-			//ConsultarKids(ColaKids);   //Funcion para probar otras, no la piden
-			//ConsultarComportamientos(ColaComportamientos);   //Funcion para probar otras, no la piden
 		}
 		
 		
@@ -7934,7 +7983,6 @@ int main()
 		else if (opcion == 14)
 		{
 			modificar_carta(ColaCartas, ColaListaDeseos, ColaKids);
-			//dijkstra();
 		}
 		
 		
@@ -7963,7 +8011,7 @@ int main()
 		
 		else if (opcion == 17)
 		{
-			//dijkstra();
+			return;
 		}
 		
 		
@@ -8010,7 +8058,13 @@ int main()
 			
 			else if (strcmp(opcion_analisis,"2")==0)
 			{
-				return 0;
+				//RECORRER EL GRAFO E INSERTAR CADA DATO (NOMBRE DEL LUGAR Y CONTADOR) EN LA FUNCION QUE DEJO COMENTADA ABAJO
+				
+				//LugarPrioridad = PrioridadTopLugar(InsertarTopLugar(LugarPrioridad,j->contador,j->nombre));
+				
+				
+				
+				ImprimirColaTopLugar(LugarPrioridad);	
 			}
 
 			else if (strcmp(opcion_analisis,"3")==0)
@@ -8121,7 +8175,20 @@ int main()
 			
 			else if (strcmp(opcion_analisis,"7")==0)
 			{
-				return 0;
+				/*
+				Arbol j
+				if(!Vacio(j)) 
+				{
+			    	JuguetesPrioridad = PrioridadTopJuguetes(InsertarTopJuguetes(JuguetesPrioridad,j->contador,j->nombre));
+					
+				
+					if(j->izquierdo) PreOrden(j->izquierdo);
+					if(j->derecho) PreOrden(j->derecho);
+				}
+				*/
+				
+				ImprimirColaTopJuguetes(JuguetesPrioridad);
+				
 			}	
 			
 			else
