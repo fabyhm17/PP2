@@ -8043,7 +8043,12 @@ int main()
 			
 			else if (strcmp(opcion_analisis,"6")==0)
 			{
-				return 0;
+				Ayudante *a;
+				for (a = ColaAyudantes->front; a!= NULL; a = a->next)
+				{
+					printf ("\nNombre: %s:", a->nombre);
+					printf ("\tCartas procesadas: %d", a->contador_cartas);
+				}	
 			}
 			
 			else if (strcmp(opcion_analisis,"7")==0)
