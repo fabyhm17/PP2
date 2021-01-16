@@ -1616,7 +1616,7 @@ void contadorDomicilio (char dom [15],int cant)
 		if (strcmp(dom, aux -> nombre)==0){
 			aux -> contador = aux -> contador + cant;
 	   }
-		aux -> siguiente;
+		aux = aux -> siguiente;
    } 
 }
 		
@@ -8139,10 +8139,15 @@ int main()
 			}
 			
 			else if (strcmp(opcion_analisis,"2")==0)
+			
 			{
-				//RECORRER EL GRAFO E INSERTAR CADA DATO (NOMBRE DEL LUGAR Y CONTADOR) EN LA FUNCION QUE DEJO COMENTADA ABAJO
-				
-				//LugarPrioridad = PrioridadTopLugar(InsertarTopLugar(LugarPrioridad,j->contador,j->nombre));
+				Domicilio * aux;
+				aux = inicio;
+				while(aux != NULL){
+					LugarPrioridad = PrioridadTopLugar(InsertarTopLugar(LugarPrioridad,aux->contador,aux->nombre));
+					
+					aux = aux -> siguiente;
+				}
 				
 				
 				
