@@ -684,7 +684,7 @@ void RegistrarJuguetesMain( )
 	printf("\n 4. Juguestes de contruccion");
 	printf("\n 5. Juguetes educativos");
 	printf("\n 6. Juguetes para bebes");
-	
+ 	
 	printf("\nIngrese el numero al que pertenece la categoria del juguete: ");
 	fflush (stdin);
 	gets (eleccion_categ);
@@ -755,6 +755,25 @@ void Buscar(Arbol a, int dat)
     	else if(dat > actual->dato) actual = actual->derecho;
    }
    printf("ERROR: No encontrado");
+   return; 
+}
+
+//VALIDACION CODIGOS
+void ValidarCodigoJuguetes(Arbol a, int dat)
+{
+   pNodo actual = a;
+
+   /* Todavía puede aparecer, ya que quedan nodos por mirar */
+	while(!Vacio(actual)) 
+	{
+    	if(dat == actual->dato)
+		{
+			a -> contador = a -> contador + 1;
+		}
+    	else if(dat < actual->dato) actual = actual->izquierdo; 
+    	else if(dat > actual->dato) actual = actual->derecho;
+   }
+   printf("ERROR: juguete no encontrado");
    return; 
 }
 
@@ -2980,6 +2999,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete que desea seleccionar: ");
 						scanf("%d",&cod1);
+						ValidarCodigoJuguetes(ArbolInt, cod1);
 						
 						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
 						
@@ -3016,7 +3036,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
-						
+						ValidarCodigoJuguetes(ArbolInt, cod1);
 						//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
 						
 						
@@ -3028,6 +3048,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						ValidarCodigoJuguetes(ArbolInt, cod2);
 						
 						//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
 						
@@ -3063,7 +3084,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
-						
+						ValidarCodigoJuguetes(ArbolInt, cod1);
 						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
 						
 						
@@ -3075,6 +3096,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						ValidarCodigoJuguetes(ArbolInt, cod2);
 						
 						//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
 						
@@ -3087,6 +3109,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete3);
 						printf ("Ingrese el codigo del juguete 3: ");
 						scanf("%d",&cod3);
+						ValidarCodigoJuguetes(ArbolInt, cod3);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod3);	
 						
@@ -3119,7 +3142,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
-						
+						ValidarCodigoJuguetes(ArbolInt, cod1);
 						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
 						
 						
@@ -3131,6 +3154,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						ValidarCodigoJuguetes(ArbolInt, cod2);
 						
 						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
 						
@@ -3143,7 +3167,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete3);
 						printf ("Ingrese el codigo del juguete 3: ");
 						scanf("%d",&cod3);
-						
+						ValidarCodigoJuguetes(ArbolInt, cod3);
 						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
 						
 						
@@ -3155,7 +3179,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete4);
 						printf ("Ingrese el codigo del juguete 4: ");
 						scanf("%d",&cod4);
-						
+						ValidarCodigoJuguetes(ArbolInt, cod4);
 						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
 						
 						
@@ -3191,6 +3215,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
+						ValidarCodigoJuguetes(ArbolInt, cod1);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod1);	
 						
@@ -3199,6 +3224,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						ValidarCodigoJuguetes(ArbolInt, cod2);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod2);	
 						
@@ -3207,6 +3233,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete3);
 						printf ("Ingrese el codigo del juguete 3: ");
 						scanf("%d",&cod3);
+						ValidarCodigoJuguetes(ArbolInt, cod3);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod3);	
 	
@@ -3215,6 +3242,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete4);
 						printf ("Ingrese el codigo del juguete 4: ");
 						scanf("%d",&cod4);
+						ValidarCodigoJuguetes(ArbolInt, cod4);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod4);	
 						
@@ -3223,6 +3251,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete5);
 						printf ("Ingrese el codigo del juguete 5: ");
 						scanf("%d",&cod5);
+						ValidarCodigoJuguetes(ArbolInt, cod5);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod5);	
 						
@@ -3255,6 +3284,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
+						ValidarCodigoJuguetes(ArbolInt, cod1);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod1);	
 						
@@ -3263,6 +3293,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						ValidarCodigoJuguetes(ArbolInt, cod2);
 						printf ("\nLos datos del juguete son:\n ");
 						Buscar(ArbolInt, cod2);	
 						
@@ -3271,6 +3302,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete3);
 						printf ("Ingrese el codigo del juguete 3: ");
 						scanf("%d",&cod3);
+						ValidarCodigoJuguetes(ArbolInt, cod3);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod3);	
 	
@@ -3279,6 +3311,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete4);
 						printf ("Ingrese el codigo del juguete 4: ");
 						scanf("%d",&cod4);
+						ValidarCodigoJuguetes(ArbolInt, cod4);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod4);	
 						
@@ -3287,6 +3320,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete5);
 						printf ("Ingrese el codigo del juguete 5: ");
 						scanf("%d",&cod5);
+						ValidarCodigoJuguetes(ArbolInt, cod5);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod5);	
 						
@@ -3295,6 +3329,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete6);
 						printf ("Ingrese el codigo del juguete 6: ");
 						scanf("%d",&cod6);
+						ValidarCodigoJuguetes(ArbolInt, cod6);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod6);	
 						
@@ -3327,6 +3362,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
+						ValidarCodigoJuguetes(ArbolInt, cod1);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod1);	
 						
@@ -3335,6 +3371,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						ValidarCodigoJuguetes(ArbolInt, cod2);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod2);	
 						
@@ -3343,6 +3380,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete3);
 						printf ("Ingrese el codigo del juguete 3: ");
 						scanf("%d",&cod3);
+						ValidarCodigoJuguetes(ArbolInt, cod3);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod3);	
 	
@@ -3351,6 +3389,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete4);
 						printf ("Ingrese el codigo del juguete 4: ");
 						scanf("%d",&cod4);
+						ValidarCodigoJuguetes(ArbolInt, cod4);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod4);	
 						
@@ -3359,6 +3398,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete5);
 						printf ("Ingrese el codigo del juguete 5: ");
 						scanf("%d",&cod5);
+						ValidarCodigoJuguetes(ArbolInt, cod5);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod5);	
 						
@@ -3367,6 +3407,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete6);
 						printf ("Ingrese el codigo del juguete 6: ");
 						scanf("%d",&cod6);
+						ValidarCodigoJuguetes(ArbolInt, cod6);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod6);	
 	
@@ -3375,6 +3416,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete7);
 						printf ("Ingrese el codigo del juguete 7: ");
 						scanf("%d",&cod7);
+						ValidarCodigoJuguetes(ArbolInt, cod7);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod7);	
 	
@@ -3407,6 +3449,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
+						ValidarCodigoJuguetes(ArbolInt, cod1);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod1);	
 						
@@ -3415,6 +3458,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						ValidarCodigoJuguetes(ArbolInt, cod2);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod2);	
 						
@@ -3423,6 +3467,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete3);
 						printf ("Ingrese el codigo del juguete 3: ");
 						scanf("%d",&cod3);
+						ValidarCodigoJuguetes(ArbolInt, cod3);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod3);	
 	
@@ -3431,6 +3476,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete4);
 						printf ("Ingrese el codigo del juguete 4: ");
 						scanf("%d",&cod4);
+						ValidarCodigoJuguetes(ArbolInt, cod4);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod4);	
 						
@@ -3439,6 +3485,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete5);
 						printf ("Ingrese el codigo del juguete 5: ");
 						scanf("%d",&cod5);
+						ValidarCodigoJuguetes(ArbolInt, cod5);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod5);	
 						
@@ -3447,6 +3494,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete6);
 						printf ("Ingrese el codigo del juguete 6: ");
 						scanf("%d",&cod6);
+						ValidarCodigoJuguetes(ArbolInt, cod6);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod6);	
 	
@@ -3455,6 +3503,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete7);
 						printf ("Ingrese el codigo del juguete 7: ");
 						scanf("%d",&cod7);
+						ValidarCodigoJuguetes(ArbolInt, cod7);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod7);	
 						
@@ -3463,6 +3512,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete8);
 						printf ("Ingrese el codigo del juguete 8: ");
 						scanf("%d",&cod8);
+						ValidarCodigoJuguetes(ArbolInt, cod8);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod8);	
 						
@@ -3495,6 +3545,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
+						ValidarCodigoJuguetes(ArbolInt, cod1);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod1);	
 						
@@ -3503,6 +3554,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						ValidarCodigoJuguetes(ArbolInt, cod2);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod2);	
 						
@@ -3511,6 +3563,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete3);
 						printf ("Ingrese el codigo del juguete 3: ");
 						scanf("%d",&cod3);
+						ValidarCodigoJuguetes(ArbolInt, cod3);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod3);	
 	
@@ -3519,6 +3572,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete4);
 						printf ("Ingrese el codigo del juguete 4: ");
 						scanf("%d",&cod4);
+						ValidarCodigoJuguetes(ArbolInt, cod4);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod4);	
 						
@@ -3527,6 +3581,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete5);
 						printf ("Ingrese el codigo del juguete 5: ");
 						scanf("%d",&cod5);
+						ValidarCodigoJuguetes(ArbolInt, cod5);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod5);	
 						
@@ -3535,6 +3590,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete6);
 						printf ("Ingrese el codigo del juguete 6: ");
 						scanf("%d",&cod6);
+						ValidarCodigoJuguetes(ArbolInt, cod6);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod6);	
 	
@@ -3543,6 +3599,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete7);
 						printf ("Ingrese el codigo del juguete 7: ");
 						scanf("%d",&cod7);
+						ValidarCodigoJuguetes(ArbolInt, cod7);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod7);	
 						
@@ -3551,6 +3608,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete8);
 						printf ("Ingrese el codigo del juguete 8: ");
 						scanf("%d",&cod8);
+						ValidarCodigoJuguetes(ArbolInt, cod8);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod8);	
 						
@@ -3559,6 +3617,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete9);
 						printf ("Ingrese el codigo del juguete 9: ");
 						scanf("%d",&cod9);
+						ValidarCodigoJuguetes(ArbolInt, cod9);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod9);	
 	
@@ -3591,6 +3650,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete1);
 						printf ("Ingrese el codigo del juguete 1: ");
 						scanf("%d",&cod1);
+						ValidarCodigoJuguetes(ArbolInt, cod1);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod1);	
 						
@@ -3599,14 +3659,17 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete2);
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
+						ValidarCodigoJuguetes(ArbolInt, cod2);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod2);	
+						
 						
 						printf ("\nIngrese el nombre del juguete 3: ");
 						fflush (stdin);
 						gets (juguete3);
 						printf ("Ingrese el codigo del juguete 3: ");
 						scanf("%d",&cod3);
+						ValidarCodigoJuguetes(ArbolInt, cod3);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod3);	
 	
@@ -3615,6 +3678,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete4);
 						printf ("Ingrese el codigo del juguete 4: ");
 						scanf("%d",&cod4);
+						ValidarCodigoJuguetes(ArbolInt, cod4);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod4);	
 						
@@ -3623,6 +3687,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete5);
 						printf ("Ingrese el codigo del juguete 5: ");
 						scanf("%d",&cod5);
+						ValidarCodigoJuguetes(ArbolInt, cod5);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod5);	
 						
@@ -3631,6 +3696,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete6);
 						printf ("Ingrese el codigo del juguete 6: ");
 						scanf("%d",&cod6);
+						ValidarCodigoJuguetes(ArbolInt, cod6);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod6);	
 	
@@ -3639,6 +3705,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete7);
 						printf ("Ingrese el codigo del juguete 7: ");
 						scanf("%d",&cod7);
+						ValidarCodigoJuguetes(ArbolInt, cod7);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod7);	
 						
@@ -3647,6 +3714,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete8);
 						printf ("Ingrese el codigo del juguete 8: ");
 						scanf("%d",&cod8);
+						ValidarCodigoJuguetes(ArbolInt, cod8);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod8);	
 						
@@ -3655,6 +3723,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete9);
 						printf ("Ingrese el codigo del juguete 9: ");
 						scanf("%d",&cod9);
+						ValidarCodigoJuguetes(ArbolInt, cod9);
 						printf ("Los datos del juguete son:\n ");
 						Buscar(ArbolInt, cod9);	
 						
@@ -3663,6 +3732,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						gets (juguete10);
 						printf ("Ingrese el codigo del juguete 10: ");
 						scanf("%d",&cod10);
+						ValidarCodigoJuguetes(ArbolInt, cod10);
 						
 						//-------------------------------------- ULTIMA VALIDACION ARBOL --------------------------------------------------- 
 						
