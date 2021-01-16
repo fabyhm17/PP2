@@ -1609,6 +1609,19 @@ void vaciar_aristas(Domicilio*aux)
 	}
 }
 
+void contadorDomicilio (char dom [15],int cant)
+{
+	Domicilio* aux = inicio;
+	while(aux != NULL){
+		if (strcmp(dom, aux -> nombre)==0){
+			aux -> contador = aux -> contador + cant;
+	   }
+		aux -> siguiente;
+   } 
+}
+		
+		
+	
 void borrarDomicilio()
 {
 	char domicilio [15];
@@ -2981,12 +2994,12 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 				if (strcmp(opc_carta,"1")==0)
 				{
 					printf("Ingrese la catidad de juguetes que desea seleccionar: ");
-					scanf("%d",cantidad_jug);
+					scanf("%d",&cantidad_jug);
+					
+					contadorDomicilio (i->lugar_residencia,cantidad_jug);
 					
 					
-					//LLAMAR GRAFO
-					
-					//if (strcmp(i->lugar_residencia, )==0)
+			
 					
 					
 					
