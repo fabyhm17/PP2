@@ -528,7 +528,7 @@ int ModificarInfoAyudante (ImprimirAyudante *ColaAyudantes)
 
 
 
-/* ------------------------------------------------------------------ 5. REGISTRAR JUGUETE ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ 5. REGISTRAR JUGUETE - ARBOL BINARIO ------------------------------------------------------------------ */
 
 
 typedef struct _nodo {
@@ -543,7 +543,7 @@ typedef struct _nodo {
 	int costo;
 	int contador;
 	struct _nodo *derecho;
-	struct _nodo *izquierdo;\
+	struct _nodo *izquierdo;
 	
 } tipoNodo;
 
@@ -553,7 +553,7 @@ typedef tipoNodo *Arbol;
 Arbol ArbolInt=NULL;
 
 
-//FUNCIONES AUXILIARES ARBOL BINARIO
+//-------------------------------------------- 5.1 FUNCIONES AUXILIARES ARBOL BINARIO --------------------------------------------------//
 int Vacio(Arbol r)
 {
    return r==NULL;
@@ -582,7 +582,8 @@ int BuscarCodigo(Arbol a, int dat)
 	return 1; 
 }
 
-//INSERTAR ARBOL DE JUGUETES
+//---------------------------------------------- 5.2 INSERTAR JUGUETES EN ARBOL AUX ---------------------------------------------//
+
 void InsertarArbol(Arbol *a, int dat,char nombre[15], char descripcion [30],char categoria [15], int edad_minima, int edad_maxima, int costo, int contador)
 {
 	pNodo padre = NULL;
@@ -652,7 +653,7 @@ void InsertarArbol(Arbol *a, int dat,char nombre[15], char descripcion [30],char
 	printf("---------REGISTRADO!!----------");
 }
 
-/* ----------------------- REGISTRAR JUGUETES EN EL MAIN ----------------------- */
+/* ----------------------- 5.3 REGISTRAR JUGUETES EN EL MAIN ----------------------- */
 
 void RegistrarJuguetesMain( )
 {
@@ -732,12 +733,12 @@ void RegistrarJuguetesMain( )
 	return;	
 }
 
-//BUSCAR JUGUETE
+//---------------------------------------------- 5.4  BUSCAR JUGUETES ---------------------------------------------//
 void Buscar(Arbol a, int dat)
 {
    pNodo actual = a;
 
-   /* Todavía puede aparecer, ya que quedan nodos por mirar */
+   
 	while(!Vacio(actual)) 
 	{
     	if(dat == actual->dato)
@@ -758,27 +759,28 @@ void Buscar(Arbol a, int dat)
    return; 
 }
 
-//VALIDACION CODIGOS
+//---------------------------------------------- 5.5 VALIDACION EXISTENCIA DE JUGUETES  ---------------------------------------------//
 void ValidarCodigoJuguetes(Arbol a, int dat)
 {
    pNodo actual = a;
 
-   /* Todavía puede aparecer, ya que quedan nodos por mirar */
 	while(!Vacio(actual)) 
 	{
     	if(dat == actual->dato)
 		{
-			a -> contador = a -> contador + 1;
+			actual -> contador = (actual -> contador) +1;	
+			printf("\nContador %d: ",actual -> contador);		
 			return;
 		}
     	else if(dat < actual->dato) actual = actual->izquierdo; 
     	else if(dat > actual->dato) actual = actual->derecho;
    }
-
+   printf("ERROR: No encontrado");
+   return; 
 }
 
 
-//MOSTRAR ARBOL
+//---------------------------------------------- 5.6 MOSTRAR ARBOL COMO CATALOGO  ---------------------------------------------//
 void PreOrden(Arbol a)
 {
 	if(!Vacio(a)) 
@@ -788,7 +790,7 @@ void PreOrden(Arbol a)
 		printf("\nNombre: %s", a -> nombre);
 		printf("\nCategoria: %s", a -> categoria);
 		printf("\nRango de edad: %d a %d", a -> edad_minima, a -> edad_maxima);
-		//printf("\nCosto: %d", a -> costo);	
+		//printf("\nCosto: %d", a -> contador);	
 		printf("\nDescripcion: %s", a -> descripcion);	
 		printf("\n_______________________________\n\n");
 	
@@ -803,8 +805,20 @@ void PreOrden(Arbol a)
 	}	
 }
 
+//---------------------------------------------- 5.7  TOP 10 JUGUETES ---------------------------------------------//
+void topArbol(Arbol a,int i)
+{
+  if (i < 10){
+   if(a->derecho) topArbol(a->derecho,i++);
+   	printf("\nnombre: %s", a ->nombre);
+	printf("\nContador: %d", a ->contador);	
+   if(a->izquierdo) topArbol(a->izquierdo, i++);
+}
 
-//----------------------------------------------6.MODIFICAR JUGUETE----------------------------------------------------------------//
+}
+
+
+//---------------------------------------------- 5.8 MODIFICAR JUGUETE----------------------------------------------------------------//
 //ELIMINAR JUGUETE
 void BorrarJuguete(Arbol *a, int dat)
 {
@@ -1030,7 +1044,7 @@ modificarJuguete(Arbol a )
 
 
 
-/* -------------------------------------------------------------- 7. REGISTRAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
+/* -------------------------------------------------------------- 7. GRAFO - REGISTRAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
 
 //GRAFO CON LISTA DE ADYACENCIA
 
@@ -1073,7 +1087,7 @@ Lista*ini=NULL;
 Lista*final=NULL; 
 
 
-//FUNCIÓN DE CREAR EL NODO DOMOCILIO
+//------------------------------------------------ 7.1  FUNCIÓN DE CREAR EL NODO DOMOCILIO------------------------------------------------
 
 void insertarLugar ()
 {
@@ -1154,7 +1168,7 @@ void insertarLugar ()
 	}
 }
 
-//INSERTAR POLO NORTE
+//------------------------------------------------------ 7.2 INSERTAR POLO NORTE -------------------------------------------
 void insertarLugarPolo (char nombre [15],int codigo,int postal)
 {
 
@@ -1197,7 +1211,7 @@ void insertarLugarPolo (char nombre [15],int codigo,int postal)
 
 
 
-//FUNCIÓN DE CREAR LAS CONEXION DE RUTAS CON DOMOCILIOS
+//---------------------------------------------- 7.3 FUNCIÓN DE CREAR LAS CONEXION DE RUTAS CON DOMOCILIOS -------------------------------
 
 void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fin [15],float distancia, float tiempo, char tipo_ruta [15])
 {
@@ -1250,7 +1264,7 @@ void agregarRuta(Domicilio*aux, Domicilio*aux2, Ruta*nuevo,char ini [15],char fi
 }
 
 
-//FUNCION AUX DE RUTAS
+//------------------------------------------------------------ 7.4  FUNCION AUX DE RUTAS ----------------------------------------------
 
 void insertarRuta()
 {
@@ -1344,6 +1358,7 @@ void insertarRuta()
 
 }
 
+// ------------------------------------------- 7.5  MODIFICAR RUTA AUX  -------------------------------------//
 void RutaModificar(char ini[15],char fin [15], float distancia, float tiempo, char tipo_ruta[15])
 {
 	int x=0;
@@ -1393,7 +1408,7 @@ void RutaModificar(char ini[15],char fin [15], float distancia, float tiempo, ch
 	}
 
 }
-/* -------------------------------------------------------------- 8. MODIFICAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
+/* -------------------------------------------------------------- 7.6 MODIFICAR LUGAR DE DOMICILIO ------------------------------------------------------------ */
 
 //MODIFICAR DOMICILIO
 void modificarDomicilio()
@@ -1521,7 +1536,7 @@ void modificarDomicilio()
 }
 
 
-//ELIMINAR ARISTA AUX
+//-------------------------------------------------- 7.7 ELIMINAR ARISTA AUX --------------------------------------------------------
 void eliminarAristaAux(char ini [15], char fin[15]){
 	Domicilio * aux, *aux2, *aux3;
 	Ruta * q, *r ,*a;
@@ -1595,7 +1610,7 @@ void eliminarAristaAux(char ini [15], char fin[15]){
 }
 
 
-//ELIMINAR NODO
+// --------------------------------------------- 7.8 ELIMINAR NODO ----------------------------------------------------------
 
 void vaciar_aristas(Domicilio*aux)
 {
@@ -1679,7 +1694,7 @@ void borrarDomicilio()
 
 	
 
-//ELIMINAR ARISTA 
+//-------------------------------------------------------------- 7. 9 ELIMINAR ARISTA AUX ---------------------------------------
 void eliminarArista()
 {
 	int x = 0;
@@ -1771,7 +1786,7 @@ void eliminarArista()
 }
 
 
-//MODIFICAR ARISTA
+//----------------------------------------------------7. 10 MODIFICAR ARISTA -------------------------------------------
 
 modificar_ruta_aux(char ini[15], char fin[15], int distancia, float tiempo, char tipo_ruta [15])
 {
@@ -1896,7 +1911,7 @@ modificarArista()
 }
 
 
-
+// -------------------------------------------------- VER GRAFO ------------------------------------------------- //
 void visualizarGrafo()
 {
     Domicilio*aux=inicio;
@@ -3062,7 +3077,7 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 						printf ("Ingrese el codigo del juguete 2: ");
 						scanf("%d",&cod2);
 						ValidarCodigoJuguetes(ArbolInt, cod2);
-						
+					
 						//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
 						
 						
@@ -7839,24 +7854,10 @@ TopJuguetesP *PrioridadTopJuguetes(TopJuguetesP * C)
 
 
 
-void contadorArbol(Arbol a, TopJuguetesP * JuguetesPrioridad  )
-{
-	if(!Vacio(a)) 
-	{
-		CrearColaTopJuguetes(JuguetesPrioridad);
-		
-     	JuguetesPrioridad = PrioridadTopJuguetes(InsertarTopJuguetes(JuguetesPrioridad,a->contador,a->nombre));
-		
-		if(a->izquierdo) contadorArbol(a->izquierdo, JuguetesPrioridad );
-		if(a->derecho) contadorArbol(a->derecho, JuguetesPrioridad );
-	}
 	
-	else
-	{
-		printf("\n\n---------- Catalogo juguetes vacio!! ----------");
-		return;	
-	}	
-}
+
+	
+
 
 
 
@@ -8263,8 +8264,8 @@ int main()
 			
 			else if (strcmp(opcion_analisis,"7")==0)
 			{
-				contadorArbol(ArbolInt, JuguetesPrioridad );
-				ImprimirColaTopJuguetes(JuguetesPrioridad);	
+			
+				topArbol(ArbolInt,0);	
 			}	
 			
 			else
