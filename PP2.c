@@ -8095,7 +8095,7 @@ int main()
 		
 		else if (opcion == 17)
 		{
-			return;
+			entregarJuguetes(ColaKids);
 		}
 		
 		
