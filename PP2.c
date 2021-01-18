@@ -810,8 +810,8 @@ void topArbol(Arbol a,int i)
 {
   if (i < 10){
    if(a->derecho) topArbol(a->derecho,i++);
-   	printf("\nnombre: %s", a ->nombre);
-	printf("\nContador: %d", a ->contador);	
+   	printf("\nJuguete: %s", a ->nombre);
+	printf("\tCantidad: %d", a ->contador);	
    if(a->izquierdo) topArbol(a->izquierdo, i++);
 }
 
@@ -7712,157 +7712,6 @@ TopLugarP *PrioridadTopLugar(TopLugarP * C)
 
 
 
-/* ------------------------------------ 15.7 Top 10 de los juguetes más pedidos  ------------------------------------- */
-
-
-/* ------------------------ STRUCT DE LA COLA ------------------------ */
-
-typedef struct JuguetesP
-{
-	int cantidad;
-	char juguete [200];
-	struct JuguetesP * next;
-}JuguetesP;
-
-
-typedef struct TopJuguetesP
-{
-	int size;
-	JuguetesP * front;
-	JuguetesP * rear;
-}TopJuguetesP;
-
-/* ----------------------- CREAR NUEVA COLA ----------------------- */
-
-TopJuguetesP * CrearColaTopJuguetes(TopJuguetesP * C)
-{
-	C= NULL;
-	C = (TopJuguetesP *) malloc(sizeof(TopJuguetesP));	
-	C-> front = NULL;
-	C-> rear = NULL;
-	return C;
-}
-
-/* ----------------------- CREAR NODO ----------------------- */
-
-JuguetesP * CrearNodoTopJuguetes(int cantidad, char juguete [200])
-{
-	struct JuguetesP *nuevo;
-	nuevo = (JuguetesP *) malloc(sizeof(JuguetesP));
-	nuevo-> next = NULL;
-	
-	nuevo->cantidad=cantidad;
-	strcpy(nuevo->juguete,juguete);
-	return nuevo;
-}
-
-/* ----------------------- AGREGAR ELEMENTO ----------------------- */
-
-TopJuguetesP * InsertarTopJuguetes(TopJuguetesP * C, int cantidad, char juguete [200])
-{
-	C->size = C-> size + 1;
-	if(C->front == NULL) 
-	{
-		C->front = CrearNodoTopJuguetes(cantidad,juguete);
-		C->rear = C->front;
-		return C;
-	}
-	C->rear->next = CrearNodoTopJuguetes(cantidad,juguete);
-	C->rear = C->rear->next;
-}
-
-/* ----------------------- IMPRIMIR COLA ----------------------- */
-
-void ImprimirColaTopJuguetes(TopJuguetesP *C)
-{
-	JuguetesP *i;
-	i = C->front;
-	int contador = 0;
-	if (C -> front == NULL)
-	{
-		printf ("\nERROR: No hay Asignaciones asignadas");
-	}
-	else
-	{
-		printf("\n\n------------------- TOP 10 DE JUGUETES MAS SOLICITADOS ------------------- \n");
-		
-		while (i != NULL)
-		{
-			printf("\n\nJuguete: %s", i->juguete);
-			printf ("\tCantidad: %d", i->cantidad);
-			i = i->next;
-			contador ++;
-			
-			if (contador == 10)
-			{
-				return;
-			}
-		}
-	}
-	printf("\n");
-}
-				
-/* ----------------------- ELIMINAR ELEMENTO ----------------------- */
-
-TopJuguetesP *EliminarTopJuguetes(TopJuguetesP * C, char Auxiliar[30])
-{
-	JuguetesP *i;
-	TopJuguetesP *C2= CrearColaTopJuguetes(C2);
-	for(i = C->front; i!= NULL; i = i->next)
-	{
-		if ((strcmp(i->juguete,Auxiliar)!=0))
-		{
-			C2= InsertarTopJuguetes(C2,i->cantidad,i->juguete);
-		}
-	}
-	return C2;
-}
-
-/* ----------------------- ORDENAR POR PRIORIDAD ----------------------- */
-
-TopJuguetesP *PrioridadTopJuguetes(TopJuguetesP * C)
-{
-	int contador=0;
-	TopJuguetesP * C2= CrearColaTopJuguetes(C2);
-	JuguetesP *i;
-	struct JuguetesP * menor;
-	menor = (JuguetesP *) malloc(sizeof(JuguetesP));
-	menor-> next = NULL;
-	
-	for(i = C->front; i!= NULL; i = i->next)
-	{
-		contador++;	
-	}
-	while (contador>0)
-	{
-		menor->cantidad= 0;
-		for(i = C->front; i!= NULL; i = i->next)
-		{
-			if (menor->cantidad<=i->cantidad)
-			{
-				menor->cantidad=i->cantidad;
-				strcpy (menor->juguete,i->juguete);
-			}	
-		}
-		C2= InsertarTopJuguetes(C2,menor->cantidad,menor->juguete);
-		contador--;
-		C= EliminarTopJuguetes(C,menor->juguete);
-	}
-	return C2;
-}
-
-
-
-
-	
-
-	
-
-
-
-
-
-
 
 /* ------------------------------------------------------------------ FUNCION PRINCIPAL ------------------------------------------------------------------ */
 
@@ -7878,8 +7727,7 @@ int main()
 	ImprimirCProcesada *ColaCartasProcesadas = CrearColaCartasProcesadas(ColaCartasProcesadas);
 	insertarLugarPolo ("Polo Norte", 000 ,101);
 	
-	
-	TopJuguetesP * JuguetesPrioridad = CrearColaTopJuguetes(JuguetesPrioridad);
+
 	TopLugarP * LugarPrioridad = CrearColaTopLugar(LugarPrioridad);
 	
 	
