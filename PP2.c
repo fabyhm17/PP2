@@ -885,7 +885,7 @@ void BorrarJuguete(Arbol *a, int dat)
    }  
 }
 
-//MODIFICAR DATOS JUGUETE
+//-------------------------------------------- MODIFICAR DATOS JUGUETE ------------------------------------------------------
 modificarJuguete(Arbol a )
 {
 	pNodo actual = a;
@@ -7482,7 +7482,7 @@ int verificarEntregaNodo(char dom [15], Imprimir * ColaKids){
 	Kid * k;
 		
 		for(k = ColaKids->front; k!= NULL; k = k->next){
-			 if(strcmp(k->lugar_residencia,dom)==0 && strcmp(k->estado_carta, "Listo para entregar")==0){
+			 if(strcmp(k->lugar_residencia,dom)==0 && strcmp(k->estado_carta, "Entregar")==0){
 			 	return 1;
 			 }
 		}
@@ -7493,7 +7493,7 @@ int ListaNinos (char dom [15], Imprimir * ColaKids){
 	Kid * k;
 		
 		for(k = ColaKids->front; k!= NULL; k = k->next){
-			 if(strcmp(k->lugar_residencia,dom)==0 && strcmp(k->estado_carta, "Listo para entregar")==0){
+			 if(strcmp(k->lugar_residencia,dom)==0 && strcmp(k->estado_carta, "Entregar")==0){
 			 	printf("\n%s", k -> nombre);
 			 }
 		}
@@ -7515,7 +7515,7 @@ void entregarJuguetes(Imprimir * ColaKids){
 	printf("\n3. Ruta marítima.");
 	printf("\n4. Ruta aérea.");
 	printf("\nOpcion:");
-	scanf("%d",op);
+	scanf("%d",&op);
 	switch(op){
 		case 1:
 			printf("\n\n------TODAS LAS RUTAS-------");
@@ -7533,12 +7533,9 @@ void entregarJuguetes(Imprimir * ColaKids){
 			
 			break;
 		case 2:
-			break;
+			
 			printf("\n\n------RUTA TERRESTRE-------");
-	
-				
-	
-			d = d -> siguiente;
+			break;
 			
 		case 3:
 			printf("\n\n------RUTA MARITIMA-------");
