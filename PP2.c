@@ -9,7 +9,7 @@
 
 #define Domicilio struct domicilio
 #define Ruta struct ruta
-#define Lista struct pila
+#define ListaA struct pila
 
 
 
@@ -1076,15 +1076,15 @@ Ruta
 	Ruta*siguiente;
 };
 
-Lista
+ListaA
 {
-	Domicilio* dato;
-	Lista*siguiente;
+	Domicilio* nombre;
+	ListaA*siguiente;
 };
 
 Domicilio*inicio = NULL;
-Lista*ini=NULL;
-Lista*final=NULL; 
+ListaA*ini=NULL;
+ListaA*final=NULL; 
 
 
 //------------------------------------------------ 7.1  FUNCIÓN DE CREAR EL NODO DOMOCILIO------------------------------------------------
@@ -1140,15 +1140,15 @@ void insertarLugar ()
 		}
 		aux = aux -> siguiente;
 	}
+	
+	//datos del nodo
 	nuevo -> codigo = codigo;
 	nuevo -> postal = postal;
 	strcpy(nuevo-> nombre, nombre);
 	nuevo -> siguiente = NULL;
 	nuevo -> adyacencia = NULL;
 	nuevo -> contador = 0;
-	
-	//ALGORITMO RECORRIDOS
-	nuevo->visitado=nuevo->terminado=0;
+	nuevo->visitado= nuevo->terminado=0;
     nuevo->monto=-1;
     strcpy(nuevo->anterior, "0");
 	
@@ -1940,174 +1940,124 @@ void visualizarGrafo()
 
 //----------------------------------------------------ALGORITMO DIJKSTRA--------------------------------------------------------------//
 
-//PILA PARA RECORRIDO
-
-void insertarPila(Domicilio* aux)
-{
-	Lista*nuevo=(Lista*)malloc(sizeof(Lista));
-	nuevo->dato=aux;
+void insertarPila(Domicilio* aux){
+	ListaA*nuevo=(ListaA*)malloc(sizeof(ListaA));
+	nuevo->nombre=aux;
 	nuevo->siguiente=NULL;
-	if(ini==NULL)
-	{
+	if(ini==NULL){
 		ini=nuevo;
 		final=nuevo;
-	}
-	
-	else
-	{
+	}else{
 	   nuevo->siguiente=ini;
 	   ini=nuevo;    	
 	}
 }
 
-
-void insertarCola(Domicilio*aux)
-{
-	Lista*nuevo=(Lista*)malloc(sizeof(Lista));
-	nuevo->dato=aux;
+void insertarCola(Domicilio*aux){
+	ListaA*nuevo=(ListaA*)malloc(sizeof(ListaA));
+	nuevo->nombre=aux;
 	nuevo->siguiente=NULL;
-	if(ini==NULL)
-	{
+	if(ini==NULL){
 		ini=nuevo;
 		final=nuevo;
-	}
-	
-	else
-	{
+	}else{
 		final->siguiente=nuevo;
 		final=nuevo;
 	}
 }
 
-
-Domicilio * desencolar()
-{
-	Lista*aux;
-	if(ini==NULL)
-	{
-		return NULL;
-	}
-	
-	else
-	{
+Domicilio*desencolar(){
+	ListaA*aux;
+	if(ini==NULL){
+		printf("Error: no existe ruta");
+		return;
+	}else{
 		aux=ini;
 		ini=ini->siguiente;
 		aux->siguiente=NULL;
 		if(ini==NULL)
-		{
-			final=NULL;
-		}	
+		final=NULL;
 	}
-	
-	Domicilio*resultado=aux->dato;
+	Domicilio*resultado=aux->nombre;
 	free(aux);
 	return resultado;
 }
 
-
-void reiniciar()
-{
-	if(inicio!=NULL)
-	{
+void reiniciar(){
+	if(inicio!=NULL){
 		Domicilio*aux=inicio;
-		while(aux!=NULL)
-		{
+		while(aux!=NULL){
 			aux->visitado=aux->terminado=0;
 		    aux=aux->siguiente;
 		}
 	}
 }
 
-
-void dijkstra(char a [15], char b [15])
-{
+void dijkstra(char a [15], char b [15]){
+	int x = 0;
 	Domicilio*aux=inicio;
-
 	char temp [15];
-	
-	
-	while(aux!=NULL)
-	{
-		if(strcmp(aux->nombre,a)==0)
-		{
+	while(aux!=NULL){
+		if(strcmp(aux->nombre,a)==0){
 			aux->terminado=1;
 			aux->monto=0;
-	
 			break;
 		}
-		
 		aux=aux->siguiente;
 	}
-	
-	if(aux==NULL)
-	{
-		printf("ERROR: ruta no encontrada.");
+	if(aux==NULL){
+		printf("Vertice no encontrado\n");
 		return;
 	}
-	
-	while(aux!=NULL)
-	{
+	while(aux!=NULL){
 		Ruta*a=aux->adyacencia;
-	    while(a!=NULL)
-		{
-		    if(a->vrt->monto==-1 || (aux->monto+a->distancia)<a->vrt->monto)
-			{
+	    while(a!=NULL){
+		    if(a->vrt->monto==-1 || (aux->monto+a->distancia)<a->vrt->monto){
 		    	a->vrt->monto=aux->monto+a->distancia;
 		        strcpy(a->vrt->anterior, aux->nombre);
+		        x =1;
+		        
 			}
-			
 		    a=a->siguiente;
 	    }
-	    
-	    aux=inicio;
-	    Domicilio*min= inicio;
-	    
-	    while(min->anterior==0 || min->terminado ==1)
-		{
-	    	min=min->siguiente;
+	     if (x ==0){
+		printf("\n***Error: No existe una ruta para ese destino***\n");
+		return;
 		}
-		
-	    while(aux!=NULL)
-		{
-	    	if(aux->monto<min->monto && aux->terminado==0 && aux->anterior!=0)
-			{
-	    		min=aux;
-	    	}
-	    	
+	    aux=inicio;
+	    Domicilio*min=inicio;
+	    while((strcmp(min->anterior,"0")==0)|| min->terminado ==1)
+	    min=min->siguiente;
+	    
+	    while(aux!=NULL){
+	    	if(aux->monto<min->monto && aux->terminado==0 && (strcmp(aux->anterior, "0")!=0))
+	    	min=aux;
 	    	aux=aux->siguiente;
 		}
 		
+		
 		aux=min;
 		aux->terminado=1;
-		
 		if(strcmp(aux->nombre,b)==0)
-		{
-			break;
-		}
+		break;
 	}
-	
-	while(strcmp(aux->anterior,"0")==1)
-	{
+
+	while(strcmp(aux->anterior, "0")!=0){
 		insertarPila(aux);
 		strcpy(temp,aux->anterior);
 		aux=inicio;
-		while(strcmp(aux->nombre,temp)==1)
-		{
+		while(strcmp(aux->nombre,temp)!=0){
 		   aux=aux->siguiente;	
 		}
 	}
-	
+
 	insertarPila(aux);
-	
-	while(ini!=NULL)
-	{
+	while(ini!=NULL){
 		printf("%s ",desencolar()->nombre);
 	}
-	
-	printf("\n");
+		printf("\n");
 	reiniciar();
 }
-
 
 
 /* ------------------------------------------------------------------ 1. REGISTRAR NIÑO ------------------------------------------------------------------ */
@@ -7482,7 +7432,7 @@ int verificarEntregaNodo(char dom [15], Imprimir * ColaKids){
 	Kid * k;
 		
 		for(k = ColaKids->front; k!= NULL; k = k->next){
-			 if(strcmp(k->lugar_residencia,dom)==0 && strcmp(k->estado_carta, "Entregar")==0){
+			 if((strcmp(k->lugar_residencia,dom)==0 )&& (strcmp(k->estado_carta, "Entregar")==0)){
 			 	return 1;
 			 }
 		}
@@ -7497,6 +7447,17 @@ int ListaNinos (char dom [15], Imprimir * ColaKids){
 			 	printf("\n%s", k -> nombre);
 			 }
 		}
+	return 0;
+}
+Ruta * in = NULL;
+int tiporuta(char ruta[15], char domicilio [15]){
+	Ruta*a= in;
+	    while(a!=NULL){
+		    if(strcmp(a->tipo_ruta,ruta)==0 && strcmp(a->destino,domicilio)==0){
+		    	return 1;   
+			}
+		    a=a->siguiente;
+	    }	
 	return 0;
 }
 void entregarJuguetes(Imprimir * ColaKids){
@@ -7521,11 +7482,13 @@ void entregarJuguetes(Imprimir * ColaKids){
 			printf("\n\n------TODAS LAS RUTAS-------");
 			while(d != NULL)
 			{
+				
 				if (verificarEntregaNodo(d -> nombre , ColaKids)==1){
-					printf("\n-------- POLO NORTE -> %s ---------", d->nombre);
+					printf("\n-------- POLO NORTE -> %s ---------\n", d->nombre);
 					dijkstra("Polo Norte", d -> nombre);
-					printf("\n\n\n-------- LISTA NINOS EN %s ---------", d->nombre);
+					printf("\n-------- LISTA NINOS EN %s ---------\n", d->nombre);
 					ListaNinos (d -> nombre, ColaKids);
+					printf("\n______________________\n\n");
 				
 				}
 				d = d -> siguiente;
@@ -7535,13 +7498,55 @@ void entregarJuguetes(Imprimir * ColaKids){
 		case 2:
 			
 			printf("\n\n------RUTA TERRESTRE-------");
+			while(d != NULL)
+			{
+				
+				if (verificarEntregaNodo(d -> nombre , ColaKids)==1 && tiporuta("Terrestre",d ->nombre)==1){
+					printf("\n-------- POLO NORTE -> %s ---------\n", d->nombre);
+					dijkstra("Polo Norte", d -> nombre);
+					printf("\n-------- LISTA NINOS EN %s ---------\n", d->nombre);
+					ListaNinos (d -> nombre, ColaKids);
+					printf("\n______________________\n\n");
+				
+				}
+				d = d -> siguiente;
+			}
+			
 			break;
 			
 		case 3:
 			printf("\n\n------RUTA MARITIMA-------");
+				while(d != NULL)
+			{
+				
+				if (verificarEntregaNodo(d -> nombre , ColaKids)==1 && tiporuta("Maritima",d ->nombre)==1){
+					printf("\n-------- POLO NORTE -> %s ---------\n", d->nombre);
+					dijkstra("Polo Norte", d -> nombre);
+					printf("\n-------- LISTA NINOS EN %s ---------\n", d->nombre);
+					ListaNinos (d -> nombre, ColaKids);
+					printf("\n______________________\n\n");
+				
+				}
+				d = d -> siguiente;
+			}
+			
 			break;
 		case 4:
 			printf("\n\n------RUTA AEREA-------");
+			while(d != NULL)
+			{
+				
+				if (verificarEntregaNodo(d -> nombre , ColaKids)==1 && tiporuta("Aerea",d ->nombre)==1){
+					printf("\n-------- POLO NORTE -> %s ---------\n", d->nombre);
+					dijkstra("Polo Norte", d -> nombre);
+					printf("\n-------- LISTA NINOS EN %s ---------\n", d->nombre);
+					ListaNinos (d -> nombre, ColaKids);
+					printf("\n______________________\n\n");
+				
+				}
+				d = d -> siguiente;
+			}
+			
 			break;
 		default:
 			printf("\nERROR: opción no válida.");
@@ -7943,6 +7948,21 @@ int main()
 		{
 			entregarJuguetes(ColaKids);
 		}
+		
+		else if (opcion == 20)
+		{
+			char in [15];
+			char fin [15];
+			printf("\nInicio");
+			fflush (stdin);
+			gets (in);
+			printf("\nfin");
+			fflush (stdin);
+			gets (fin);
+										
+			dijkstra(in,fin);
+		}
+		
 		
 		
 		else if (opcion == 18)
