@@ -2832,6 +2832,29 @@ ImprimirCarta * InsertarCarta(ImprimirCarta * ColaCartas,char cedula[15], char y
 
 
 
+int ValidarSolicitud(ImprimirCarta *ColaCartas,char cedula_kid [50],char year[10])
+{
+	Carta *i;
+	
+	for(i = ColaCartas->front; i!= NULL; i = i->next)
+	{
+		if (strcmp(i->cedula,cedula_kid)==0)
+		{
+			if (strcmp(i->year,year)==0)
+			{
+				if (strcmp(i->estado_jug,"Solicitado")==0)
+				{
+					return 1;
+				}
+			}
+		}
+	}
+	return 0;
+}			
+
+
+
+
 /* ----------------------- REGISTRAR CARTA EN EL MAIN ----------------------- */
 
 void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, Imprimir *ColaKids)
@@ -2956,796 +2979,804 @@ void RegistrarCartaMain(ImprimirCarta *ColaCartas, ImprimirLD *ColaListaDeseos, 
 		
 				if (strcmp(opc_carta,"1")==0)
 				{
-					printf("Ingrese la catidad de juguetes que desea seleccionar: ");
-					scanf("%d",&cantidad_jug);
-					
-					contadorDomicilio (i->lugar_residencia,cantidad_jug);
-					
-
-					if (cantidad_jug == 1)
+					if (ValidarSolicitud(ColaCartas,cedula_kid,year)==1)
 					{
-						printf ("Ingrese el nombre del juguete que desea seleccionar: ");
-						fflush (stdin);
-						gets (juguete1);
-						printf ("Ingrese el codigo del juguete que desea seleccionar: ");
-						scanf("%d",&cod1);
-						ValidarCodigoJuguetes(ArbolInt, cod1);
-						
-						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
-						
-						
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod1);	
-	
-						if(strcmp(year,"2017")==0)
-						{
-							contador_2017 = 1;
-						}
-						if(strcmp(year,"2018")==0)
-						{
-							contador_2018 = 1;
-						}
-						if(strcmp(year,"2019")==0)
-						{
-							contador_2019 = 1;
-						}
-						if(strcmp(year,"2020")==0)
-						{
-							contador_2020 = 1;
-						}
-						if(strcmp(year,"2021")==0)
-						{
-							contador_2021 = 1;
-						}
-					}
-					
-					else if (cantidad_jug==2)
-					{
-						printf ("Ingrese el nombre del juguete 1: ");
-						fflush (stdin);
-						gets (juguete1);
-						printf ("Ingrese el codigo del juguete 1: ");
-						scanf("%d",&cod1);
-						ValidarCodigoJuguetes(ArbolInt, cod1);
-						//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
-						
-						
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod1);	
-						
-						printf ("\nIngrese el nombre del juguete 2: ");
-						fflush (stdin);
-						gets (juguete2);
-						printf ("Ingrese el codigo del juguete 2: ");
-						scanf("%d",&cod2);
-						ValidarCodigoJuguetes(ArbolInt, cod2);
-					
-						//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
-						
-						
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod2);	
-	
-						if(strcmp(year,"2017")==0)
-						{
-							contador_2017 = 2;
-						}
-						if(strcmp(year,"2018")==0)
-						{
-							contador_2018 = 2;
-						}
-						if(strcmp(year,"2019")==0)
-						{
-							contador_2019 = 2;
-						}
-					    if(strcmp(year,"2020")==0)
-						{
-							contador_2020 = 2;
-						}
-						if(strcmp(year,"2021")==0)
-						{
-							contador_2021 = 2;
-						}
-					}
-					else if (cantidad_jug==3)
-					{
-						printf ("Ingrese el nombre del juguete 1: ");
-						fflush (stdin);
-						gets (juguete1);
-						printf ("Ingrese el codigo del juguete 1: ");
-						scanf("%d",&cod1);
-						ValidarCodigoJuguetes(ArbolInt, cod1);
-						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
-						
-						
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod1);	
-						
-						printf ("\nIngrese el nombre del juguete 2: ");
-						fflush (stdin);
-						gets (juguete2);
-						printf ("Ingrese el codigo del juguete 2: ");
-						scanf("%d",&cod2);
-						ValidarCodigoJuguetes(ArbolInt, cod2);
-						
-						//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
-						
-						
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod2);	
-						
-						printf ("\nIngrese el nombre del juguete 3: ");
-						fflush (stdin);
-						gets (juguete3);
-						printf ("Ingrese el codigo del juguete 3: ");
-						scanf("%d",&cod3);
-						ValidarCodigoJuguetes(ArbolInt, cod3);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod3);	
-						
-						if(strcmp(year,"2017")==0)
-						{
-							contador_2017 = 3;
-						}
-						if(strcmp(year,"2018")==0)
-						{
-							contador_2018 = 3;
-						}
-						if(strcmp(year,"2019")==0)
-						{
-							contador_2019 = 3;
-						}
-						if(strcmp(year,"2020")==0)
-						{
-							contador_2020 = 3;
-						}
-						if(strcmp(year,"2021")==0)
-						{
-							contador_2021 = 3;
-						}
-					}
-					
-					else if (cantidad_jug==4)
-					{
-						printf ("Ingrese el nombre del juguete 1: ");
-						fflush (stdin);
-						gets (juguete1);
-						printf ("Ingrese el codigo del juguete 1: ");
-						scanf("%d",&cod1);
-						ValidarCodigoJuguetes(ArbolInt, cod1);
-						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
-						
-						
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod1);	
-						
-						printf ("\nIngrese el nombre del juguete 2: ");
-						fflush (stdin);
-						gets (juguete2);
-						printf ("Ingrese el codigo del juguete 2: ");
-						scanf("%d",&cod2);
-						ValidarCodigoJuguetes(ArbolInt, cod2);
-						
-						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
-						
-						
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod2);	
-						
-						printf ("\nIngrese el nombre del juguete 3: ");
-						fflush (stdin);
-						gets (juguete3);
-						printf ("Ingrese el codigo del juguete 3: ");
-						scanf("%d",&cod3);
-						ValidarCodigoJuguetes(ArbolInt, cod3);
-						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
-						
-						
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod3);	
-	
-						printf ("\nIngrese el nombre del juguete 4: ");
-						fflush (stdin);
-						gets (juguete4);
-						printf ("Ingrese el codigo del juguete 4: ");
-						scanf("%d",&cod4);
-						ValidarCodigoJuguetes(ArbolInt, cod4);
-						//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
-						
-						
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod4);	
-						
-						if(strcmp(year,"2017")==0)
-						{
-							contador_2017 = 4;
-						}
-						if(strcmp(year,"2018")==0)
-						{
-							contador_2018 = 4;
-						}
-						if(strcmp(year,"2019")==0)
-						{
-							contador_2019 = 4;
-						}
-						if(strcmp(year,"2020")==0)
-						{
-							contador_2020 = 4;
-						}
-						if(strcmp(year,"2021")==0)
-						{
-							contador_2021 = 4;
-						}
-					}						
-	
-					else if (cantidad_jug==5)
-					{
-						printf ("Ingrese el nombre del juguete 1: ");
-						fflush (stdin);
-						gets (juguete1);
-						printf ("Ingrese el codigo del juguete 1: ");
-						scanf("%d",&cod1);
-						ValidarCodigoJuguetes(ArbolInt, cod1);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod1);	
-						
-						printf ("\nIngrese el nombre del juguete 2: ");
-						fflush (stdin);
-						gets (juguete2);
-						printf ("Ingrese el codigo del juguete 2: ");
-						scanf("%d",&cod2);
-						ValidarCodigoJuguetes(ArbolInt, cod2);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod2);	
-						
-						printf ("\nIngrese el nombre del juguete 3: ");
-						fflush (stdin);
-						gets (juguete3);
-						printf ("Ingrese el codigo del juguete 3: ");
-						scanf("%d",&cod3);
-						ValidarCodigoJuguetes(ArbolInt, cod3);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod3);	
-	
-						printf ("\nIngrese el nombre del juguete 4: ");
-						fflush (stdin);
-						gets (juguete4);
-						printf ("Ingrese el codigo del juguete 4: ");
-						scanf("%d",&cod4);
-						ValidarCodigoJuguetes(ArbolInt, cod4);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod4);	
-						
-						printf ("\nIngrese el nombre del juguete 5: ");
-						fflush (stdin);
-						gets (juguete5);
-						printf ("Ingrese el codigo del juguete 5: ");
-						scanf("%d",&cod5);
-						ValidarCodigoJuguetes(ArbolInt, cod5);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod5);	
-						
-						if(strcmp(year,"2017")==0)
-						{
-							contador_2017 = 5;
-						}
-						if(strcmp(year,"2018")==0)
-						{
-							contador_2018 = 5;
-						}
-						if(strcmp(year,"2019")==0)
-						{
-							contador_2019 = 5;
-						}
-						if(strcmp(year,"2020")==0)
-						{
-							contador_2020 = 5;
-						}
-						if(strcmp(year,"2021")==0)
-						{
-							contador_2021 = 5;
-						}
-					}
-					
-					else if (cantidad_jug==6)
-					{
-						printf ("\nIngrese el nombre del juguete 1: ");
-						fflush (stdin);
-						gets (juguete1);
-						printf ("Ingrese el codigo del juguete 1: ");
-						scanf("%d",&cod1);
-						ValidarCodigoJuguetes(ArbolInt, cod1);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod1);	
-						
-						printf ("\nIngrese el nombre del juguete 2: ");
-						fflush (stdin);
-						gets (juguete2);
-						printf ("Ingrese el codigo del juguete 2: ");
-						scanf("%d",&cod2);
-						ValidarCodigoJuguetes(ArbolInt, cod2);
-						printf ("\nLos datos del juguete son:\n ");
-						Buscar(ArbolInt, cod2);	
-						
-						printf ("\nIngrese el nombre del juguete 3: ");
-						fflush (stdin);
-						gets (juguete3);
-						printf ("Ingrese el codigo del juguete 3: ");
-						scanf("%d",&cod3);
-						ValidarCodigoJuguetes(ArbolInt, cod3);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod3);	
-	
-						printf ("\nIngrese el nombre del juguete 4: ");
-						fflush (stdin);
-						gets (juguete4);
-						printf ("Ingrese el codigo del juguete 4: ");
-						scanf("%d",&cod4);
-						ValidarCodigoJuguetes(ArbolInt, cod4);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod4);	
-						
-						printf ("\nIngrese el nombre del juguete 5: ");
-						fflush (stdin);
-						gets (juguete5);
-						printf ("Ingrese el codigo del juguete 5: ");
-						scanf("%d",&cod5);
-						ValidarCodigoJuguetes(ArbolInt, cod5);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod5);	
-						
-						printf ("\nIngrese el nombre del juguete 6: ");
-						fflush (stdin);
-						gets (juguete6);
-						printf ("Ingrese el codigo del juguete 6: ");
-						scanf("%d",&cod6);
-						ValidarCodigoJuguetes(ArbolInt, cod6);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod6);	
-						
-						if(strcmp(year,"2017")==0)
-						{
-							contador_2017 = 6;
-						}
-						if(strcmp(year,"2018")==0)
-						{
-							contador_2018 = 6;
-						}
-						if(strcmp(year,"2019")==0)
-						{
-							contador_2019 = 6;
-						}
-						if(strcmp(year,"2020")==0)
-						{
-							contador_2020 = 6;
-						}
-						if(strcmp(year,"2021")==0)
-						{
-							contador_2021 = 6;
-						}
-					}
-					
-					else if (cantidad_jug==7)
-					{
-						printf ("\nIngrese el nombre del juguete 1: ");
-						fflush (stdin);
-						gets (juguete1);
-						printf ("Ingrese el codigo del juguete 1: ");
-						scanf("%d",&cod1);
-						ValidarCodigoJuguetes(ArbolInt, cod1);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod1);	
-						
-						printf ("\nIngrese el nombre del juguete 2: ");
-						fflush (stdin);
-						gets (juguete2);
-						printf ("Ingrese el codigo del juguete 2: ");
-						scanf("%d",&cod2);
-						ValidarCodigoJuguetes(ArbolInt, cod2);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod2);	
-						
-						printf ("\nIngrese el nombre del juguete 3: ");
-						fflush (stdin);
-						gets (juguete3);
-						printf ("Ingrese el codigo del juguete 3: ");
-						scanf("%d",&cod3);
-						ValidarCodigoJuguetes(ArbolInt, cod3);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod3);	
-	
-						printf ("\nIngrese el nombre del juguete 4: ");
-						fflush (stdin);
-						gets (juguete4);
-						printf ("Ingrese el codigo del juguete 4: ");
-						scanf("%d",&cod4);
-						ValidarCodigoJuguetes(ArbolInt, cod4);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod4);	
-						
-						printf ("\nIngrese el nombre del juguete 5: ");
-						fflush (stdin);
-						gets (juguete5);
-						printf ("Ingrese el codigo del juguete 5: ");
-						scanf("%d",&cod5);
-						ValidarCodigoJuguetes(ArbolInt, cod5);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod5);	
-						
-						printf ("\nIngrese el nombre del juguete 6: ");
-						fflush (stdin);
-						gets (juguete6);
-						printf ("Ingrese el codigo del juguete 6: ");
-						scanf("%d",&cod6);
-						ValidarCodigoJuguetes(ArbolInt, cod6);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod6);	
-	
-						printf ("\nIngrese el nombre del juguete 7: ");
-						fflush (stdin);
-						gets (juguete7);
-						printf ("Ingrese el codigo del juguete 7: ");
-						scanf("%d",&cod7);
-						ValidarCodigoJuguetes(ArbolInt, cod7);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod7);	
-	
-						if(strcmp(year,"2017")==0)
-						{
-							contador_2017 = 7;
-						}
-						if(strcmp(year,"2018")==0)
-						{
-							contador_2018 = 7;
-						}
-						if(strcmp(year,"2019")==0)
-						{
-							contador_2019 = 7;
-						}
-						if(strcmp(year,"2020")==0)
-						{
-							contador_2020 = 7;
-						}
-						if(strcmp(year,"2021")==0)
-						{
-							contador_2021 = 7;
-						}
-					}
-					
-					else if (cantidad_jug==8)
-					{
-						printf ("Ingrese el nombre del juguete 1: ");
-						fflush (stdin);
-						gets (juguete1);
-						printf ("Ingrese el codigo del juguete 1: ");
-						scanf("%d",&cod1);
-						ValidarCodigoJuguetes(ArbolInt, cod1);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod1);	
-						
-						printf ("\nIngrese el nombre del juguete 2: ");
-						fflush (stdin);
-						gets (juguete2);
-						printf ("Ingrese el codigo del juguete 2: ");
-						scanf("%d",&cod2);
-						ValidarCodigoJuguetes(ArbolInt, cod2);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod2);	
-						
-						printf ("\nIngrese el nombre del juguete 3: ");
-						fflush (stdin);
-						gets (juguete3);
-						printf ("Ingrese el codigo del juguete 3: ");
-						scanf("%d",&cod3);
-						ValidarCodigoJuguetes(ArbolInt, cod3);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod3);	
-	
-						printf ("\nIngrese el nombre del juguete 4: ");
-						fflush (stdin);
-						gets (juguete4);
-						printf ("Ingrese el codigo del juguete 4: ");
-						scanf("%d",&cod4);
-						ValidarCodigoJuguetes(ArbolInt, cod4);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod4);	
-						
-						printf ("\nIngrese el nombre del juguete 5: ");
-						fflush (stdin);
-						gets (juguete5);
-						printf ("Ingrese el codigo del juguete 5: ");
-						scanf("%d",&cod5);
-						ValidarCodigoJuguetes(ArbolInt, cod5);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod5);	
-						
-						printf ("\nIngrese el nombre del juguete 6: ");
-						fflush (stdin);
-						gets (juguete6);
-						printf ("Ingrese el codigo del juguete 6: ");
-						scanf("%d",&cod6);
-						ValidarCodigoJuguetes(ArbolInt, cod6);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod6);	
-	
-						printf ("\nIngrese el nombre del juguete 7: ");
-						fflush (stdin);
-						gets (juguete7);
-						printf ("Ingrese el codigo del juguete 7: ");
-						scanf("%d",&cod7);
-						ValidarCodigoJuguetes(ArbolInt, cod7);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod7);	
-						
-						printf ("\nIngrese el nombre del juguete 8: ");
-						fflush (stdin);
-						gets (juguete8);
-						printf ("Ingrese el codigo del juguete 8: ");
-						scanf("%d",&cod8);
-						ValidarCodigoJuguetes(ArbolInt, cod8);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod8);	
-						
-						if(strcmp(year,"2017")==0)
-						{
-							contador_2017 = 8;
-						}
-						if(strcmp(year,"2018")==0)
-						{
-							contador_2018 = 8;
-						}
-						if(strcmp(year,"2019")==0)
-						{
-							contador_2019 = 8;
-						}
-						if(strcmp(year,"2020")==0)
-						{
-							contador_2020 = 8;
-						}
-						if(strcmp(year,"2021")==0)
-						{
-							contador_2021 = 8;
-						}
-					}
-					
-					else if (cantidad_jug==9)
-					{
-						printf ("Ingrese el nombre del juguete 1: ");
-						fflush (stdin);
-						gets (juguete1);
-						printf ("Ingrese el codigo del juguete 1: ");
-						scanf("%d",&cod1);
-						ValidarCodigoJuguetes(ArbolInt, cod1);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod1);	
-						
-						printf ("\nIngrese el nombre del juguete 2: ");
-						fflush (stdin);
-						gets (juguete2);
-						printf ("Ingrese el codigo del juguete 2: ");
-						scanf("%d",&cod2);
-						ValidarCodigoJuguetes(ArbolInt, cod2);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod2);	
-						
-						printf ("\nIngrese el nombre del juguete 3: ");
-						fflush (stdin);
-						gets (juguete3);
-						printf ("Ingrese el codigo del juguete 3: ");
-						scanf("%d",&cod3);
-						ValidarCodigoJuguetes(ArbolInt, cod3);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod3);	
-	
-						printf ("\nIngrese el nombre del juguete 4: ");
-						fflush (stdin);
-						gets (juguete4);
-						printf ("Ingrese el codigo del juguete 4: ");
-						scanf("%d",&cod4);
-						ValidarCodigoJuguetes(ArbolInt, cod4);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod4);	
-						
-						printf ("\nIngrese el nombre del juguete 5: ");
-						fflush (stdin);
-						gets (juguete5);
-						printf ("Ingrese el codigo del juguete 5: ");
-						scanf("%d",&cod5);
-						ValidarCodigoJuguetes(ArbolInt, cod5);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod5);	
-						
-						printf ("\nIngrese el nombre del juguete 6: ");
-						fflush (stdin);
-						gets (juguete6);
-						printf ("Ingrese el codigo del juguete 6: ");
-						scanf("%d",&cod6);
-						ValidarCodigoJuguetes(ArbolInt, cod6);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod6);	
-	
-						printf ("\nIngrese el nombre del juguete 7: ");
-						fflush (stdin);
-						gets (juguete7);
-						printf ("Ingrese el codigo del juguete 7: ");
-						scanf("%d",&cod7);
-						ValidarCodigoJuguetes(ArbolInt, cod7);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod7);	
-						
-						printf ("\nIngrese el nombre del juguete 8: ");
-						fflush (stdin);
-						gets (juguete8);
-						printf ("Ingrese el codigo del juguete 8: ");
-						scanf("%d",&cod8);
-						ValidarCodigoJuguetes(ArbolInt, cod8);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod8);	
-						
-						printf ("\nIngrese el nombre del juguete 9: ");
-						fflush (stdin);
-						gets (juguete9);
-						printf ("Ingrese el codigo del juguete 9: ");
-						scanf("%d",&cod9);
-						ValidarCodigoJuguetes(ArbolInt, cod9);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod9);	
-	
-						if(strcmp(year,"2017")==0)
-						{
-							contador_2017 = 9;
-						}
-						if(strcmp(year,"2018")==0)
-						{
-							contador_2018 = 9;
-						}
-						if(strcmp(year,"2019")==0)
-						{
-							contador_2019 = 9;
-						}
-						if(strcmp(year,"2020")==0)
-						{
-							contador_2020 = 9;
-						}
-						if(strcmp(year,"2021")==0)
-						{
-							contador_2021 = 9;
-						}
-					}
-						
-					else if (cantidad_jug==10)
-					{
-						printf ("Ingrese el nombre del juguete 1: ");
-						fflush (stdin);
-						gets (juguete1);
-						printf ("Ingrese el codigo del juguete 1: ");
-						scanf("%d",&cod1);
-						ValidarCodigoJuguetes(ArbolInt, cod1);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod1);	
-						
-						printf ("\nIngrese el nombre del juguete 2: ");
-						fflush (stdin);
-						gets (juguete2);
-						printf ("Ingrese el codigo del juguete 2: ");
-						scanf("%d",&cod2);
-						ValidarCodigoJuguetes(ArbolInt, cod2);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod2);	
-						
-						
-						printf ("\nIngrese el nombre del juguete 3: ");
-						fflush (stdin);
-						gets (juguete3);
-						printf ("Ingrese el codigo del juguete 3: ");
-						scanf("%d",&cod3);
-						ValidarCodigoJuguetes(ArbolInt, cod3);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod3);	
-	
-						printf ("\nIngrese el nombre del juguete 4: ");
-						fflush (stdin);
-						gets (juguete4);
-						printf ("Ingrese el codigo del juguete 4: ");
-						scanf("%d",&cod4);
-						ValidarCodigoJuguetes(ArbolInt, cod4);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod4);	
-						
-						printf ("\nIngrese el nombre del juguete 5: ");
-						fflush (stdin);
-						gets (juguete5);
-						printf ("Ingrese el codigo del juguete 5: ");
-						scanf("%d",&cod5);
-						ValidarCodigoJuguetes(ArbolInt, cod5);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod5);	
-						
-						printf ("\nIngrese el nombre del juguete 6: ");
-						fflush (stdin);
-						gets (juguete6);
-						printf ("Ingrese el codigo del juguete 6: ");
-						scanf("%d",&cod6);
-						ValidarCodigoJuguetes(ArbolInt, cod6);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod6);	
-	
-						printf ("\nIngrese el nombre del juguete 7: ");
-						fflush (stdin);
-						gets (juguete7);
-						printf ("Ingrese el codigo del juguete 7: ");
-						scanf("%d",&cod7);
-						ValidarCodigoJuguetes(ArbolInt, cod7);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod7);	
-						
-						printf ("\nIngrese el nombre del juguete 8: ");
-						fflush (stdin);
-						gets (juguete8);
-						printf ("Ingrese el codigo del juguete 8: ");
-						scanf("%d",&cod8);
-						ValidarCodigoJuguetes(ArbolInt, cod8);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod8);	
-						
-						printf ("\nIngrese el nombre del juguete 9: ");
-						fflush (stdin);
-						gets (juguete9);
-						printf ("Ingrese el codigo del juguete 9: ");
-						scanf("%d",&cod9);
-						ValidarCodigoJuguetes(ArbolInt, cod9);
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod9);	
-						
-						printf ("\nIngrese el nombre del juguete 10: ");
-						fflush (stdin);
-						gets (juguete10);
-						printf ("Ingrese el codigo del juguete 10: ");
-						scanf("%d",&cod10);
-						ValidarCodigoJuguetes(ArbolInt, cod10);
-						
-						//-------------------------------------- ULTIMA VALIDACION ARBOL --------------------------------------------------- 
-						
-						
-						
-						printf ("Los datos del juguete son:\n ");
-						Buscar(ArbolInt, cod10);
-						
-						if(strcmp(year,"2017")==0)
-						{
-							contador_2017 = 10;
-						}
-						if(strcmp(year,"2018")==0)
-						{
-							contador_2018 = 10;
-						}
-						if(strcmp(year,"2019")==0)
-						{
-							contador_2019 = 10;
-						}
-						if(strcmp(year,"2020")==0)
-						{
-							contador_2020 = 10;
-						}
-						if(strcmp(year,"2021")==0)
-						{
-							contador_2021 = 10;
-						}	
+						printf("ERROR: El niño ya ha registrado una carta. Si desea mofificarla seleccione la opción 14.");
+						return;
 					}
 					else
 					{
-						printf("ERROR: Solo se permite un maximo de 10 juguetes en la carta");
+	
+						printf("Ingrese la catidad de juguetes que desea seleccionar: ");
+						scanf("%d",&cantidad_jug);
+						
+						contadorDomicilio (i->lugar_residencia,cantidad_jug);
+						
+	
+						if (cantidad_jug == 1)
+						{
+							printf ("Ingrese el nombre del juguete que desea seleccionar: ");
+							fflush (stdin);
+							gets (juguete1);
+							printf ("Ingrese el codigo del juguete que desea seleccionar: ");
+							scanf("%d",&cod1);
+							ValidarCodigoJuguetes(ArbolInt, cod1);
+							
+							//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+							
+							
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod1);	
+		
+							if(strcmp(year,"2017")==0)
+							{
+								contador_2017 = 1;
+							}
+							if(strcmp(year,"2018")==0)
+							{
+								contador_2018 = 1;
+							}
+							if(strcmp(year,"2019")==0)
+							{
+								contador_2019 = 1;
+							}
+							if(strcmp(year,"2020")==0)
+							{
+								contador_2020 = 1;
+							}
+							if(strcmp(year,"2021")==0)
+							{
+								contador_2021 = 1;
+							}
+						}
+						
+						else if (cantidad_jug==2)
+						{
+							printf ("Ingrese el nombre del juguete 1: ");
+							fflush (stdin);
+							gets (juguete1);
+							printf ("Ingrese el codigo del juguete 1: ");
+							scanf("%d",&cod1);
+							ValidarCodigoJuguetes(ArbolInt, cod1);
+							//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
+							
+							
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod1);	
+							
+							printf ("\nIngrese el nombre del juguete 2: ");
+							fflush (stdin);
+							gets (juguete2);
+							printf ("Ingrese el codigo del juguete 2: ");
+							scanf("%d",&cod2);
+							ValidarCodigoJuguetes(ArbolInt, cod2);
+						
+							//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
+							
+							
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod2);	
+		
+							if(strcmp(year,"2017")==0)
+							{
+								contador_2017 = 2;
+							}
+							if(strcmp(year,"2018")==0)
+							{
+								contador_2018 = 2;
+							}
+							if(strcmp(year,"2019")==0)
+							{
+								contador_2019 = 2;
+							}
+						    if(strcmp(year,"2020")==0)
+							{
+								contador_2020 = 2;
+							}
+							if(strcmp(year,"2021")==0)
+							{
+								contador_2021 = 2;
+							}
+						}
+						else if (cantidad_jug==3)
+						{
+							printf ("Ingrese el nombre del juguete 1: ");
+							fflush (stdin);
+							gets (juguete1);
+							printf ("Ingrese el codigo del juguete 1: ");
+							scanf("%d",&cod1);
+							ValidarCodigoJuguetes(ArbolInt, cod1);
+							//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+							
+							
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod1);	
+							
+							printf ("\nIngrese el nombre del juguete 2: ");
+							fflush (stdin);
+							gets (juguete2);
+							printf ("Ingrese el codigo del juguete 2: ");
+							scanf("%d",&cod2);
+							ValidarCodigoJuguetes(ArbolInt, cod2);
+							
+							//-------------------------------------- VALIDACION ARBOL --------------------------------------------------- 
+							
+							
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod2);	
+							
+							printf ("\nIngrese el nombre del juguete 3: ");
+							fflush (stdin);
+							gets (juguete3);
+							printf ("Ingrese el codigo del juguete 3: ");
+							scanf("%d",&cod3);
+							ValidarCodigoJuguetes(ArbolInt, cod3);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod3);	
+							
+							if(strcmp(year,"2017")==0)
+							{
+								contador_2017 = 3;
+							}
+							if(strcmp(year,"2018")==0)
+							{
+								contador_2018 = 3;
+							}
+							if(strcmp(year,"2019")==0)
+							{
+								contador_2019 = 3;
+							}
+							if(strcmp(year,"2020")==0)
+							{
+								contador_2020 = 3;
+							}
+							if(strcmp(year,"2021")==0)
+							{
+								contador_2021 = 3;
+							}
+						}
+						
+						else if (cantidad_jug==4)
+						{
+							printf ("Ingrese el nombre del juguete 1: ");
+							fflush (stdin);
+							gets (juguete1);
+							printf ("Ingrese el codigo del juguete 1: ");
+							scanf("%d",&cod1);
+							ValidarCodigoJuguetes(ArbolInt, cod1);
+							//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+							
+							
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod1);	
+							
+							printf ("\nIngrese el nombre del juguete 2: ");
+							fflush (stdin);
+							gets (juguete2);
+							printf ("Ingrese el codigo del juguete 2: ");
+							scanf("%d",&cod2);
+							ValidarCodigoJuguetes(ArbolInt, cod2);
+							
+							//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+							
+							
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod2);	
+							
+							printf ("\nIngrese el nombre del juguete 3: ");
+							fflush (stdin);
+							gets (juguete3);
+							printf ("Ingrese el codigo del juguete 3: ");
+							scanf("%d",&cod3);
+							ValidarCodigoJuguetes(ArbolInt, cod3);
+							//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+							
+							
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod3);	
+		
+							printf ("\nIngrese el nombre del juguete 4: ");
+							fflush (stdin);
+							gets (juguete4);
+							printf ("Ingrese el codigo del juguete 4: ");
+							scanf("%d",&cod4);
+							ValidarCodigoJuguetes(ArbolInt, cod4);
+							//-------------------------------------- VALIDACION ARBOL ---------------------------------------------------
+							
+							
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod4);	
+							
+							if(strcmp(year,"2017")==0)
+							{
+								contador_2017 = 4;
+							}
+							if(strcmp(year,"2018")==0)
+							{
+								contador_2018 = 4;
+							}
+							if(strcmp(year,"2019")==0)
+							{
+								contador_2019 = 4;
+							}
+							if(strcmp(year,"2020")==0)
+							{
+								contador_2020 = 4;
+							}
+							if(strcmp(year,"2021")==0)
+							{
+								contador_2021 = 4;
+							}
+						}						
+		
+						else if (cantidad_jug==5)
+						{
+							printf ("Ingrese el nombre del juguete 1: ");
+							fflush (stdin);
+							gets (juguete1);
+							printf ("Ingrese el codigo del juguete 1: ");
+							scanf("%d",&cod1);
+							ValidarCodigoJuguetes(ArbolInt, cod1);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod1);	
+							
+							printf ("\nIngrese el nombre del juguete 2: ");
+							fflush (stdin);
+							gets (juguete2);
+							printf ("Ingrese el codigo del juguete 2: ");
+							scanf("%d",&cod2);
+							ValidarCodigoJuguetes(ArbolInt, cod2);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod2);	
+							
+							printf ("\nIngrese el nombre del juguete 3: ");
+							fflush (stdin);
+							gets (juguete3);
+							printf ("Ingrese el codigo del juguete 3: ");
+							scanf("%d",&cod3);
+							ValidarCodigoJuguetes(ArbolInt, cod3);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod3);	
+		
+							printf ("\nIngrese el nombre del juguete 4: ");
+							fflush (stdin);
+							gets (juguete4);
+							printf ("Ingrese el codigo del juguete 4: ");
+							scanf("%d",&cod4);
+							ValidarCodigoJuguetes(ArbolInt, cod4);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod4);	
+							
+							printf ("\nIngrese el nombre del juguete 5: ");
+							fflush (stdin);
+							gets (juguete5);
+							printf ("Ingrese el codigo del juguete 5: ");
+							scanf("%d",&cod5);
+							ValidarCodigoJuguetes(ArbolInt, cod5);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod5);	
+							
+							if(strcmp(year,"2017")==0)
+							{
+								contador_2017 = 5;
+							}
+							if(strcmp(year,"2018")==0)
+							{
+								contador_2018 = 5;
+							}
+							if(strcmp(year,"2019")==0)
+							{
+								contador_2019 = 5;
+							}
+							if(strcmp(year,"2020")==0)
+							{
+								contador_2020 = 5;
+							}
+							if(strcmp(year,"2021")==0)
+							{
+								contador_2021 = 5;
+							}
+						}
+						
+						else if (cantidad_jug==6)
+						{
+							printf ("\nIngrese el nombre del juguete 1: ");
+							fflush (stdin);
+							gets (juguete1);
+							printf ("Ingrese el codigo del juguete 1: ");
+							scanf("%d",&cod1);
+							ValidarCodigoJuguetes(ArbolInt, cod1);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod1);	
+							
+							printf ("\nIngrese el nombre del juguete 2: ");
+							fflush (stdin);
+							gets (juguete2);
+							printf ("Ingrese el codigo del juguete 2: ");
+							scanf("%d",&cod2);
+							ValidarCodigoJuguetes(ArbolInt, cod2);
+							printf ("\nLos datos del juguete son:\n ");
+							Buscar(ArbolInt, cod2);	
+							
+							printf ("\nIngrese el nombre del juguete 3: ");
+							fflush (stdin);
+							gets (juguete3);
+							printf ("Ingrese el codigo del juguete 3: ");
+							scanf("%d",&cod3);
+							ValidarCodigoJuguetes(ArbolInt, cod3);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod3);	
+		
+							printf ("\nIngrese el nombre del juguete 4: ");
+							fflush (stdin);
+							gets (juguete4);
+							printf ("Ingrese el codigo del juguete 4: ");
+							scanf("%d",&cod4);
+							ValidarCodigoJuguetes(ArbolInt, cod4);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod4);	
+							
+							printf ("\nIngrese el nombre del juguete 5: ");
+							fflush (stdin);
+							gets (juguete5);
+							printf ("Ingrese el codigo del juguete 5: ");
+							scanf("%d",&cod5);
+							ValidarCodigoJuguetes(ArbolInt, cod5);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod5);	
+							
+							printf ("\nIngrese el nombre del juguete 6: ");
+							fflush (stdin);
+							gets (juguete6);
+							printf ("Ingrese el codigo del juguete 6: ");
+							scanf("%d",&cod6);
+							ValidarCodigoJuguetes(ArbolInt, cod6);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod6);	
+							
+							if(strcmp(year,"2017")==0)
+							{
+								contador_2017 = 6;
+							}
+							if(strcmp(year,"2018")==0)
+							{
+								contador_2018 = 6;
+							}
+							if(strcmp(year,"2019")==0)
+							{
+								contador_2019 = 6;
+							}
+							if(strcmp(year,"2020")==0)
+							{
+								contador_2020 = 6;
+							}
+							if(strcmp(year,"2021")==0)
+							{
+								contador_2021 = 6;
+							}
+						}
+						
+						else if (cantidad_jug==7)
+						{
+							printf ("\nIngrese el nombre del juguete 1: ");
+							fflush (stdin);
+							gets (juguete1);
+							printf ("Ingrese el codigo del juguete 1: ");
+							scanf("%d",&cod1);
+							ValidarCodigoJuguetes(ArbolInt, cod1);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod1);	
+							
+							printf ("\nIngrese el nombre del juguete 2: ");
+							fflush (stdin);
+							gets (juguete2);
+							printf ("Ingrese el codigo del juguete 2: ");
+							scanf("%d",&cod2);
+							ValidarCodigoJuguetes(ArbolInt, cod2);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod2);	
+							
+							printf ("\nIngrese el nombre del juguete 3: ");
+							fflush (stdin);
+							gets (juguete3);
+							printf ("Ingrese el codigo del juguete 3: ");
+							scanf("%d",&cod3);
+							ValidarCodigoJuguetes(ArbolInt, cod3);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod3);	
+		
+							printf ("\nIngrese el nombre del juguete 4: ");
+							fflush (stdin);
+							gets (juguete4);
+							printf ("Ingrese el codigo del juguete 4: ");
+							scanf("%d",&cod4);
+							ValidarCodigoJuguetes(ArbolInt, cod4);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod4);	
+							
+							printf ("\nIngrese el nombre del juguete 5: ");
+							fflush (stdin);
+							gets (juguete5);
+							printf ("Ingrese el codigo del juguete 5: ");
+							scanf("%d",&cod5);
+							ValidarCodigoJuguetes(ArbolInt, cod5);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod5);	
+							
+							printf ("\nIngrese el nombre del juguete 6: ");
+							fflush (stdin);
+							gets (juguete6);
+							printf ("Ingrese el codigo del juguete 6: ");
+							scanf("%d",&cod6);
+							ValidarCodigoJuguetes(ArbolInt, cod6);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod6);	
+		
+							printf ("\nIngrese el nombre del juguete 7: ");
+							fflush (stdin);
+							gets (juguete7);
+							printf ("Ingrese el codigo del juguete 7: ");
+							scanf("%d",&cod7);
+							ValidarCodigoJuguetes(ArbolInt, cod7);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod7);	
+		
+							if(strcmp(year,"2017")==0)
+							{
+								contador_2017 = 7;
+							}
+							if(strcmp(year,"2018")==0)
+							{
+								contador_2018 = 7;
+							}
+							if(strcmp(year,"2019")==0)
+							{
+								contador_2019 = 7;
+							}
+							if(strcmp(year,"2020")==0)
+							{
+								contador_2020 = 7;
+							}
+							if(strcmp(year,"2021")==0)
+							{
+								contador_2021 = 7;
+							}
+						}
+						
+						else if (cantidad_jug==8)
+						{
+							printf ("Ingrese el nombre del juguete 1: ");
+							fflush (stdin);
+							gets (juguete1);
+							printf ("Ingrese el codigo del juguete 1: ");
+							scanf("%d",&cod1);
+							ValidarCodigoJuguetes(ArbolInt, cod1);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod1);	
+							
+							printf ("\nIngrese el nombre del juguete 2: ");
+							fflush (stdin);
+							gets (juguete2);
+							printf ("Ingrese el codigo del juguete 2: ");
+							scanf("%d",&cod2);
+							ValidarCodigoJuguetes(ArbolInt, cod2);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod2);	
+							
+							printf ("\nIngrese el nombre del juguete 3: ");
+							fflush (stdin);
+							gets (juguete3);
+							printf ("Ingrese el codigo del juguete 3: ");
+							scanf("%d",&cod3);
+							ValidarCodigoJuguetes(ArbolInt, cod3);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod3);	
+		
+							printf ("\nIngrese el nombre del juguete 4: ");
+							fflush (stdin);
+							gets (juguete4);
+							printf ("Ingrese el codigo del juguete 4: ");
+							scanf("%d",&cod4);
+							ValidarCodigoJuguetes(ArbolInt, cod4);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod4);	
+							
+							printf ("\nIngrese el nombre del juguete 5: ");
+							fflush (stdin);
+							gets (juguete5);
+							printf ("Ingrese el codigo del juguete 5: ");
+							scanf("%d",&cod5);
+							ValidarCodigoJuguetes(ArbolInt, cod5);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod5);	
+							
+							printf ("\nIngrese el nombre del juguete 6: ");
+							fflush (stdin);
+							gets (juguete6);
+							printf ("Ingrese el codigo del juguete 6: ");
+							scanf("%d",&cod6);
+							ValidarCodigoJuguetes(ArbolInt, cod6);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod6);	
+		
+							printf ("\nIngrese el nombre del juguete 7: ");
+							fflush (stdin);
+							gets (juguete7);
+							printf ("Ingrese el codigo del juguete 7: ");
+							scanf("%d",&cod7);
+							ValidarCodigoJuguetes(ArbolInt, cod7);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod7);	
+							
+							printf ("\nIngrese el nombre del juguete 8: ");
+							fflush (stdin);
+							gets (juguete8);
+							printf ("Ingrese el codigo del juguete 8: ");
+							scanf("%d",&cod8);
+							ValidarCodigoJuguetes(ArbolInt, cod8);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod8);	
+							
+							if(strcmp(year,"2017")==0)
+							{
+								contador_2017 = 8;
+							}
+							if(strcmp(year,"2018")==0)
+							{
+								contador_2018 = 8;
+							}
+							if(strcmp(year,"2019")==0)
+							{
+								contador_2019 = 8;
+							}
+							if(strcmp(year,"2020")==0)
+							{
+								contador_2020 = 8;
+							}
+							if(strcmp(year,"2021")==0)
+							{
+								contador_2021 = 8;
+							}
+						}
+						
+						else if (cantidad_jug==9)
+						{
+							printf ("Ingrese el nombre del juguete 1: ");
+							fflush (stdin);
+							gets (juguete1);
+							printf ("Ingrese el codigo del juguete 1: ");
+							scanf("%d",&cod1);
+							ValidarCodigoJuguetes(ArbolInt, cod1);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod1);	
+							
+							printf ("\nIngrese el nombre del juguete 2: ");
+							fflush (stdin);
+							gets (juguete2);
+							printf ("Ingrese el codigo del juguete 2: ");
+							scanf("%d",&cod2);
+							ValidarCodigoJuguetes(ArbolInt, cod2);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod2);	
+							
+							printf ("\nIngrese el nombre del juguete 3: ");
+							fflush (stdin);
+							gets (juguete3);
+							printf ("Ingrese el codigo del juguete 3: ");
+							scanf("%d",&cod3);
+							ValidarCodigoJuguetes(ArbolInt, cod3);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod3);	
+		
+							printf ("\nIngrese el nombre del juguete 4: ");
+							fflush (stdin);
+							gets (juguete4);
+							printf ("Ingrese el codigo del juguete 4: ");
+							scanf("%d",&cod4);
+							ValidarCodigoJuguetes(ArbolInt, cod4);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod4);	
+							
+							printf ("\nIngrese el nombre del juguete 5: ");
+							fflush (stdin);
+							gets (juguete5);
+							printf ("Ingrese el codigo del juguete 5: ");
+							scanf("%d",&cod5);
+							ValidarCodigoJuguetes(ArbolInt, cod5);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod5);	
+							
+							printf ("\nIngrese el nombre del juguete 6: ");
+							fflush (stdin);
+							gets (juguete6);
+							printf ("Ingrese el codigo del juguete 6: ");
+							scanf("%d",&cod6);
+							ValidarCodigoJuguetes(ArbolInt, cod6);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod6);	
+		
+							printf ("\nIngrese el nombre del juguete 7: ");
+							fflush (stdin);
+							gets (juguete7);
+							printf ("Ingrese el codigo del juguete 7: ");
+							scanf("%d",&cod7);
+							ValidarCodigoJuguetes(ArbolInt, cod7);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod7);	
+							
+							printf ("\nIngrese el nombre del juguete 8: ");
+							fflush (stdin);
+							gets (juguete8);
+							printf ("Ingrese el codigo del juguete 8: ");
+							scanf("%d",&cod8);
+							ValidarCodigoJuguetes(ArbolInt, cod8);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod8);	
+							
+							printf ("\nIngrese el nombre del juguete 9: ");
+							fflush (stdin);
+							gets (juguete9);
+							printf ("Ingrese el codigo del juguete 9: ");
+							scanf("%d",&cod9);
+							ValidarCodigoJuguetes(ArbolInt, cod9);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod9);	
+		
+							if(strcmp(year,"2017")==0)
+							{
+								contador_2017 = 9;
+							}
+							if(strcmp(year,"2018")==0)
+							{
+								contador_2018 = 9;
+							}
+							if(strcmp(year,"2019")==0)
+							{
+								contador_2019 = 9;
+							}
+							if(strcmp(year,"2020")==0)
+							{
+								contador_2020 = 9;
+							}
+							if(strcmp(year,"2021")==0)
+							{
+								contador_2021 = 9;
+							}
+						}
+							
+						else if (cantidad_jug==10)
+						{
+							printf ("Ingrese el nombre del juguete 1: ");
+							fflush (stdin);
+							gets (juguete1);
+							printf ("Ingrese el codigo del juguete 1: ");
+							scanf("%d",&cod1);
+							ValidarCodigoJuguetes(ArbolInt, cod1);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod1);	
+							
+							printf ("\nIngrese el nombre del juguete 2: ");
+							fflush (stdin);
+							gets (juguete2);
+							printf ("Ingrese el codigo del juguete 2: ");
+							scanf("%d",&cod2);
+							ValidarCodigoJuguetes(ArbolInt, cod2);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod2);	
+							
+							
+							printf ("\nIngrese el nombre del juguete 3: ");
+							fflush (stdin);
+							gets (juguete3);
+							printf ("Ingrese el codigo del juguete 3: ");
+							scanf("%d",&cod3);
+							ValidarCodigoJuguetes(ArbolInt, cod3);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod3);	
+		
+							printf ("\nIngrese el nombre del juguete 4: ");
+							fflush (stdin);
+							gets (juguete4);
+							printf ("Ingrese el codigo del juguete 4: ");
+							scanf("%d",&cod4);
+							ValidarCodigoJuguetes(ArbolInt, cod4);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod4);	
+							
+							printf ("\nIngrese el nombre del juguete 5: ");
+							fflush (stdin);
+							gets (juguete5);
+							printf ("Ingrese el codigo del juguete 5: ");
+							scanf("%d",&cod5);
+							ValidarCodigoJuguetes(ArbolInt, cod5);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod5);	
+							
+							printf ("\nIngrese el nombre del juguete 6: ");
+							fflush (stdin);
+							gets (juguete6);
+							printf ("Ingrese el codigo del juguete 6: ");
+							scanf("%d",&cod6);
+							ValidarCodigoJuguetes(ArbolInt, cod6);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod6);	
+		
+							printf ("\nIngrese el nombre del juguete 7: ");
+							fflush (stdin);
+							gets (juguete7);
+							printf ("Ingrese el codigo del juguete 7: ");
+							scanf("%d",&cod7);
+							ValidarCodigoJuguetes(ArbolInt, cod7);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod7);	
+							
+							printf ("\nIngrese el nombre del juguete 8: ");
+							fflush (stdin);
+							gets (juguete8);
+							printf ("Ingrese el codigo del juguete 8: ");
+							scanf("%d",&cod8);
+							ValidarCodigoJuguetes(ArbolInt, cod8);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod8);	
+							
+							printf ("\nIngrese el nombre del juguete 9: ");
+							fflush (stdin);
+							gets (juguete9);
+							printf ("Ingrese el codigo del juguete 9: ");
+							scanf("%d",&cod9);
+							ValidarCodigoJuguetes(ArbolInt, cod9);
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod9);	
+							
+							printf ("\nIngrese el nombre del juguete 10: ");
+							fflush (stdin);
+							gets (juguete10);
+							printf ("Ingrese el codigo del juguete 10: ");
+							scanf("%d",&cod10);
+							ValidarCodigoJuguetes(ArbolInt, cod10);
+							
+							//-------------------------------------- ULTIMA VALIDACION ARBOL --------------------------------------------------- 
+							
+							
+							
+							printf ("Los datos del juguete son:\n ");
+							Buscar(ArbolInt, cod10);
+							
+							if(strcmp(year,"2017")==0)
+							{
+								contador_2017 = 10;
+							}
+							if(strcmp(year,"2018")==0)
+							{
+								contador_2018 = 10;
+							}
+							if(strcmp(year,"2019")==0)
+							{
+								contador_2019 = 10;
+							}
+							if(strcmp(year,"2020")==0)
+							{
+								contador_2020 = 10;
+							}
+							if(strcmp(year,"2021")==0)
+							{
+								contador_2021 = 10;
+							}	
+						}
+						else
+						{
+							printf("ERROR: Solo se permite un maximo de 10 juguetes en la carta");
+						}
+						
+						strcpy(estado_jug,"Solicitado");
+						InsertarCarta(ColaCartas, cedula_kid, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6, cod6, juguete7, cod7, juguete8, cod8, juguete9, cod9, juguete10, cod10, estado_jug, contador_2017, contador_2018,contador_2019,contador_2020, contador_2021);
+
 					}
-					
-					strcpy(estado_jug,"Solicitado");
-					InsertarCarta(ColaCartas, cedula_kid, year, juguete1, cod1, juguete2, cod2, juguete3, cod3, juguete4, cod4, juguete5, cod5, juguete6, cod6, juguete7, cod7, juguete8, cod8, juguete9, cod9, juguete10, cod10, estado_jug, contador_2017, contador_2018,contador_2019,contador_2020, contador_2021);
-					
-					//Cambiar el estado del juguete
 				}
 				else if (strcmp(opc_carta,"2")==0)
 				{
 					printf("Ingrese la catidad de juguetes que desea seleccionar: "); 
-					int cantidad_jug;
+					scanf("%d",&cantidad_jug);
 					
 					if (cantidad_jug==1)
 					{
