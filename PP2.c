@@ -1085,7 +1085,7 @@ ListaA
 Domicilio*inicio = NULL;
 ListaA*ini=NULL;
 ListaA*final=NULL; 
-
+Ruta*start = NULL;
 
 //------------------------------------------------ 7.1  FUNCIÓN DE CREAR EL NODO DOMOCILIO------------------------------------------------
 
@@ -2006,6 +2006,7 @@ void dijkstra(char a [15], char b [15]){
 		aux=aux->siguiente;
 	}
 	if(aux==NULL){
+		reiniciar();
 		printf("Vertice no encontrado\n");
 		return;
 	}
@@ -2015,15 +2016,11 @@ void dijkstra(char a [15], char b [15]){
 		    if(a->vrt->monto==-1 || (aux->monto+a->distancia)<a->vrt->monto){
 		    	a->vrt->monto=aux->monto+a->distancia;
 		        strcpy(a->vrt->anterior, aux->nombre);
-		        x =1;
+		       
 		        
 			}
 		    a=a->siguiente;
 	    }
-	     if (x ==0){
-		printf("\n***Error: No existe una ruta para ese destino***\n");
-		return;
-		}
 	    aux=inicio;
 	    Domicilio*min=inicio;
 	    while((strcmp(min->anterior,"0")==0)|| min->terminado ==1)
@@ -2058,6 +2055,7 @@ void dijkstra(char a [15], char b [15]){
 		printf("\n");
 	reiniciar();
 }
+
 
 
 /* ------------------------------------------------------------------ 1. REGISTRAR NIÑO ------------------------------------------------------------------ */
@@ -7449,15 +7447,20 @@ int ListaNinos (char dom [15], Imprimir * ColaKids){
 		}
 	return 0;
 }
-Ruta * in = NULL;
+
 int tiporuta(char ruta[15], char domicilio [15]){
-	Ruta*a= in;
+	Domicilio * aux = inicio;
+	
+	while(aux != NULL){
+		Ruta*a= aux->adyacencia;
 	    while(a!=NULL){
-		    if(strcmp(a->tipo_ruta,ruta)==0 && strcmp(a->destino,domicilio)==0){
+		    if((strcmp(a->tipo_ruta,ruta)==0) && (strcmp(a->destino,domicilio)==0)){
 		    	return 1;   
 			}
-		    a=a->siguiente;
-	    }	
+		    a= a->siguiente;
+	    }
+		aux = aux -> siguiente;
+	}
 	return 0;
 }
 void entregarJuguetes(Imprimir * ColaKids){
@@ -7484,9 +7487,9 @@ void entregarJuguetes(Imprimir * ColaKids){
 			{
 				
 				if (verificarEntregaNodo(d -> nombre , ColaKids)==1){
-					printf("\n-------- POLO NORTE -> %s ---------\n", d->nombre);
-					dijkstra("Polo Norte", d -> nombre);
-					printf("\n-------- LISTA NINOS EN %s ---------\n", d->nombre);
+					printf("\n-- POLO NORTE -> %s --\n", d->nombre);
+					dijkstra("Polo_Norte", d -> nombre);
+					printf("\nLISTA NINOS EN %s\n", d->nombre);
 					ListaNinos (d -> nombre, ColaKids);
 					printf("\n______________________\n\n");
 				
@@ -7502,9 +7505,9 @@ void entregarJuguetes(Imprimir * ColaKids){
 			{
 				
 				if (verificarEntregaNodo(d -> nombre , ColaKids)==1 && tiporuta("Terrestre",d ->nombre)==1){
-					printf("\n-------- POLO NORTE -> %s ---------\n", d->nombre);
-					dijkstra("Polo Norte", d -> nombre);
-					printf("\n-------- LISTA NINOS EN %s ---------\n", d->nombre);
+					printf("\n--- POLO NORTE -> %s --\n", d->nombre);
+					dijkstra("Polo_Norte", d -> nombre);
+					printf("\nLISTA NINOS EN %s\n", d->nombre);
 					ListaNinos (d -> nombre, ColaKids);
 					printf("\n______________________\n\n");
 				
@@ -7515,14 +7518,14 @@ void entregarJuguetes(Imprimir * ColaKids){
 			break;
 			
 		case 3:
-			printf("\n\n------RUTA MARITIMA-------");
+			printf("\n\n------RUTA MARITIMA-------\n");
 				while(d != NULL)
 			{
 				
 				if (verificarEntregaNodo(d -> nombre , ColaKids)==1 && tiporuta("Maritima",d ->nombre)==1){
-					printf("\n-------- POLO NORTE -> %s ---------\n", d->nombre);
-					dijkstra("Polo Norte", d -> nombre);
-					printf("\n-------- LISTA NINOS EN %s ---------\n", d->nombre);
+					printf("\n-- POLO NORTE -> %s --\n", d->nombre);
+					dijkstra("Polo_Norte", d -> nombre);
+					printf("\nLISTA NINOS EN %s\n", d->nombre);
 					ListaNinos (d -> nombre, ColaKids);
 					printf("\n______________________\n\n");
 				
@@ -7537,9 +7540,9 @@ void entregarJuguetes(Imprimir * ColaKids){
 			{
 				
 				if (verificarEntregaNodo(d -> nombre , ColaKids)==1 && tiporuta("Aerea",d ->nombre)==1){
-					printf("\n-------- POLO NORTE -> %s ---------\n", d->nombre);
-					dijkstra("Polo Norte", d -> nombre);
-					printf("\n-------- LISTA NINOS EN %s ---------\n", d->nombre);
+					printf("\n-- POLO NORTE -> %s --\n", d->nombre);
+					dijkstra("Polo_Norte", d -> nombre);
+					printf("\nLISTA NINOS EN %s\n", d->nombre);
 					ListaNinos (d -> nombre, ColaKids);
 					printf("\n______________________\n\n");
 				
@@ -7727,7 +7730,7 @@ int main()
 	ImprimirCarta * ColaCartas = CrearColaCartas(ColaCartas);
 	ImprimirLD *ColaListaDeseos = CrearColaListaDeseos(ColaListaDeseos);
 	ImprimirCProcesada *ColaCartasProcesadas = CrearColaCartasProcesadas(ColaCartasProcesadas);
-	insertarLugarPolo ("Polo Norte", 000 ,101);
+	insertarLugarPolo ("Polo_Norte", 000 ,101);
 	
 
 	TopLugarP * LugarPrioridad = CrearColaTopLugar(LugarPrioridad);
